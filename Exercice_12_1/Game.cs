@@ -182,6 +182,16 @@ namespace Exercice_12_1
         private List<Ogre> listeOgresFini;
 
         /// <summary>
+        /// Générateur de nombres aléatoires pour générer des astéroïdes.
+        /// </summary>
+        private Random randomPJEnemi;       
+
+        /// <summary>
+        /// Probabilité de générer un astéroïde par cycle de Update().
+        /// </summary>
+        private float probPJ;
+
+        /// <summary>
         /// Liste de gestion des particules d'explosions.
         /// </summary>
         private List<ParticuleExplosion> listeParticulesExplosions = new List<ParticuleExplosion>();
@@ -549,6 +559,9 @@ namespace Exercice_12_1
             // Créer les attributs de gestion des explosions.
             this.randomExplosions = new Random();
 
+            this.randomPJEnemi = new Random();
+            this.probPJ = 0.01f;
+
             // Le jeu est en cours de démarrage. Notez qu'on évite d'exploiter la prorpiété EtatJeu
             // car le setter de cette dernière manipule des effets sonores qui ne sont pas encore
             // chargées par LoadContent()
@@ -813,6 +826,38 @@ namespace Exercice_12_1
             {
                 //ogre.GrillePathFinding.Destination = this.joueur.Position;
                 ogre.SeTournerVers(this.joueur.Position);
+
+                 // Déterminer si on doit créer un nouvel astéroide.
+                if (this.randomPJEnemi.NextDouble() < this.probPJ)
+                {
+                    // Créer le sprite
+                    if (ogre.Direction == Personnage.Directions.Nord)
+                    {
+                        Projectile pj = new Projectile(new Vector2(ogre.Position.X, ogre.Position.Y -60), 0);
+                        this.listeProjectiles.Add(pj);
+                    }
+
+                    // Créer le sprite
+                    if (ogre.Direction == Personnage.Directions.Est)
+                    {
+                        Projectile pj = new Projectile(new Vector2(ogre.Position.X -60, ogre.Position.Y), 2);
+                        this.listeProjectiles.Add(pj);
+                    }
+
+                    // Créer le sprite
+                    if (ogre.Direction == Personnage.Directions.Sud)
+                    {
+                        Projectile pj = new Projectile(new Vector2(ogre.Position.X, ogre.Position.Y + 60), 4);
+                        this.listeProjectiles.Add(pj);
+                    }
+
+                    // Créer le sprite
+                    if (ogre.Direction == Personnage.Directions.Ouest)
+                    {
+                        Projectile pj = new Projectile(new Vector2(ogre.Position.X +60 , ogre.Position.Y), 6);
+                        this.listeProjectiles.Add(pj);
+                    }
+                }
 
 
                 ogre.Update(gameTime, this.graphics);

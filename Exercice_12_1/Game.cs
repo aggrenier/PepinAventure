@@ -182,6 +182,21 @@ namespace Exercice_12_1
         private List<Ogre> listeOgresFini;
 
         /// <summary>
+        /// Liste de gestion des particules d'explosions.
+        /// </summary>
+        private List<ParticuleExplosion> listeParticulesExplosions = new List<ParticuleExplosion>();
+
+        /// <summary>
+        /// Texture représentant une particule d'explosion.
+        /// </summary>
+        private Texture2D explosionParticule;
+
+        /// <summary>
+        /// Générateur de nombres aléatoires pour générer des particules d'explosion.
+        /// </summary>
+        private Random randomExplosions;
+
+        /// <summary>
         /// Attribut indiquant l'état du jeu
         /// </summary>
         private Etats etatJeu;
@@ -531,6 +546,9 @@ namespace Exercice_12_1
             listeOgres = new List<Ogre>();                                                                                     /////////////////////////// OGRES
             listeOgresFini = new List<Ogre>();
 
+            // Créer les attributs de gestion des explosions.
+            this.randomExplosions = new Random();
+
             // Le jeu est en cours de démarrage. Notez qu'on évite d'exploiter la prorpiété EtatJeu
             // car le setter de cette dernière manipule des effets sonores qui ne sont pas encore
             // chargées par LoadContent()
@@ -579,6 +597,9 @@ namespace Exercice_12_1
             Bloc.LoadContent(Content, this.graphics);
 
             Ogre.LoadContent(Content, this.graphics);
+
+            // Charger les textures associées aux effets visuels gérées par Game.
+            this.explosionParticule = Content.Load<Texture2D>("Textures\\Effets\\explosion");
 
             this.MondeCourant = Mondes.MAP_1_1;
             LoadMap11();
@@ -797,7 +818,7 @@ namespace Exercice_12_1
                 ogre.Update(gameTime, this.graphics);
             }
 
-            GestionProjectile();
+            GestionProjectile(gameTime);
 
             GestionBloc();
 
@@ -941,6 +962,37 @@ namespace Exercice_12_1
         }
 
         /// <summary>
+        /// Routine mettant à jour les particules d'explosions. Elle s'occupe de:
+        ///   1 - Mettre à jour chaque particule
+        ///   2 - Éliminer les particules n'étant plus visibles.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        protected void UpdateParticulesExplosions(GameTime gameTime)                                                                                    //explosion
+        {
+            // Liste de particules à détruire
+            List<ParticuleExplosion> particulesFinies = new List<ParticuleExplosion>();
+
+            // Mettre à jour les particules d'explosion
+            foreach (ParticuleExplosion particule in this.listeParticulesExplosions)
+            {
+                particule.Update(gameTime, this.graphics);
+
+                // Si la particule est devenue invisible, alors on peut l'ignorer à partir
+                // de maintenant
+                if (!particule.Visible)
+                {
+                    particulesFinies.Add(particule);
+                }
+            }
+
+            // Éliminer les particules ayant disparu de l'écran
+            foreach (ParticuleExplosion particule in particulesFinies)
+            {
+                this.listeParticulesExplosions.Remove(particule);
+            }
+        }
+
+        /// <summary>
         /// Cette fonction membre est invoquée lorsque le jeu doit mettre à jour son 
         /// affichage.
         /// </summary>
@@ -1035,6 +1087,12 @@ namespace Exercice_12_1
                     this.couleurMenuTitre,
                     this.couleurMenuItem,
                     this.couleurMenuItemSelectionne);
+            }
+
+            // Afficher les explosions
+            foreach (ParticuleExplosion particule in this.listeParticulesExplosions)                                                        //////////Explosion
+            {
+                particule.Draw(this.spriteBatch);
             }
 
             this.spriteBatch.End();
@@ -1233,7 +1291,7 @@ namespace Exercice_12_1
         /// <summary>
         /// Fonction qui fait la gestion des projectiles         
         /// </summary>
-        private void GestionProjectile()
+        private void GestionProjectile(GameTime gameTime)
         {
             if (ServiceHelper.Get<IInputService>().tirerNord(1))
             {
@@ -1308,8 +1366,18 @@ namespace Exercice_12_1
                 {
                     listeProjectileFini.Add(pj);
                 }
+                foreach (Ogre ogre in listeOgres)                                                       ////// explosion /////////////
+                {
+                    if (pj.Collision(ogre))
+                    {
+                        // Créer un nouvel effet visuel pour l'explosion.
+                        this.CreerExplosion(ogre, gameTime);
+                        listeProjectileFini.Add(pj);
+                        listeOgresFini.Add(ogre);
+                    }
+                }
             }
-            // Se débarasser des astéroïdes ayant quitté l'écran.
+            // Se débarasser des projectile ayant quitté l'écran.
             foreach (Projectile pj in listeProjectileFini)
             {
                 this.listeProjectiles.Remove(pj);
@@ -1533,6 +1601,31 @@ namespace Exercice_12_1
             if (row - Espacement < -(this.graphics.GraphicsDevice.Viewport.Height / 2))
             {
                 this.DrawMessage(this.spriteBatch, "Merci", 290, Color.Pink);                
+            }
+        }
+
+        /// <summary>
+        /// Fonction permettant de simuler une explosion de l'astéroïde donné. La fonction
+        /// crée un ensemble de particules d'explosition (de 10 à 20 instances de ParticuleExplosion)
+        /// positionnées au centre de l'astéroïde, et les ajoute à sa liste de particules à
+        /// gérer (attribut privListeParticulesExplosions).
+        /// </summary>
+        /// <param name="asteriode">Astéroïde à faire exploser.</param>
+        /// <param name="gameTime">Lecture du temps de jeu écoulé.</param>
+        private void CreerExplosion(Sprite sprite, GameTime gameTime)                                                                               ////// explosion
+        {
+            // Déterminer au hasard le nombre de particules pour représenter l'explosion
+            int nombreDeParticules = 10 + this.randomExplosions.Next(11);   // entre 10 et 20 particules
+
+            // Créer les particules et les ajouter à la liste de particules d'explosions à gérer
+            for (int i = 0; i < nombreDeParticules; i++)
+            {
+                ParticuleExplosion particule = new ParticuleExplosion(
+                    sprite.Position,                              // positionné au départ sur l'astéroïde
+                    this.explosionParticule,                         // texture à utiliser
+                    0);      // vitesse de déplacement vertical
+
+                this.listeParticulesExplosions.Add(particule);
             }
         }
     }

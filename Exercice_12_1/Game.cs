@@ -174,7 +174,12 @@ namespace Exercice_12_1
         /// <summary>
         /// Liste de sprite représentant les ogres.
         /// </summary>
-        private List<Ogre> ogres;
+        private List<Ogre> listeOgres;
+
+        /// <summary>
+        /// Liste de sprite représentant les ogres fini.
+        /// </summary>
+        private List<Ogre> listeOgresFini;
 
         /// <summary>
         /// Attribut indiquant l'état du jeu
@@ -523,6 +528,9 @@ namespace Exercice_12_1
             this.listeBloc = new List<Sprite>();
             this.listeBlocFini = new List<Sprite>();
 
+            listeOgres = new List<Ogre>();                                                                                     /////////////////////////// OGRES
+            listeOgresFini = new List<Ogre>();
+
             // Le jeu est en cours de démarrage. Notez qu'on évite d'exploiter la prorpiété EtatJeu
             // car le setter de cette dernière manipule des effets sonores qui ne sont pas encore
             // chargées par LoadContent()
@@ -570,6 +578,7 @@ namespace Exercice_12_1
 
             Bloc.LoadContent(Content, this.graphics);
 
+            Ogre.LoadContent(Content, this.graphics);
 
             this.MondeCourant = Mondes.MAP_1_1;
             LoadMap11();
@@ -772,13 +781,21 @@ namespace Exercice_12_1
 
 
             this.camera.Centrer(this.joueur.Position);
+            // Se débarasser des astéroïdes ayant quitté l'écran.
+            foreach (Ogre ogre in listeOgresFini)
+            {
+                this.listeOgres.Remove(ogre);
+            }
 
-            //// Mettre à jour les ogres.
-            //foreach (Ogre ogre in this.ogres)
-            //{
-            //    ogre.GrillePathFinding.Destination = this.joueur.Position;
-            //    ogre.Update(gameTime, this.graphics);
-            //}
+            // Mettre à jour les ogres.
+            foreach (Ogre ogre in this.listeOgres)
+            {
+                //ogre.GrillePathFinding.Destination = this.joueur.Position;
+                ogre.SeTournerVers(this.joueur.Position);
+
+
+                ogre.Update(gameTime, this.graphics);
+            }
 
             GestionProjectile();
 
@@ -899,11 +916,11 @@ namespace Exercice_12_1
             // Suspendre au besoin les effets sonores du vaisseau.
             this.joueur.SuspendreEffetsSonores(suspendre);
 
-            // Suspendre au besoin les effets sonores des ogres.
-            //foreach (Ogre ogre in this.ogres)
-            //{
-            //    ogre.SuspendreEffetsSonores(suspendre);
-            //}
+            //Suspendre au besoin les effets sonores des ogres.
+            foreach (Ogre ogre in this.listeOgres)
+            {
+                ogre.SuspendreEffetsSonores(suspendre);
+            }
 
             if (suspendre)
             {
@@ -960,36 +977,30 @@ namespace Exercice_12_1
             // Liste statique exploitée pour ordonner les sprites avant leur affichage.
             List<Sprite> listeDraw = new List<Sprite>();
 
-            // Ajouter les sprites à afficher à la liste.
+            //Ajouter les sprites à afficher à la liste.
             //listeDraw.Add(this.joueur);
-            //foreach (Ogre ogre in this.ogres)
-            //{
-            //    listeDraw.Add(ogre);
-            //}
+            foreach (Ogre ogre in this.listeOgres)
+            {
+                listeDraw.Add(ogre);
+            }
+
+            // Afficher les astéroïdes.
+            foreach (Bloc bloc in this.listeBloc)
+            {
+                listeDraw.Add(bloc);
+            }
+
+            // Afficher les astéroïdes.
+            foreach (Projectile pj in this.listeProjectiles)
+            {
+                listeDraw.Add(pj);
+            }
 
             // Trier les sprite en ordre croissant de position verticale, puis les afficher.
             listeDraw.Sort(ComparerSpritesPourAffichage);
             foreach (Sprite sprite in listeDraw)
             {
                 sprite.Draw(this.camera, this.spriteBatch);
-            }
-
-            if (this.listeProjectiles != null)
-            {
-                // Afficher les astéroïdes.
-                foreach (Projectile pj in this.listeProjectiles)
-                {
-                    pj.Draw(this.spriteBatch);
-                }
-            }
-
-            if (this.listeBloc != null)
-            {
-                // Afficher les astéroïdes.
-                foreach (Bloc bloc in this.listeBloc)
-                {
-                    bloc.Draw(this.spriteBatch);
-                }
             }
 
             // Afficher le sprite du joueur.
@@ -1146,6 +1157,18 @@ namespace Exercice_12_1
             {
                 this.listeProjectiles.Remove(pj);
             }
+
+            foreach (Ogre ogre in this.listeOgres)
+            {
+                listeOgresFini.Add(ogre);
+            }
+            // Se débarasser des astéroïdes ayant quitté l'écran.
+            foreach (Ogre ogre in listeOgresFini)
+            {
+                this.listeOgres.Remove(ogre);
+            }
+
+           
         }
 
         /// <summary>
@@ -1157,6 +1180,9 @@ namespace Exercice_12_1
 
             Bloc bloc2 = new Bloc(300, 133);
             this.listeBloc.Add(bloc2);
+
+            Ogre ogre = new Ogre(new Vector2(300, 300));
+            this.listeOgres.Add(ogre);
         }
 
         /// <summary>

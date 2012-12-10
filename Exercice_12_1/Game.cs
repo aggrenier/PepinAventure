@@ -822,6 +822,9 @@ namespace Exercice_12_1
 
             GestionBloc();
 
+            // Mettre à jour les particules d'explosion
+            this.UpdateParticulesExplosions(gameTime); 
+
             foreach (Projectile pj in this.listeProjectiles)
             {
                 pj.Update(gameTime, this.graphics);
@@ -840,7 +843,7 @@ namespace Exercice_12_1
             foreach (Bloc bloc in this.listeBloc)
             {
                 listeBlocFini.Add(bloc);
-            }
+            }           
 
             // Vérifier si le joueur a atteint une sortie du monde.
             if (this.monde.AtteintUneSortie(this.joueur))

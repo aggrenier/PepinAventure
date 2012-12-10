@@ -123,8 +123,8 @@ namespace Exercice_12_1
                 content,            // gestionnaire de contenu à utiliser
                 graphics,           // gestionnaire de périphériques à utiliser
                 Ogre.palettes,      // liste où doivent être stockées les palettes de l'ogre
-                96,                 // largeur de chaque tuile dans les palettes
-                96,                 // hauteur de chaque tuile dans les palettes
+                69,                 // largeur de chaque tuile dans les palettes
+                80,                 // hauteur de chaque tuile dans les palettes
                 "Textures\\Ogre");  // sous-répertoire de Content où sont stockées les palettes de l'ogre
         }
 
@@ -145,14 +145,13 @@ namespace Exercice_12_1
             {
                 Rectangle destRect = new Rectangle((int)this.Position.X, (int)this.Position.Y, 1, 1);
 
-                if (this.Camera.EstVisible(destRect))
-                {
-                    base.LireVitesses(gameTime, out vitesseNord, out vitesseSud, out vitesseEst, out vitesseOuest);
-                }
+                
+                 base.LireVitesses(gameTime, out vitesseNord, out vitesseSud, out vitesseEst, out vitesseOuest);
+               
 
             }
             catch (ArgumentOutOfRangeException) { }
             return true;
-        }
+        }       
     }
 }

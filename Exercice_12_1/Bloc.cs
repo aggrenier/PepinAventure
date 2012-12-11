@@ -226,8 +226,8 @@ namespace Exercice_12_1
         /// <param name="graphics">Gestionnaire de périphérique d'affichage.</param>
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics)
         {
-            ForcerPosition(Position.X + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale),
-                Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.vitesseVerticale));            
+            //ForcerPosition(Position.X + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale),
+            //    Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.vitesseVerticale));            
 
             if(this.vitesHorizontale != 0 || this.vitesseVerticale != 0)
             this.VideDeBloc -= 0.05f;
@@ -269,9 +269,30 @@ namespace Exercice_12_1
                     deltaY = (int)(deltaY * (1.0f - resistance));
                 }
 
+                int deplacementVert = 0;
+                int deplacementHor  = 0;
+
+                if (deltaX > 1)
+                {
+                    deplacementVert = 16;
+                }
+                else if (deltaY < 1)
+                {
+                    deplacementVert = -16;
+                }
+
+                if (deltaY > 1)
+                {
+                    deplacementHor = 16;
+                }
+                else if (deltaY < 1)
+                {
+                    deplacementHor = -16;
+                }
+
                 // Modifier la position du sprite en conséquence (on exploite le setter
                 // de _position afin d'appliquer boundsRect).
-                this.Position = new Vector2(this.Position.X + deltaX, this.Position.Y + deltaY);
+                this.Position = new Vector2(this.Position.X + deplacementVert, this.Position.Y + deplacementHor);
             }
 
 

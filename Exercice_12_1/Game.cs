@@ -530,6 +530,59 @@ namespace Exercice_12_1
         }
 
         /// <summary>
+        /// Définition de fonction déléguée permettant de valider un déplacement d'une position
+        /// à une autre dans le monde. La fonction retourne le point le plus près de 
+        /// (posSource.X+deltaX, posSource.Y+DeltaY) jusqu'où le personnage peut se rendre horizontalement 
+        /// et verticalement sans rencontrer de résistance plus élévée que la limite donnée.
+        /// </summary>
+        /// <param name="posSource">Position du pixel de départ du déplacement, en coordonnées du monde.</param>
+        /// <param name="deltaX">Déplacement total horizontal, en coordonnées du monde.</param>
+        /// <param name="deltaY">Déplacement total vertical, en coordonnées du monde.</param>
+        /// <param name="resistanceMax">Résistance maximale tolérée lors du déplacement.</param>
+        public void ValiderDeplacement1(Vector2 posSource, ref float deltaX, ref float deltaY, float resistanceMax)
+        {
+            Vector2 dest = new Vector2(posSource.X, posSource.Y);
+
+
+
+            // Premièrement considérer le déplacement horizontal. Incrémenter la distance horizontale
+            // de déplacement jusqu'à deltaX ou jusqu'à ce qu'une résistance supérieure à celle tolérée
+            // soit rencontrée.
+            while (dest.X != posSource.X + deltaX)
+            {
+                dest.X += Math.Sign(deltaX);        // incrémenter la distance horizontale
+
+                // Vérifier la résistance
+                if (this.CalculerResistanceAuMouvement(dest) > resistanceMax)
+                {
+                    dest.X -= Math.Sign(deltaX);    // reculer d'un pixel (validé à l'itération précédente)
+                    break;
+                }
+            }
+
+            // Maintenant considérer le déplacement vertical. Incrémenter la distance verticale
+            // de déplacement jusqu'à deltaY ou jusqu'à ce qu'une résistance supérieure à celle tolérée
+            // soit rencontrée.
+            while (dest.Y != posSource.Y + deltaY)
+            {
+                dest.Y += Math.Sign(deltaY);        // incrémenter la distance horizontale
+
+                // Vérifier la résistance
+                if (this.CalculerResistanceAuMouvement(dest) > resistanceMax)
+                {
+                    dest.Y -= Math.Sign(deltaY);    // reculer d'un pixel (validé à l'itération précédente)
+                    break;
+                }
+                else if (this.CalculerResistanceAuMouvement(dest) == .9f)                             ///////////******
+                    this.joueur.Etat = Personnage.Etats.Tombe;
+            }
+
+            // Déterminer le déplacement maximal dans les deux directions
+            deltaX = (int)(dest.X - posSource.X);
+            deltaY = (int)(dest.Y - posSource.Y);
+        }
+
+        /// <summary>
         /// Permet au jeu d'effectuer toute initialisation avant de commencer à jouer.
         /// Cette fonction membre peut demander les services requis et charger tout contenu
         /// non graphique pertinent. L'invocation de base.Initialize() itèrera parmi les
@@ -609,8 +662,7 @@ namespace Exercice_12_1
             this.joueur.BoundsRect = new Rectangle(0, 0, 600, 600);
 
             // Imposer la palette de collisions au déplacement du joueur.
-            this.joueur.GetValiderDeplacement = this.ValiderDeplacement;
-
+            this.joueur.GetValiderDeplacement = this.ValiderDeplacement; 
 
             // Construire une grille de tuiles franchissables pour le pathfinding des ogres (ils peuvent se déplacer
             // uniquement sur terre).
@@ -1340,9 +1392,9 @@ namespace Exercice_12_1
         {
             ClearMap();
 
-            Bloc bloc2 = new Bloc(300, 133);
-            bloc2.RayonDeCollision = 14;
-            this.listeBloc.Add(bloc2);
+            Bloc bloc0 = new Bloc(300, 133);
+            bloc0.GetValiderDeplacement = this.ValiderDeplacement1;
+            this.listeBloc.Add(bloc0);
 
             Ogre ogre = new Ogre(new Vector2(300, 300));
             this.listeOgres.Add(ogre);
@@ -1357,6 +1409,7 @@ namespace Exercice_12_1
             ClearMap();
 
             Bloc bloc0 = new Bloc(106, 340);
+            bloc0.GetValiderDeplacement = this.ValiderDeplacement1; 
             Bloc bloc1 = new Bloc(133, 300);
             Bloc bloc2 = new Bloc(106, 255);
 

@@ -1369,8 +1369,11 @@ namespace Exercice_12_1
             Ogre ogre1 = new Ogre(new Vector2(339, 214));
             this.listeOgres.Add(ogre1);
 
-            Switch switch1 = new Switch(200, 200);
+            Switch switch1 = new Switch(133, 230);
             this.listeSwitch.Add(switch1);
+
+            Switch switch2 = new Switch(203, 300);
+            this.listeSwitch.Add(switch2);
         }
         /// <summary>
         /// Fonction qui load tout les elements de map 1-3           

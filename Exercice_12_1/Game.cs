@@ -1106,7 +1106,7 @@ namespace Exercice_12_1
                         Color.Chartreuse,                // couleur
                         0,  // angle de rotation
                         new Vector2(16, 16),        // origine de rotation
-                        pj.VideDeProjectile % 1.1f,             // échelle d'affichage
+                        .4f + pj.VideDeProjectile % 1.001f,             // échelle d'affichage
                         SpriteEffects.None,         // effets
                         0.0f);                      // profondeur de couche (layer depth));
                 }
@@ -1450,12 +1450,12 @@ namespace Exercice_12_1
                 }
                 foreach (Ogre ogre in listeOgres)                                                       ////// explosion /////////////
                 {
-                    if (pj.Collision(ogre))
+                    if (pj.Collision(ogre) && pj.TypeProjectile == Projectile.TypesProjectiles.Joueur)
                     {
-                        // Créer un nouvel effet visuel pour l'explosion.
-                        //this.CreerExplosion(ogre, gameTime);
-                        //listeProjectileFini.Add(pj);
-                        //listeOgresFini.Add(ogre);
+                        //Créer un nouvel effet visuel pour l'explosion.
+                        this.CreerExplosion(ogre, gameTime);
+                        listeProjectileFini.Add(pj);
+                        listeOgresFini.Add(ogre);
                     }
                 }
                 if (pj.TypeProjectile == Projectile.TypesProjectiles.Ennemi)

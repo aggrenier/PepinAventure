@@ -151,8 +151,6 @@ namespace Exercice_12_1
         /// </summary>
         private List<Sprite> listeProjectileFini;
 
-
-
         /// <summary>
         /// Liste des sprites représentant des blocs.
         /// </summary>
@@ -836,6 +834,7 @@ namespace Exercice_12_1
                     if (ogre.Direction == Personnage.Directions.Nord)
                     {
                         Projectile pj = new Projectile(new Vector2(ogre.Position.X, ogre.Position.Y -60), 0);
+                        pj.TypeProjectile = Projectile.TypesProjectiles.Ennemi;
                         this.listeProjectiles.Add(pj);
                     }
 
@@ -843,6 +842,7 @@ namespace Exercice_12_1
                     if (ogre.Direction == Personnage.Directions.Est)
                     {
                         Projectile pj = new Projectile(new Vector2(ogre.Position.X -60, ogre.Position.Y), 2);
+                        pj.TypeProjectile = Projectile.TypesProjectiles.Ennemi;
                         this.listeProjectiles.Add(pj);
                     }
 
@@ -850,6 +850,7 @@ namespace Exercice_12_1
                     if (ogre.Direction == Personnage.Directions.Sud)
                     {
                         Projectile pj = new Projectile(new Vector2(ogre.Position.X, ogre.Position.Y + 60), 4);
+                        pj.TypeProjectile = Projectile.TypesProjectiles.Ennemi;
                         this.listeProjectiles.Add(pj);
                     }
 
@@ -857,6 +858,7 @@ namespace Exercice_12_1
                     if (ogre.Direction == Personnage.Directions.Ouest)
                     {
                         Projectile pj = new Projectile(new Vector2(ogre.Position.X +60 , ogre.Position.Y), 6);
+                        pj.TypeProjectile = Projectile.TypesProjectiles.Ennemi;
                         this.listeProjectiles.Add(pj);
                     }
                 }
@@ -1079,32 +1081,48 @@ namespace Exercice_12_1
             // Liste statique exploitée pour ordonner les sprites avant leur affichage.
             List<Sprite> listeDraw = new List<Sprite>();
 
-            //Ajouter les sprites à afficher à la liste.
+            //Ajouter les ogres à afficher à la liste.
             //listeDraw.Add(this.joueur);
             foreach (Ogre ogre in this.listeOgres)
             {
                 listeDraw.Add(ogre);
             }
 
-            // Afficher les astéroïdes.
+            // Afficher les blocs.
             foreach (Bloc bloc in this.listeBloc)
             {
                 listeDraw.Add(bloc);
             }
 
-            // Afficher les astéroïdes.
+            // Afficher les projectiles.
             foreach (Projectile pj in this.listeProjectiles)
             {
-                spriteBatch.Draw(
-                    pj.Texture,                 // texture
-                    pj.Position,                // position
-                    null,                       // sourceRectangle
-                    Color.Chartreuse,                // couleur
-                    0,  // angle de rotation
-                    new Vector2(16, 16),        // origine de rotation
-                    pj.VideDeProjectile/2,             // échelle d'affichage
-                    SpriteEffects.None,         // effets
-                    0.0f);                      // profondeur de couche (layer depth));
+                if (pj.TypeProjectile == Projectile.TypesProjectiles.Joueur)
+                {
+                    spriteBatch.Draw(
+                        pj.Texture,                 // texture
+                        pj.Position,                // position
+                        null,                       // sourceRectangle
+                        Color.Chartreuse,                // couleur
+                        0,  // angle de rotation
+                        new Vector2(16, 16),        // origine de rotation
+                        pj.VideDeProjectile % 1.1f,             // échelle d'affichage
+                        SpriteEffects.None,         // effets
+                        0.0f);                      // profondeur de couche (layer depth));
+                }
+                else
+                {
+                    spriteBatch.Draw(
+                        pj.Texture,                 // texture
+                        pj.Position,                // position
+                        null,                       // sourceRectangle
+                        Color.LightSalmon,                // couleur
+                        0,                          // angle de rotation
+                        new Vector2(16, 16),        // origine de rotation
+                        pj.VideDeProjectile % 1.1f,             // échelle d'affichage
+                        SpriteEffects.None,         // effets
+                        0.0f);                      // profondeur de couche (layer depth));
+                }
             }
 
             // Trier les sprite en ordre croissant de position verticale, puis les afficher.
@@ -1355,6 +1373,7 @@ namespace Exercice_12_1
             if (ServiceHelper.Get<IInputService>().tirerNord(1))
             {
                 Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 0);
+                pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
 
                 if (ServiceHelper.Get<IInputService>().DeplacementDroite(0) > 0)
                 {
@@ -1372,6 +1391,8 @@ namespace Exercice_12_1
             else if (ServiceHelper.Get<IInputService>().tirerEst(1))
             {
                 Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 2);
+                pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
+
                 if (ServiceHelper.Get<IInputService>().DeplacementAvant(0) > 0)
                 {
                     pj.vitesseVerticale -= (this.joueur.VitesseVerticale * 1.2f);
@@ -1387,6 +1408,7 @@ namespace Exercice_12_1
             else if (ServiceHelper.Get<IInputService>().tirerSud(1))
             {
                 Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 4);
+                pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
 
                 if (ServiceHelper.Get<IInputService>().DeplacementDroite(0) > 0)
                 {
@@ -1403,6 +1425,7 @@ namespace Exercice_12_1
             else if (ServiceHelper.Get<IInputService>().tirerOuest(1))
             {
                 Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 6);
+                pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
 
                 if (ServiceHelper.Get<IInputService>().DeplacementAvant(0) > 0)
                 {
@@ -1430,9 +1453,24 @@ namespace Exercice_12_1
                     if (pj.Collision(ogre))
                     {
                         // Créer un nouvel effet visuel pour l'explosion.
-                        this.CreerExplosion(ogre, gameTime);
-                        listeProjectileFini.Add(pj);
-                        listeOgresFini.Add(ogre);
+                        //this.CreerExplosion(ogre, gameTime);
+                        //listeProjectileFini.Add(pj);
+                        //listeOgresFini.Add(ogre);
+                    }
+                }
+                if (pj.TypeProjectile == Projectile.TypesProjectiles.Ennemi)
+                {
+                    foreach (Projectile pj1 in this.listeProjectiles)
+                    {
+                        if (pj1.TypeProjectile == Projectile.TypesProjectiles.Joueur)
+                        if (pj.Collision(pj1))
+                        {
+                            // Créer un nouvel effet visuel pour l'explosion.
+                            this.CreerExplosion(pj, gameTime);
+                            listeProjectileFini.Add(pj);
+                            listeProjectileFini.Add(pj1);
+
+                        }
                     }
                 }
             }

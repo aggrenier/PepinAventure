@@ -87,6 +87,21 @@ namespace Exercice_12_1
         /// </summary>
         private ValiderDeplacement getValiderDeplacement;
 
+        private TypesProjectiles typeProjectile;
+
+        public enum TypesProjectiles
+        {
+
+            Joueur,
+
+            Ennemi
+        }
+
+        public TypesProjectiles TypeProjectile
+        {
+            get { return this.typeProjectile; }
+            set { this.typeProjectile = value; }
+        }
 
         /// <summary>
         /// Attribut statique (i.e. partagé par toutes les instances) constituant une 
@@ -369,8 +384,8 @@ namespace Exercice_12_1
 
             this.VideDeProjectile -= 0.1f;
 
-            if (animProjectile < 2f)
-            this.animProjectile -= 0.01f;
+            animProjectile -= .01f;
+            //animProjectile = (float)Math.Sin(this.animProjectile);
 
             // La fonction de base s'occupe de l'animation.
             base.Update(gameTime, graphics);

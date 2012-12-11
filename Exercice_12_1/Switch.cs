@@ -74,75 +74,12 @@ namespace Exercice_12_1
     public class Switch : SpriteAnimation
     {
         /// <summary>
-        /// Fonction déléguée permettant d'obtenir la résistance aux déplacements du sprite
-        /// dans le monde de tuiles. Si aucune fonction déléguée n'est fournie, aucune
-        /// résistance n'est appliquée aux déplacements.
-        /// </summary>
-        private ResistanceAuMouvement getResistanceAuMouvement;
-
-        /// <summary>
-        /// Fonction déléguée permettant de valider les déplacements du sprite
-        /// dans le monde de tuiles. Si aucune fonction déléguée n'est fournie, aucune
-        /// résistance n'est appliquée aux déplacements.
-        /// </summary>
-        private ValiderDeplacement getValiderDeplacement;
-
-
-        /// <summary>
         /// Attribut statique (i.e. partagé par toutes les instances) constituant une 
         /// liste de palettes à exploiter selon la direction et l'état du joueur.
         /// </summary>
-        private static PaletteTuiles palettes;
-
-        /// <summary>
-        /// Effet sonore contenant le bruitage du joueur en état de marche.
-        /// </summary>
-        private static SoundEffect bruitLancer;
-
-        /// <summary>
-        /// Effet sonore contenant le bruitage du joueur en état de course.
-        /// </summary>
-        private static SoundEffect bruitFrapper;
-
-        /// <summary>
-        /// Vitesse de marche du joueur, avec valeur par défaut.
-        /// </summary>
-        private float VitesseHorizontale = 0.0f;
-
-        public float vitesHorizontale
-        {
-            get { return this.VitesseHorizontale; }
-            set { this.VitesseHorizontale += value; }
-        }
-
-        private float VitesseVerticale = 0.0f;
-        /// <summary>
-        /// Vitesse de marche du joueur, avec valeur par défaut.
-        /// </summary>
-        public float vitesseVerticale
-        {
-            get { return this.VitesseVerticale; }
-            set { this.VitesseVerticale += value; }
-        }       
+        private static PaletteTuiles palettes;      
 
        
-        private float vieDeBloc = 2f;
-
-        public float VideDeBloc
-        {
-            get { return this.vieDeBloc; }
-            set { this.vieDeBloc = value; }
-        }
-
-        private bool blockMouvement = true;
-
-        public bool BlockMouvement
-        {
-            get { return this.blockMouvement; }
-            set { this.blockMouvement = value; }
-        }
-
-
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
         /// </summary>
@@ -152,15 +89,6 @@ namespace Exercice_12_1
             : base(x, y)
         {
 
-        }
-
-        /// <summary>
-        /// Accesseur pour attribut vitesseMaximum.
-        /// </summary>
-        public float VitesseMaximum
-        {
-            get { return this.VitesseMaximum; }
-            set { this.VitesseMaximum = value; }
         }
 
         /// <summary>
@@ -183,30 +111,7 @@ namespace Exercice_12_1
             {    
                return new Vector2(this.Position.X , this.Position.Y );
             }
-        }
-              
-
-        /// <summary>
-        /// Propriété (accesseur pour getResistanceAuMouvement) retournant ou changeant la fonction déléguée 
-        /// de calcul de résistance aux déplacements.
-        /// </summary>
-        /// <value>Fonction de calcul de résistance aux déplacements.</value>
-        public ResistanceAuMouvement GetResistanceAuMouvement
-        {
-            get { return this.getResistanceAuMouvement; }
-            set { this.getResistanceAuMouvement = value; }
-        }
-
-        /// <summary>
-        /// Propriété (accesseur pour getValiderDeplacement) retournant ou changeant la fonction déléguée 
-        /// de validation des déplacements.
-        /// </summary>
-        /// <value>Fonction de calcul de résistance aux déplacements.</value>
-        public ValiderDeplacement GetValiderDeplacement
-        {
-            get { return this.getValiderDeplacement; }
-            set { this.getValiderDeplacement = value; }
-        }
+        }   
 
         /// <summary>
         /// Charge les images associées au sprite du joueur.

@@ -150,6 +150,7 @@
     <Compile Include="ServiceHelper.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="SpriteAnimation.cs" />
+    <Compile Include="Switch.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

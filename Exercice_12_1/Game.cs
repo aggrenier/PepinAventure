@@ -1420,7 +1420,7 @@ namespace Exercice_12_1
 
             Ogre ogre = new Ogre(new Vector2(152, 144));
             this.listeOgres.Add(ogre);
-            Ogre ogre1 = new Ogre(new Vector2(339, 214));
+            Ogre ogre1 = new Ogre(new Vector2(444, 144));
             this.listeOgres.Add(ogre1);
 
             Switch switch1 = new Switch(133, 230);
@@ -1439,6 +1439,11 @@ namespace Exercice_12_1
             Bloc bloc0 = new Bloc(404, 150);
             Bloc bloc1 = new Bloc(404, 175);
 
+            Ogre ogre = new Ogre(new Vector2(300, 120));
+            this.listeOgres.Add(ogre);
+            Ogre ogre1 = new Ogre(new Vector2(300, 260));
+            this.listeOgres.Add(ogre1);
+
             this.listeBloc.Add(bloc0);
             this.listeBloc.Add(bloc1);
 
@@ -1449,6 +1454,11 @@ namespace Exercice_12_1
         private void LoadMap14()
         {
             ClearMap();
+
+            Ogre ogre = new Ogre(new Vector2(300, 120));
+            this.listeOgres.Add(ogre);
+            Ogre ogre1 = new Ogre(new Vector2(300, 260));
+            this.listeOgres.Add(ogre1);
         }
         /// <summary>
         /// Fonction qui load tout les elements de map 1-5           
@@ -1456,6 +1466,11 @@ namespace Exercice_12_1
         private void LoadMap15()
         {
             ClearMap();
+
+            Ogre ogre = new Ogre(new Vector2(300, 120));
+            this.listeOgres.Add(ogre);
+            Ogre ogre1 = new Ogre(new Vector2(300, 260));
+            this.listeOgres.Add(ogre1);
 
         }
 

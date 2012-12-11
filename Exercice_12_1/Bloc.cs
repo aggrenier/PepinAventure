@@ -233,7 +233,7 @@ namespace Exercice_12_1
             //// Calculer le déplacement du sprite selon la direction indiquée. Notez que
             //// deux directions opposées s'annulent.
             //float deltaX = vitesHorizontale;
-            //float deltaY = vitesseVerticale;            
+            //float deltaY = vitesseVerticale;
 
             //// Si une fonction déléguée est fournie pour valider les mouvements sur les tuiles
             //// y faire appel pour valider la position résultante du mouvement.
@@ -242,7 +242,7 @@ namespace Exercice_12_1
             //    // Déterminer le déplacement maximal permis vers la nouvelle position en fonction
             //    // de la résistance des tuiles. Une résistance maximale de 0.95 est indiquée afin de
             //    // permettre au sprite de traverser les tuiles n'étant pas complètement solides.
-            //    this.getValiderDeplacement(this.PositionPourCollisions, ref deltaX, ref deltaY, 0.95f);
+            //    this.getValiderDeplacement(new Vector2(AireOccupe.X,AireOccupe.Y), ref deltaX, ref deltaY, 0.95f);
             //}
 
             //// Si une fonction déléguée est fournie pour autoriser les mouvements sur les tuiles
@@ -252,7 +252,7 @@ namespace Exercice_12_1
             //    // Déterminer les coordonnées de destination et tenant compte que le sprite est
             //    // centré sur Position, alors que ses mouvements doivent être autorisés en fonction
             //    // de la position de ses pieds.
-            //    Vector2 newPos = this.PositionPourCollisions;
+            //    Vector2 newPos = new Vector2(AireOccupe.X, AireOccupe.Y);
             //    newPos.X += deltaX;
             //    newPos.Y += deltaY;
 
@@ -262,7 +262,7 @@ namespace Exercice_12_1
             //    // Appliquer le facteur de résistance obtenu au déplacement.
             //    deltaX = (int)(deltaX * (1.0f - resistance));
             //    deltaY = (int)(deltaY * (1.0f - resistance));
-            //}           
+            //}
 
             //// Modifier la position du sprite en conséquence (on exploite le setter
             //// de _position afin d'appliquer boundsRect).

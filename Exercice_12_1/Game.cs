@@ -1471,7 +1471,7 @@ namespace Exercice_12_1
                             listeProjectileFini.Add(pj1);
 
                         }
-                    }
+                    }                   
                 }
             }
             // Se débarasser des projectile ayant quitté l'écran.

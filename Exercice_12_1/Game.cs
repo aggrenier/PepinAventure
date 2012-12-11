@@ -529,6 +529,32 @@ namespace Exercice_12_1
             deltaY = (int)(dest.Y - posSource.Y);
         }
 
+
+        /// <summary>
+        /// Fonction retournant le niveau de résistance aux déplacements en fonction de la couleur du pixel de tuile
+        /// à la position donnée.
+        /// </summary>
+        /// <param name="position">Position du pixel en coordonnées du monde.</param>
+        /// <returns>Facteur de résistance entre 0.0f (aucune résistance) et 1.0f (résistance maximale).</returns>
+        public float CalculerResistanceAuMouvemenBlock(Vector2 position)
+        {            
+            // Extraire la couleur du pixel correspondant à la position donnée dans privTuilesCollisions.
+            Color pixColor = this.monde.CouleurDeCollision(position);
+
+            // Déterminer le niveau de résistance en fonction de la couleur
+            if (pixColor == Color.White)
+            {
+                return 0.0f;
+            }
+            else if (pixColor == Color.Blue)
+            {
+                return 0.9f;
+            }
+            else
+            {
+                return 1.0f;
+            }
+        }
         /// <summary>
         /// Définition de fonction déléguée permettant de valider un déplacement d'une position
         /// à une autre dans le monde. La fonction retourne le point le plus près de 
@@ -553,7 +579,7 @@ namespace Exercice_12_1
                 dest.X += Math.Sign(deltaX);        // incrémenter la distance horizontale
 
                 // Vérifier la résistance
-                if (this.CalculerResistanceAuMouvement(dest) > resistanceMax)
+                if (this.CalculerResistanceAuMouvemenBlock(dest) > resistanceMax)
                 {
                     dest.X -= Math.Sign(deltaX);    // reculer d'un pixel (validé à l'itération précédente)
                     break;
@@ -568,7 +594,7 @@ namespace Exercice_12_1
                 dest.Y += Math.Sign(deltaY);        // incrémenter la distance horizontale
 
                 // Vérifier la résistance
-                if (this.CalculerResistanceAuMouvement(dest) > resistanceMax)
+                if (this.CalculerResistanceAuMouvemenBlock(dest) > resistanceMax)
                 {
                     dest.Y -= Math.Sign(deltaY);    // reculer d'un pixel (validé à l'itération précédente)
                     break;
@@ -1411,7 +1437,9 @@ namespace Exercice_12_1
             Bloc bloc0 = new Bloc(106, 340);
             bloc0.GetValiderDeplacement = this.ValiderDeplacement1; 
             Bloc bloc1 = new Bloc(133, 300);
+            bloc1.GetValiderDeplacement = this.ValiderDeplacement1;
             Bloc bloc2 = new Bloc(106, 255);
+            bloc2.GetValiderDeplacement = this.ValiderDeplacement1;
 
             this.listeBloc.Add(bloc0);
             this.listeBloc.Add(bloc1);

@@ -226,51 +226,53 @@ namespace Exercice_12_1
         /// <param name="graphics">Gestionnaire de périphérique d'affichage.</param>
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics)
         {
-            //ForcerPosition(Position.X + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale),
-            //    Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.vitesseVerticale));            
+            ForcerPosition(Position.X + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale),
+                Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.vitesseVerticale));            
 
             if(this.vitesHorizontale != 0 || this.vitesseVerticale != 0)
             this.VideDeBloc -= 0.05f;
 
 
-
-            // Calculer le déplacement du sprite selon la direction indiquée. Notez que
-            // deux directions opposées s'annulent.
-            float deltaX = vitesHorizontale;
-            float deltaY = vitesseVerticale;            
-
-            // Si une fonction déléguée est fournie pour valider les mouvements sur les tuiles
-            // y faire appel pour valider la position résultante du mouvement.
-            if (this.getValiderDeplacement != null && (deltaX != 0.0 || deltaY != 0.0))
+            if ((this.vitesHorizontale != 0 || this.vitesseVerticale != 0))
             {
-                // Déterminer le déplacement maximal permis vers la nouvelle position en fonction
-                // de la résistance des tuiles. Une résistance maximale de 0.95 est indiquée afin de
-                // permettre au sprite de traverser les tuiles n'étant pas complètement solides.
-                this.getValiderDeplacement(this.PositionPourCollisions, ref deltaX, ref deltaY, 0.95f);
+                // Calculer le déplacement du sprite selon la direction indiquée. Notez que
+                // deux directions opposées s'annulent.
+                float deltaX = vitesHorizontale;
+                float deltaY = vitesseVerticale;
+
+                // Si une fonction déléguée est fournie pour valider les mouvements sur les tuiles
+                // y faire appel pour valider la position résultante du mouvement.
+                if (this.getValiderDeplacement != null && (deltaX != 0.0 || deltaY != 0.0))
+                {
+                    // Déterminer le déplacement maximal permis vers la nouvelle position en fonction
+                    // de la résistance des tuiles. Une résistance maximale de 0.95 est indiquée afin de
+                    // permettre au sprite de traverser les tuiles n'étant pas complètement solides.
+                    this.getValiderDeplacement(this.PositionPourCollisions, ref deltaX, ref deltaY, 0.95f);
+                }
+
+                // Si une fonction déléguée est fournie pour autoriser les mouvements sur les tuiles
+                // y faire appel pour valider la position résultante du mouvement.
+                if (this.getResistanceAuMouvement != null && (deltaX != 0.0 || deltaY != 0.0))
+                {
+                    // Déterminer les coordonnées de destination et tenant compte que le sprite est
+                    // centré sur Position, alors que ses mouvements doivent être autorisés en fonction
+                    // de la position de ses pieds.
+                    Vector2 newPos = this.PositionPourCollisions;
+                    newPos.X += deltaX;
+                    newPos.Y += deltaY;
+
+                    // Calculer la résistance à la position du sprite.
+                    float resistance = this.getResistanceAuMouvement(newPos);
+
+                    // Appliquer le facteur de résistance obtenu au déplacement.
+                    deltaX = (int)(deltaY * (1.0f - resistance));
+                    deltaY = (int)(deltaY * (1.0f - resistance));
+                }
+
+                // Modifier la position du sprite en conséquence (on exploite le setter
+                // de _position afin d'appliquer boundsRect).
+                this.Position = new Vector2(this.Position.X + deltaX, this.Position.Y + deltaY);
             }
-
-            // Si une fonction déléguée est fournie pour autoriser les mouvements sur les tuiles
-            // y faire appel pour valider la position résultante du mouvement.
-            if (this.getResistanceAuMouvement != null && (deltaX != 0.0 || deltaY != 0.0))
-            {
-                // Déterminer les coordonnées de destination et tenant compte que le sprite est
-                // centré sur Position, alors que ses mouvements doivent être autorisés en fonction
-                // de la position de ses pieds.
-                Vector2 newPos = this.PositionPourCollisions;
-                newPos.X += deltaX;
-                newPos.Y += deltaY;
-
-                // Calculer la résistance à la position du sprite.
-                float resistance = this.getResistanceAuMouvement(newPos);
-
-                // Appliquer le facteur de résistance obtenu au déplacement.
-                deltaX = (int)(deltaX * (1.0f - resistance));
-                deltaY = (int)(deltaY * (1.0f - resistance));
-            }           
-
-            // Modifier la position du sprite en conséquence (on exploite le setter
-            // de _position afin d'appliquer boundsRect).
-            this.Position = new Vector2(this.Position.X + deltaX, this.Position.Y + deltaY);
 
 
             // La fonction de base s'occupe de l'animation.

@@ -1625,7 +1625,7 @@ namespace Exercice_12_1
             // de lignes inclu dans la même string mais séparées de \n.
             string[] lignes = 
             {
-                 "Matthieu Doell",
+                 "Matthieu Doell\nAlexandre Grenier",
                  "Cours 20884 IFM\nPhysique du Jeu", 
                  "Ce jeu enfreint plusieurs droits d'auteurs\nRedistribution interdite",
                  "Copyright 2012\nPRODUCTIONS DOELL-GRENIER\nNintendo"

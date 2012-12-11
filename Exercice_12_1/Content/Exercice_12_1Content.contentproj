@@ -530,11 +530,6 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Content Include="Audio\Musique\zelda_2.mp3">
-      <Name>zelda_2</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Content>
     <Compile Include="Audio\Musique\zelda_fin.wav">
       <Name>zelda_fin</Name>
       <Importer>WavImporter</Importer>

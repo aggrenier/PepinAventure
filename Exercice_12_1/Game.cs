@@ -441,7 +441,6 @@ namespace Exercice_12_1
         /// <returns>Facteur de résistance entre 0.0f (aucune résistance) et 1.0f (résistance maximale).</returns>
         public float CalculerResistanceAuMouvement(Vector2 position)
         {
-
             foreach (Bloc bloc in listeBloc)
             {
                 if (this.joueur.Collision(bloc))
@@ -449,7 +448,6 @@ namespace Exercice_12_1
                     return 1.0f;
                 }
             }
-
             // Extraire la couleur du pixel correspondant à la position donnée dans privTuilesCollisions.
             Color pixColor = this.monde.CouleurDeCollision(position);
 
@@ -1105,7 +1103,7 @@ namespace Exercice_12_1
                         null,                       // sourceRectangle
                         Color.Chartreuse,                // couleur
                         0,  // angle de rotation
-                        new Vector2(16, 16),        // origine de rotation
+                        new Vector2(16, 16),   
                         .4f + pj.VideDeProjectile % 1.001f,             // échelle d'affichage
                         SpriteEffects.None,         // effets
                         0.0f);                      // profondeur de couche (layer depth));
@@ -1118,7 +1116,7 @@ namespace Exercice_12_1
                         null,                       // sourceRectangle
                         Color.LightSalmon,                // couleur
                         0,                          // angle de rotation
-                        new Vector2(16, 16),        // origine de rotation
+                        new Vector2(16, 16),  
                         pj.VideDeProjectile % 1.1f,             // échelle d'affichage
                         SpriteEffects.None,         // effets
                         0.0f);                      // profondeur de couche (layer depth));
@@ -1314,6 +1312,7 @@ namespace Exercice_12_1
             ClearMap();
 
             Bloc bloc2 = new Bloc(300, 133);
+            bloc2.RayonDeCollision = 14;
             this.listeBloc.Add(bloc2);
 
             Ogre ogre = new Ogre(new Vector2(300, 300));
@@ -1334,6 +1333,11 @@ namespace Exercice_12_1
             this.listeBloc.Add(bloc0);
             this.listeBloc.Add(bloc1);
             this.listeBloc.Add(bloc2);
+
+            Ogre ogre = new Ogre(new Vector2(152, 144));
+            this.listeOgres.Add(ogre);
+            Ogre ogre1 = new Ogre(new Vector2(339, 214));
+            this.listeOgres.Add(ogre1);
         }
         /// <summary>
         /// Fonction qui load tout les elements de map 1-3           
@@ -1450,7 +1454,7 @@ namespace Exercice_12_1
                 }
                 foreach (Ogre ogre in listeOgres)                                                       ////// explosion /////////////
                 {
-                    if (pj.Collision(ogre) && pj.TypeProjectile == Projectile.TypesProjectiles.Joueur)
+                    if (pj.CollisionRapide(ogre) && pj.TypeProjectile == Projectile.TypesProjectiles.Joueur)
                     {
                         //Créer un nouvel effet visuel pour l'explosion.
                         this.CreerExplosion(ogre, gameTime);
@@ -1463,15 +1467,15 @@ namespace Exercice_12_1
                     foreach (Projectile pj1 in this.listeProjectiles)
                     {
                         if (pj1.TypeProjectile == Projectile.TypesProjectiles.Joueur)
-                        if (pj.Collision(pj1))
-                        {
-                            // Créer un nouvel effet visuel pour l'explosion.
-                            this.CreerExplosion(pj, gameTime);
-                            listeProjectileFini.Add(pj);
-                            listeProjectileFini.Add(pj1);
+                            if (pj.CollisionRapide(pj1))
+                            {
+                                // Créer un nouvel effet visuel pour l'explosion.
+                                this.CreerExplosion(pj, gameTime);
+                                listeProjectileFini.Add(pj);
+                                listeProjectileFini.Add(pj1);
 
-                        }
-                    }                   
+                            }
+                    }
                 }
             }
             // Se débarasser des projectile ayant quitté l'écran.

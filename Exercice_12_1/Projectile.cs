@@ -384,7 +384,7 @@ namespace Exercice_12_1
 
             this.VideDeProjectile -= 0.1f;
 
-            animProjectile -= .01f;
+            //animProjectile -= .01f;
             //animProjectile = (float)Math.Sin(this.animProjectile);
 
             // La fonction de base s'occupe de l'animation.

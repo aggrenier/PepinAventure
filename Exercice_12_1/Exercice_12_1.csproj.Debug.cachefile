@@ -121,4 +121,5 @@ Content\Polices\MenuItemsPolice.xnb
 Content\Polices\MenuTitresPolice.xnb
 Content\Polices\MessagesPolice.xnb
 Content\Textures\Effets\explosion.xnb
+Content\Objects\Switch.xnb
 Content\Menus\QuitterMenu.xml

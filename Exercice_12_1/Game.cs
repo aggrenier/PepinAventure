@@ -162,6 +162,16 @@ namespace Exercice_12_1
         private List<Sprite> listeBlocFini;
 
         /// <summary>
+        /// Liste des sprites représentant des switch.
+        /// </summary>
+        private List<Sprite> listeSwitch;
+
+        /// <summary>
+        /// Liste des sprites représentant des switch fini.
+        /// </summary>
+        private List<Sprite> listeSwitchFini;
+
+        /// <summary>
         /// Attribut représentant le monde de tuiles à afficherdurant le jeu.
         /// </summary>
         private Monde monde;

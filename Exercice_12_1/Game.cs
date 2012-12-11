@@ -561,8 +561,11 @@ namespace Exercice_12_1
             this.listeBloc = new List<Sprite>();
             this.listeBlocFini = new List<Sprite>();
 
-            listeOgres = new List<Ogre>();                                                                                     /////////////////////////// OGRES
-            listeOgresFini = new List<Ogre>();
+            this.listeOgres = new List<Ogre>();                                                                                     /////////////////////////// OGRES
+            this.listeOgresFini = new List<Ogre>();
+
+            this.listeSwitch = new List<Sprite>();
+            this.listeSwitchFini = new List<Sprite>();
 
             // Créer les attributs de gestion des explosions.
             this.randomExplosions = new Random();
@@ -618,6 +621,8 @@ namespace Exercice_12_1
             Bloc.LoadContent(Content, this.graphics);
 
             Ogre.LoadContent(Content, this.graphics);
+
+            Switch.LoadContent(Content, this.graphics);
 
             // Charger les textures associées aux effets visuels gérées par Game.
             this.explosionParticule = Content.Load<Texture2D>("Textures\\Effets\\explosion");
@@ -1101,6 +1106,10 @@ namespace Exercice_12_1
             {
                 listeDraw.Add(bloc);
             }
+            foreach (Switch switcht1 in this.listeSwitch)
+            {
+                listeDraw.Add(switcht1);
+            }
 
             // Afficher les projectiles.
             foreach (Projectile pj in this.listeProjectiles)
@@ -1311,6 +1320,16 @@ namespace Exercice_12_1
                 this.listeOgres.Remove(ogre);
             }
 
+            foreach (Switch switch1 in this.listeSwitch)
+            {
+                listeSwitchFini.Add(switch1);
+            }
+
+            foreach (Switch switch1 in this.listeSwitchFini)
+            {
+                this.listeSwitch.Remove(switch1);
+            }
+
            
         }
 
@@ -1327,6 +1346,7 @@ namespace Exercice_12_1
 
             Ogre ogre = new Ogre(new Vector2(300, 300));
             this.listeOgres.Add(ogre);
+           
         }
 
         /// <summary>
@@ -1348,6 +1368,9 @@ namespace Exercice_12_1
             this.listeOgres.Add(ogre);
             Ogre ogre1 = new Ogre(new Vector2(339, 214));
             this.listeOgres.Add(ogre1);
+
+            Switch switch1 = new Switch(200, 200);
+            this.listeSwitch.Add(switch1);
         }
         /// <summary>
         /// Fonction qui load tout les elements de map 1-3           

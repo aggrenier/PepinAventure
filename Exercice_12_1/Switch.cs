@@ -45,27 +45,7 @@ namespace Exercice_12_1
     using Microsoft.Xna.Framework.Audio;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Input;
-
-    /// <summary>
-    /// Définition de fonction déléguée permettant de calculer la résistance aux déplacements
-    /// dans le monde à la position donnée.
-    /// </summary>
-    /// <param name="position">Position du pixel en coordonnées du monde.</param>
-    /// <returns>Facteur de résistance entre 0.0f (aucune résistance) et 1.0f (résistance maximale).</returns>
-    public delegate float ResistanceAuMouvement2(Vector2 position);
-
-    /// <summary>
-    /// Définition de fonction déléguée permettant de valider un déplacement d'une position
-    /// à une autre dans le monde. La fonction retourne le point le plus près de 
-    /// (posSource.X+deltaX, posSource.Y+DeltaY) jusqu'où le personnage peut se rendre horizontalement 
-    /// et verticalement sans rencontrer de résistance plus élévée que la limite donnée.
-    /// </summary>
-    /// <param name="posSource">Position du pixel de départ du déplacement, en coordonnées du monde.</param>
-    /// <param name="deltaX">Déplacement total horizontal, en coordonnées du monde.</param>
-    /// <param name="deltaY">Déplacement total vertical, en coordonnées du monde.</param>
-    /// <param name="resistanceMax">Résistance maximale tolérée lors du déplacement.</param>
-    public delegate void ValiderDeplacement2(Vector2 posSource, ref int deltaX, ref int deltaY, float resistanceMax);
+    using Microsoft.Xna.Framework.Input;    
 
     /// <summary>
     /// Classe implantant le sprite représentant le soldat contrôlé par le joueur. Ce sprite

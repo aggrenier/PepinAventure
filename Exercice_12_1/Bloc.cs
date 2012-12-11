@@ -227,17 +227,32 @@ namespace Exercice_12_1
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics)
         {
             //ForcerPosition(Position.X + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale),
-            //    Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.vitesseVerticale));            
-
-            if(this.vitesHorizontale != 0 || this.vitesseVerticale != 0)
-            this.VideDeBloc -= 0.05f;
-
-
+            //    Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.vitesseVerticale));     
 
             // Calculer le déplacement du sprite selon la direction indiquée. Notez que
             // deux directions opposées s'annulent.
             float deltaX = vitesHorizontale;
-            float deltaY = vitesseVerticale;            
+            float deltaY = vitesseVerticale;
+
+            if (vitesHorizontale > 0.0)
+            {
+                deltaX = -vitesHorizontale;
+            }
+
+            if (vitesHorizontale > 0.0)
+            {
+                deltaX = vitesHorizontale;
+            }
+
+            if (vitesseVerticale > 0.0)
+            {
+                deltaY = -vitesseVerticale;
+            }
+
+            if (vitesseVerticale > 0.0)
+            {
+                deltaY = vitesseVerticale;
+            }
 
             // Si une fonction déléguée est fournie pour valider les mouvements sur les tuiles
             // y faire appel pour valider la position résultante du mouvement.
@@ -266,12 +281,17 @@ namespace Exercice_12_1
                 // Appliquer le facteur de résistance obtenu au déplacement.
                 deltaX = (int)(deltaX * (1.0f - resistance));
                 deltaY = (int)(deltaY * (1.0f - resistance));
-            }           
+            }
 
             // Modifier la position du sprite en conséquence (on exploite le setter
             // de _position afin d'appliquer boundsRect).
             this.Position = new Vector2(this.Position.X + deltaX, this.Position.Y + deltaY);
 
+
+
+
+            if(this.vitesHorizontale != 0 || this.vitesseVerticale != 0)
+            this.VideDeBloc -= 0.05f;  
 
             // La fonction de base s'occupe de l'animation.
             base.Update(gameTime, graphics);

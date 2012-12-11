@@ -1408,10 +1408,10 @@ namespace Exercice_12_1
         {
             ClearMap();
 
-            Bloc bloc0 = new Bloc(106, 340);
-            bloc0.GetValiderDeplacement = this.ValiderDeplacement1; 
+            Bloc bloc0 = new Bloc(133, 208);             
             Bloc bloc1 = new Bloc(133, 300);
-            Bloc bloc2 = new Bloc(106, 255);
+            bloc1.GetValiderDeplacement = this.ValiderDeplacement1;
+            Bloc bloc2 = new Bloc(231, 300);
 
             this.listeBloc.Add(bloc0);
             this.listeBloc.Add(bloc1);

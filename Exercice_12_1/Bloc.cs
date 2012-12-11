@@ -123,8 +123,15 @@ namespace Exercice_12_1
         {
             get { return this.VitesseVerticale; }
             set { this.VitesseVerticale += value; }
-        }       
+        }
 
+        private Rectangle aireOccupe;
+
+        public Rectangle AireOccupe
+        {
+            get { return this.aireOccupe; }
+            set { this.aireOccupe = value; }
+        }
        
         private float vieDeBloc = 2f;
 
@@ -148,10 +155,13 @@ namespace Exercice_12_1
         /// </summary>
         /// <param name="x">Coordonnée initiale x (horizontale) du sprite.</param>
         /// <param name="y">Coordonnée initiale y (verticale) du sprite.</param>
-        public Bloc(float x, float y)
+        public Bloc(int x, int y)
             : base(x, y)
         {
-
+            aireOccupe.X = x-14;
+            aireOccupe.Y = y-14;
+            aireOccupe.Width = 28;
+            aireOccupe.Height = 28;
         }
 
         /// <summary>
@@ -171,20 +181,7 @@ namespace Exercice_12_1
             // Les palettes sont stockées dans la liste en groupes d'état (i.e.
             // 8 palettes de direction pour chaque état).
             get { return palettes; }
-        }
-
-        /// <summary>
-        /// Propriété (accesseur de lecture seulement) retournant la position des pattes du sprite.
-        /// Cette position est utilisée pour déterminer si le sprite est debout sur une tuile solide.
-        /// </summary>
-        public Vector2 PositionPourCollisions
-        {
-            get
-            {    
-               return new Vector2(this.Position.X , this.Position.Y );
-            }
-        }
-              
+        }         
 
         /// <summary>
         /// Propriété (accesseur pour getResistanceAuMouvement) retournant ou changeant la fonction déléguée 

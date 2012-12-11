@@ -349,8 +349,8 @@ namespace IFM20884
             // Appliquer premièrement la détection par forme englobante
             //float distance = (float)Math.Sqrt(Math.Pow(this.Position.X - cible.Position.X, 2f) + Math.Pow((this.Position.Y - cible.Position.Y), 2f));
 
-            Rectangle rectSprite = new Rectangle((int)this.position.X+this.Width/2, (int)this.position.Y+this.Height/2,10,10);
-            Rectangle rectbloc = new Rectangle((int)cible.Position.X-14, (int)cible.Position.Y-14, 40, 40);             
+            Rectangle rectSprite = new Rectangle((int)this.position.X-5, (int)this.position.Y-5,10,10);
+            Rectangle rectbloc = new Rectangle((int)cible.Position.X-14, (int)cible.Position.Y-14, 28, 28);             
             if(rectSprite.Intersects( rectbloc))           
             {
                 Console.WriteLine(this.RayonDeCollision);

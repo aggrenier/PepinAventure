@@ -453,7 +453,8 @@ namespace Exercice_12_1
         {
             foreach (Bloc bloc in listeBloc)
             {
-                if (this.joueur.Collision(bloc))
+                if (new Rectangle((int)this.joueur.PositionPourCollisions.X,
+                    (int)this.joueur.PositionPourCollisions.Y,1,1).Intersects(bloc.AireOccupe))
                 {
                     return 1.0f;
                 }
@@ -490,8 +491,6 @@ namespace Exercice_12_1
         {
             Vector2 dest = new Vector2(posSource.X, posSource.Y);
 
-
-
             // Premièrement considérer le déplacement horizontal. Incrémenter la distance horizontale
             // de déplacement jusqu'à deltaX ou jusqu'à ce qu'une résistance supérieure à celle tolérée
             // soit rencontrée.
@@ -505,6 +504,8 @@ namespace Exercice_12_1
                     dest.X -= Math.Sign(deltaX);    // reculer d'un pixel (validé à l'itération précédente)
                     break;
                 }
+                else if (this.CalculerResistanceAuMouvement(dest) == .9f)                             ///////////******
+                    this.joueur.Etat = Personnage.Etats.Tombe;
             }
 
             // Maintenant considérer le déplacement vertical. Incrémenter la distance verticale
@@ -965,7 +966,7 @@ namespace Exercice_12_1
                 if (this.MondeCourant == Mondes.MAP_1_1)
                 {
                     this.MondeCourant = Mondes.MAP_1_2;
-                    this.joueur.Position = new Vector2(300, 500);
+                    this.joueur.Position = new Vector2(300, 490);
 
                     LoadMap12();
 
@@ -1613,7 +1614,7 @@ namespace Exercice_12_1
         {
             foreach (Bloc bloc in listeBloc)
             {
-                if (this.joueur.Collision(bloc) && ServiceHelper.Get<IInputService>().Sauter(1) && bloc.BlockMouvement == true)
+                if (this.joueur.CollisionBloc(bloc) && ServiceHelper.Get<IInputService>().Sauter(1) && bloc.BlockMouvement == true)
                 {
                     if (this.joueur.Direction == Personnage.Directions.Nord)
                     {
@@ -1648,7 +1649,7 @@ namespace Exercice_12_1
             {
                 foreach (Bloc bloc in listeBloc)
                 {
-                    if (bloc.Collision(pj))
+                    if (bloc.CollisionBloc(pj))
                     {
                         if (pj.vitesHorizontale < 0)
                         {

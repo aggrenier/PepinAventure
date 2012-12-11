@@ -87,7 +87,7 @@ namespace Exercice_12_1
         /// </summary>
         public override Vector2 PositionInitiale
         {
-            get { return new Vector2(300,500); }
+            get { return new Vector2(300,480); }
         }
 
         public override bool AtteintUneSortie(Sprite sprite)

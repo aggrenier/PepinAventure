@@ -332,7 +332,7 @@ namespace IFM20884
         {
             get
             {
-                int dx = 0, dy = (Height / 2) - 20;
+                int dx = 0, dy =   20;
 
                 // La position considérée est celle des pattes devant le personnage,
                 // ce qui dépend de la direction de déplacement
@@ -340,13 +340,19 @@ namespace IFM20884
                     this.direction == Directions.NordEst ||
                     this.direction == Directions.SudEst)
                 {
-                    dx += (Width / 2) - 30;
+                    dx =  + 12;
                 }
                 else if (this.direction == Directions.Ouest ||
                     this.direction == Directions.NordOuest ||
                     this.direction == Directions.SudOuest)
                 {
-                    dx -= (Width / 2) - 30;
+                    dx =  - 12;
+                }
+                if (this.direction == Directions.Nord ||
+                    this.direction == Directions.NordEst ||
+                    this.direction == Directions.NordOuest)
+                {
+                    dy -= 12;
                 }
 
                 return new Vector2(this.Position.X + dx, this.Position.Y + dy);

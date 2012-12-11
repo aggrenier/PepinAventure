@@ -143,6 +143,7 @@
     <Compile Include="PFGrille.cs" />
     <Compile Include="PFListeNoeuds.cs" />
     <Compile Include="PFNoeud.cs" />
+    <Compile Include="Porte.cs" />
     <Compile Include="Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

@@ -151,6 +151,8 @@ namespace Exercice_12_1
         /// </summary>
         private List<Sprite> listeProjectileFini;
 
+
+
         /// <summary>
         /// Liste des sprites représentant des blocs.
         /// </summary>
@@ -1093,7 +1095,16 @@ namespace Exercice_12_1
             // Afficher les astéroïdes.
             foreach (Projectile pj in this.listeProjectiles)
             {
-                listeDraw.Add(pj);
+                spriteBatch.Draw(
+                    pj.Texture,                 // texture
+                    pj.Position,                // position
+                    null,                       // sourceRectangle
+                    Color.Chartreuse,                // couleur
+                    0,  // angle de rotation
+                    new Vector2(16, 16),        // origine de rotation
+                    pj.VideDeProjectile/2,             // échelle d'affichage
+                    SpriteEffects.None,         // effets
+                    0.0f);                      // profondeur de couche (layer depth));
             }
 
             // Trier les sprite en ordre croissant de position verticale, puis les afficher.

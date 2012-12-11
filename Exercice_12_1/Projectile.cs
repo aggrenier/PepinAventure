@@ -135,8 +135,16 @@ namespace Exercice_12_1
 
         public float VideDeProjectile
         {
-            get { return this.vieDeProjectile;   }
+            get { return this.vieDeProjectile; }
             set { this.vieDeProjectile = value; }
+        }
+
+        private float animProjectile = 5f;
+
+        public float AnimProjectile
+        {
+            get { return this.animProjectile; }
+            set { this.animProjectile = value; }
         }
         
 
@@ -360,10 +368,52 @@ namespace Exercice_12_1
                 Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.vitesseVerticale));
 
             this.VideDeProjectile -= 0.1f;
-            
+
+            if (animProjectile < 2f)
+            this.animProjectile -= 0.01f;
 
             // La fonction de base s'occupe de l'animation.
             base.Update(gameTime, graphics);
-        }        
+        }
+
+        /// <summary>
+        /// Affiche à l'écran le sprite en fonction de la position de la camera. L'affichage est
+        /// déléguée à palette afin d'afficher la tuile courante d'animation.
+        /// </summary>
+        /// <param name="camera">Caméra à exploiter pour l'affichage.</param>
+        /// <param name="spriteBatch">Gestionnaire d'affichage en batch aux périphériques.</param>
+        public override void Draw(Camera camera, SpriteBatch spriteBatch)
+        {
+            // Comme l'attribut _position contient la position centrée du sprite mais
+            // que Draw() considère la position fournie comme celle de l'origine du
+            // sprite, il faut décaler _position en conséquence avant d'invoquer Draw().
+            ForcerPosition(Position.X - (this.Width / 2), Position.Y - (this.Height / 2));
+
+            // Créer destRect aux coordonnées du sprite dans le monde. À noter que
+            // les dimensions de destRect sont constantes.
+            Rectangle destRect = new Rectangle((int)Position.X, (int)Position.Y, this.Width, this.Height);
+
+            // Afficher le sprite s'il est visible.
+            if (camera == null)
+            {
+                // Afficher la tuile courante.
+                this.Palette.Draw((int)this.IndexTuile, destRect, spriteBatch);
+            }
+            else if (camera.EstVisible(destRect))
+            {
+                // Puisque le sprite est visible, déléguer à la palette de tuiles la tâche d'afficher
+                // la tuile courante.
+
+                // Décaler la destination en fonction de la caméra. Ceci correspond à transformer destRect 
+                // de coordonnées logiques (i.e. du monde) à des coordonnées physiques (i.e. de l'écran).
+                camera.Monde2Camera(ref destRect);
+
+                // Afficher la tuile courante.
+                this.Palette.Draw((int)this.IndexTuile, destRect, spriteBatch);
+            }
+
+            // Remettre _position au centre du sprite.
+            ForcerPosition(Position.X + (this.Width / 2), Position.Y + (this.Height / 2));
+        }
     }
 }

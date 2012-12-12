@@ -750,9 +750,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Audio\Effets\Joueur\Stationnaire\" />
-    <Folder Include="Textures\OgreMouvement\Course\" />
-    <Folder Include="Textures\OgreMouvement\Marche\" />
-    <Folder Include="Textures\OgreMouvement\Tombe\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Textures\OgreMouvement\Stationnaire\Est.png">
@@ -791,6 +788,132 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
     <Compile Include="Textures\OgreMouvement\Stationnaire\SudOuest.png">
+      <Name>SudOuest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\OgreMouvement\Marche\Est.png">
+      <Name>Est</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Marche\Nord.png">
+      <Name>Nord</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Marche\NordEst.png">
+      <Name>NordEst</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Marche\NordOuest.png">
+      <Name>NordOuest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Marche\Ouest.png">
+      <Name>Ouest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Marche\Sud.png">
+      <Name>Sud</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Marche\SudEst.png">
+      <Name>SudEst</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Marche\SudOuest.png">
+      <Name>SudOuest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\OgreMouvement\Course\Est.png">
+      <Name>Est</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Course\Nord.png">
+      <Name>Nord</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Course\NordEst.png">
+      <Name>NordEst</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Course\NordOuest.png">
+      <Name>NordOuest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Course\Ouest.png">
+      <Name>Ouest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Course\Sud.png">
+      <Name>Sud</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Course\SudEst.png">
+      <Name>SudEst</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Course\SudOuest.png">
+      <Name>SudOuest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\OgreMouvement\Tombe\Est.png">
+      <Name>Est</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Tombe\Nord.png">
+      <Name>Nord</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Tombe\NordEst.png">
+      <Name>NordEst</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Tombe\NordOuest.png">
+      <Name>NordOuest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Tombe\Ouest.png">
+      <Name>Ouest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Tombe\Sud.png">
+      <Name>Sud</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Tombe\SudEst.png">
+      <Name>SudEst</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Tombe\SudOuest.png">
       <Name>SudOuest</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>

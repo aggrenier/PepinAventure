@@ -151,8 +151,8 @@ namespace Exercice_12_1
                 content,            // gestionnaire de contenu à utiliser
                 graphics,           // gestionnaire de périphériques à utiliser
                 OgreMouvement.palettes,      // liste où doivent être stockées les palettes de l'ogre
-                69,                 // largeur de chaque tuile dans les palettes
-                80,                 // hauteur de chaque tuile dans les palettes
+                32,                 // largeur de chaque tuile dans les palettes
+                26,                 // hauteur de chaque tuile dans les palettes
                 "Textures\\OgreMouvement");  // sous-répertoire de Content où sont stockées les palettes de l'ogre
         }
 

@@ -1184,16 +1184,32 @@ namespace Exercice_12_1
             //listeDraw.Add(this.joueur);
             foreach (Ennemi ogre in this.listeOgres)
             {
-                spriteBatch.Draw(
-                        ogre.Texture,                 // texture
-                        ogre.Position,                // position
-                        null,                         // sourceRectangle
-                        Color.White,                // couleur
-                        0,  // angle de rotation
-                        new Vector2(16, 16),   
-                        0.75f,             // échelle d'affichage
-                        SpriteEffects.None,         // effets
-                        0.0f);                      // profondeur de couche (layer depth));
+                if (ogre is OgreMouvement)
+                {
+                    spriteBatch.Draw(
+                            ogre.Texture,                 // texture
+                            ogre.Position,                // position
+                            null,                         // sourceRectangle
+                            Color.White,                 // couleur
+                            0,  // angle de rotation
+                            new Vector2(16, 16),
+                            2f,                       // échelle d'affichage
+                            SpriteEffects.None,         // effets
+                            0.0f);
+                }
+                else
+                {
+                    spriteBatch.Draw(
+                            ogre.Texture,                 // texture
+                            ogre.Position,                // position
+                            null,                         // sourceRectangle
+                            Color.White,                // couleur
+                            0,  // angle de rotation
+                            new Vector2(16, 16),
+                            0.75f,             // échelle d'affichage
+                            SpriteEffects.None,         // effets
+                            0.0f);
+                }// profondeur de couche (layer depth));
                 
             }
 

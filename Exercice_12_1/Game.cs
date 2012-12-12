@@ -667,7 +667,7 @@ namespace Exercice_12_1
 
             // Construire une grille de tuiles franchissables pour le pathfinding des ogres (ils peuvent se déplacer
             // uniquement sur terre).
-            //PFGrille grille = new PFGrille((this.monde as MondeTuiles), Color.White);
+            PFGrille grille = null;
 
             Projectile.LoadContent(Content, this.graphics);
 
@@ -1394,7 +1394,8 @@ namespace Exercice_12_1
             ClearMap();
 
             Bloc bloc0 = new Bloc(300, 133);
-            bloc0.GetValiderDeplacement = this.ValiderDeplacement1;
+            bloc0.BoundsRect = new Rectangle(91, 91, 415, 415);
+
             this.listeBloc.Add(bloc0);
 
             Ogre ogre = new Ogre(new Vector2(300, 300));
@@ -1410,9 +1411,13 @@ namespace Exercice_12_1
             ClearMap();
 
             Bloc bloc0 = new Bloc(106, 340);
-            bloc0.GetValiderDeplacement = this.ValiderDeplacement1; 
+            bloc0.BoundsRect = new Rectangle(91, 91, 415, 415);
+            
             Bloc bloc1 = new Bloc(133, 300);
+            bloc1.BoundsRect = new Rectangle(91, 91, 415, 415);
+
             Bloc bloc2 = new Bloc(106, 255);
+            bloc2.BoundsRect = new Rectangle(91, 91, 415, 415);
 
             this.listeBloc.Add(bloc0);
             this.listeBloc.Add(bloc1);

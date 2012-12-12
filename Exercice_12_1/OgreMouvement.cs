@@ -51,7 +51,7 @@ namespace Exercice_12_1
     /// Classe implantant le sprite représentant un ogre. Ce sprite animé par intelligence
     /// artificielle peut être stationnaire, marcher et courir dans huit directions.
     /// </summary>
-    public class Ogre : PFEnnemi
+    public class OgreMouvement : PFEnnemi
     {
         /// <summary>
         /// Attribut statique (i.e. partagé par toutes les instances) constituant une 
@@ -74,7 +74,7 @@ namespace Exercice_12_1
         /// </summary>
         /// <param name="x">Coordonnée initiale x (horizontale) du sprite.</param>
         /// <param name="y">Coordonnée initiale y (verticale) du sprite.</param>
-        public Ogre(float x, float y)
+        public OgreMouvement(float x, float y)
             : base(x, y)
         {
         }
@@ -83,7 +83,7 @@ namespace Exercice_12_1
         /// Constructeur paramétré recevant la position du sprite. On invoque l'autre constructeur.
         /// </summary>
         /// <param name="position">Coordonnées initiales horizontale et verticale du sprite.</param>
-        public Ogre(Vector2 position)
+        public OgreMouvement(Vector2 position)
             : this(position.X, position.Y)
         {
         }
@@ -96,7 +96,7 @@ namespace Exercice_12_1
             get { return this.VitesseHorizontale; }
             set { this.VitesseHorizontale = value; }
         }
-       
+
         /// <summary>
         /// Vitesse de marche du joueur, avec valeur par défaut.
         /// </summary>
@@ -113,7 +113,7 @@ namespace Exercice_12_1
         /// </summary>
         protected override List<PaletteTuiles> Palettes
         {
-            get { return Ogre.palettes; }
+            get { return OgreMouvement.palettes; }
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Exercice_12_1
             LoadContent(
                 content,            // gestionnaire de contenu à utiliser
                 graphics,           // gestionnaire de périphériques à utiliser
-                Ogre.palettes,      // liste où doivent être stockées les palettes de l'ogre
+                OgreMouvement.palettes,      // liste où doivent être stockées les palettes de l'ogre
                 69,                 // largeur de chaque tuile dans les palettes
                 80,                 // hauteur de chaque tuile dans les palettes
                 "Textures\\Ogre");  // sous-répertoire de Content où sont stockées les palettes de l'ogre
@@ -164,7 +164,62 @@ namespace Exercice_12_1
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics)
         {
 
-                       
+            // Déterminer le message à afficher selon l'état du jeu.
+            switch (this.Direction)
+            {
+                case Directions.Nord:
+
+                    this.VitesseHorizontal = 0f;
+                    this.vitesseVerticale = -1f;
+
+                    break;
+                case Directions.NordEst:
+                    this.VitesseHorizontal = 1f;
+                    this.vitesseVerticale = -1f;
+
+                    break;
+                case Directions.Est:
+                    this.VitesseHorizontal = 1f;
+                    this.vitesseVerticale = 0.00f;
+
+                    break;
+                case Directions.SudEst:
+                    this.VitesseHorizontal = 1f;
+                    this.vitesseVerticale = 1f;
+
+                    break;
+                case Directions.Sud:
+                    this.VitesseHorizontal = 0f;
+                    this.vitesseVerticale = 1f;
+
+                    break;
+                case Directions.SudOuest:
+                    this.VitesseHorizontal = 1f;
+                    this.vitesseVerticale = -0f;
+
+                    break;
+                case Directions.Ouest:
+                    this.VitesseHorizontal = -1f;
+                    this.vitesseVerticale = 0f;
+
+                    break;
+                case Directions.NordOuest:
+                    this.VitesseHorizontal = -1f;
+                    this.vitesseVerticale = -1f;
+
+                    break;
+
+                default:
+                    this.VitesseHorizontal = 0f;
+                    this.vitesseVerticale = 0f;
+
+                    break;
+            }
+
+            this.Position = new Vector2((Position.X + (this.VitesseHorizontale)),
+                Position.Y + (this.vitesseVerticale));
+            this.ClampPositionToBoundsRect();
+
 
             // La fonction de base s'occupe de l'animation.
             base.Update(gameTime, graphics);
@@ -187,13 +242,13 @@ namespace Exercice_12_1
             {
                 Rectangle destRect = new Rectangle((int)this.Position.X, (int)this.Position.Y, 1, 1);
 
-                
-                 base.LireVitesses(gameTime, out vitesseNord, out vitesseSud, out vitesseEst, out vitesseOuest);
-               
+
+                base.LireVitesses(gameTime, out vitesseNord, out vitesseSud, out vitesseEst, out vitesseOuest);
+
 
             }
             catch (ArgumentOutOfRangeException) { }
             return true;
-        }       
+        }
     }
 }

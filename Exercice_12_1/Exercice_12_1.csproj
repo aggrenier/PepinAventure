@@ -133,6 +133,7 @@
     <Compile Include="MondeAvant.cs" />
     <Compile Include="MondeImages.cs" />
     <Compile Include="Ogre.cs" />
+    <Compile Include="OgreMouvement.cs" />
     <Compile Include="ParticuleExplosion.cs" />
     <Compile Include="Personnage.cs" />
     <Compile Include="ManetteService.cs" />

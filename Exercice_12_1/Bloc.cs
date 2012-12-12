@@ -229,6 +229,8 @@ namespace Exercice_12_1
             if(this.vitesseHorizontale != 0 || this.vitesseVerticale != 0)
             this.VideDeBloc -= 0.05f;
 
+            this.ClampPositionToBoundsRect();
+
 
             //// Calculer le déplacement du sprite selon la direction indiquée. Notez que
             //// deux directions opposées s'annulent.

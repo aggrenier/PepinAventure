@@ -150,7 +150,7 @@ namespace IFM20884
 
         public float VitesseHorizontal
         {
-            get { return this.vitesseHorizontal; }
+            get { return 0.3f; }
             set { vitesseHorizontal = value; }
         }
 
@@ -158,7 +158,7 @@ namespace IFM20884
 
         public float VitesseVerticale
         {
-            get { return this.vitesseVerticale; }
+            get { return 0.3f; }
             set { vitesseVerticale = value; }                           //erreure de frappe hor/vert ******
         }
 

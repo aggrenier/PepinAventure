@@ -57,17 +57,7 @@ namespace Exercice_12_1
         /// Attribut statique (i.e. partagé par toutes les instances) constituant une 
         /// liste de palettes à exploiter selon la direction et l'état du personnage.
         /// </summary>
-        private static List<PaletteTuiles> palettes = new List<PaletteTuiles>();
-
-        /// <summary>
-        /// Vitesse de marche du joueur, avec valeur par défaut.
-        /// </summary>
-        private float VitesseHorizontale = 0.0f;
-
-        /// <summary>
-        /// Vitesse de marche du joueur, avec valeur par défaut.
-        /// </summary>
-        private float VitesseVerticale = 0.0f;
+        private static List<PaletteTuiles> palettes = new List<PaletteTuiles>();       
 
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
@@ -86,25 +76,7 @@ namespace Exercice_12_1
         public Ogre(Vector2 position)
             : this(position.X, position.Y)
         {
-        }
-
-        /// <summary>
-        /// Vitesse de marche du joueur, avec valeur par défaut.
-        /// </summary>
-        public float vitesHorizontale
-        {
-            get { return this.VitesseHorizontale; }
-            set { this.VitesseHorizontale = value; }
-        }
-       
-        /// <summary>
-        /// Vitesse de marche du joueur, avec valeur par défaut.
-        /// </summary>
-        public float vitesseVerticale
-        {
-            get { return this.VitesseVerticale; }
-            set { this.VitesseVerticale = value; }
-        }
+        }       
 
         /// <summary>
         /// Propriété accesseur retournant la liste des palettes associées au personnage 

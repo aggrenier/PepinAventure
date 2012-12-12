@@ -169,48 +169,48 @@ namespace Exercice_12_1
             {
                 case Directions.Nord:
 
-                    this.VitesseHorizontal = 0f;
+                    this.VitesseHorizontale = 0f;
                     this.vitesseVerticale = -1f;
 
                     break;
                 case Directions.NordEst:
-                    this.VitesseHorizontal = 1f;
+                    this.VitesseHorizontale = 1f;
                     this.vitesseVerticale = -1f;
 
                     break;
                 case Directions.Est:
-                    this.VitesseHorizontal = 1f;
+                    this.VitesseHorizontale = 1f;
                     this.vitesseVerticale = 0.00f;
 
                     break;
                 case Directions.SudEst:
-                    this.VitesseHorizontal = 1f;
+                    this.VitesseHorizontale = 1f;
                     this.vitesseVerticale = 1f;
 
                     break;
                 case Directions.Sud:
-                    this.VitesseHorizontal = 0f;
+                    this.VitesseHorizontale = 0f;
                     this.vitesseVerticale = 1f;
 
                     break;
                 case Directions.SudOuest:
-                    this.VitesseHorizontal = 1f;
+                    this.VitesseHorizontale = 1f;
                     this.vitesseVerticale = -0f;
 
                     break;
                 case Directions.Ouest:
-                    this.VitesseHorizontal = -1f;
+                    this.VitesseHorizontale = -1f;
                     this.vitesseVerticale = 0f;
 
                     break;
                 case Directions.NordOuest:
-                    this.VitesseHorizontal = -1f;
+                    this.VitesseHorizontale = -1f;
                     this.vitesseVerticale = -1f;
 
                     break;
 
                 default:
-                    this.VitesseHorizontal = 0f;
+                    this.VitesseHorizontale = 0f;
                     this.vitesseVerticale = 0f;
 
                     break;

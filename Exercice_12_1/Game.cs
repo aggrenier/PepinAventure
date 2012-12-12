@@ -667,7 +667,7 @@ namespace Exercice_12_1
 
             // Construire une grille de tuiles franchissables pour le pathfinding des ogres (ils peuvent se déplacer
             // uniquement sur terre).
-            PFGrille grille = null;
+            // PFGrille grille = null;
 
             Projectile.LoadContent(Content, this.graphics);
 
@@ -894,7 +894,7 @@ namespace Exercice_12_1
                 //ogre.GrillePathFinding.Destination = this.joueur.Position;
                 ogre.SeTournerVers(this.joueur.Position);
 
-                 // Déterminer si on doit créer un nouvel astéroide.
+                // Déterminer si on doit créer un nouvel astéroide.
                 if (this.randomPJEnemi.NextDouble() < this.probPJ)
                 {
                     // Créer le sprite
@@ -908,7 +908,7 @@ namespace Exercice_12_1
                     // Créer le sprite
                     if (ogre.Direction == Personnage.Directions.NordEst)
                     {
-                        Projectile pj = new Projectile(new Vector2(ogre.Position.X +60, ogre.Position.Y - 60), 1);
+                        Projectile pj = new Projectile(new Vector2(ogre.Position.X + 60, ogre.Position.Y - 60), 1);
                         pj.TypeProjectile = Projectile.TypesProjectiles.Ennemi;
                         this.listeProjectiles.Add(pj);
                     }
@@ -1432,6 +1432,7 @@ namespace Exercice_12_1
             this.listeBloc.Add(bloc0);
 
             OgreMouvement ogre = new OgreMouvement(new Vector2(300, 300));
+            ogre.BoundsRect = new Rectangle(91, 91, 415, 415);
             this.listeOgres.Add(ogre);
            
         }
@@ -1461,6 +1462,11 @@ namespace Exercice_12_1
             Ogre ogre1 = new Ogre(new Vector2(444, 144));
             this.listeOgres.Add(ogre1);
 
+            OgreMouvement ogre2 = new OgreMouvement(new Vector2(444, 144));
+            this.listeOgres.Add(ogre2);
+
+
+
             Switch switch1 = new Switch(133, 230);
             this.listeSwitch.Add(switch1);
 
@@ -1477,9 +1483,9 @@ namespace Exercice_12_1
             Bloc bloc0 = new Bloc(404, 150);
             Bloc bloc1 = new Bloc(404, 175);
 
-            Ogre ogre = new Ogre(new Vector2(300, 120));
+            Ogre ogre = new Ogre(new Vector2(240, 144));
             this.listeOgres.Add(ogre);
-            Ogre ogre1 = new Ogre(new Vector2(300, 260));
+            Ogre ogre1 = new Ogre(new Vector2(360, 144));
             this.listeOgres.Add(ogre1);
 
             this.listeBloc.Add(bloc0);

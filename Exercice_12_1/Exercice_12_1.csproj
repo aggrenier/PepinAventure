@@ -119,6 +119,7 @@
     <Compile Include="Bloc.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="ClavierService.cs" />
+    <Compile Include="PorteHorizontale.cs" />
     <Compile Include="Ennemi.cs" />
     <Compile Include="IInputService.cs" />
     <Compile Include="ItemDeMenu.cs" />

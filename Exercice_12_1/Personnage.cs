@@ -312,7 +312,7 @@ namespace IFM20884
                         }
                         else
                         {
-                            this.bruitActif.Volume = 0.2f;
+                            this.bruitActif.Volume = 0.4f;
                             this.bruitActif.IsLooped = false;
                         }
                     }

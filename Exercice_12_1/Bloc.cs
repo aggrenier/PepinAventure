@@ -158,10 +158,10 @@ namespace Exercice_12_1
         public Bloc(int x, int y)
             : base(x, y)
         {
-            aireOccupe.X = x-14;
-            aireOccupe.Y = y-14;
-            aireOccupe.Width = 28;
-            aireOccupe.Height = 28;
+            aireOccupe.X = (int)Position.X-14;
+            aireOccupe.Y = (int)Position.Y-14;
+            aireOccupe.Width = Width;
+            aireOccupe.Height = Height;
         }
 
         /// <summary>
@@ -224,10 +224,13 @@ namespace Exercice_12_1
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics)
         {
             ForcerPosition(Position.X + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale),
-                Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.vitesseVerticale));            
+                Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.vitesseVerticale));
+            
+            this.aireOccupe.X = (int)(Position.X + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale));
+            this.aireOccupe.Y = (int)(Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale));
 
             if(this.vitesseHorizontale != 0 || this.vitesseVerticale != 0)
-            this.VideDeBloc -= 0.05f;
+                this.VideDeBloc -= 0.05f;
 
             this.ClampPositionToBoundsRect();
 

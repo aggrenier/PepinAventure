@@ -109,8 +109,6 @@ Content\Textures\Ogre\Tombe\Ouest.xnb
 Content\Textures\Ogre\Tombe\Sud.xnb
 Content\Textures\Ogre\Tombe\SudEst.xnb
 Content\Textures\Ogre\Tombe\SudOuest.xnb
-Content\Textures\Effets\explosion.xnb
-Content\Objects\Switch.xnb
 Content\Audio\Effets\Joueur\Course.xnb
 Content\Audio\Effets\Joueur\Marche.xnb
 Content\Audio\Musique\zelda_1.xnb
@@ -122,6 +120,8 @@ Content\Audio\Musique\zelda_fin.xnb
 Content\Polices\MenuItemsPolice.xnb
 Content\Polices\MenuTitresPolice.xnb
 Content\Polices\MessagesPolice.xnb
+Content\Textures\Effets\explosion.xnb
+Content\Objects\Switch.xnb
 Content\Textures\OgreMouvement\Stationnaire\Est.xnb
 Content\Textures\OgreMouvement\Stationnaire\Nord.xnb
 Content\Textures\OgreMouvement\Stationnaire\NordEst.xnb

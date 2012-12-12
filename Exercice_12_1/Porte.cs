@@ -75,7 +75,21 @@ namespace Exercice_12_1
         public bool Ouvert
         {
             get { return this.ouvert; }
-            set { this.ouvert = value; }
+            set { 
+                this.ouvert = value;
+                if (this.ouvert)
+                    IndexTuile = 0;
+                else
+                    IndexTuile = 2;
+            }
+        }
+
+        private Rectangle barre;
+
+        public Rectangle Barre
+        {
+            get { return this.barre; }
+            set { this.barre = value; }
         }
 
         /// <summary>
@@ -86,7 +100,10 @@ namespace Exercice_12_1
         public Porte(int x, int y, Directions direction)
             : base(x, y)
         {
-
+            barre.X = x - Width/2;
+            barre.Y = y - Height/2;
+            barre.Width = Width;
+            barre.Height = Height;
         }
 
         /// <summary>
@@ -158,9 +175,9 @@ namespace Exercice_12_1
         {
 
             palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Nord"), 48, 36);
-            palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Sud"), 48, 36);
-            palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Est"), 36, 48);
-            palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Ouest"), 36, 28);
+            //palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Sud"), 48, 36);
+            //palettes.Add(new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Est"), 32, 48));
+            //palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Ouest"), 36, 28);
 
         }
 

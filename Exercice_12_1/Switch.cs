@@ -57,20 +57,63 @@ namespace Exercice_12_1
         /// Attribut statique (i.e. partagé par toutes les instances) constituant une 
         /// liste de palettes à exploiter selon la direction et l'état du joueur.
         /// </summary>
-        private static PaletteTuiles palettes;      
+        private static PaletteTuiles palettes;
 
-       
+        private Rectangle boutton;
+
+        public Rectangle Boutton
+        {
+            get { return this.boutton; }
+        }
+
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
         /// </summary>
         /// <param name="x">Coordonnée initiale x (horizontale) du sprite.</param>
         /// <param name="y">Coordonnée initiale y (verticale) du sprite.</param>
-        public Switch(float x, float y)
+        public Switch(int x, int y)
             : base(x, y)
         {
-
+            boutton.X = x - Width / 4;
+            boutton.Y = y - Height / 4;
+            boutton.Width = Width / 2;
+            boutton.Height = Height / 2;
         }
 
+        private Types type;
+
+        public Types Type
+        {
+            get { return this.type; }
+            set { this.type = value; }
+        }
+
+        /// <summary>
+        /// Enumération des portes que la switch peuvent ouvrir.
+        /// </summary>
+        public enum Types
+        {
+            /// <summary>
+            /// Ouvre le porte du nord.
+            /// </summary>
+            Nord,
+
+            /// <summary>
+            /// Ouvre le porte de l'est.
+            /// </summary>
+            Est,
+
+            /// <summary>
+            /// Ouvre le porte du sud.
+            /// </summary>
+            Sud,
+
+            /// <summary>
+            /// Ouvre le porte de l'ouest.
+            /// </summary>
+            Ouest
+        }
+        
         /// <summary>
         /// Accesseur pour la palette.
         /// </summary>

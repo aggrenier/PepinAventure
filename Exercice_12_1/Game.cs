@@ -171,16 +171,25 @@ namespace Exercice_12_1
         /// </summary>
         private List<Sprite> listeSwitchFini;
 
-                 /// <summary>
+        /// <summary>
         /// Liste des portes animés.
         /// </summary>
         private List<Sprite> listePorte;
 
-       /// <summary>
+        /// <summary>
+        /// Liste des portes animés.
+        /// </summary>
+        private List<Sprite> listePorteHorizontale;
+
+        /// <summary>
+        /// Liste des portes animés.
+        /// </summary>
+        private List<Sprite> listePorteHorizontaleFini;
+
+        /// <summary>
         /// Sert 'a enlever les portes des maps suivants.
         /// </summary>
         private List<Sprite> listePorteFini;
-
 
         /// <summary>
         /// Attribut représentant le monde de tuiles à afficherdurant le jeu.
@@ -470,6 +479,28 @@ namespace Exercice_12_1
                     return 1.0f;
                 }
             }
+
+            foreach (Porte porte in listePorte)
+            {
+                if (!porte.Ouvert)
+                    if (new Rectangle((int)this.joueur.PositionPourCollisions.X,
+                         (int)this.joueur.PositionPourCollisions.Y, 1, 1).Intersects(porte.Barre))
+                    {
+                        return 1.0f;
+                    }
+            }
+
+            foreach (PorteHorizontale porte in listePorteHorizontale)
+            {
+                if (!porte.Ouvert)
+                    if (new Rectangle((int)this.joueur.PositionPourCollisions.X,
+                         (int)this.joueur.PositionPourCollisions.Y, 1, 1).Intersects(porte.Barre))
+                    {
+                        return 1.0f;
+                    }
+            }
+
+
             // Extraire la couleur du pixel correspondant à la position donnée dans privTuilesCollisions.
             Color pixColor = this.monde.CouleurDeCollision(position);
 
@@ -635,6 +666,9 @@ namespace Exercice_12_1
             this.listePorte = new List<Sprite>();
             this.listePorteFini = new List<Sprite>();
 
+            this.listePorteHorizontale = new List<Sprite>();
+            this.listePorteHorizontaleFini = new List<Sprite>();
+
 
             // Créer les attributs de gestion des explosions.
             this.randomExplosions = new Random();
@@ -694,6 +728,8 @@ namespace Exercice_12_1
             Switch.LoadContent(Content, this.graphics);
 
             Porte.LoadContent(Content, this.graphics);
+
+            PorteHorizontale.LoadContent(Content, this.graphics);
 
             // Charger les textures associées aux effets visuels gérées par Game.
             this.explosionParticule = Content.Load<Texture2D>("Textures\\Effets\\explosion");
@@ -987,6 +1023,8 @@ namespace Exercice_12_1
 
             GestionBloc();
 
+            GestionSwtich(gameTime);
+
             // Mettre à jour les particules d'explosion
             this.UpdateParticulesExplosions(gameTime); 
 
@@ -1059,7 +1097,7 @@ namespace Exercice_12_1
                 else if (this.MondeCourant == Mondes.MAP_1_3)
                 {
                     this.MondeCourant = Mondes.MAP_1_2;
-                    this.joueur.Position = new Vector2(300, 60);
+                    this.joueur.Position = new Vector2(300, 80);
 
                     LoadMap12();
                 }
@@ -1241,6 +1279,10 @@ namespace Exercice_12_1
             }
 
             foreach (Porte porte in this.listePorte)
+            {
+                listeDraw.Add(porte);
+            }
+            foreach (PorteHorizontale porte in this.listePorteHorizontale)
             {
                 listeDraw.Add(porte);
             }
@@ -1475,6 +1517,15 @@ namespace Exercice_12_1
                 this.listePorte.Remove(porte);
             }
 
+            foreach (PorteHorizontale porte in this.listePorteHorizontale)
+            {
+                this.listePorteHorizontaleFini.Add(porte);
+            }
+
+            foreach (PorteHorizontale porte in this.listePorteHorizontaleFini)
+            {
+                this.listePorteHorizontale.Remove(porte);
+            }
 
 
         }
@@ -1495,8 +1546,8 @@ namespace Exercice_12_1
             ogre.BoundsRect = new Rectangle(91, 91, 415, 415);
             this.listeOgres.Add(ogre);
 
-            Porte porte0 = new Porte(300, 75, Porte.Directions.Nord);
-            this.listePorte.Add(porte0);
+            //Porte porte0 = new Porte(300, 75, Porte.Directions.Nord);
+            //this.listePorte.Add(porte0);
 
            
         }
@@ -1532,15 +1583,17 @@ namespace Exercice_12_1
 
             Switch switch1 = new Switch(133, 230);
             this.listeSwitch.Add(switch1);
+            switch1.Type = Switch.Types.Nord;
 
             Switch switch2 = new Switch(203, 300);
             this.listeSwitch.Add(switch2);
+            switch2.Type = Switch.Types.Est;
 
-            Porte porte0 = new Porte(300, 75, Porte.Directions.Nord);
-            this.listePorte.Add(porte0);
+            Porte porteNord = new Porte(300, 75, Porte.Directions.Nord);
+            this.listePorte.Add(porteNord);
 
-            Porte porte1 = new Porte(300, 525, Porte.Directions.Sud);
-            this.listePorte.Add(porte1);
+            //PorteHorizontale porteEst = new PorteHorizontale(525, 300, PorteHorizontale.Directions.Est);
+            //this.listePorteHorizontale.Add(porteEst);
         }
         /// <summary>
         /// Fonction qui load tout les elements de map 1-3           
@@ -1586,10 +1639,147 @@ namespace Exercice_12_1
 
             Ogre ogre = new Ogre(new Vector2(400, 120));
             this.listeOgres.Add(ogre);
-            Ogre ogre1 = new Ogre(new Vector2(400, 260));
+            Ogre ogre1 = new Ogre(new Vector2(400, 480));
             this.listeOgres.Add(ogre1);
 
+            OgreMouvement ogre2 = new OgreMouvement(new Vector2(200, 120));
+            this.listeOgres.Add(ogre2);
+            ogre2.BoundsRect = new Rectangle(180, 77, 100, 300);
+
+            OgreMouvement ogre3 = new OgreMouvement(new Vector2(200, 480));
+            ogre3.BoundsRect = new Rectangle(180, 77, 100, 450);
+            this.listeOgres.Add(ogre3);
+
         }
+
+
+        /// <summary>
+        /// Fonction qui fait la gestion des portes ouverts vs leurs switch         
+        /// </summary>
+        private void GestionSwtich(GameTime gameTime)
+        {
+            
+            foreach (Switch switch1 in listeSwitch)
+            {
+                foreach (Bloc bloc in listeBloc)
+                {
+                    if (switch1.Boutton.Intersects(bloc.AireOccupe))
+                    {
+                        switch (switch1.Type)
+                        {
+                            case (Switch.Types.Nord):
+                                foreach (Porte p in listePorte)
+                                {
+                                    if (p.Direction == Porte.Directions.Nord)
+                                        p.Ouvert = true;
+                                    return;
+                                }
+                                break;
+                            case (Switch.Types.Est):
+                                foreach (Porte p in listePorte)
+                                {
+                                    if (p.Direction == Porte.Directions.Est)
+                                        p.Ouvert = true;
+                                    return;
+                                }
+                                break;
+                            case (Switch.Types.Sud):
+                                foreach (Porte p in listePorte)
+                                {
+                                    if (p.Direction == Porte.Directions.Sud)
+                                        p.Ouvert = true;
+                                    return;
+                                }
+                                break;
+                            default:
+                                foreach (Porte p in listePorte)
+                                {
+                                    if (p.Direction == Porte.Directions.Ouest)
+                                        p.Ouvert = true;
+                                    return;
+                                }
+                                break;
+                        } // fin de switch
+
+
+                    }
+                }
+
+                if (switch1.Boutton.Intersects(new Rectangle((int)this.joueur.PositionPourCollisions.X,
+                    (int)this.joueur.PositionPourCollisions.Y,10,10)))
+                {
+                    switch (switch1.Type)
+                    {
+                        case (Switch.Types.Nord):
+                            foreach (Porte p in listePorte)
+                            {
+                                if (p.Direction == Porte.Directions.Nord)
+                                    p.Ouvert = true;
+                            }
+                            break;
+                        case (Switch.Types.Est):
+                            foreach (Porte p in listePorte)
+                            {
+                                if (p.Direction == Porte.Directions.Est)
+                                    p.Ouvert = true;
+                            }
+                            break;
+                        case (Switch.Types.Sud):
+                            foreach (Porte p in listePorte)
+                            {
+                                if (p.Direction == Porte.Directions.Sud)
+                                    p.Ouvert = true;
+                            }
+                            break;
+                        default:
+                            foreach (Porte p in listePorte)
+                            {
+                                if (p.Direction == Porte.Directions.Ouest)
+                                    p.Ouvert = true;
+                            }
+                            break;
+                        } // fin de switch
+                    }
+                    // Else, le boutton n'est pas presser et la porte ferme.
+                    else{
+                        switch (switch1.Type)
+                        {
+                            case (Switch.Types.Nord):
+                                foreach (Porte p in listePorte)
+                                {
+                                    if (p.Direction == Porte.Directions.Nord)
+                                        p.Ouvert = false;
+                                }
+                                break;
+                            case (Switch.Types.Est):
+                                foreach (Porte p in listePorte)
+                                {
+                                    if (p.Direction == Porte.Directions.Est)
+                                        p.Ouvert = false;
+                                }
+                                break;
+                            case (Switch.Types.Sud):
+                                foreach (Porte p in listePorte)
+                                {
+                                    if (p.Direction == Porte.Directions.Sud)
+                                        p.Ouvert = false;
+                                }
+                                break;
+                            default:
+                                foreach (Porte p in listePorte)
+                                {
+                                    if (p.Direction == Porte.Directions.Ouest)
+                                        p.Ouvert = false;
+                                }
+                                break;
+                        } // fin de switch
+
+                    }
+            }
+
+        }
+
+
 
         /// <summary>
         /// Fonction qui fait la gestion des projectiles         
@@ -1769,7 +1959,7 @@ namespace Exercice_12_1
 
                     bloc.BlockMouvement = false;
                 }
-            }
+            }            
         }
 
         /// <summary>

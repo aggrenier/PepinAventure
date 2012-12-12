@@ -119,6 +119,7 @@
     <Compile Include="Bloc.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="ClavierService.cs" />
+    <Compile Include="Food.cs" />
     <Compile Include="PorteHorizontale.cs" />
     <Compile Include="Ennemi.cs" />
     <Compile Include="IInputService.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Sprite.cs" />
     <Compile Include="SpriteAnimation.cs" />
     <Compile Include="Switch.cs" />
+    <Compile Include="VieDeJoueur1.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

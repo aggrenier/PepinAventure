@@ -192,6 +192,31 @@ namespace Exercice_12_1
         private List<Sprite> listePorteFini;
 
         /// <summary>
+        /// Liste des portes animés.
+        /// </summary>
+        private List<Sprite> listeVideJoueur;
+
+        /// <summary>
+        /// Sert 'a enlever les portes des maps suivants.
+        /// </summary>
+        private List<Sprite> listeVideJoueurFini;
+
+        /// <summary>
+        /// Liste des portes animés.
+        /// </summary>
+        private List<Sprite> listeFood;
+
+        /// <summary>
+        /// Sert 'a enlever les portes des maps suivants.
+        /// </summary>
+        private List<Sprite> listeFoodFini;       
+
+         /// <summary>
+        /// Sert 'a enlever les portes des maps suivants.
+        /// </summary>
+        private bool BoolFood;
+
+        /// <summary>
         /// Attribut représentant le monde de tuiles à afficherdurant le jeu.
         /// </summary>
         private Monde monde;
@@ -220,6 +245,8 @@ namespace Exercice_12_1
         /// Probabilité de générer un astéroïde par cycle de Update().
         /// </summary>
         private float probPJ;
+
+        private int ViedeJoueur;
 
         /// <summary>
         /// Liste de gestion des particules d'explosions.
@@ -669,6 +696,14 @@ namespace Exercice_12_1
             this.listePorteHorizontale = new List<Sprite>();
             this.listePorteHorizontaleFini = new List<Sprite>();
 
+            this.listeVideJoueur = new List<Sprite>();
+            this.listeVideJoueurFini = new List<Sprite>();
+
+            this.listeFood = new List<Sprite>();
+            this.listeFoodFini = new List<Sprite>();
+            BoolFood = true;
+
+            ViedeJoueur = 10;           
 
             // Créer les attributs de gestion des explosions.
             this.randomExplosions = new Random();
@@ -730,6 +765,12 @@ namespace Exercice_12_1
             Porte.LoadContent(Content, this.graphics);
 
             PorteHorizontale.LoadContent(Content, this.graphics);
+
+            VieDeJoueur.LoadContent(Content, this.graphics);
+
+            Food.LoadContent(Content,this.graphics);
+            
+            //listeViedeJoueur.Add(Content.Load<Sprite>("Objetcs\\Heart"));
 
             // Charger les textures associées aux effets visuels gérées par Game.
             this.explosionParticule = Content.Load<Texture2D>("Textures\\Effets\\explosion");
@@ -925,6 +966,8 @@ namespace Exercice_12_1
             // Mettre à jour le sprite du joueur puis centrer la camera sur celui-ci.
             this.joueur.Update(gameTime, this.graphics);
 
+            
+
             if (this.joueur.Etat == Personnage.Etats.Tombe && this.joueur.ContTombe > 60)
             {
                 this.joueur.AngleRotation = this.joueur.ContTombe = 0;
@@ -1019,11 +1062,24 @@ namespace Exercice_12_1
                 ogre.Update(gameTime, this.graphics);
             }
 
-            GestionProjectile(gameTime);
+            this.GestionProjectile(gameTime);
 
-            GestionBloc();
+            this.GestionBloc();
 
-            GestionSwtich(gameTime);
+            this.GestionSwtich(gameTime);
+
+            this.UpdateVieDeJoueur();
+
+            foreach (Food food in this.listeFood)
+            {
+                if(this.joueur.CollisionRapide(food))
+                {
+                    BoolFood = false;
+                    this.ViedeJoueur = 10;
+                    listeFoodFini.Add(food);
+                }
+
+            }
 
             // Mettre à jour les particules d'explosion
             this.UpdateParticulesExplosions(gameTime); 
@@ -1365,6 +1421,15 @@ namespace Exercice_12_1
             {
                 particule.Draw(this.spriteBatch);
             }
+            foreach(Food food in this.listeFood)
+            {
+                food.Draw(this.spriteBatch);
+            }
+
+            foreach (Sprite vie in this.listeVideJoueur)
+            {
+                vie.Draw(this.spriteBatch);
+            }
 
             this.spriteBatch.End();
 
@@ -1526,8 +1591,14 @@ namespace Exercice_12_1
             {
                 this.listePorteHorizontale.Remove(porte);
             }
-
-
+            foreach (Food food in this.listeFood)
+            {
+                listeFoodFini.Add(food);
+            }
+            foreach (Food food in this.listeFoodFini)
+            {
+                listeFood.Remove(food);
+            }
         }
 
         /// <summary>
@@ -1616,6 +1687,11 @@ namespace Exercice_12_1
 
             this.listeBloc.Add(bloc0);
             this.listeBloc.Add(bloc1);
+            if (this.BoolFood == true)
+            {
+                Food food = new Food(475, 120);
+                this.listeFood.Add(food);
+            }
 
         }
         /// <summary>
@@ -1889,6 +1965,13 @@ namespace Exercice_12_1
                             }
                     }
                 }
+                if (pj.CollisionRapide(this.joueur) && pj.TypeProjectile == Projectile.TypesProjectiles.Ennemi)
+                {
+                    this.ViedeJoueur--;
+                    // Créer un nouvel effet visuel pour l'explosion.
+                    this.CreerExplosion(pj, gameTime);
+                    listeProjectileFini.Add(pj);
+                }
             }
             // Se débarasser des projectile ayant quitté l'écran.
             foreach (Projectile pj in listeProjectileFini)
@@ -2114,6 +2197,47 @@ namespace Exercice_12_1
             if (row - Espacement < -(this.graphics.GraphicsDevice.Viewport.Height / 2))
             {
                 this.DrawMessage(this.spriteBatch, "Merci", 290, Color.Pink);                
+            }
+        }
+
+        /// <summary>
+        /// Fonction permettant de simuler une explosion de l'astéroïde donné. La fonction
+        /// crée un ensemble de particules d'explosition (de 10 à 20 instances de ParticuleExplosion)
+        /// positionnées au centre de l'astéroïde, et les ajoute à sa liste de particules à
+        /// gérer (attribut privListeParticulesExplosions).
+        /// </summary>        
+        public void UpdateVieDeJoueur()
+        {
+            int compteur = this.ViedeJoueur;
+            int distance = 15;
+            int distance1 = 15;
+
+            foreach (VieDeJoueur vie in this.listeVideJoueur)
+            {
+                listeVideJoueurFini.Add(vie);
+            }
+
+            foreach (VieDeJoueur vie in this.listeVideJoueurFini)
+            {
+                listeVideJoueur.Remove(vie);
+            }
+
+
+            for (; compteur > 0; compteur--)
+            {
+                
+                if (compteur > 5 && compteur < 11)
+                {
+                    VieDeJoueur vie = new VieDeJoueur(distance, 45);
+                    listeVideJoueur.Add(vie);
+                    distance += 30;
+                }
+                else if( compteur > 0)
+                {
+                    VieDeJoueur vie = new VieDeJoueur(distance1, 15);
+                    listeVideJoueur.Add(vie);
+                    distance1 += 30;
+                }
             }
         }
 

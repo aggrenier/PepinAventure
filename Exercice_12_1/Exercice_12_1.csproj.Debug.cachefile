@@ -158,4 +158,6 @@ Content\Textures\Porte\Nord.xnb
 Content\Textures\Porte\Sud.xnb
 Content\Textures\Porte\Ouest.xnb
 Content\Textures\Porte\Est.xnb
+Content\Objects\Heart.xnb
+Content\Objects\Food.xnb
 Content\Menus\QuitterMenu.xml

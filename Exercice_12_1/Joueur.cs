@@ -71,6 +71,11 @@ namespace Exercice_12_1
         private int indexPeripherique = 1;
 
         /// <summary>
+        /// Attribut indiquant la vie du joueur
+        /// </summary>
+        private int vieDeJoueur;
+
+        /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
         /// </summary>
         /// <param name="x">Coordonnée initiale x (horizontale) du sprite.</param>
@@ -78,6 +83,7 @@ namespace Exercice_12_1
         public Joueur(float x, float y)
             : base(x, y) 
         {
+            this.VieDeJoueur = 5;
         }
 
         /// <summary>
@@ -96,6 +102,12 @@ namespace Exercice_12_1
         {
             get { return this.indexPeripherique; }
             set { this.indexPeripherique = Math.Min(Math.Max(value, 0), 4); }
+        }
+
+        public int VieDeJoueur
+        {
+            get { return this.vieDeJoueur; }
+            set { this.vieDeJoueur = value; }
         }
 
         /// <summary>

@@ -83,7 +83,7 @@ namespace Exercice_12_1
         /// </summary>
         /// <param name="x">Coordonnée initiale x (horizontale) du sprite.</param>
         /// <param name="y">Coordonnée initiale y (verticale) du sprite.</param>
-        public Porte(float x, float y)
+        public Porte(int x, int y, Directions direction)
             : base(x, y)
         {
 
@@ -93,6 +93,11 @@ namespace Exercice_12_1
         /// Attribut indiquant la direction de déplacement courante.
         /// </summary>
         private Directions direction;
+
+        public Directions Direction
+        {
+            get { return this.direction; }
+        }
 
         /// <summary>
         /// Enumération des directions potentielles de déplacement du personnage.
@@ -151,7 +156,12 @@ namespace Exercice_12_1
         /// les caractéristiques de celui-ci (p.ex. l'écran).</param>
         public static void LoadContent(ContentManager content, GraphicsDeviceManager graphics)
         {
-            palettes = new PaletteTuiles(content.Load<Texture2D>("Objects\\Porte"), 28, 28);
+
+            palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Nord"), 48, 36);
+            palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Sud"), 48, 36);
+            palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Est"), 36, 48);
+            palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Ouest"), 36, 28);
+
         }
 
         /// <summary>

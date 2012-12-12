@@ -171,6 +171,17 @@ namespace Exercice_12_1
         /// </summary>
         private List<Sprite> listeSwitchFini;
 
+                 /// <summary>
+        /// Liste des portes animés.
+        /// </summary>
+        private List<Sprite> listePorte;
+
+       /// <summary>
+        /// Sert 'a enlever les portes des maps suivants.
+        /// </summary>
+        private List<Sprite> listePorteFini;
+
+
         /// <summary>
         /// Attribut représentant le monde de tuiles à afficherdurant le jeu.
         /// </summary>
@@ -621,6 +632,10 @@ namespace Exercice_12_1
             this.listeSwitch = new List<Sprite>();
             this.listeSwitchFini = new List<Sprite>();
 
+            this.listePorte = new List<Sprite>();
+            this.listePorteFini = new List<Sprite>();
+
+
             // Créer les attributs de gestion des explosions.
             this.randomExplosions = new Random();
 
@@ -677,6 +692,8 @@ namespace Exercice_12_1
             OgreMouvement.LoadContent(Content, this.graphics);
 
             Switch.LoadContent(Content, this.graphics);
+
+            Porte.LoadContent(Content, this.graphics);
 
             // Charger les textures associées aux effets visuels gérées par Game.
             this.explosionParticule = Content.Load<Texture2D>("Textures\\Effets\\explosion");
@@ -1223,6 +1240,12 @@ namespace Exercice_12_1
                 listeDraw.Add(switcht1);
             }
 
+            foreach (Porte porte in this.listePorte)
+            {
+                listeDraw.Add(porte);
+            }
+
+
             // Afficher les projectiles.
             foreach (Projectile pj in this.listeProjectiles)
             {
@@ -1442,7 +1465,18 @@ namespace Exercice_12_1
                 this.listeSwitch.Remove(switch1);
             }
 
-           
+            foreach (Porte porte in this.listePorte)
+            {
+                this.listePorteFini.Add(porte);
+            }
+
+            foreach (Porte porte in this.listePorteFini)
+            {
+                this.listePorte.Remove(porte);
+            }
+
+
+
         }
 
         /// <summary>
@@ -1460,6 +1494,10 @@ namespace Exercice_12_1
             OgreMouvement ogre = new OgreMouvement(new Vector2(300, 300));
             ogre.BoundsRect = new Rectangle(91, 91, 415, 415);
             this.listeOgres.Add(ogre);
+
+            Porte porte0 = new Porte(300, 75, Porte.Directions.Nord);
+            this.listePorte.Add(porte0);
+
            
         }
 
@@ -1497,6 +1535,12 @@ namespace Exercice_12_1
 
             Switch switch2 = new Switch(203, 300);
             this.listeSwitch.Add(switch2);
+
+            Porte porte0 = new Porte(300, 75, Porte.Directions.Nord);
+            this.listePorte.Add(porte0);
+
+            Porte porte1 = new Porte(300, 525, Porte.Directions.Sud);
+            this.listePorte.Add(porte1);
         }
         /// <summary>
         /// Fonction qui load tout les elements de map 1-3           
@@ -1513,7 +1557,7 @@ namespace Exercice_12_1
             Ogre ogre1 = new Ogre(new Vector2(360, 144));
             this.listeOgres.Add(ogre1);
 
-            OgreMouvement ogre2 = new OgreMouvement(new Vector2(300, 144));
+            OgreMouvement ogre2 = new OgreMouvement(new Vector2(300, 300));
             ogre2.BoundsRect = new Rectangle(240, 144, 120, 200);
             this.listeOgres.Add(ogre2);
 
@@ -1540,9 +1584,9 @@ namespace Exercice_12_1
         {
             ClearMap();
 
-            Ogre ogre = new Ogre(new Vector2(300, 120));
+            Ogre ogre = new Ogre(new Vector2(400, 120));
             this.listeOgres.Add(ogre);
-            Ogre ogre1 = new Ogre(new Vector2(300, 260));
+            Ogre ogre1 = new Ogre(new Vector2(400, 260));
             this.listeOgres.Add(ogre1);
 
         }

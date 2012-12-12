@@ -154,4 +154,8 @@ Content\Textures\OgreMouvement\Tombe\Ouest.xnb
 Content\Textures\OgreMouvement\Tombe\Sud.xnb
 Content\Textures\OgreMouvement\Tombe\SudEst.xnb
 Content\Textures\OgreMouvement\Tombe\SudOuest.xnb
+Content\Textures\Porte\Nord.xnb
+Content\Textures\Porte\Sud.xnb
+Content\Textures\Porte\Ouest.xnb
+Content\Textures\Porte\Est.xnb
 Content\Menus\QuitterMenu.xml

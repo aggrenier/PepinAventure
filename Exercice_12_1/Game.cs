@@ -1184,7 +1184,17 @@ namespace Exercice_12_1
             //listeDraw.Add(this.joueur);
             foreach (Ennemi ogre in this.listeOgres)
             {
-                listeDraw.Add(ogre);
+                spriteBatch.Draw(
+                        ogre.Texture,                 // texture
+                        ogre.Position,                // position
+                        null,                         // sourceRectangle
+                        Color.White,                // couleur
+                        0,  // angle de rotation
+                        new Vector2(16, 16),   
+                        0.75f,             // échelle d'affichage
+                        SpriteEffects.None,         // effets
+                        0.0f);                      // profondeur de couche (layer depth));
+                
             }
 
             // Afficher les blocs.
@@ -1462,10 +1472,9 @@ namespace Exercice_12_1
             Ogre ogre1 = new Ogre(new Vector2(444, 144));
             this.listeOgres.Add(ogre1);
 
-            OgreMouvement ogre2 = new OgreMouvement(new Vector2(444, 144));
+            OgreMouvement ogre2 = new OgreMouvement(new Vector2(350, 350));
             this.listeOgres.Add(ogre2);
-
-
+            ogre2.BoundsRect = new Rectangle(300, 300, 193, 215);           
 
             Switch switch1 = new Switch(133, 230);
             this.listeSwitch.Add(switch1);
@@ -1483,10 +1492,14 @@ namespace Exercice_12_1
             Bloc bloc0 = new Bloc(404, 150);
             Bloc bloc1 = new Bloc(404, 175);
 
-            Ogre ogre = new Ogre(new Vector2(240, 144));
+            Ogre ogre = new Ogre(new Vector2(210, 144));
             this.listeOgres.Add(ogre);
             Ogre ogre1 = new Ogre(new Vector2(360, 144));
             this.listeOgres.Add(ogre1);
+
+            OgreMouvement ogre2 = new OgreMouvement(new Vector2(300, 144));
+            ogre2.BoundsRect = new Rectangle(240, 144, 120, 200);
+            this.listeOgres.Add(ogre2);
 
             this.listeBloc.Add(bloc0);
             this.listeBloc.Add(bloc1);
@@ -1601,7 +1614,7 @@ namespace Exercice_12_1
                 {
                     listeProjectileFini.Add(pj);
                 }
-                foreach (Ennemi ogre in listeOgres)                                                       ////// explosion /////////////
+                foreach (Ennemi ogre in listeOgres)                                                       
                 {
                     if (pj.CollisionRapide(ogre) && pj.TypeProjectile == Projectile.TypesProjectiles.Joueur)
                     {

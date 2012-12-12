@@ -797,22 +797,22 @@ namespace IFM20884
                 palettes.Add(new PaletteTuiles(content.Load<Texture2D>(repertoire + "\\Ouest"), largeurTuiles, hauteurTuiles));
                 palettes.Add(new PaletteTuiles(content.Load<Texture2D>(repertoire + "\\NordOuest"), largeurTuiles, hauteurTuiles));
 
-                //// Charger les bruitages de fond du personnage pour différents états. On utilise
-                //// un try-catch car il n'est pas requis par la classe dérivée de fournir un effet
-                //// sonore pour chaque état.
-                //if (effetsSonores != null)
-                //{
-                //    try
-                //    {
-                //        effetsSonores.Add(content.Load<SoundEffect>(repertoireEffetsSonores + repertoireEtat));
-                //    }
-                //    catch (ContentLoadException)
-                //    {
-                //        // Ajouter null à la liste pour indiquer que cet état ne dispose pas
-                //        // d'effet sonore associé.
-                //        effetsSonores.Add(null);
-                //    }
-                //}
+                // Charger les bruitages de fond du personnage pour différents états. On utilise
+                // un try-catch car il n'est pas requis par la classe dérivée de fournir un effet
+                // sonore pour chaque état.
+                if (effetsSonores != null)
+                {
+                    try
+                    {
+                        effetsSonores.Add(content.Load<SoundEffect>(repertoireEffetsSonores + repertoireEtat));
+                    }
+                    catch (ContentLoadException)
+                    {
+                        // Ajouter null à la liste pour indiquer que cet état ne dispose pas
+                        // d'effet sonore associé.
+                        effetsSonores.Add(null);
+                    }
+                }
             }
         }
     }

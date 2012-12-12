@@ -60,6 +60,16 @@ namespace Exercice_12_1
         private static List<PaletteTuiles> palettes = new List<PaletteTuiles>();
 
         /// <summary>
+        /// Vitesse de marche du joueur, avec valeur par défaut.
+        /// </summary>
+        private float VitesseHorizontale = 0.0f;
+
+        /// <summary>
+        /// Vitesse de marche du joueur, avec valeur par défaut.
+        /// </summary>
+        private float VitesseVerticale = 0.0f;
+
+        /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
         /// </summary>
         /// <param name="x">Coordonnée initiale x (horizontale) du sprite.</param>
@@ -76,6 +86,24 @@ namespace Exercice_12_1
         public Ogre(Vector2 position)
             : this(position.X, position.Y)
         {
+        }
+
+        /// <summary>
+        /// Vitesse de marche du joueur, avec valeur par défaut.
+        /// </summary>
+        public float vitesHorizontale
+        {
+            get { return this.VitesseHorizontale; }
+            set { this.VitesseHorizontale += value; }
+        }
+       
+        /// <summary>
+        /// Vitesse de marche du joueur, avec valeur par défaut.
+        /// </summary>
+        public float vitesseVerticale
+        {
+            get { return this.VitesseVerticale; }
+            set { this.VitesseVerticale += value; }
         }
 
         /// <summary>
@@ -126,6 +154,34 @@ namespace Exercice_12_1
                 69,                 // largeur de chaque tuile dans les palettes
                 80,                 // hauteur de chaque tuile dans les palettes
                 "Textures\\Ogre");  // sous-répertoire de Content où sont stockées les palettes de l'ogre
+        }
+
+        /// <summary>
+        /// Ajuste la position du sprite en fonction de l'input.
+        /// </summary>
+        /// <param name="gameTime">Gestionnaire de temps de jeu.</param>
+        /// <param name="graphics">Gestionnaire de périphérique d'affichage.</param>
+        public override void Update(GameTime gameTime, GraphicsDeviceManager graphics)
+        {
+
+            // Déterminer le message à afficher selon l'état du jeu.
+            switch (this.Direction)
+            {
+                case Directions.Nord:
+                    
+
+                    break;
+
+                default:
+                    
+                    break;
+            }
+
+            ForcerPosition(Position.X + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale),
+                Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.vitesseVerticale));
+
+            // La fonction de base s'occupe de l'animation.
+            base.Update(gameTime, graphics);
         }
 
         /// <summary>

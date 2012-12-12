@@ -1641,11 +1641,11 @@ namespace Exercice_12_1
                     }
                     else if (this.joueur.Direction == Personnage.Directions.Est)
                     {
-                        bloc.vitesHorizontale = 0.1f;
+                        bloc.vitesseHorizontale = 0.1f;
                     }
                     else if (this.joueur.Direction == Personnage.Directions.Ouest)
                     {
-                        bloc.vitesHorizontale = -0.1f;
+                        bloc.vitesseHorizontale = -0.1f;
                     }
 
                     bruitageblock.Play();

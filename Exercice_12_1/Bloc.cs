@@ -109,7 +109,7 @@ namespace Exercice_12_1
         /// </summary>
         private float VitesseHorizontale = 0.0f;
 
-        public float vitesHorizontale
+        public float vitesseHorizontale
         {
             get { return this.VitesseHorizontale; }
             set { this.VitesseHorizontale += value; }
@@ -226,7 +226,7 @@ namespace Exercice_12_1
             ForcerPosition(Position.X + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale),
                 Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.vitesseVerticale));            
 
-            if(this.vitesHorizontale != 0 || this.vitesseVerticale != 0)
+            if(this.vitesseHorizontale != 0 || this.vitesseVerticale != 0)
             this.VideDeBloc -= 0.05f;
 
 

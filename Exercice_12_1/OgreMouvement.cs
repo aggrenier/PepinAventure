@@ -153,7 +153,7 @@ namespace Exercice_12_1
                 OgreMouvement.palettes,      // liste où doivent être stockées les palettes de l'ogre
                 69,                 // largeur de chaque tuile dans les palettes
                 80,                 // hauteur de chaque tuile dans les palettes
-                "Textures\\Ogre");  // sous-répertoire de Content où sont stockées les palettes de l'ogre
+                "Textures\\OgreMouvement");  // sous-répertoire de Content où sont stockées les palettes de l'ogre
         }
 
         /// <summary>

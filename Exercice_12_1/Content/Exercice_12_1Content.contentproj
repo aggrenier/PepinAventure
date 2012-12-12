@@ -750,6 +750,51 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Audio\Effets\Joueur\Stationnaire\" />
+    <Folder Include="Textures\OgreMouvement\Course\" />
+    <Folder Include="Textures\OgreMouvement\Marche\" />
+    <Folder Include="Textures\OgreMouvement\Tombe\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\OgreMouvement\Stationnaire\Est.png">
+      <Name>Est</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Stationnaire\Nord.png">
+      <Name>Nord</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Stationnaire\NordEst.png">
+      <Name>NordEst</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Stationnaire\NordOuest.png">
+      <Name>NordOuest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Stationnaire\Ouest.png">
+      <Name>Ouest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Stationnaire\Sud.png">
+      <Name>Sud</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Stationnaire\SudEst.png">
+      <Name>SudEst</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\OgreMouvement\Stationnaire\SudOuest.png">
+      <Name>SudOuest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

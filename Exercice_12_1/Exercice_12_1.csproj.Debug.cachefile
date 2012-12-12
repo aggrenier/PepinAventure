@@ -122,4 +122,12 @@ Content\Audio\Musique\zelda_fin.xnb
 Content\Polices\MenuItemsPolice.xnb
 Content\Polices\MenuTitresPolice.xnb
 Content\Polices\MessagesPolice.xnb
+Content\Textures\OgreMouvement\Stationnaire\Est.xnb
+Content\Textures\OgreMouvement\Stationnaire\Nord.xnb
+Content\Textures\OgreMouvement\Stationnaire\NordEst.xnb
+Content\Textures\OgreMouvement\Stationnaire\NordOuest.xnb
+Content\Textures\OgreMouvement\Stationnaire\Ouest.xnb
+Content\Textures\OgreMouvement\Stationnaire\Sud.xnb
+Content\Textures\OgreMouvement\Stationnaire\SudEst.xnb
+Content\Textures\OgreMouvement\Stationnaire\SudOuest.xnb
 Content\Menus\QuitterMenu.xml

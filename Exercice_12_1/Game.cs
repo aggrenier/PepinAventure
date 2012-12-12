@@ -184,12 +184,12 @@ namespace Exercice_12_1
         /// <summary>
         /// Liste de sprite représentant les ogres.
         /// </summary>
-        private List<Ogre> listeOgres;
+        private List<Ennemi> listeOgres;
 
         /// <summary>
         /// Liste de sprite représentant les ogres fini.
         /// </summary>
-        private List<Ogre> listeOgresFini;
+        private List<Ennemi> listeOgresFini;
 
         /// <summary>
         /// Générateur de nombres aléatoires pour générer des astéroïdes.
@@ -615,8 +615,8 @@ namespace Exercice_12_1
             this.listeBloc = new List<Sprite>();
             this.listeBlocFini = new List<Sprite>();
 
-            this.listeOgres = new List<Ogre>();                                                                                     /////////////////////////// OGRES
-            this.listeOgresFini = new List<Ogre>();
+            this.listeOgres = new List<Ennemi>();                                                                                     /////////////////////////// OGRES
+            this.listeOgresFini = new List<Ennemi>();
 
             this.listeSwitch = new List<Sprite>();
             this.listeSwitchFini = new List<Sprite>();
@@ -674,6 +674,7 @@ namespace Exercice_12_1
             Bloc.LoadContent(Content, this.graphics);
 
             Ogre.LoadContent(Content, this.graphics);
+            OgreMouvement.LoadContent(Content, this.graphics);
 
             Switch.LoadContent(Content, this.graphics);
 
@@ -882,13 +883,13 @@ namespace Exercice_12_1
 
             this.camera.Centrer(this.joueur.Position);
             // Se débarasser des astéroïdes ayant quitté l'écran.
-            foreach (Ogre ogre in listeOgresFini)
+            foreach (Ennemi ogre in listeOgresFini)
             {
                 this.listeOgres.Remove(ogre);
             }
 
             // Mettre à jour les ogres.
-            foreach (Ogre ogre in this.listeOgres)
+            foreach (Ennemi ogre in this.listeOgres)
             {
                 //ogre.GrillePathFinding.Destination = this.joueur.Position;
                 ogre.SeTournerVers(this.joueur.Position);
@@ -1056,7 +1057,7 @@ namespace Exercice_12_1
             this.joueur.SuspendreEffetsSonores(suspendre);
 
             //Suspendre au besoin les effets sonores des ogres.
-            foreach (Ogre ogre in this.listeOgres)
+            foreach (Ennemi ogre in this.listeOgres)
             {
                 ogre.SuspendreEffetsSonores(suspendre);
             }
@@ -1149,7 +1150,7 @@ namespace Exercice_12_1
 
             //Ajouter les ogres à afficher à la liste.
             //listeDraw.Add(this.joueur);
-            foreach (Ogre ogre in this.listeOgres)
+            foreach (Ennemi ogre in this.listeOgres)
             {
                 listeDraw.Add(ogre);
             }
@@ -1363,12 +1364,12 @@ namespace Exercice_12_1
                 this.listeProjectiles.Remove(pj);
             }
 
-            foreach (Ogre ogre in this.listeOgres)
+            foreach (Ennemi ogre in this.listeOgres)
             {
                 listeOgresFini.Add(ogre);
             }
             // Se débarasser des astéroïdes ayant quitté l'écran.
-            foreach (Ogre ogre in listeOgresFini)
+            foreach (Ennemi ogre in listeOgresFini)
             {
                 this.listeOgres.Remove(ogre);
             }
@@ -1398,7 +1399,7 @@ namespace Exercice_12_1
 
             this.listeBloc.Add(bloc0);
 
-            Ogre ogre = new Ogre(new Vector2(300, 300));
+            OgreMouvement ogre = new OgreMouvement(new Vector2(300, 300));
             this.listeOgres.Add(ogre);
            
         }
@@ -1562,7 +1563,7 @@ namespace Exercice_12_1
                 {
                     listeProjectileFini.Add(pj);
                 }
-                foreach (Ogre ogre in listeOgres)                                                       ////// explosion /////////////
+                foreach (Ennemi ogre in listeOgres)                                                       ////// explosion /////////////
                 {
                     if (pj.CollisionRapide(ogre) && pj.TypeProjectile == Projectile.TypesProjectiles.Joueur)
                     {

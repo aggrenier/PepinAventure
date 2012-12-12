@@ -900,7 +900,15 @@ namespace Exercice_12_1
                     // Créer le sprite
                     if (ogre.Direction == Personnage.Directions.Nord)
                     {
-                        Projectile pj = new Projectile(new Vector2(ogre.Position.X, ogre.Position.Y -60), 0);
+                        Projectile pj = new Projectile(new Vector2(ogre.Position.X, ogre.Position.Y - 60), 0);
+                        pj.TypeProjectile = Projectile.TypesProjectiles.Ennemi;
+                        this.listeProjectiles.Add(pj);
+                    }
+
+                    // Créer le sprite
+                    if (ogre.Direction == Personnage.Directions.NordEst)
+                    {
+                        Projectile pj = new Projectile(new Vector2(ogre.Position.X +60, ogre.Position.Y - 60), 1);
                         pj.TypeProjectile = Projectile.TypesProjectiles.Ennemi;
                         this.listeProjectiles.Add(pj);
                     }
@@ -908,7 +916,15 @@ namespace Exercice_12_1
                     // Créer le sprite
                     if (ogre.Direction == Personnage.Directions.Est)
                     {
-                        Projectile pj = new Projectile(new Vector2(ogre.Position.X -60, ogre.Position.Y), 2);
+                        Projectile pj = new Projectile(new Vector2(ogre.Position.X + 60, ogre.Position.Y), 2);
+                        pj.TypeProjectile = Projectile.TypesProjectiles.Ennemi;
+                        this.listeProjectiles.Add(pj);
+                    }
+
+                    // Créer le sprite
+                    if (ogre.Direction == Personnage.Directions.SudEst)
+                    {
+                        Projectile pj = new Projectile(new Vector2(ogre.Position.X + 60, ogre.Position.Y + 60), 3);
                         pj.TypeProjectile = Projectile.TypesProjectiles.Ennemi;
                         this.listeProjectiles.Add(pj);
                     }
@@ -922,9 +938,25 @@ namespace Exercice_12_1
                     }
 
                     // Créer le sprite
+                    if (ogre.Direction == Personnage.Directions.SudOuest)
+                    {
+                        Projectile pj = new Projectile(new Vector2(ogre.Position.X - 60, ogre.Position.Y + 60), 5);
+                        pj.TypeProjectile = Projectile.TypesProjectiles.Ennemi;
+                        this.listeProjectiles.Add(pj);
+                    }
+
+                    // Créer le sprite
                     if (ogre.Direction == Personnage.Directions.Ouest)
                     {
-                        Projectile pj = new Projectile(new Vector2(ogre.Position.X +60 , ogre.Position.Y), 6);
+                        Projectile pj = new Projectile(new Vector2(ogre.Position.X - 60, ogre.Position.Y), 6);
+                        pj.TypeProjectile = Projectile.TypesProjectiles.Ennemi;
+                        this.listeProjectiles.Add(pj);
+                    }
+
+                    // Créer le sprite
+                    if (ogre.Direction == Personnage.Directions.NordOuest)
+                    {
+                        Projectile pj = new Projectile(new Vector2(ogre.Position.X - 60, ogre.Position.Y - 60), 7);
                         pj.TypeProjectile = Projectile.TypesProjectiles.Ennemi;
                         this.listeProjectiles.Add(pj);
                     }

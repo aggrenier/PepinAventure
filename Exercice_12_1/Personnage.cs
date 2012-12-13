@@ -138,12 +138,12 @@ namespace IFM20884
         private int contTombe = 0;
 
         /// <summary>
-        /// Attribut s'assure qu'un personnage sort d'état du tombe.
+        /// La vitesse horizontal du personnage.
         /// </summary>
         private float vitesseHorizontal;
 
         /// <summary>
-        /// Attribut s'assure qu'un personnage sort d'état du tombe.
+        /// La vitesse vertical du personnage.
         /// </summary>
         private float vitesseVerticale;
         
@@ -155,7 +155,7 @@ namespace IFM20884
         public Personnage(float x, float y)
             : base(x, y)
         {
-            // Par défaut, le sprite est celui faisant face au personnage.
+            // Par défaut, le sprite est celui faisant face aux Joueur du partie.
             this.direction = Directions.Sud;
             this.etat = Etats.Stationnaire;
         }
@@ -313,7 +313,7 @@ namespace IFM20884
         }
 
         /// <summary>
-        /// Accesseur pour l'attribut direction.
+        /// Accesseur pour la possession du clef.
         /// </summary>
         public bool Clef
         {
@@ -379,7 +379,7 @@ namespace IFM20884
         {
             get
             {
-                int dx = 0, dy =   20;
+                int dx = 0, dy = 20;
 
                 // La position considérée est celle des pattes devant le personnage,
                 // ce qui dépend de la direction de déplacement

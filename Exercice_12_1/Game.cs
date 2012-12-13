@@ -2211,18 +2211,26 @@ namespace Exercice_12_1
                 if (this.monde.CouleurDeCollision(pj.Position).R == 237)
                 {
                     if (pj.vitesHorizontale < 0)
-                        pj.vitesHorizontale = 1;                    
-                    else if (pj.vitesHorizontale > 0)                    
+                    {
+                        pj.vitesHorizontale = 1;
+                    }
+                    else if (pj.vitesHorizontale > 0)
+                    {
                         pj.vitesHorizontale = -1;
+                    }
 
                 }
 
                 else if (this.monde.CouleurDeCollision(pj.Position) == Color.Black)
                 {
                     if (pj.vitesseVerticale < 0)
-                        pj.vitesseVerticale = 1;                    
-                    else if (pj.vitesseVerticale > 0)                    
+                    {
+                        pj.vitesseVerticale = 1;
+                    }
+                    else if (pj.vitesseVerticale > 0)
+                    {
                         pj.vitesseVerticale = -1;
+                    }
                     
                 }
             }

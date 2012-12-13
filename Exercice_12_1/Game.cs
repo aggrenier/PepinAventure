@@ -2068,11 +2068,12 @@ namespace Exercice_12_1
         {
             foreach (Projectile pj in this.listeProjectiles)
             {
-                if (this.monde.CouleurDeCollision(pj.Position) == Color.Red)
+                if (this.monde.CouleurDeCollision(pj.Position).R == 237)
                 {
                     if (pj.vitesHorizontale < 0)
                     {
                         pj.vitesHorizontale = 1;
+                        //Console.WriteLine(this.monde.CouleurDeCollision(pj.Position).ToString());
                     }
 
                     else if (pj.vitesHorizontale > 0)

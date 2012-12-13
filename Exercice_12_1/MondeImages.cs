@@ -173,7 +173,7 @@ namespace IFM20884
             // Calculer un rectangle d'un seul pixel positionné au pixel d'intérêt dans l'image.
             Rectangle targetRect = new Rectangle(x, y, 1, 1);
 
-            // Extraire la couleur du pixel      
+            // Extraire la couleur du pixel                                                          indexOutOfRangeException
             this.TexturesCollisions[row, col].GetData<Color>(0, targetRect, colorData, 0, 1);
 
             return colorData[0];

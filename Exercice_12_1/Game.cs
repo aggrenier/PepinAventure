@@ -1726,8 +1726,9 @@ namespace Exercice_12_1
             Porte porteNord = new Porte(300, 75, Porte.Directions.Nord);
             this.listePorte.Add(porteNord);
 
-            //PorteHorizontale porteEst = new PorteHorizontale(525, 300, PorteHorizontale.Directions.Est);
-            //this.listePorteHorizontale.Add(porteEst);
+            PorteHorizontale porteEst = new PorteHorizontale(525, 300, PorteHorizontale.Directions.Est);
+            porteEst.Direction = PorteHorizontale.Directions.Est;
+            this.listePorteHorizontale.Add(porteEst);
         }
         /// <summary>
         /// Fonction qui load tout les elements de map 1-3           

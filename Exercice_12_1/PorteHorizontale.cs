@@ -111,10 +111,14 @@ namespace Exercice_12_1
         /// </summary>
         private Directions direction;
 
+        /// <summary>
+        /// Attribut indiquant la porte ouverte ou fermer.
+        /// </summary>
         public Directions Direction
         {
             get { return this.direction; }
-        }
+            set { this.direction = value; }
+        }     
 
         /// <summary>
         /// Enumération des directions potentielles de déplacement du personnage.

@@ -112,56 +112,41 @@ namespace IFM20884
         /// </summary>
         private Camera camera = null;
 
+        /// <summary>
+        /// Attribut indiquant la vie du joueur
+        /// </summary>
+        private int vieDeJoueur;
+
+        /// <summary>
+        /// Attribut indiquant la vie du joueur
+        /// </summary>
+        private bool clef;
 
         /// <summary>
         /// Attribut qui sert à controller l'angle de rotation l'hors d'un tombe.
         /// </summary>
         private float angleRotation = 0.0f;
-
-        public float AngleRotation
-        {
-            get { return this.angleRotation; }
-            set { angleRotation = value; }
-        }
-
+        
         /// <summary>
         /// Atribut representant l'echelle pendant une tombe.
         /// </summary>
-        private float echelle = 1.0f;
-
-        public float Echelle
-        {
-            get { return this.echelle; }
-            set { echelle = value; }
-        }
+        private float echelle = 1.0f;       
 
         /// <summary>
         /// Attribut s'assure qu'un personnage sort d'état du tombe.
         /// </summary>
         private int contTombe = 0;
 
-        public int ContTombe
-        {
-            get { return this.contTombe; }
-            set { contTombe = value; }
-        }
-
+        /// <summary>
+        /// Attribut s'assure qu'un personnage sort d'état du tombe.
+        /// </summary>
         private float vitesseHorizontal;
 
-        public float VitesseHorizontal
-        {
-            get { return 0.3f; }
-            set { vitesseHorizontal = value; }
-        }
-
+        /// <summary>
+        /// Attribut s'assure qu'un personnage sort d'état du tombe.
+        /// </summary>
         private float vitesseVerticale;
-
-        public float VitesseVerticale
-        {
-            get { return 0.3f; }
-            set { vitesseVerticale = value; }                           //erreure de frappe hor/vert ******
-        }
-
+        
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
         /// </summary>
@@ -257,6 +242,23 @@ namespace IFM20884
         }
 
         /// <summary>
+        /// Public vie de joueur, pour la vie du joueur
+        /// </summary>
+        public int VieDeJoueur
+        {
+            get { return this.vieDeJoueur; }
+            set { this.vieDeJoueur = value; }
+        }
+
+        /// <summary>
+        /// Accesseur pour attribut vitesseMaximum.
+        /// </summary>
+        public float AngleRotation
+        {
+            get { return this.angleRotation; }
+            set { angleRotation = value; }
+        }
+        /// <summary>
         /// Accesseur pour attribut vitesseMaximum.
         /// </summary>
         public float VitesseMaximum
@@ -272,6 +274,51 @@ namespace IFM20884
         {
             get { return this.direction; }
             set { this.direction = value; }
+        }
+
+        /// <summary>
+        /// Accesseur pour l'attribut direction.
+        /// </summary>
+        public float Echelle
+        {
+            get { return this.echelle; }
+            set { echelle = value; }
+        }
+
+        /// <summary>
+        /// Accesseur pour l'attribut direction.
+        /// </summary>
+        public int ContTombe
+        {
+            get { return this.contTombe; }
+            set { contTombe = value; }
+        }
+
+        /// <summary>
+        /// Accesseur pour l'attribut direction.
+        /// </summary>
+        public float VitesseVerticale
+        {
+            get { return 0.3f; }
+            set { vitesseVerticale = value; }
+        }
+
+        /// <summary>
+        /// Accesseur pour l'attribut direction.
+        /// </summary>
+        public float VitesseHorizontal
+        {
+            get { return 0.3f; }
+            set { vitesseHorizontal = value; }
+        }
+
+        /// <summary>
+        /// Accesseur pour l'attribut direction.
+        /// </summary>
+        public bool Clef
+        {
+            get { return clef; }
+            set { clef = value; }
         }
 
         /// <summary>

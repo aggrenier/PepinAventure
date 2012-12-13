@@ -92,17 +92,7 @@ namespace Exercice_12_1
         /// Attribut statique (i.e. partagé par toutes les instances) constituant une 
         /// liste de palettes à exploiter selon la direction et l'état du joueur.
         /// </summary>
-        private static PaletteTuiles palettes;
-
-        /// <summary>
-        /// Effet sonore contenant le bruitage du joueur en état de marche.
-        /// </summary>
-        private static SoundEffect bruitLancer;
-
-        /// <summary>
-        /// Effet sonore contenant le bruitage du joueur en état de course.
-        /// </summary>
-        private static SoundEffect bruitFrapper;
+        private static PaletteTuiles palettes;      
 
         /// <summary>
         /// Vitesse de marche du joueur, avec valeur par défaut.

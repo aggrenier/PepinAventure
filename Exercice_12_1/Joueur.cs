@@ -68,12 +68,7 @@ namespace Exercice_12_1
         /// Attribut indiquant l'index du périphérique contrôlant le sprite (voir
         /// dans Update (1 par défaut).
         /// </summary>
-        private int indexPeripherique = 1;
-
-        /// <summary>
-        /// Attribut indiquant la vie du joueur
-        /// </summary>
-        private int vieDeJoueur;
+        private int indexPeripherique = 1;        
 
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
@@ -102,13 +97,7 @@ namespace Exercice_12_1
         {
             get { return this.indexPeripherique; }
             set { this.indexPeripherique = Math.Min(Math.Max(value, 0), 4); }
-        }
-
-        public int VieDeJoueur
-        {
-            get { return this.vieDeJoueur; }
-            set { this.vieDeJoueur = value; }
-        }
+        }       
 
         /// <summary>
         /// Propriété accesseur retournant la liste des palettes associées au personnage 

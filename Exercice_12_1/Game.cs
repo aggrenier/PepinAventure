@@ -209,12 +209,27 @@ namespace Exercice_12_1
         /// <summary>
         /// Sert 'a enlever les portes des maps suivants.
         /// </summary>
-        private List<Sprite> listeFoodFini;       
+        private List<Sprite> listeFoodFini;
+
+        /// <summary>
+        /// Liste des portes animés.
+        /// </summary>
+        private List<Sprite> listeClef;
+
+        /// <summary>
+        /// Sert 'a enlever les portes des maps suivants.
+        /// </summary>
+        private List<Sprite> listeClefFini;     
 
          /// <summary>
         /// Sert 'a enlever les portes des maps suivants.
         /// </summary>
         private bool BoolFood;
+
+        /// <summary>
+        /// Sert 'a enlever les portes des maps suivants.
+        /// </summary>
+        private bool boolClef;
 
         /// <summary>
         /// Attribut représentant le monde de tuiles à afficherdurant le jeu.
@@ -703,8 +718,10 @@ namespace Exercice_12_1
             this.listeFoodFini = new List<Sprite>();
             BoolFood = true;
 
-            ViedeJoueur = 10;           
-
+            this.listeClef = new List<Sprite>();
+            this.listeClefFini = new List<Sprite>();
+            boolClef = false;
+        
             // Créer les attributs de gestion des explosions.
             this.randomExplosions = new Random();
 
@@ -769,9 +786,13 @@ namespace Exercice_12_1
             VieDeJoueur.LoadContent(Content, this.graphics);
 
             Food.LoadContent(Content,this.graphics);
-            
-            //listeViedeJoueur.Add(Content.Load<Sprite>("Objetcs\\Heart"));
 
+            Clef.LoadContent(Content, this.graphics);
+
+            this.joueur.VieDeJoueur = 10;
+
+            this.joueur.Clef = false;
+            
             // Charger les textures associées aux effets visuels gérées par Game.
             this.explosionParticule = Content.Load<Texture2D>("Textures\\Effets\\explosion");
 
@@ -1075,12 +1096,35 @@ namespace Exercice_12_1
                 if(this.joueur.CollisionRapide(food))
                 {
                     BoolFood = false;
-                    this.ViedeJoueur = 10;
+                    this.joueur.VieDeJoueur = 10;
                     listeFoodFini.Add(food);
                 }
 
             }
 
+            foreach (Food food in this.listeFoodFini)
+            {
+                this.listeFood.Remove(food);
+            }
+
+            foreach (Clef clef in this.listeClef)
+            {
+                if(this.joueur.Collision(clef))
+                {
+                    boolClef = true;
+                    this.joueur.Clef = true;
+                    listeClefFini.Add(clef);
+
+                    Clef clef1 = new Clef(600 - 16, 15);
+                    listeClef.Add(clef1);
+                    break;
+                }              
+            }
+
+            foreach (Clef clef in this.listeClefFini)
+            {
+                this.listeClef.Remove(clef);
+            }
             // Mettre à jour les particules d'explosion
             this.UpdateParticulesExplosions(gameTime); 
 
@@ -1421,6 +1465,10 @@ namespace Exercice_12_1
             {
                 particule.Draw(this.spriteBatch);
             }
+            foreach (Clef clef in this.listeClef)
+            {
+                clef.Draw(this.spriteBatch);
+            }
             foreach(Food food in this.listeFood)
             {
                 food.Draw(this.spriteBatch);
@@ -1599,6 +1647,21 @@ namespace Exercice_12_1
             {
                 listeFood.Remove(food);
             }
+
+            foreach (Clef clef in this.listeClef)
+            {
+                listeClefFini.Add(clef);
+            }
+            foreach (Clef clef in this.listeClefFini)
+            {
+                listeClef.Remove(clef);
+            }
+
+            if (boolClef == true)
+            {
+                Clef clef1 = new Clef(600 - 16, 15);
+                listeClef.Add(clef1);
+            }
         }
 
         /// <summary>
@@ -1705,6 +1768,12 @@ namespace Exercice_12_1
             this.listeOgres.Add(ogre);
             Ogre ogre1 = new Ogre(new Vector2(300, 260));
             this.listeOgres.Add(ogre1);
+
+            if (boolClef == false)
+            {
+                Clef clef = new Clef(474, 461);
+                this.listeClef.Add(clef);
+            }
         }
         /// <summary>
         /// Fonction qui load tout les elements de map 1-5           
@@ -1725,6 +1794,18 @@ namespace Exercice_12_1
             OgreMouvement ogre3 = new OgreMouvement(new Vector2(200, 480));
             ogre3.BoundsRect = new Rectangle(180, 77, 100, 450);
             this.listeOgres.Add(ogre3);
+
+            Porte porteNord = new Porte(115, 75, Porte.Directions.Nord);
+            if (this.joueur.Clef == false)
+            {
+                porteNord.Ouvert = false;
+            }
+            else
+            {
+                porteNord.Ouvert = true;
+            }
+            this.listePorte.Add(porteNord);
+            
 
         }
 
@@ -1967,7 +2048,7 @@ namespace Exercice_12_1
                 }
                 if (pj.CollisionRapide(this.joueur) && pj.TypeProjectile == Projectile.TypesProjectiles.Ennemi)
                 {
-                    this.ViedeJoueur--;
+                    this.joueur.VieDeJoueur--;
                     // Créer un nouvel effet visuel pour l'explosion.
                     this.CreerExplosion(pj, gameTime);
                     listeProjectileFini.Add(pj);
@@ -2208,7 +2289,7 @@ namespace Exercice_12_1
         /// </summary>        
         public void UpdateVieDeJoueur()
         {
-            int compteur = this.ViedeJoueur;
+            int compteur = this.joueur.VieDeJoueur;
             int distance = 15;
             int distance1 = 15;
 

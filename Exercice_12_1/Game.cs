@@ -1804,18 +1804,16 @@ namespace Exercice_12_1
             {
                 porteNord.Ouvert = true;
             }
-            this.listePorte.Add(porteNord);
-            
+            this.listePorte.Add(porteNord);      
 
         }
 
-
         /// <summary>
-        /// Fonction qui fait la gestion des portes ouverts vs leurs switch         
+        /// Fonction qui fait S'occupe de switch sur la map         
         /// </summary>
+        /// /// <param name="gameTime">Recoie la gameTime.</param>
         private void GestionSwtich(GameTime gameTime)
         {
-            
             foreach (Switch switch1 in listeSwitch)
             {
                 foreach (Bloc bloc in listeBloc)
@@ -1824,116 +1822,253 @@ namespace Exercice_12_1
                     {
                         switch (switch1.Type)
                         {
-                            case (Switch.Types.Nord):
+                            case Switch.Types.Nord:
                                 foreach (Porte p in listePorte)
                                 {
                                     if (p.Direction == Porte.Directions.Nord)
+                                    {
                                         p.Ouvert = true;
+                                    }
+
                                     return;
                                 }
+
+                                foreach (PorteHorizontale p in listePorteHorizontale)
+                                {
+                                    if (p.Direction == PorteHorizontale.Directions.Nord)
+                                    {
+                                        p.Ouvert = true;
+                                    }
+
+                                    return;
+                                }
+
                                 break;
-                            case (Switch.Types.Est):
+                            case Switch.Types.Est:
                                 foreach (Porte p in listePorte)
                                 {
                                     if (p.Direction == Porte.Directions.Est)
+                                    {
                                         p.Ouvert = true;
+                                    }
+                                }
+
+                                foreach (PorteHorizontale p in listePorteHorizontale)
+                                {
+                                    if (p.Direction == PorteHorizontale.Directions.Est)
+                                    {
+                                        p.Ouvert = true;
+                                    }
+
                                     return;
                                 }
+
                                 break;
-                            case (Switch.Types.Sud):
+                            case Switch.Types.Sud:
                                 foreach (Porte p in listePorte)
                                 {
                                     if (p.Direction == Porte.Directions.Sud)
+                                    {
                                         p.Ouvert = true;
+                                    }
+
                                     return;
                                 }
+
+                                foreach (PorteHorizontale p in listePorteHorizontale)
+                                {
+                                    if (p.Direction == PorteHorizontale.Directions.Sud)
+                                    {
+                                        p.Ouvert = true;
+                                    }
+
+                                    return;
+                                }
+
                                 break;
                             default:
                                 foreach (Porte p in listePorte)
                                 {
                                     if (p.Direction == Porte.Directions.Ouest)
+                                    {
                                         p.Ouvert = true;
+                                    }
+
                                     return;
                                 }
+
+                                foreach (PorteHorizontale p in listePorteHorizontale)
+                                {
+                                    if (p.Direction == PorteHorizontale.Directions.Ouest)
+                                    {
+                                        p.Ouvert = true;
+                                    }
+
+                                    return;
+                                }
+
                                 break;
                         } // fin de switch
-
-
                     }
                 }
 
-                if (switch1.Boutton.Intersects(new Rectangle((int)this.joueur.PositionPourCollisions.X,
-                    (int)this.joueur.PositionPourCollisions.Y,10,10)))
+                if (switch1.Boutton.Intersects(new Rectangle((int)this.joueur.PositionPourCollisions.X, (int)this.joueur.PositionPourCollisions.Y, 10, 10)))
                 {
                     switch (switch1.Type)
                     {
-                        case (Switch.Types.Nord):
+                        case Switch.Types.Nord:
                             foreach (Porte p in listePorte)
                             {
                                 if (p.Direction == Porte.Directions.Nord)
+                                {
                                     p.Ouvert = true;
+                                }
                             }
+
+                            foreach (PorteHorizontale p in listePorteHorizontale)
+                            {
+                                if (p.Direction == PorteHorizontale.Directions.Nord)
+                                {
+                                    p.Ouvert = true;
+                                }
+                            }
+
                             break;
-                        case (Switch.Types.Est):
+                        case Switch.Types.Est:
                             foreach (Porte p in listePorte)
                             {
                                 if (p.Direction == Porte.Directions.Est)
+                                {
                                     p.Ouvert = true;
+                                }
                             }
+
+                            foreach (PorteHorizontale p in listePorteHorizontale)
+                            {
+                                if (p.Direction == PorteHorizontale.Directions.Est)
+                                {
+                                    p.Ouvert = true;
+                                }
+                            }
+
                             break;
-                        case (Switch.Types.Sud):
+                        case Switch.Types.Sud:
                             foreach (Porte p in listePorte)
                             {
                                 if (p.Direction == Porte.Directions.Sud)
+                                {
                                     p.Ouvert = true;
+                                }
                             }
+
+                            foreach (PorteHorizontale p in listePorteHorizontale)
+                            {
+                                if (p.Direction == PorteHorizontale.Directions.Sud)
+                                {
+                                    p.Ouvert = true;
+                                }
+                            }
+
                             break;
                         default:
                             foreach (Porte p in listePorte)
                             {
                                 if (p.Direction == Porte.Directions.Ouest)
+                                {
                                     p.Ouvert = true;
+                                }
                             }
+
+                            foreach (PorteHorizontale p in listePorteHorizontale)
+                            {
+                                if (p.Direction == PorteHorizontale.Directions.Ouest)
+                                {
+                                    p.Ouvert = true;
+                                }
+                            }
+
                             break;
-                        } // fin de switch
                     }
-                    // Else, le boutton n'est pas presser et la porte ferme.
-                    else{
-                        switch (switch1.Type)
-                        {
-                            case (Switch.Types.Nord):
-                                foreach (Porte p in listePorte)
+                }
+                else
+                {
+                    switch (switch1.Type)
+                    {
+                        case Switch.Types.Nord:
+                            foreach (Porte p in listePorte)
+                            {
+                                if (p.Direction == Porte.Directions.Nord)
                                 {
-                                    if (p.Direction == Porte.Directions.Nord)
-                                        p.Ouvert = false;
+                                    p.Ouvert = false;
                                 }
-                                break;
-                            case (Switch.Types.Est):
-                                foreach (Porte p in listePorte)
-                                {
-                                    if (p.Direction == Porte.Directions.Est)
-                                        p.Ouvert = false;
-                                }
-                                break;
-                            case (Switch.Types.Sud):
-                                foreach (Porte p in listePorte)
-                                {
-                                    if (p.Direction == Porte.Directions.Sud)
-                                        p.Ouvert = false;
-                                }
-                                break;
-                            default:
-                                foreach (Porte p in listePorte)
-                                {
-                                    if (p.Direction == Porte.Directions.Ouest)
-                                        p.Ouvert = false;
-                                }
-                                break;
-                        } // fin de switch
+                            }
 
+                            foreach (PorteHorizontale p in listePorteHorizontale)
+                            {
+                                if (p.Direction == PorteHorizontale.Directions.Nord)
+                                {
+                                    p.Ouvert = false;
+                                }
+                            }
+
+                            break;
+                        case Switch.Types.Est:
+                            foreach (Porte p in listePorte)
+                            {
+                                if (p.Direction == Porte.Directions.Est)
+                                {
+                                    p.Ouvert = false;
+                                }
+                            }
+
+                            foreach (PorteHorizontale p in listePorteHorizontale)
+                            {
+                                if (p.Direction == PorteHorizontale.Directions.Est)
+                                {
+                                    p.Ouvert = false;
+                                }
+                            }
+
+                            break;
+                        case Switch.Types.Sud:
+                            foreach (Porte p in listePorte)
+                            {
+                                if (p.Direction == Porte.Directions.Sud)
+                                {
+                                    p.Ouvert = false;
+                                }
+                            }
+
+                            foreach (PorteHorizontale p in listePorteHorizontale)
+                            {
+                                if (p.Direction == PorteHorizontale.Directions.Sud)
+                                {
+                                    p.Ouvert = false;
+                                }
+                            }
+
+                            break;
+                        default:
+                            foreach (Porte p in listePorte)
+                            {
+                                if (p.Direction == Porte.Directions.Ouest)
+                                {
+                                    p.Ouvert = false;
+                                }
+                            }
+
+                            foreach (PorteHorizontale p in listePorteHorizontale)
+                            {
+                                if (p.Direction == PorteHorizontale.Directions.Ouest)
+                                {
+                                    p.Ouvert = false;
+                                }
+                            }
+
+                            break;
                     }
+                }
             }
-
         }
 
 

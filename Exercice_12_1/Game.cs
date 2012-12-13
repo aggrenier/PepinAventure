@@ -513,10 +513,14 @@ namespace Exercice_12_1
         /// <returns>Facteur de résistance entre 0.0f (aucune résistance) et 1.0f (résistance maximale).</returns>
         public float CalculerResistanceAuMouvement(Vector2 position)
         {
+            Rectangle joueurRect = new Rectangle((int)this.joueur.PositionPourCollisions.X,
+                                                 (int)this.joueur.PositionPourCollisions.Y,1,1);
+
             foreach (Bloc bloc in listeBloc)
             {
-                if (new Rectangle((int)this.joueur.PositionPourCollisions.X,
-                    (int)this.joueur.PositionPourCollisions.Y,1,1).Intersects(bloc.AireOccupe))
+                if (bloc.AireOccupe.X == 300) // ça fait aucune sense.
+                     bloc.AireOccupe = new Rectangle(286, 119, 28, 28);
+                if (joueurRect.Intersects(bloc.AireOccupe))
                 {
                     return 1.0f;
                 }
@@ -525,8 +529,7 @@ namespace Exercice_12_1
             foreach (Porte porte in listePorte)
             {
                 if (!porte.Ouvert)
-                    if (new Rectangle((int)this.joueur.PositionPourCollisions.X,
-                         (int)this.joueur.PositionPourCollisions.Y, 1, 1).Intersects(porte.Barre))
+                    if (joueurRect.Intersects(porte.Barre))
                     {
                         return 1.0f;
                     }
@@ -535,8 +538,7 @@ namespace Exercice_12_1
             foreach (PorteHorizontale porte in listePorteHorizontale)
             {
                 if (!porte.Ouvert)
-                    if (new Rectangle((int)this.joueur.PositionPourCollisions.X,
-                         (int)this.joueur.PositionPourCollisions.Y, 1, 1).Intersects(porte.Barre))
+                    if (joueurRect.Intersects(porte.Barre))
                     {
                         return 1.0f;
                     }
@@ -1673,6 +1675,7 @@ namespace Exercice_12_1
 
             Bloc bloc0 = new Bloc(300, 133);
             bloc0.BoundsRect = new Rectangle(91, 91, 415, 415);
+            bloc0.AireOccupe = new Rectangle(286, 119, 28, 28);
 
             this.listeBloc.Add(bloc0);
 

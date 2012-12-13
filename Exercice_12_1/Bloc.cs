@@ -148,8 +148,8 @@ namespace Exercice_12_1
         public Bloc(int x, int y)
             : base(x, y)
         {
-            aireOccupe.X = (int)Position.X-14;
-            aireOccupe.Y = (int)Position.Y-14;
+            aireOccupe.X = 286;
+            aireOccupe.Y = 119;
             aireOccupe.Width = Width;
             aireOccupe.Height = Height;
         }

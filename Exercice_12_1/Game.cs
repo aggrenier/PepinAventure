@@ -126,6 +126,11 @@ namespace Exercice_12_1
         private Texture2D ecranGenerique;
 
         /// <summary>
+        /// Fond d'écran de générique.
+        /// </summary>
+        private Texture2D ecranGameOver;
+
+        /// <summary>
         /// Donne la position d'affichage du générique lorsque le jeu est en cours
         /// de se terminer.
         /// </summary>
@@ -224,7 +229,7 @@ namespace Exercice_12_1
          /// <summary>
         /// Sert 'a enlever les portes des maps suivants.
         /// </summary>
-        private bool BoolFood;
+        private bool boolFood;
 
         /// <summary>
         /// Sert 'a enlever les portes des maps suivants.
@@ -260,8 +265,6 @@ namespace Exercice_12_1
         /// Probabilité de générer un astéroïde par cycle de Update().
         /// </summary>
         private float probPJ;
-
-        private int ViedeJoueur;
 
         /// <summary>
         /// Liste de gestion des particules d'explosions.
@@ -363,6 +366,11 @@ namespace Exercice_12_1
             /// En cours de fin de jeu.
             /// </summary>
             Quitter,
+
+            /// <summary>
+            /// En cours de fin de jeu.
+            /// </summary>
+            GameOver,
 
             /// <summary>
             /// En suspension temporaire.
@@ -718,7 +726,7 @@ namespace Exercice_12_1
 
             this.listeFood = new List<Sprite>();
             this.listeFoodFini = new List<Sprite>();
-            BoolFood = true;
+            boolFood = true;
 
             this.listeClef = new List<Sprite>();
             this.listeClefFini = new List<Sprite>();
@@ -848,7 +856,7 @@ namespace Exercice_12_1
             // Charger les fonds d'écran d'accueil et de générique.
             this.ecranAccueil = Content.Load<Texture2D>("Textures\\SplashDebut");
             this.ecranGenerique = Content.Load<Texture2D>("Textures\\SplashFin");
-
+            this.ecranGameOver = Content.Load<Texture2D>("Textures\\SplashGameOver");            
         }
 
         /// <summary>
@@ -921,7 +929,33 @@ namespace Exercice_12_1
             {
                 // L'usager veut-il démarrer la partie? 
                 if (ServiceHelper.Get<IInputService>().Sauter(1))
+                {
                     this.EtatJeu = Etats.Jouer;
+                }
+                // Rien d'autre à faire alors on quitte la fonction 
+                base.Update(gameTime);
+                return;
+            }
+
+            // Si le jeu est en cours de démarrage, passer à l'état de jouer.
+            if (this.EtatJeu == Etats.GameOver)
+            {
+                // L'usager veut-il démarrer la partie? 
+                if (ServiceHelper.Get<IInputService>().Sauter(1))
+                {
+                    this.EtatJeu = Etats.Demarrer;
+                    this.joueur.VieDeJoueur = 10;
+                    this.MondeCourant = Mondes.MAP_1_1;
+                    this.boolClef = false;
+                    this.boolFood = false;
+                    this.joueur.Clef = false;
+                    this.ClearMap();
+                    this.LoadMap11();
+                }
+                if (ServiceHelper.Get<IInputService>().Quitter(1))
+                {
+                    this.EtatJeu = Etats.Quitter;
+                }
                 // Rien d'autre à faire alors on quitte la fonction 
                 base.Update(gameTime);
                 return;
@@ -989,8 +1023,10 @@ namespace Exercice_12_1
             // Mettre à jour le sprite du joueur puis centrer la camera sur celui-ci.
             this.joueur.Update(gameTime, this.graphics);
 
-            
-
+            if (this.joueur.VieDeJoueur == 0)
+            {
+                this.EtatJeu = Etats.GameOver;
+            }
             if (this.joueur.Etat == Personnage.Etats.Tombe && this.joueur.ContTombe > 60)
             {
                 this.joueur.AngleRotation = this.joueur.ContTombe = 0;
@@ -1097,7 +1133,7 @@ namespace Exercice_12_1
             {
                 if(this.joueur.CollisionRapide(food))
                 {
-                    BoolFood = false;
+                    boolFood = false;
                     this.joueur.VieDeJoueur = 10;
                     listeFoodFini.Add(food);
                 }
@@ -1311,6 +1347,24 @@ namespace Exercice_12_1
 
             // Activer le blending alpha (pour la transparence des sprites).
             this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+
+            // Si le jeu est en état de démarrage, afficher l'écran d'accueil 
+            if (this.EtatJeu == Etats.Demarrer)
+            {
+                this.DrawEcranAccueil(this.spriteBatch);
+                this.spriteBatch.End();
+                base.Draw(gameTime);
+                return;
+            }
+
+            // Si le jeu est en état de démarrage, afficher l'écran d'accueil 
+            if (this.EtatJeu == Etats.GameOver)
+            {
+                this.DrawEcranGameOver(this.spriteBatch);
+                this.spriteBatch.End();
+                base.Draw(gameTime);
+                return;
+            }
 
             // Si le jeu est en état de démarrage, afficher l'écran d'accueil 
             if (this.EtatJeu == Etats.Demarrer)
@@ -1754,7 +1808,7 @@ namespace Exercice_12_1
 
             this.listeBloc.Add(bloc0);
             this.listeBloc.Add(bloc1);
-            if (this.BoolFood == true)
+            if (this.boolFood == true)
             {
                 Food food = new Food(475, 120);
                 this.listeFood.Add(food);
@@ -2378,6 +2432,35 @@ namespace Exercice_12_1
 
             // Afficher le message 50 pixels plus bas que le centre de l'écran.
             this.DrawMessage(this.spriteBatch, message, 50, Color.Blue);
+        }
+
+        /// <summary>
+        /// Fonction dessinant l'écran d'accueil. Un message est affiché sur la texture d'accueil
+        /// afin d'indiquer à l'usager quelle touche presser pour démarrer la partie.
+        /// </summary>
+        /// <param name="spriteBatch">Tampon d'affichage.</param>
+        protected void DrawEcranGameOver(SpriteBatch spriteBatch)
+        {
+            // Dessiner le fond d'écran.
+            spriteBatch.Draw(this.ecranGameOver, Vector2.Zero, Color.White);
+
+            // Afficher le message approprié selon le périphérique d'inputs.
+            string message = string.Empty;
+            if (ServiceHelper.Get<IInputService>().GetType() == typeof(ClavierService))
+            {
+                message = "Pressez Espace pour commencer...\nPressez ESC pour quitter";
+            }
+            else if (ServiceHelper.Get<IInputService>().GetType() == typeof(ManetteService))
+            {
+                message = "Pressez A pour commencer...\nPressez sur Start pour quitter";
+            }
+            else
+            {
+                message = "ERREUR: aucune manette ou clavier!";
+            }
+
+            // Afficher le message 50 pixels plus bas que le centre de l'écran.
+            this.DrawMessage(this.spriteBatch, message, 50, Color.White);
         }
 
         /// <summary>

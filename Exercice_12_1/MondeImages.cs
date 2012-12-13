@@ -174,7 +174,13 @@ namespace IFM20884
             Rectangle targetRect = new Rectangle(x, y, 1, 1);
 
             // Extraire la couleur du pixel                                                          indexOutOfRangeException
-            this.TexturesCollisions[row, col].GetData<Color>(0, targetRect, colorData, 0, 1);
+            try
+            {
+                this.TexturesCollisions[row, col].GetData<Color>(0, targetRect, colorData, 0, 1);
+            }
+            catch (IndexOutOfRangeException) { 
+                Console.Error.WriteLine("Projectile sortie du monde"); 
+            }
 
             return colorData[0];
         }

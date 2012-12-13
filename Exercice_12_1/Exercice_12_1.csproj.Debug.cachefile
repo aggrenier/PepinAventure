@@ -149,6 +149,7 @@ Content\Textures\Porte\Ouest.xnb
 Content\Textures\Porte\Est.xnb
 Content\Objects\Heart.xnb
 Content\Objects\Food.xnb
+Content\Objects\Key.xnb
 Content\Audio\Effets\Joueur\Course.xnb
 Content\Audio\Effets\Joueur\Marche.xnb
 Content\Audio\Musique\zelda_1.xnb
@@ -160,5 +161,4 @@ Content\Audio\Musique\zelda_fin.xnb
 Content\Polices\MenuItemsPolice.xnb
 Content\Polices\MenuTitresPolice.xnb
 Content\Polices\MessagesPolice.xnb
-Content\Objects\Key.xnb
 Content\Menus\QuitterMenu.xml

@@ -2068,7 +2068,7 @@ namespace Exercice_12_1
         {
             foreach (Projectile pj in this.listeProjectiles)
             {
-                if (this.monde.CouleurDeCollision(pj.Position) == Color.Black)
+                if (this.monde.CouleurDeCollision(pj.Position) == Color.Red)
                 {
                     if (pj.vitesHorizontale < 0)
                     {
@@ -2079,7 +2079,9 @@ namespace Exercice_12_1
                     {
                         pj.vitesHorizontale = -1;
                     }
-
+                }
+                else if (this.monde.CouleurDeCollision(pj.Position) == Color.Black)
+                {
                     if (pj.vitesseVerticale < 0)
                     {
                         pj.vitesseVerticale = 1;

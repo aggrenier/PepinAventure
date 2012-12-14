@@ -292,6 +292,87 @@ namespace IFM20884
             }
 
             base.Update(gameTime);
+        }        
+
+        /// <summary>
+        /// Retourne si le joueur tire au nord
+        /// </summary>
+        /// <param name="device">Le périphérique à lire.</param>
+        /// <returns>Vrai si la barre d'espacement est pressée.</returns>
+        public bool TirerNord(int device)
+        {
+            // Ralentir les répétitions de pressions (400 millisecondes de délai)
+            return this.DelaiDuplicationExpire(device, Buttons.RightThumbstickUp, 400);
+        }
+
+        /// <summary>
+        /// Retourne si le joueur tire a l'est
+        /// </summary>
+        /// <param name="device">Le périphérique à lire.</param>
+        /// <returns>Vrai si la barre d'espacement est pressée.</returns>
+        public bool TirerEst(int device)
+        {
+            // S'assurer que le numéro de manette fourni est valide.
+            this.ValiderDevice(ref device);
+
+            // Premièrement vérifier le thumbstick gauche
+            if (this.etatManette[device - 1].IsButtonDown(Buttons.RightThumbstickRight))
+            {
+                return true;
+            }
+
+            return false;                                                                       
+        }
+
+        /// <summary>
+        /// Retourne si le joueur tire au sud
+        /// </summary>
+        /// <param name="device">Le périphérique à lire.</param>
+        /// <returns>Vrai si la barre d'espacement est pressée.</returns>
+        public bool TirerSud(int device)
+        {
+            // S'assurer que le numéro de manette fourni est valide.
+            this.ValiderDevice(ref device);
+
+            // Premièrement vérifier le thumbstick gauche
+            if (this.etatManette[device - 1].IsButtonDown(Buttons.RightThumbstickDown))
+            {
+                return true;
+            }
+
+            return false;
+
+            // lil' problem
+        }
+
+        /// <summary>
+        /// Retourne si le tire ouest
+        /// </summary>
+        /// <param name="device">Le périphérique à lire.</param>
+        /// <returns>Vrai si la barre d'espacement est pressée.</returns>
+        public bool TirerOuest(int device)
+        {
+            // S'assurer que le numéro de manette fourni est valide.
+            this.ValiderDevice(ref device);
+
+            // Premièrement vérifier le thumbstick gauche
+            if (this.etatManette[device - 1].IsButtonDown(Buttons.RightThumbstickLeft))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Retourne si le joueur bouge un bloc
+        /// </summary>        
+        /// <param name="device">Le périphérique à lire.</param>
+        /// <returns>Vrai si la barre d'espacement est pressée.</returns>
+        public bool BougerBloc(int device)
+        {
+            // Imposer un délai de 0.2 seconde entre chaque saut.
+            return true;                                                                    
         }
 
         /// <summary>
@@ -399,77 +480,6 @@ namespace IFM20884
 
             // La touche est pressée seulement si c'est une nouvelle pression
             return !etaitPresse && estPresse;
-        }
-
-        /// </summary>
-        /// <param name="device">Le périphérique à lire.</param>
-        /// <returns>Vrai si la barre d'espacement est pressée.</returns>
-        public bool TirerNord(int device)
-        {
-            // Ralentir les répétitions de pressions (400 millisecondes de délai)
-            return this.DelaiDuplicationExpire(device, Buttons.RightThumbstickUp, 400);
         }       
-
-        /// </summary>
-        /// <param name="device">Le périphérique à lire.</param>
-        /// <returns>Vrai si la barre d'espacement est pressée.</returns>
-        public bool TirerEst(int device)
-        {
-            // S'assurer que le numéro de manette fourni est valide.
-            this.ValiderDevice(ref device);
-
-            // Premièrement vérifier le thumbstick gauche
-            if (this.etatManette[device - 1].IsButtonDown(Buttons.RightThumbstickRight))
-            {
-                return true;
-            }
-
-            return false;                                                                       // lil' problem
-        }
-
-        /// </summary>
-        /// <param name="device">Le périphérique à lire.</param>
-        /// <returns>Vrai si la barre d'espacement est pressée.</returns>
-        public bool TirerSud(int device)
-        {
-           // S'assurer que le numéro de manette fourni est valide.
-            this.ValiderDevice(ref device);
-
-            // Premièrement vérifier le thumbstick gauche
-            if (this.etatManette[device - 1].IsButtonDown(Buttons.RightThumbstickDown))
-            {
-                return true;
-            }
-
-            return false;
-
-                                                                  // lil' problem
-        }
-
-        /// </summary>
-        /// <param name="device">Le périphérique à lire.</param>
-        /// <returns>Vrai si la barre d'espacement est pressée.</returns>
-        public bool TirerOuest(int device)
-        {
-            // S'assurer que le numéro de manette fourni est valide.
-            this.ValiderDevice(ref device);
-
-            // Premièrement vérifier le thumbstick gauche
-            if (this.etatManette[device - 1].IsButtonDown(Buttons.RightThumbstickLeft))
-            {
-                return true;
-            }
-
-            return false;               
-        }
-
-        /// </summary>
-        /// <param name="device">Le périphérique à lire.</param>
-        /// <returns>Vrai si la barre d'espacement est pressée.</returns>
-        public bool BougerBloc(int device)
-        {
-            // Imposer un délai de 0.2 seconde entre chaque saut.
-            return true;                                                                    // lil' problem
-        }
     }
 }

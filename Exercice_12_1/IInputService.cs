@@ -125,11 +125,39 @@ namespace IFM20884
         /// <returns>Vrai si l'item de menu actif doit être sélectionné; faux sinon.</returns>
         bool MenuItemSelection(int device);
 
+        /// <summary>
+        /// Indique si le Joueur tier ou nord
+        /// </summary>
+        /// <param name="device">Le périphérique à lire.</param>
+        /// <returns>Vrai si le joueur tire; faux sinon.</returns>
         bool TirerNord(int device);
+
+        /// <summary>
+        /// Indique si le Joueur tier ou Est
+        /// </summary>
+        /// <param name="device">Le périphérique à lire.</param>
+        /// <returns>Vrai si le joueur tire; faux sinon.</returns>
         bool TirerEst(int device);
+
+        /// <summary>
+        /// Indique si le Joueur tier ou Sud
+        /// </summary>
+        /// <param name="device">Le périphérique à lire.</param>
+        /// <returns>Vrai si le joueur tire; faux sinon.</returns>
         bool TirerSud(int device);
+
+        /// <summary>
+        /// Indique si le Joueur tier ou Ouest
+        /// </summary>
+        /// <param name="device">Le périphérique à lire.</param>
+        /// <returns>Vrai si le joueur tire; faux sinon.</returns>
         bool TirerOuest(int device);
 
+        /// <summary>
+        /// Indique si le Joueur bouge un bloc
+        /// </summary>
+        /// <param name="device">Le périphérique à lire.</param>
+        /// <returns>Vrai si le joueur bougeun bloc; faux sinon.</returns>
         bool BougerBloc(int device);
     }
 }

@@ -156,7 +156,7 @@
     <Compile Include="Sprite.cs" />
     <Compile Include="SpriteAnimation.cs" />
     <Compile Include="Switch.cs" />
-    <Compile Include="VieDeJoueur1.cs" />
+    <Compile Include="VieDeJoueur.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="JoueurSprite.cs" company="Marco Lavoie">
+// <copyright file="Switch.cs" company="Marco Lavoie">
 // Marco Lavoie, 2010. Tous droits réservés
 // 
 // L'utilisation de ce matériel pédagogique (présentations, code source 
@@ -59,13 +59,16 @@ namespace Exercice_12_1
         /// </summary>
         private static PaletteTuiles palettes;
 
+        /// <summary>
+        /// Boutton pour Collision       
+        /// </summary>
         private Rectangle boutton;
 
-        public Rectangle Boutton
-        {
-            get { return this.boutton; }
-        }
-
+        /// <summary>
+        /// Type pour porte       
+        /// </summary>
+        private Types type; 
+   
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
         /// </summary>
@@ -74,19 +77,11 @@ namespace Exercice_12_1
         public Switch(int x, int y)
             : base(x, y)
         {
-            boutton.X = x - Width / 4;
-            boutton.Y = y - Height / 4;
-            boutton.Width = Width / 2;
-            boutton.Height = Height / 2;
-        }
-
-        private Types type;
-
-        public Types Type
-        {
-            get { return this.type; }
-            set { this.type = value; }
-        }
+            this.boutton.X = x - (this.Width / 4);
+            this.boutton.Y = y - (this.Height / 4);
+            this.boutton.Width = this.Width / 2;
+            this.boutton.Height = this.Height / 2;
+        }      
 
         /// <summary>
         /// Enumération des portes que la switch peuvent ouvrir.
@@ -113,7 +108,36 @@ namespace Exercice_12_1
             /// </summary>
             Ouest
         }
-        
+
+        /// <summary>
+        /// Type pour porte       
+        /// </summary>
+        public Types Type
+        {
+            get { return this.type; }
+            set { this.type = value; }
+        }
+
+        /// <summary>
+        /// Boutton pour Collision       
+        /// </summary>
+        public Rectangle Boutton
+        {
+            get { return this.boutton; }
+        }
+     
+        /// <summary>
+        /// Propriété (accesseur de lecture seulement) retournant la position des pattes du sprite.
+        /// Cette position est utilisée pour déterminer si le sprite est debout sur une tuile solide.
+        /// </summary>
+        public Vector2 PositionPourCollisions
+        {
+            get
+            {    
+               return new Vector2(this.Position.X, this.Position.Y);
+            }
+        }
+
         /// <summary>
         /// Accesseur pour la palette.
         /// </summary>
@@ -123,18 +147,6 @@ namespace Exercice_12_1
             // 8 palettes de direction pour chaque état).
             get { return palettes; }
         }
-
-        /// <summary>
-        /// Propriété (accesseur de lecture seulement) retournant la position des pattes du sprite.
-        /// Cette position est utilisée pour déterminer si le sprite est debout sur une tuile solide.
-        /// </summary>
-        public Vector2 PositionPourCollisions
-        {
-            get
-            {    
-               return new Vector2(this.Position.X , this.Position.Y );
-            }
-        }   
 
         /// <summary>
         /// Charge les images associées au sprite du joueur.

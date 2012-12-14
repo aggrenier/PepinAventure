@@ -342,7 +342,7 @@ namespace Exercice_12_1
             MAP_1_2,
 
             /// <summary>
-            /// Monde 1.3.
+            /// Monde 1.3. 
             /// </summary>
             MAP_1_3,
 
@@ -1146,18 +1146,12 @@ namespace Exercice_12_1
                 this.joueur.Position = this.monde.PositionInitiale;
             }
 
-            this.camera.Centrer(this.joueur.Position);
-
-            // Se débarasser des astéroïdes ayant quitté l'écran.
-            foreach (Ennemi ogre in this.listeOgresFini)
-            {
-                this.listeOgres.Remove(ogre);
-            }
+            this.camera.Centrer(this.joueur.Position);           
 
             // Mettre à jour les ogres.
             foreach (Ennemi ogre in this.listeOgres)
             {
-                ogre.SeTournerVers(this.joueur.Position);
+                ogre.SeTournerVers(this.joueur.Position);               
 
                 // Déterminer si on doit créer un nouvel astéroide.
                 if (this.randomPJEnemi.NextDouble() < this.probPJ)
@@ -1227,7 +1221,20 @@ namespace Exercice_12_1
                     }
                 }
 
+                if (ogre.Collision(this.joueur))
+                {
+                    this.joueur.VieDeJoueur--;
+                    this.CreerExplosion(ogre, gameTime);
+                    this.listeOgresFini.Add(ogre);                    
+                }
+
                 ogre.Update(gameTime, this.graphics);
+            }
+
+            // Se débarasser des astéroïdes ayant quitté l'écran.
+            foreach (Ennemi ogre in this.listeOgresFini)
+            {
+                this.listeOgres.Remove(ogre);
             }
 
             this.GestionProjectile(gameTime);

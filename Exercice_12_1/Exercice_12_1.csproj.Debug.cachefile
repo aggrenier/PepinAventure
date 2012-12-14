@@ -159,8 +159,8 @@ Content\Audio\Effets\Projectile\Projectile.xnb
 Content\Audio\Effets\Bloc\Bloc.xnb
 Content\Audio\Effets\Joueur\Tombe.xnb
 Content\Audio\Musique\zelda_fin.xnb
+Content\Audio\Musique\GameOver.xnb
 Content\Polices\MenuItemsPolice.xnb
 Content\Polices\MenuTitresPolice.xnb
 Content\Polices\MessagesPolice.xnb
-Content\Audio\Musique\GameOver.xnb
 Content\Menus\QuitterMenu.xml

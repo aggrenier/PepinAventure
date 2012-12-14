@@ -101,12 +101,7 @@ namespace Exercice_12_1
         /// <summary>
         /// Vitesse de marche du joueur, avec valeur par défaut.
         /// </summary>
-        private float vitesseVerticale = 0.0f;       
-
-        /// <summary>
-        /// Vitesse de marche du joueur, avec valeur par défaut.
-        /// </summary>
-        private Rectangle aireOccupe;        
+        private float vitesseVerticale = 0.0f;        
 
         /// <summary>
         /// Vitesse de marche du joueur, avec valeur par défaut.
@@ -126,10 +121,6 @@ namespace Exercice_12_1
         public Bloc(int x, int y)
             : base(x, y)
         {
-            this.aireOccupe.X = 286;
-            this.aireOccupe.Y = 119;
-            this.aireOccupe.Width = this.Width;
-            this.aireOccupe.Height = this.Height;
         }
 
         /// <summary>
@@ -164,8 +155,12 @@ namespace Exercice_12_1
         /// </summary>
         public Rectangle AireOccupe
         {
-            get { return this.aireOccupe; }
-            set { this.aireOccupe = value; }
+            get {
+                return new Rectangle((int)this.Position.X - this.Width / 2,
+                                        (int)this.Position.Y - this.Height / 2, 
+                                        this.Width, 
+                                        this.Height );
+            }
         }
 
         /// <summary>
@@ -237,9 +232,6 @@ namespace Exercice_12_1
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics)
         {
             this.ForcerPosition(this.Position.X + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale), Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.vitesseVerticale));
-            
-            this.aireOccupe.X = (int)(Position.X + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale));
-            this.aireOccupe.Y = (int)(Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale));
 
             if (this.vitesseHorizontale != 0 || this.vitesseVerticale != 0)
             {

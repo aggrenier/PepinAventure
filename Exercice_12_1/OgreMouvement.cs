@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="Ogre.cs" company="Marco Lavoie">
+// <copyright file="OgreMouvement.cs" company="Marco Lavoie">
 // Marco Lavoie, 2010. Tous droits réservés
 // 
 // L'utilisation de ce matériel pédagogique (présentations, code source 
@@ -62,12 +62,12 @@ namespace Exercice_12_1
         /// <summary>
         /// Vitesse de marche du joueur, avec valeur par défaut.
         /// </summary>
-        private float VitesseHorizontale = 0.0f;
+        private float vitesseHorizontale = 0.0f;
 
         /// <summary>
         /// Vitesse de marche du joueur, avec valeur par défaut.
         /// </summary>
-        private float VitesseVerticale = 0.0f;
+        new private float vitesseVerticale = 0.0f;
 
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
@@ -91,16 +91,16 @@ namespace Exercice_12_1
         /// <summary>
         /// Vitesse de marche du joueur, avec valeur par défaut.
         /// </summary>
-        public float vitesHorizontale
+        public float VitesHorizontale
         {
-            get { return this.VitesseHorizontale; }
-            set { this.VitesseHorizontale = value; }
+            get { return this.vitesseHorizontale; }
+            set { this.vitesseHorizontale = value; }
         }
 
         /// <summary>
         /// Vitesse de marche du joueur, avec valeur par défaut.
         /// </summary>
-        public float vitesseVerticale
+        new public float VitesseVerticale
         {
             get { return this.VitesseVerticale; }
             set { this.VitesseVerticale = value; }
@@ -169,54 +169,54 @@ namespace Exercice_12_1
             {
                 case Directions.Nord:
 
-                    this.VitesseHorizontale = 0f;
+                    this.vitesseHorizontale = 0f;
                     this.vitesseVerticale = -1f;
 
                     break;
                 case Directions.NordEst:
-                    this.VitesseHorizontale = 1f;
+                    this.vitesseHorizontale = 1f;
                     this.vitesseVerticale = -1f;
 
                     break;
                 case Directions.Est:
-                    this.VitesseHorizontale = 1f;
+                    this.vitesseHorizontale = 1f;
                     this.vitesseVerticale = 0.00f;
 
                     break;
                 case Directions.SudEst:
-                    this.VitesseHorizontale = 1f;
+                    this.vitesseHorizontale = 1f;
                     this.vitesseVerticale = 1f;
 
                     break;
                 case Directions.Sud:
-                    this.VitesseHorizontale = 0f;
+                    this.vitesseHorizontale = 0f;
                     this.vitesseVerticale = 1f;
 
                     break;
                 case Directions.SudOuest:
-                    this.VitesseHorizontale = 1f;
+                    this.vitesseHorizontale = 1f;
                     this.vitesseVerticale = -0f;
 
                     break;
                 case Directions.Ouest:
-                    this.VitesseHorizontale = -1f;
+                    this.vitesseHorizontale = -1f;
                     this.vitesseVerticale = 0f;
 
                     break;
                 case Directions.NordOuest:
-                    this.VitesseHorizontale = -1f;
+                    this.vitesseHorizontale = -1f;
                     this.vitesseVerticale = -1f;
 
                     break;
 
                 default:
-                    this.VitesseHorizontale = 0f;
+                    this.vitesseHorizontale = 0f;
                     this.vitesseVerticale = 0f;
 
                     break;
             }
 
-            this.Position = new Vector2((Position.X + (this.VitesseHorizontale)),
+            this.Position = new Vector2((Position.X + (this.vitesseHorizontale)),
                 Position.Y + (this.vitesseVerticale));
             this.ClampPositionToBoundsRect();
 
@@ -241,13 +241,12 @@ namespace Exercice_12_1
             try
             {
                 Rectangle destRect = new Rectangle((int)this.Position.X, (int)this.Position.Y, 1, 1);
-
-
                 base.LireVitesses(gameTime, out vitesseNord, out vitesseSud, out vitesseEst, out vitesseOuest);
 
-
             }
-            catch (ArgumentOutOfRangeException) { }
+            catch (ArgumentOutOfRangeException) 
+            { 
+            }
             return true;
         }
     }

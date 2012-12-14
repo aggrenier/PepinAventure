@@ -401,7 +401,7 @@ namespace IFM20884
                     this.direction == Directions.NordEst ||
                     this.direction == Directions.NordOuest)
                 {
-                    dy = -12;
+                    dy -= 12;
                 }
 
                 return new Vector2(this.Position.X + dx, this.Position.Y + dy);

@@ -171,11 +171,11 @@ namespace IFM20884
             this.maxEchelle = 0.10f + ((float)randomiseur.NextDouble() * 0.20f);          // échelle maximale entre 0.1 et 0.3
             this.echelle = 0.005f + ((float)randomiseur.NextDouble() * 0.01f);            // échelle de départ entre 0.005 et 0.015
 
-            int sens = Math.Sign(randomiseur.NextDouble()-0.5f);
-            float delta = (float)(randomiseur.NextDouble() /180);
+            int sens = Math.Sign(randomiseur.NextDouble() - 0.5f);
+            float delta = (float)(randomiseur.NextDouble() / 180);
 
             this.rotation = 0f;                                                           // angle de rotation de l'image (initialisée à 0 radians)
-            this.rotationVitesse =(2f * (float)Math.PI) * sens * delta;                           // vitesse max d'une rotation
+            this.rotationVitesse = (2f * (float)Math.PI) * sens * delta;                           // vitesse max d'une rotation
 
             this.expansion = 0.0025f + ((float)randomiseur.NextDouble() * 0.005f);        // vitesse d'expansion entre 0.0025 et 0.0075
             this.dispersionAngle = (float)(randomiseur.NextDouble() * 2f * Math.PI);      // angle de déplacement de la particule (entre 0 et 360 degrés, en radians)

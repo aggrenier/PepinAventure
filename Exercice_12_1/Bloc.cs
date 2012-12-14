@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="JoueurSprite.cs" company="Marco Lavoie">
+// <copyright file="Bloc.cs" company="Marco Lavoie">
 // Marco Lavoie, 2010. Tous droits réservés
 // 
 // L'utilisation de ce matériel pédagogique (présentations, code source 
@@ -74,6 +74,12 @@ namespace Exercice_12_1
     public class Bloc : SpriteAnimation
     {
         /// <summary>
+        /// Attribut statique (i.e. partagé par toutes les instances) constituant une 
+        /// liste de palettes à exploiter selon la direction et l'état du joueur.
+        /// </summary>
+        private static PaletteTuiles palettes;
+
+        /// <summary>
         /// Fonction déléguée permettant d'obtenir la résistance aux déplacements du sprite
         /// dans le monde de tuiles. Si aucune fonction déléguée n'est fournie, aucune
         /// résistance n'est appliquée aux déplacements.
@@ -85,60 +91,32 @@ namespace Exercice_12_1
         /// dans le monde de tuiles. Si aucune fonction déléguée n'est fournie, aucune
         /// résistance n'est appliquée aux déplacements.
         /// </summary>
-        private ValiderDeplacement2 getValiderDeplacement;
-
-
-        /// <summary>
-        /// Attribut statique (i.e. partagé par toutes les instances) constituant une 
-        /// liste de palettes à exploiter selon la direction et l'état du joueur.
-        /// </summary>
-        private static PaletteTuiles palettes;      
+        private ValiderDeplacement2 getValiderDeplacement;             
 
         /// <summary>
         /// Vitesse de marche du joueur, avec valeur par défaut.
         /// </summary>
-        private float VitesseHorizontale = 0.0f;
+        private float vitesseHorizontale = 0.0f;       
 
-        public float vitesseHorizontale
-        {
-            get { return this.VitesseHorizontale; }
-            set { this.VitesseHorizontale += value; }
-        }
-
-        private float VitesseVerticale = 0.0f;
         /// <summary>
         /// Vitesse de marche du joueur, avec valeur par défaut.
         /// </summary>
-        public float vitesseVerticale
-        {
-            get { return this.VitesseVerticale; }
-            set { this.VitesseVerticale += value; }
-        }
+        private float vitesseVerticale = 0.0f;       
 
-        private Rectangle aireOccupe;
+        /// <summary>
+        /// Vitesse de marche du joueur, avec valeur par défaut.
+        /// </summary>
+        private Rectangle aireOccupe;        
 
-        public Rectangle AireOccupe
-        {
-            get { return this.aireOccupe; }
-            set { this.aireOccupe = value; }
-        }
-       
-        private float vieDeBloc = 2f;
+        /// <summary>
+        /// Vitesse de marche du joueur, avec valeur par défaut.
+        /// </summary>
+        private float vieDeBloc = 2f;        
 
-        public float VideDeBloc
-        {
-            get { return this.vieDeBloc; }
-            set { this.vieDeBloc = value; }
-        }
-
-        private bool blockMouvement = true;
-
-        public bool BlockMouvement
-        {
-            get { return this.blockMouvement; }
-            set { this.blockMouvement = value; }
-        }
-
+        /// <summary>
+        /// Vitesse de marche du joueur, avec valeur par défaut.
+        /// </summary>
+        private bool blockMouvement = true;      
 
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
@@ -148,10 +126,10 @@ namespace Exercice_12_1
         public Bloc(int x, int y)
             : base(x, y)
         {
-            aireOccupe.X = 286;
-            aireOccupe.Y = 119;
-            aireOccupe.Width = Width;
-            aireOccupe.Height = Height;
+            this.aireOccupe.X = 286;
+            this.aireOccupe.Y = 119;
+            this.aireOccupe.Width = this.Width;
+            this.aireOccupe.Height = this.Height;
         }
 
         /// <summary>
@@ -164,14 +142,49 @@ namespace Exercice_12_1
         }
 
         /// <summary>
-        /// Accesseur pour la palette.
+        /// Vitesse de marche du joueur, avec valeur par défaut.
         /// </summary>
-        protected override PaletteTuiles Palette
+        public float VitesseHorizontale
         {
-            // Les palettes sont stockées dans la liste en groupes d'état (i.e.
-            // 8 palettes de direction pour chaque état).
-            get { return palettes; }
-        }         
+            get { return this.vitesseHorizontale; }
+            set { this.vitesseHorizontale += value; }
+        }
+
+        /// <summary>
+        /// Vitesse de marche du joueur, avec valeur par défaut.
+        /// </summary>
+        public float VitesseVerticale
+        {
+            get { return this.vitesseVerticale; }
+            set { this.vitesseVerticale += value; }
+        }
+
+        /// <summary>
+        /// Vitesse de marche du joueur, avec valeur par défaut.
+        /// </summary>
+        public Rectangle AireOccupe
+        {
+            get { return this.aireOccupe; }
+            set { this.aireOccupe = value; }
+        }
+
+        /// <summary>
+        /// Vitesse de marche du joueur, avec valeur par défaut.
+        /// </summary>
+        public float VideDeBloc
+        {
+            get { return this.vieDeBloc; }
+            set { this.vieDeBloc = value; }
+        }
+
+        /// <summary>
+        /// Vitesse de marche du joueur, avec valeur par défaut.
+        /// </summary>
+        public bool BlockMouvement
+        {
+            get { return this.blockMouvement; }
+            set { this.blockMouvement = value; }
+        }        
 
         /// <summary>
         /// Propriété (accesseur pour getResistanceAuMouvement) retournant ou changeant la fonction déléguée 
@@ -193,6 +206,16 @@ namespace Exercice_12_1
         {
             get { return this.getValiderDeplacement; }
             set { this.getValiderDeplacement = value; }
+        }    
+
+        /// <summary>
+        /// Accesseur pour la palette.
+        /// </summary>
+        protected override PaletteTuiles Palette
+        {
+            // Les palettes sont stockées dans la liste en groupes d'état (i.e.
+            // 8 palettes de direction pour chaque état).
+            get { return palettes; }
         }
 
         /// <summary>
@@ -213,56 +236,17 @@ namespace Exercice_12_1
         /// <param name="graphics">Gestionnaire de périphérique d'affichage.</param>
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics)
         {
-            ForcerPosition(Position.X + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale),
-                Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.vitesseVerticale));
+            this.ForcerPosition(this.Position.X + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale), Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.vitesseVerticale));
             
             this.aireOccupe.X = (int)(Position.X + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale));
             this.aireOccupe.Y = (int)(Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale));
 
-            if(this.vitesseHorizontale != 0 || this.vitesseVerticale != 0)
+            if (this.vitesseHorizontale != 0 || this.vitesseVerticale != 0)
+            {
                 this.VideDeBloc -= 0.05f;
+            }
 
             this.ClampPositionToBoundsRect();
-
-
-            //// Calculer le déplacement du sprite selon la direction indiquée. Notez que
-            //// deux directions opposées s'annulent.
-            //float deltaX = vitesHorizontale;
-            //float deltaY = vitesseVerticale;
-
-            //// Si une fonction déléguée est fournie pour valider les mouvements sur les tuiles
-            //// y faire appel pour valider la position résultante du mouvement.
-            //if (this.getValiderDeplacement != null && (deltaX != 0.0 || deltaY != 0.0))
-            //{
-            //    // Déterminer le déplacement maximal permis vers la nouvelle position en fonction
-            //    // de la résistance des tuiles. Une résistance maximale de 0.95 est indiquée afin de
-            //    // permettre au sprite de traverser les tuiles n'étant pas complètement solides.
-            //    this.getValiderDeplacement(new Vector2(AireOccupe.X,AireOccupe.Y), ref deltaX, ref deltaY, 0.95f);
-            //}
-
-            //// Si une fonction déléguée est fournie pour autoriser les mouvements sur les tuiles
-            //// y faire appel pour valider la position résultante du mouvement.
-            //if (this.getResistanceAuMouvement != null && (deltaX != 0.0 || deltaY != 0.0))
-            //{
-            //    // Déterminer les coordonnées de destination et tenant compte que le sprite est
-            //    // centré sur Position, alors que ses mouvements doivent être autorisés en fonction
-            //    // de la position de ses pieds.
-            //    Vector2 newPos = new Vector2(AireOccupe.X, AireOccupe.Y);
-            //    newPos.X += deltaX;
-            //    newPos.Y += deltaY;
-
-            //    // Calculer la résistance à la position du sprite.
-            //    float resistance = this.getResistanceAuMouvement(newPos);
-
-            //    // Appliquer le facteur de résistance obtenu au déplacement.
-            //    deltaX = (int)(deltaX * (1.0f - resistance));
-            //    deltaY = (int)(deltaY * (1.0f - resistance));
-            //}
-
-            //// Modifier la position du sprite en conséquence (on exploite le setter
-            //// de _position afin d'appliquer boundsRect).
-            //this.Position = new Vector2(this.Position.X + deltaX, this.Position.Y + deltaY);
-
 
             // La fonction de base s'occupe de l'animation.
             base.Update(gameTime, graphics);

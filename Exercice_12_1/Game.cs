@@ -2301,19 +2301,19 @@ namespace Exercice_12_1
                 {
                     if (this.joueur.Direction == Personnage.Directions.Nord)
                     {
-                        bloc.vitesseVerticale = -0.1f;
+                        bloc.VitesseVerticale = -0.1f;
                     }
                     else if (this.joueur.Direction == Personnage.Directions.Sud)
                     {
-                        bloc.vitesseVerticale = 0.1f;
+                        bloc.VitesseVerticale = 0.1f;
                     }
                     else if (this.joueur.Direction == Personnage.Directions.Est)
                     {
-                        bloc.vitesseHorizontale = 0.1f;
+                        bloc.VitesseHorizontale = 0.1f;
                     }
                     else if (this.joueur.Direction == Personnage.Directions.Ouest)
                     {
-                        bloc.vitesseHorizontale = -0.1f;
+                        bloc.VitesseHorizontale = -0.1f;
                     }
 
                     bruitageblock.Play();

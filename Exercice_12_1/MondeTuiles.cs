@@ -66,6 +66,16 @@ namespace IFM20884
         }
 
         /// <summary>
+        /// Propriété accesseur retournant et changeant la palette de gestion des collisions
+        /// de sprites avec les tuiles (peut être nul).
+        /// </summary>
+        /// <value>Palette de gestion des collisions de sprites avec les tuiles.</value>
+        public virtual PaletteTuiles PaletteCollisions
+        {
+            get { throw new NullReferenceException("aucune texture fournie pour la détection de collisions"); }
+        }
+
+        /// <summary>
         /// Propriété accesseur retournant et changeant le tableau d'index des tuiles du monde.
         /// </summary>
         protected abstract int[,] MappeMonde
@@ -79,16 +89,6 @@ namespace IFM20884
         protected abstract PaletteTuiles Palette
         {
             get;
-        }
-
-        /// <summary>
-        /// Propriété accesseur retournant et changeant la palette de gestion des collisions
-        /// de sprites avec les tuiles (peut être nul).
-        /// </summary>
-        /// <value>Palette de gestion des collisions de sprites avec les tuiles.</value>
-        public virtual PaletteTuiles PaletteCollisions
-        {
-            get { throw new NullReferenceException("aucune texture fournie pour la détection de collisions"); }
         }
 
         /// <summary>

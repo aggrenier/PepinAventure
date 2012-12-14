@@ -178,7 +178,8 @@ namespace IFM20884
             {
                 this.TexturesCollisions[row, col].GetData<Color>(0, targetRect, colorData, 0, 1);
             }
-            catch (IndexOutOfRangeException) { 
+            catch (IndexOutOfRangeException) 
+            { 
                 Console.Error.WriteLine("Projectile sortie du monde"); 
             }
 

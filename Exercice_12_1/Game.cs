@@ -399,7 +399,7 @@ namespace Exercice_12_1
                 {
                     return Mondes.MAP_1_3;
                 }
-                else if (this.monde is map_1_4)
+                else if (this.monde is Map_1_4)
                 {
                     return Mondes.MAP_1_4;
                 }
@@ -427,11 +427,11 @@ namespace Exercice_12_1
                 }
                 else if (value == Mondes.MAP_1_4)
                 {
-                    this.monde = new map_1_4();
+                    this.monde = new Map_1_4();
                 }
                 else if (value == Mondes.MAP_1_5)
                 {
-                    this.monde = new map_1_5();
+                    this.monde = new Map_1_5();
                 }
 
                 // Reconfigurer la caméra.
@@ -760,8 +760,8 @@ namespace Exercice_12_1
             Map_1_1.LoadContent(Content, this.graphics);
             map_1_2.LoadContent(Content, this.graphics);
             map_1_3.LoadContent(Content, this.graphics);
-            map_1_4.LoadContent(Content, this.graphics);
-            map_1_5.LoadContent(Content, this.graphics);
+            Map_1_4.LoadContent(Content, this.graphics);
+            Map_1_5.LoadContent(Content, this.graphics);
 
             // Configurer la caméra.
             //this.camera.MondeRect = new Rectangle(0, 0, this.monde.Largeur, this.monde.Hauteur);

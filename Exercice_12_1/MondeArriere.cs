@@ -107,6 +107,16 @@ namespace Exercice_12_1
         }
 
         /// <summary>
+        /// Propriété (accesseur de paletteCollisions) retournant et changeant la palette de gestion des collisions
+        /// de sprites avec les tuiles (peut être nul).
+        /// </summary>
+        /// <value>Palette de gestion des collisions de sprites avec les tuiles.</value>
+        public override PaletteTuiles PaletteCollisions
+        {
+            get { return paletteCollisions; }
+        }
+
+        /// <summary>
         /// Accesseur à surcharger retournant la position initiale du sprite 
         /// du joueur dans le monde.
         /// </summary>
@@ -131,16 +141,6 @@ namespace Exercice_12_1
         protected override PaletteTuiles Palette
         {
             get { return paletteTuiles; }
-        }
-
-        /// <summary>
-        /// Propriété (accesseur de paletteCollisions) retournant et changeant la palette de gestion des collisions
-        /// de sprites avec les tuiles (peut être nul).
-        /// </summary>
-        /// <value>Palette de gestion des collisions de sprites avec les tuiles.</value>
-        public override PaletteTuiles PaletteCollisions
-        {
-            get { return paletteCollisions; }
         }
 
         /// <summary>

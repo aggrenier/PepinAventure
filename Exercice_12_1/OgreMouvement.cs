@@ -67,7 +67,7 @@ namespace Exercice_12_1
         /// <summary>
         /// Vitesse de marche du joueur, avec valeur par défaut.
         /// </summary>
-        new private float vitesseVerticale = 0.0f;
+        private float vitesseVerticale = 0.0f;
 
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
@@ -100,7 +100,7 @@ namespace Exercice_12_1
         /// <summary>
         /// Vitesse de marche du joueur, avec valeur par défaut.
         /// </summary>
-        new public float VitesseVerticale
+        public float VitesseVerticale
         {
             get { return this.VitesseVerticale; }
             set { this.VitesseVerticale = value; }
@@ -163,7 +163,6 @@ namespace Exercice_12_1
         /// <param name="graphics">Gestionnaire de périphérique d'affichage.</param>
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics)
         {
-
             // Déterminer le message à afficher selon l'état du jeu.
             switch (this.Direction)
             {
@@ -216,10 +215,8 @@ namespace Exercice_12_1
                     break;
             }
 
-            this.Position = new Vector2((Position.X + (this.vitesseHorizontale)),
-                Position.Y + (this.vitesseVerticale));
+            this.Position = new Vector2(Position.X + this.vitesseHorizontale, Position.Y + this.vitesseVerticale);
             this.ClampPositionToBoundsRect();
-
 
             // La fonction de base s'occupe de l'animation.
             base.Update(gameTime, graphics);
@@ -242,11 +239,11 @@ namespace Exercice_12_1
             {
                 Rectangle destRect = new Rectangle((int)this.Position.X, (int)this.Position.Y, 1, 1);
                 base.LireVitesses(gameTime, out vitesseNord, out vitesseSud, out vitesseEst, out vitesseOuest);
-
             }
             catch (ArgumentOutOfRangeException) 
             { 
             }
+
             return true;
         }
     }

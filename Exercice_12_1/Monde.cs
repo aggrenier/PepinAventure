@@ -81,7 +81,10 @@ namespace IFM20884
         /// </summary>
         /// <param name="sprite">Sprite dont on doit vérifier s'il a atteint une sortie.</param>
         /// <returns>Vrai si le sprite a atteint une sorite; faux sinon.</returns>
-        public virtual bool AtteintUneSortie(Sprite sprite) { return false; }
+        public virtual bool AtteintUneSortie(Sprite sprite) 
+        { 
+            return false; 
+        }
 
         /// <summary>
         /// Retourne la couleur du pixel dont la position donnée dans le monde.

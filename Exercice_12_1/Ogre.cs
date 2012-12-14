@@ -161,6 +161,7 @@ namespace Exercice_12_1
             catch (ArgumentOutOfRangeException)
             { 
             }
+
             return true;
         }       
     }

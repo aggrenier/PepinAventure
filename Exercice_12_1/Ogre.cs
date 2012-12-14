@@ -134,10 +134,7 @@ namespace Exercice_12_1
         /// <param name="gameTime">Gestionnaire de temps de jeu.</param>
         /// <param name="graphics">Gestionnaire de périphérique d'affichage.</param>
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics)
-        {
-
-                       
-
+        {  
             // La fonction de base s'occupe de l'animation.
             base.Update(gameTime, graphics);
         }
@@ -159,12 +156,11 @@ namespace Exercice_12_1
             {
                 Rectangle destRect = new Rectangle((int)this.Position.X, (int)this.Position.Y, 1, 1);
 
-                
-                 base.LireVitesses(gameTime, out vitesseNord, out vitesseSud, out vitesseEst, out vitesseOuest);
-               
-
+                base.LireVitesses(gameTime, out vitesseNord, out vitesseSud, out vitesseEst, out vitesseOuest);
             }
-            catch (ArgumentOutOfRangeException) { }
+            catch (ArgumentOutOfRangeException)
+            { 
+            }
             return true;
         }       
     }

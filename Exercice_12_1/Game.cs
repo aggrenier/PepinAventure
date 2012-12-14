@@ -2129,8 +2129,6 @@ namespace Exercice_12_1
             }
         }
 
-
-
         /// <summary>
         /// Fonction qui fait la gestion des projectiles         
         /// </summary>
@@ -2150,10 +2148,8 @@ namespace Exercice_12_1
                     pj.VitesseHorizontale -= (this.joueur.VitesseHorizontal * 1.2f);
                 }
 
-
                 this.listeProjectiles.Add(pj);
             }
-
             else if (ServiceHelper.Get<IInputService>().TirerEst(1))
             {
                 Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 2);
@@ -2170,7 +2166,6 @@ namespace Exercice_12_1
 
                 this.listeProjectiles.Add(pj);
             }
-
             else if (ServiceHelper.Get<IInputService>().TirerSud(1))
             {
                 Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 4);

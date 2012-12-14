@@ -384,26 +384,29 @@ namespace IFM20884
 
                 // La position considérée est celle des pattes devant le personnage,
                 // ce qui dépend de la direction de déplacement
-                if (this.direction == Directions.Est ||
-                    this.direction == Directions.NordEst ||
-                    this.direction == Directions.SudEst)
+                if (this.etat != Etats.Stationnaire)
                 {
-                    dx = +12;
-                }
-                else if (this.direction == Directions.Ouest ||
-                    this.direction == Directions.NordOuest ||
-                    this.direction == Directions.SudOuest)
-                {
-                    dx = -12;
-                }
+                    if (this.direction == Directions.Est ||
+                        this.direction == Directions.NordEst ||
+                        this.direction == Directions.SudEst)
+                    {
+                        dx = +12;
+                    }
 
-                if (this.direction == Directions.Nord ||
-                    this.direction == Directions.NordEst ||
-                    this.direction == Directions.NordOuest)
-                {
-                    dy -= 12;
-                }
+                    else if (this.direction == Directions.Ouest ||
+                        this.direction == Directions.NordOuest ||
+                        this.direction == Directions.SudOuest)
+                    {
+                        dx = -12;
+                    }
 
+                    if (this.direction == Directions.Nord ||
+                        this.direction == Directions.NordEst ||
+                        this.direction == Directions.NordOuest)
+                    {
+                        dy -= 12;
+                    }
+                }
                 return new Vector2(this.Position.X + dx, this.Position.Y + dy);
             }
         }

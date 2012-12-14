@@ -100,7 +100,7 @@ namespace Exercice_12_1
         /// <summary>
         /// Vitesse de marche du joueur, avec valeur par défaut.
         /// </summary>
-        public float VitesseVerticale
+        public new float VitesseVerticale
         {
             get { return this.VitesseVerticale; }
             set { this.VitesseVerticale = value; }

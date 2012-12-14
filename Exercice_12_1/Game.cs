@@ -345,9 +345,6 @@ namespace Exercice_12_1
             /// Monde 1.4.
             /// </summary>
             MAP_1_5
-
-
-
         }
 
         /// <summary>
@@ -533,6 +530,7 @@ namespace Exercice_12_1
                 {
                     bloc.AireOccupe = new Rectangle(286, 119, 28, 28);
                 }
+
                 if (joueurRect.Intersects(bloc.AireOccupe))
                 {
                     return 1.0f;
@@ -560,7 +558,6 @@ namespace Exercice_12_1
                     }
                 }
             }
-
 
             // Extraire la couleur du pixel correspondant à la position donnée dans privTuilesCollisions.
             Color pixColor = this.monde.CouleurDeCollision(position);
@@ -650,8 +647,6 @@ namespace Exercice_12_1
         public void ValiderDeplacement1(Vector2 posSource, ref float deltaX, ref float deltaY, float resistanceMax)
         {
             Vector2 dest = new Vector2(posSource.X, posSource.Y);
-
-
 
             // Premièrement considérer le déplacement horizontal. Incrémenter la distance horizontale
             // de déplacement jusqu'à deltaX ou jusqu'à ce qu'une résistance supérieure à celle tolérée
@@ -770,16 +765,12 @@ namespace Exercice_12_1
             // Créer un nouveau SpriteBatch, utilisée pour dessiner les textures.
             this.spriteBatch = new SpriteBatch(GraphicsDevice);
 
-
             // Charger les images de fonds du jeu pour les différents mondes.
             Exercice_12_1.Map_1_1.LoadContent(Content, this.graphics);
             Exercice_12_1.Map_1_2.LoadContent(Content, this.graphics);
             Exercice_12_1.Map_1_3.LoadContent(Content, this.graphics);
             Exercice_12_1.Map_1_4.LoadContent(Content, this.graphics);
             Exercice_12_1.Map_1_5.LoadContent(Content, this.graphics);
-
-            // Configurer la caméra.
-            //this.camera.MondeRect = new Rectangle(0, 0, this.monde.Largeur, this.monde.Hauteur);
 
             // Charger le sprite représentant le joueur.
             Exercice_12_1.Joueur.LoadContent(Content, this.graphics);
@@ -791,15 +782,12 @@ namespace Exercice_12_1
             // Imposer la palette de collisions au déplacement du joueur.
             this.joueur.GetValiderDeplacement = this.ValiderDeplacement; 
 
-            // Construire une grille de tuiles franchissables pour le pathfinding des ogres (ils peuvent se déplacer
-            // uniquement sur terre).
-            // PFGrille grille = null;
-
             Exercice_12_1.Projectile.LoadContent(Content, this.graphics);
 
             Exercice_12_1.Bloc.LoadContent(Content, this.graphics);
 
             Exercice_12_1.Ogre.LoadContent(Content, this.graphics);
+
             Exercice_12_1.OgreMouvement.LoadContent(Content, this.graphics);
 
             Exercice_12_1.Switch.LoadContent(Content, this.graphics);
@@ -822,7 +810,7 @@ namespace Exercice_12_1
             this.explosionParticule = Content.Load<Texture2D>("Textures\\Effets\\explosion");
 
             this.MondeCourant = Mondes.MAP_1_1;
-            LoadMap11();
+            this.LoadMap11();
 
             // Imposer la palette de collisions au déplacement du joueur.                       ///////////******
             this.joueur.GetResistanceAuMouvement = this.CalculerResistanceAuMouvement;          ///////////******
@@ -947,6 +935,7 @@ namespace Exercice_12_1
                 {
                     this.EtatJeu = Etats.Jouer;
                 }
+
                 // Rien d'autre à faire alors on quitte la fonction 
                 base.Update(gameTime);
                 return;
@@ -967,10 +956,12 @@ namespace Exercice_12_1
                     this.ClearMap();
                     this.LoadMap11();
                 }
+
                 if (ServiceHelper.Get<IInputService>().Quitter(1))
                 {
                     this.EtatJeu = Etats.Quitter;
                 }
+
                 // Rien d'autre à faire alors on quitte la fonction 
                 base.Update(gameTime);
                 return;
@@ -981,12 +972,12 @@ namespace Exercice_12_1
             // appropriée
             if (this.EtatJeu == Etats.Quitter)
             {
-
                 if (bruitageFinOn != true)
                 {
                     bruitageFin.Play();
                     bruitageFinOn = true;
                 }
+
                 // L'usager veut-il quitter immédiatement
                 if (ServiceHelper.Get<IInputService>().Quitter(0))
                 {
@@ -1036,7 +1027,7 @@ namespace Exercice_12_1
             if (this.bruitageFondActif.State == SoundState.Stopped)
             {
                 this.bruitageFondActif.Play();
-                this.bruitageFondActif.Volume = 0.1f;                                            //////////////////////////////
+                this.bruitageFondActif.Volume = 0.1f;
             }
 
             // Mettre à jour le sprite du joueur puis centrer la camera sur celui-ci.
@@ -1046,6 +1037,7 @@ namespace Exercice_12_1
             {
                 this.EtatJeu = Etats.GameOver;
             }
+
             if (this.joueur.Etat == Personnage.Etats.Tombe && this.joueur.ContTombe > 60)
             {
                 this.joueur.AngleRotation = this.joueur.ContTombe = 0;
@@ -1054,8 +1046,8 @@ namespace Exercice_12_1
                 this.joueur.Position = monde.PositionInitiale;
             }
 
-
             this.camera.Centrer(this.joueur.Position);
+
             // Se débarasser des astéroïdes ayant quitté l'écran.
             foreach (Ennemi ogre in listeOgresFini)
             {
@@ -1136,7 +1128,6 @@ namespace Exercice_12_1
                     }
                 }
 
-
                 ogre.Update(gameTime, this.graphics);
             }
 
@@ -1156,7 +1147,6 @@ namespace Exercice_12_1
                     this.joueur.VieDeJoueur = 10;
                     listeFoodFini.Add(food);
                 }
-
             }
 
             foreach (Food food in this.listeFoodFini)
@@ -1182,13 +1172,13 @@ namespace Exercice_12_1
             {
                 this.listeClef.Remove(clef);
             }
+            
             // Mettre à jour les particules d'explosion
             this.UpdateParticulesExplosions(gameTime); 
 
             foreach (Projectile pj in this.listeProjectiles)
             {
                 pj.Update(gameTime, this.graphics);
-
             }
 
             foreach (Bloc bloc in listeBloc)
@@ -1198,7 +1188,6 @@ namespace Exercice_12_1
                     bloc.Update(gameTime, this.graphics);
                 }
             }
-
 
             foreach (Bloc bloc in this.listeBloc)
             {
@@ -1214,11 +1203,9 @@ namespace Exercice_12_1
                     this.joueur.Position = new Vector2(300, 490);
 
                     LoadMap12();
-
                 }
                 else if (this.MondeCourant == Mondes.MAP_1_2)
                 {
-
                     if (this.joueur.Position.Y > 500)
                     {
                         this.MondeCourant = Mondes.MAP_1_1;
@@ -1233,14 +1220,12 @@ namespace Exercice_12_1
 
                         LoadMap13();
                     }
-
                     else if (this.joueur.Position.X > 510)
                     {
                         this.MondeCourant = Mondes.MAP_1_4;
                         this.joueur.Position = new Vector2(97, 300);
 
                         LoadMap14();
-
                     }
                     else if (this.joueur.Position.X < 85)
                     {
@@ -1250,7 +1235,6 @@ namespace Exercice_12_1
                         LoadMap15();
                     }
                 }
-
                 else if (this.MondeCourant == Mondes.MAP_1_3)
                 {
                     this.MondeCourant = Mondes.MAP_1_2;
@@ -1258,17 +1242,12 @@ namespace Exercice_12_1
 
                     LoadMap12();
                 }
-
                 else if (this.MondeCourant == Mondes.MAP_1_4)
                 {
-
-
                     this.MondeCourant = Mondes.MAP_1_2;
                     this.joueur.Position = new Vector2(500, 280);
 
-
                     LoadMap12();
-
                 }
                 else if (this.MondeCourant == Mondes.MAP_1_5)
                 {
@@ -1282,11 +1261,8 @@ namespace Exercice_12_1
                     {
                         this.EtatJeu = Etats.Quitter;
                     }
-
                 }
-            }
-
-            Console.WriteLine(joueur.Position);
+            }         
 
             base.Update(gameTime);
         }
@@ -1398,6 +1374,7 @@ namespace Exercice_12_1
             if (this.EtatJeu == Etats.Quitter)
             {                
                 this.DrawGenerique(this.spriteBatch);
+
                 // Ignorer le reste de la fonction d'affichage 
                 this.spriteBatch.End();
                 base.Draw(gameTime);
@@ -1439,8 +1416,7 @@ namespace Exercice_12_1
                             0.75f,             // échelle d'affichage
                             SpriteEffects.None,         // effets
                             0.0f);
-                }// profondeur de couche (layer depth));
-                
+                }// profondeur de couche (layer depth));                
             }
 
             // Afficher les blocs.
@@ -1448,6 +1424,7 @@ namespace Exercice_12_1
             {
                 listeDraw.Add(bloc);
             }
+
             foreach (Switch switcht1 in this.listeSwitch)
             {
                 listeDraw.Add(switcht1);
@@ -1457,11 +1434,11 @@ namespace Exercice_12_1
             {
                 listeDraw.Add(porte);
             }
+
             foreach (PorteHorizontale porte in this.listePorteHorizontale)
             {
                 listeDraw.Add(porte);
             }
-
 
             // Afficher les projectiles.
             foreach (Projectile pj in this.listeProjectiles)
@@ -1542,10 +1519,12 @@ namespace Exercice_12_1
             {
                 particule.Draw(this.spriteBatch);
             }
+
             foreach (Clef clef in this.listeClef)
             {
                 clef.Draw(this.spriteBatch);
             }
+
             foreach(Food food in this.listeFood)
             {
                 food.Draw(this.spriteBatch);
@@ -1592,7 +1571,6 @@ namespace Exercice_12_1
                 Vector2 centreEcran = new Vector2(
                     this.graphics.GraphicsDevice.Viewport.Width / 2,
                     this.graphics.GraphicsDevice.Viewport.Height / 2);
-
 
                 int decalageY = 50;
                 // Appliquer le décalage vertical par rapport au centre de l'écran.
@@ -2248,6 +2226,7 @@ namespace Exercice_12_1
                     foreach (Projectile pj1 in this.listeProjectiles)
                     {
                         if (pj1.TypeProjectile == Projectile.TypesProjectiles.Joueur)
+                        {
                             if (pj.CollisionRapide(pj1))
                             {
                                 // Créer un nouvel effet visuel pour l'explosion.
@@ -2256,6 +2235,7 @@ namespace Exercice_12_1
                                 listeProjectileFini.Add(pj1);
 
                             }
+                        }
                     }
                 }
                 if (pj.CollisionRapide(this.joueur) && pj.TypeProjectile == Projectile.TypesProjectiles.Ennemi)

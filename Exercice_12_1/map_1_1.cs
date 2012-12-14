@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="MondeNuit.cs" company="Marco Lavoie">
+// <copyright file="Map_1_1.cs" company="Marco Lavoie">
 // Marco Lavoie, 2010. Tous droits réservés
 // 
 // L'utilisation de ce matériel pédagogique (présentations, code source 
@@ -48,7 +48,7 @@ namespace Exercice_12_1
     /// <summary>
     /// Classe concrétisant un monde d'image de Mario Bros.
     /// </summary>
-    public class map_1_1 : MondeImages
+    public class Map_1_1 : MondeImages
     {
         /// <summary>
         /// Attribut fournissant les textures d'affichage à la propriété Textures.
@@ -87,15 +87,8 @@ namespace Exercice_12_1
         /// </summary>
         public override Vector2 PositionInitiale
         {
-            get { return new Vector2(300,480); }
+            get { return new Vector2(300, 480); }
         }
-
-        public override bool AtteintUneSortie(Sprite sprite)
-        {
-
-            return (sprite.Position.Y < 60);
-        }
-        
 
         /// <summary>
         /// Charge les images d'affichage et de détection de collisions.
@@ -113,19 +106,25 @@ namespace Exercice_12_1
             textures[0, 0] = content.Load<Texture2D>("Monde\\map_1_1\\map00");
             textures[0, 1] = content.Load<Texture2D>("Monde\\map_1_1\\map01");
 
-
             textures[1, 0] = content.Load<Texture2D>("Monde\\map_1_1\\map10");
             textures[1, 1] = content.Load<Texture2D>("Monde\\map_1_1\\map11");
-           
 
             // Charger les textures de collisions, rangée par rangée
             texturesCollisions[0, 0] = content.Load<Texture2D>("Monde\\map_1_1\\mapCollision00");
             texturesCollisions[0, 1] = content.Load<Texture2D>("Monde\\map_1_1\\mapCollision01");
 
-
             texturesCollisions[1, 0] = content.Load<Texture2D>("Monde\\map_1_1\\mapCollision10");
             texturesCollisions[1, 1] = content.Load<Texture2D>("Monde\\map_1_1\\mapCollision11");
-            
         }
+
+        /// <summary>
+        /// Surcharghe de la propriété ccesseur retournant la position initiale du sprite       
+        /// </summary>
+        /// <param name="sprite">Sprite qui a atteint une sortie</param>
+        /// <returns>Returns true si le joueur a atteint une sortie</returns>
+        public override bool AtteintUneSortie(Sprite sprite)
+        {
+            return sprite.Position.Y < 60;
+        }     
     }
 }

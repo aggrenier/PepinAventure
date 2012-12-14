@@ -387,7 +387,7 @@ namespace Exercice_12_1
             get
             {
                 // Retourner l'enum correspondant au monde courant.
-                if (this.monde is map_1_1)
+                if (this.monde is Map_1_1)
                 {
                     return Mondes.MAP_1_1;
                 }
@@ -415,7 +415,7 @@ namespace Exercice_12_1
                 // Créer le nouveau monde.
                 if (value == Mondes.MAP_1_1)
                 {
-                    this.monde = new map_1_1();
+                    this.monde = new Map_1_1();
                 }
                 else if (value == Mondes.MAP_1_2)
                 {
@@ -757,7 +757,7 @@ namespace Exercice_12_1
 
 
             // Charger les images de fonds du jeu pour les différents mondes.
-            map_1_1.LoadContent(Content, this.graphics);
+            Map_1_1.LoadContent(Content, this.graphics);
             map_1_2.LoadContent(Content, this.graphics);
             map_1_3.LoadContent(Content, this.graphics);
             map_1_4.LoadContent(Content, this.graphics);

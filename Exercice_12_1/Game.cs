@@ -391,11 +391,11 @@ namespace Exercice_12_1
                 {
                     return Mondes.MAP_1_1;
                 }
-                else if (this.monde is map_1_2)
+                else if (this.monde is Map_1_2)
                 {
                     return Mondes.MAP_1_2;
                 }
-                else if (this.monde is map_1_3)
+                else if (this.monde is Map_1_3)
                 {
                     return Mondes.MAP_1_3;
                 }
@@ -419,11 +419,11 @@ namespace Exercice_12_1
                 }
                 else if (value == Mondes.MAP_1_2)
                 {
-                    this.monde = new map_1_2();
+                    this.monde = new Map_1_2();
                 }
                 else if (value == Mondes.MAP_1_3)
                 {
-                    this.monde = new map_1_3();
+                    this.monde = new Map_1_3();
                 }
                 else if (value == Mondes.MAP_1_4)
                 {
@@ -758,8 +758,8 @@ namespace Exercice_12_1
 
             // Charger les images de fonds du jeu pour les différents mondes.
             Map_1_1.LoadContent(Content, this.graphics);
-            map_1_2.LoadContent(Content, this.graphics);
-            map_1_3.LoadContent(Content, this.graphics);
+            Map_1_2.LoadContent(Content, this.graphics);
+            Map_1_3.LoadContent(Content, this.graphics);
             Map_1_4.LoadContent(Content, this.graphics);
             Map_1_5.LoadContent(Content, this.graphics);
 

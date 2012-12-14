@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="MondeNuit.cs" company="Marco Lavoie">
+// <copyright file="Map_1_2.cs" company="Marco Lavoie">
 // Marco Lavoie, 2010. Tous droits réservés
 // 
 // L'utilisation de ce matériel pédagogique (présentations, code source 
@@ -48,7 +48,7 @@ namespace Exercice_12_1
     /// <summary>
     /// Classe concrétisant un monde d'image de Mario Bros.
     /// </summary>
-    public class map_1_2 : MondeImages
+    public class Map_1_2 : MondeImages
     {
         /// <summary>
         /// Attribut fournissant les textures d'affichage à la propriété Textures.
@@ -87,18 +87,8 @@ namespace Exercice_12_1
         /// </summary>
         public override Vector2 PositionInitiale
         {
-            get { return new Vector2(this.Hauteur/2, this.Largeur/2); }
-                     
+            get { return new Vector2(300, 300); }
         }
-
-        public override bool AtteintUneSortie(Sprite sprite)
-        {
-
-            return (sprite.Position.Y < 60) 
-                || (sprite.Position.Y > 500)
-                || (sprite.Position.X > 510)
-                || (sprite.Position.X < 85);
-        }      
 
         /// <summary>
         /// Charge les images d'affichage et de détection de collisions.
@@ -116,19 +106,30 @@ namespace Exercice_12_1
             textures[0, 0] = content.Load<Texture2D>("Monde\\map_1_2\\map100");
             textures[0, 1] = content.Load<Texture2D>("Monde\\map_1_2\\map101");
 
-
             textures[1, 0] = content.Load<Texture2D>("Monde\\map_1_2\\map110");
             textures[1, 1] = content.Load<Texture2D>("Monde\\map_1_2\\map111");
-           
 
             // Charger les textures de collisions, rangée par rangée
             texturesCollisions[0, 0] = content.Load<Texture2D>("Monde\\map_1_2\\Map1Collision00");
             texturesCollisions[0, 1] = content.Load<Texture2D>("Monde\\map_1_2\\Map1Collision01");
-
-
+            
             texturesCollisions[1, 0] = content.Load<Texture2D>("Monde\\map_1_2\\Map1Collision10");
             texturesCollisions[1, 1] = content.Load<Texture2D>("Monde\\map_1_2\\Map1Collision11");
-            
+        }
+
+        /// <summary>
+        /// Surcharge de la propriété accesseur aux textures de détection de
+        /// collisions. Cette propriété est exploitée par la classe de base pour 
+        /// extraire les couleurs de collisions.
+        /// </summary>
+        /// <param name="sprite">Sprite sprite</param>
+        /// <returns>true if atteint la position dans le monde</returns>
+        public override bool AtteintUneSortie(Sprite sprite)
+        {
+            return (sprite.Position.Y < 60)
+                || (sprite.Position.Y > 500)
+                || (sprite.Position.X > 510)
+                || (sprite.Position.X < 85);
         }
     }
 }

@@ -128,9 +128,9 @@
     <Compile Include="Joueur.cs" />
     <Compile Include="Map_1_1.cs" />
     <Compile Include="map_1_2.cs" />
-    <Compile Include="map_1_3.cs" />
-    <Compile Include="map_1_4.cs" />
-    <Compile Include="map_1_5.cs" />
+    <Compile Include="Map_1_3.cs" />
+    <Compile Include="Map_1_4.cs" />
+    <Compile Include="Map_1_5.cs" />
     <Compile Include="Monde.cs" />
     <Compile Include="MondeArriere.cs" />
     <Compile Include="MondeAvant.cs" />

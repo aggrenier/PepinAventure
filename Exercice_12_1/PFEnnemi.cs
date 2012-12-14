@@ -145,73 +145,12 @@ namespace IFM20884
             out float vitesseEst,
             out float vitesseOuest)
         {
-
             // Par défaut, aucune vitesse appliquée.
             vitesseNord = 0.0f;
             vitesseSud = 0.0f;
             vitesseEst = 0.0f;
             vitesseOuest = 0.0f;
-
-            //this.SeTournerVers(this.grillePathFinding.Destination);       
-
-            return false;
-        //    // Distance (en pixels) en déça de laquelle le pathfiding n'est pas appliqué,
-        //    // considérant que le sprite est assez pr`s de sa destination. On évite ainsi
-        //    // que le sprite "danse" autour de sa destination.
-        //    const int Tolerance = 5;
-
-        //    // Par défaut, aucune vitesse appliquée.
-        //    vitesseNord = 0.0f;
-        //    vitesseSud = 0.0f;
-        //    vitesseEst = 0.0f;
-        //    vitesseOuest = 0.0f;
-
-        //    // Si on a pas ce qu'il faut pour faire du pathfinding, alors arrêter ici.
-        //    if (this.grillePathFinding == null || this.grillePathFinding.Chemin.Count == 0)
-        //    {
-        //        // Au minimum, faire tourner le sprite en direction de la destination s'il y en a une disponible.
-        //        // On exploite un try-catch au cas où aucun noeud de destination n'est disponible.
-        //        try
-        //        {
-        //            this.SeTournerVers(this.grillePathFinding.Destination);
-        //        }
-        //        catch (NullReferenceException)
-        //        {
-        //        }
-
-        //        return false;
-        //    }
-
-        //    // Obtenir les coordonnées du point central de la prochaine tuile sur le chemin le
-        //    // plus court menant à sa destination.
-        //    Vector2 destPos = this.grillePathFinding.Chemin[0];
-
-        //    // Ne pas se déplacer si le sprite est déjà assez près de sa destination.
-        //    if (Math.Abs(destPos.X - this.Position.X) > Tolerance)
-        //    {
-        //        if (destPos.X < this.Position.X)
-        //        {
-        //            vitesseOuest = 0.5f;
-        //        }
-        //        else if (destPos.X > this.Position.X)
-        //        {
-        //            vitesseEst = 0.5f;
-        //        }
-        //    }
-
-        //    if (Math.Abs(destPos.Y - this.Position.Y) > Tolerance)
-        //    {
-        //        if (destPos.Y < this.Position.Y)
-        //        {
-        //            vitesseNord = 0.5f;
-        //        }
-        //        else if (destPos.Y > this.Position.Y)
-        //        {
-        //            vitesseSud = 0.5f;
-        //        }
-        //    }
-
-        //    return true;
+            return false;        
         }
     }
 }

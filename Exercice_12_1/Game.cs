@@ -69,7 +69,7 @@ namespace Exercice_12_1
         /// <summary>
         /// Effet sonore contenant le bruitage fin
         /// </summary>
-        private Boolean bruitageFinOn = false;
+        private bool bruitageFinOn = false;
 
         /// <summary>
         /// Liste de tous les menus du jeu (chargés dans LoadContent()).
@@ -523,7 +523,7 @@ namespace Exercice_12_1
         {
             Rectangle joueurRect = new Rectangle((int)this.joueur.PositionPourCollisions.X, (int)this.joueur.PositionPourCollisions.Y, 1, 1);
 
-            foreach (Bloc bloc in listeBloc)
+            foreach (Bloc bloc in this.listeBloc)
             {
                 if (bloc.AireOccupe.X == 300)
                 {
@@ -536,7 +536,7 @@ namespace Exercice_12_1
                 }
             }
 
-            foreach (Porte porte in listePorte)
+            foreach (Porte porte in this.listePorte)
             {
                 if (!porte.Ouvert)
                 {
@@ -547,7 +547,7 @@ namespace Exercice_12_1
                 }
             }
 
-            foreach (PorteHorizontale porte in listePorteHorizontale)
+            foreach (PorteHorizontale porte in this.listePorteHorizontale)
             {
                 if (!porte.Ouvert)
                 {
@@ -735,11 +735,11 @@ namespace Exercice_12_1
 
             this.listeFood = new List<Sprite>();
             this.listeFoodFini = new List<Sprite>();
-            boolFood = true;
+            this.boolFood = true;
 
             this.listeClef = new List<Sprite>();
             this.listeClefFini = new List<Sprite>();
-            boolClef = false;
+            this.boolClef = false;
 
             // Créer les attributs de gestion des explosions.
             this.randomExplosions = new Random();
@@ -765,14 +765,14 @@ namespace Exercice_12_1
             this.spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Charger les images de fonds du jeu pour les différents mondes.
-            Exercice_12_1.Map_1_1.LoadContent(Content, this.graphics);
-            Exercice_12_1.Map_1_2.LoadContent(Content, this.graphics);
-            Exercice_12_1.Map_1_3.LoadContent(Content, this.graphics);
-            Exercice_12_1.Map_1_4.LoadContent(Content, this.graphics);
-            Exercice_12_1.Map_1_5.LoadContent(Content, this.graphics);
+            Map_1_1.LoadContent(this.Content, this.graphics);
+            Map_1_2.LoadContent(this.Content, this.graphics);
+            Map_1_3.LoadContent(this.Content, this.graphics);
+            Map_1_4.LoadContent(this.Content, this.graphics);
+            Map_1_5.LoadContent(this.Content, this.graphics);
 
             // Charger le sprite représentant le joueur.
-            Exercice_12_1.Joueur.LoadContent(Content, this.graphics);
+            Exercice_12_1.Joueur.LoadContent(this.Content, this.graphics);
 
             // Créer et initialiser le sprite du joueur.
             this.joueur = new Joueur(1150, 300);
@@ -781,25 +781,25 @@ namespace Exercice_12_1
             // Imposer la palette de collisions au déplacement du joueur.
             this.joueur.GetValiderDeplacement = this.ValiderDeplacement;
 
-            Exercice_12_1.Projectile.LoadContent(Content, this.graphics);
+            Projectile.LoadContent(this.Content, this.graphics);
 
-            Exercice_12_1.Bloc.LoadContent(Content, this.graphics);
+            Bloc.LoadContent(this.Content, this.graphics);
 
-            Exercice_12_1.Ogre.LoadContent(Content, this.graphics);
+            Ogre.LoadContent(this.Content, this.graphics);
 
-            Exercice_12_1.OgreMouvement.LoadContent(Content, this.graphics);
+            OgreMouvement.LoadContent(this.Content, this.graphics);
 
-            Exercice_12_1.Switch.LoadContent(Content, this.graphics);
+            Switch.LoadContent(this.Content, this.graphics);
 
-            Exercice_12_1.Porte.LoadContent(Content, this.graphics);
+            Porte.LoadContent(this.Content, this.graphics);
 
-            Exercice_12_1.PorteHorizontale.LoadContent(Content, this.graphics);
+            PorteHorizontale.LoadContent(this.Content, this.graphics);
 
-            Exercice_12_1.VieDeJoueur.LoadContent(Content, this.graphics);
+            VieDeJoueur.LoadContent(this.Content, this.graphics);
 
-            Exercice_12_1.Food.LoadContent(Content, this.graphics);
+            Food.LoadContent(this.Content, this.graphics);
 
-            Exercice_12_1.Clef.LoadContent(Content, this.graphics);
+            Clef.LoadContent(this.Content, this.graphics);
 
             this.joueur.VieDeJoueur = 10;
 
@@ -811,8 +811,8 @@ namespace Exercice_12_1
             this.MondeCourant = Mondes.MAP_1_1;
             this.LoadMap11();
 
-            // Imposer la palette de collisions au déplacement du joueur.                       ///////////******
-            this.joueur.GetResistanceAuMouvement = this.CalculerResistanceAuMouvement;          ///////////******
+            // Imposer la palette de collisions au déplacement du joueur.                       
+            this.joueur.GetResistanceAuMouvement = this.CalculerResistanceAuMouvement;          
 
             // Charger le bruitage de fond du jeu.
             bruitageFond = Content.Load<SoundEffect>("Audio\\Musique\\zelda_3");
@@ -821,7 +821,7 @@ namespace Exercice_12_1
             bruitageFin = Content.Load<SoundEffect>("Audio\\Musique\\zelda_Fin");
 
             // Charger le bruitage de fond du jeu.
-            bruitageblock = Content.Load<SoundEffect>("Audio\\Effets\\Bloc\\bloc");///////////////////
+            this.bruitageblock = Content.Load<SoundEffect>("Audio\\Effets\\Bloc\\bloc");
 
             // Sélectionner et paramétrer le bruitage de fond.
             this.bruitageFondActif = bruitageFond.CreateInstance();
@@ -971,10 +971,10 @@ namespace Exercice_12_1
             // appropriée
             if (this.EtatJeu == Etats.Quitter)
             {
-                if (bruitageFinOn != true)
+                if (this.bruitageFinOn != true)
                 {
                     bruitageFin.Play();
-                    bruitageFinOn = true;
+                    this.bruitageFinOn = true;
                 }
 
                 // L'usager veut-il quitter immédiatement
@@ -1042,13 +1042,13 @@ namespace Exercice_12_1
                 this.joueur.AngleRotation = this.joueur.ContTombe = 0;
                 this.joueur.Etat = Personnage.Etats.Stationnaire;
                 this.joueur.Echelle = 1.0f;
-                this.joueur.Position = monde.PositionInitiale;
+                this.joueur.Position = this.monde.PositionInitiale;
             }
 
             this.camera.Centrer(this.joueur.Position);
 
             // Se débarasser des astéroïdes ayant quitté l'écran.
-            foreach (Ennemi ogre in listeOgresFini)
+            foreach (Ennemi ogre in this.listeOgresFini)
             {
                 this.listeOgres.Remove(ogre);
             }
@@ -1056,7 +1056,6 @@ namespace Exercice_12_1
             // Mettre à jour les ogres.
             foreach (Ennemi ogre in this.listeOgres)
             {
-                //ogre.GrillePathFinding.Destination = this.joueur.Position;
                 ogre.SeTournerVers(this.joueur.Position);
 
                 // Déterminer si on doit créer un nouvel astéroide.
@@ -1142,9 +1141,9 @@ namespace Exercice_12_1
             {
                 if (this.joueur.Collision(food))
                 {
-                    boolFood = false;
+                    this.boolFood = false;
                     this.joueur.VieDeJoueur = 10;
-                    listeFoodFini.Add(food);
+                    this.listeFoodFini.Add(food);
                 }
             }
 
@@ -1157,12 +1156,12 @@ namespace Exercice_12_1
             {
                 if (this.joueur.Collision(clef))
                 {
-                    boolClef = true;
+                    this.boolClef = true;
                     this.joueur.Clef = true;
-                    listeClefFini.Add(clef);
+                    this.listeClefFini.Add(clef);
 
                     Clef clef1 = new Clef(600 - 16, 15);
-                    listeClef.Add(clef1);
+                    this.listeClef.Add(clef1);
                     break;
                 }
             }
@@ -1180,7 +1179,7 @@ namespace Exercice_12_1
                 pj.Update(gameTime, this.graphics);
             }
 
-            foreach (Bloc bloc in listeBloc)
+            foreach (Bloc bloc in this.listeBloc)
             {
                 if (bloc.VideDeBloc > 0)
                 {
@@ -1190,10 +1189,10 @@ namespace Exercice_12_1
 
             foreach (Bloc bloc in this.listeBloc)
             {
-                listeBlocFini.Add(bloc);
+                this.listeBlocFini.Add(bloc);
             }
 
-            GestionAtteintUneSortie();
+            this.GestionAtteintUneSortie();
 
             base.Update(gameTime);
         }
@@ -1207,7 +1206,7 @@ namespace Exercice_12_1
             // Suspendre au besoin les effets sonores du vaisseau.
             this.joueur.SuspendreEffetsSonores(suspendre);
 
-            //Suspendre au besoin les effets sonores des ogres.
+            // Suspendre au besoin les effets sonores des ogres.
             foreach (Ennemi ogre in this.listeOgres)
             {
                 ogre.SuspendreEffetsSonores(suspendre);
@@ -1237,7 +1236,7 @@ namespace Exercice_12_1
         ///   2 - Éliminer les particules n'étant plus visibles.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected void UpdateParticulesExplosions(GameTime gameTime)                                                                                    //explosion
+        protected void UpdateParticulesExplosions(GameTime gameTime)                                                                                    
         {
             // Liste de particules à détruire
             List<ParticuleExplosion> particulesFinies = new List<ParticuleExplosion>();
@@ -1318,13 +1317,13 @@ namespace Exercice_12_1
             // Liste statique exploitée pour ordonner les sprites avant leur affichage.
             List<Sprite> listeDraw = new List<Sprite>();
 
-            //Ajouter les ogres à afficher à la liste.
-            //listeDraw.Add(this.joueur);
+            // Ajouter les ogres à afficher à la liste.
+            // listeDraw.Add(this.joueur);
             foreach (Ennemi ogre in this.listeOgres)
             {
                 if (ogre is OgreMouvement)
                 {
-                    spriteBatch.Draw(
+                    this.spriteBatch.Draw(
                             ogre.Texture,                 // texture
                             ogre.Position,                // position
                             null,                         // sourceRectangle
@@ -1337,7 +1336,7 @@ namespace Exercice_12_1
                 }
                 else
                 {
-                    spriteBatch.Draw(
+                    this.spriteBatch.Draw(
                             ogre.Texture,                 // texture
                             ogre.Position,                // position
                             null,                         // sourceRectangle
@@ -1347,7 +1346,7 @@ namespace Exercice_12_1
                             0.75f,             // échelle d'affichage
                             SpriteEffects.None,         // effets
                             0.0f);
-                }// profondeur de couche (layer depth));                
+                }              
             }
 
             // Afficher les blocs.
@@ -1376,7 +1375,7 @@ namespace Exercice_12_1
             {
                 if (pj.TypeProjectile == Projectile.TypesProjectiles.Joueur)
                 {
-                    spriteBatch.Draw(
+                    this.spriteBatch.Draw(
                         pj.Texture,                 // texture
                         pj.Position,                // position
                         null,                       // sourceRectangle
@@ -1389,7 +1388,7 @@ namespace Exercice_12_1
                 }
                 else
                 {
-                    spriteBatch.Draw(
+                    this.spriteBatch.Draw(
                         pj.Texture,                 // texture
                         pj.Position,                // position
                         null,                       // sourceRectangle
@@ -1417,14 +1416,14 @@ namespace Exercice_12_1
             else
             {
                 // Afficher le joueur en etat de tombe
-                spriteBatch.Draw(
-                    joueur.Texture,             // texture
-                    joueur.Position,            // position
+                this.spriteBatch.Draw(
+                    this.joueur.Texture,             // texture
+                    this.joueur.Position,            // position
                     null,                       // sourceRectangle
                     Color.White,                // couleur
                     this.joueur.AngleRotation,  // angle de rotation
                     new Vector2(16, 16),        // origine de rotation
-                    joueur.Echelle,             // échelle d'affichage
+                    this.joueur.Echelle,             // échelle d'affichage
                     SpriteEffects.None,         // effets
                     0.0f);                      // profondeur de couche (layer depth)
             }
@@ -1446,7 +1445,7 @@ namespace Exercice_12_1
             }
 
             // Afficher les explosions
-            foreach (ParticuleExplosion particule in this.listeParticulesExplosions)                                                        //////////Explosion
+            foreach (ParticuleExplosion particule in this.listeParticulesExplosions)
             {
                 particule.Draw(this.spriteBatch);
             }
@@ -1469,7 +1468,7 @@ namespace Exercice_12_1
             this.spriteBatch.End();
 
             base.Draw(gameTime);
-        }       
+        }
 
         /// <summary>
         /// Routine d'affichage de message (centré à l'écran) correspondant à l'état courant du jeu.
@@ -1613,7 +1612,7 @@ namespace Exercice_12_1
 
             // Afficher le message 50 pixels plus bas que le centre de l'écran.
             this.DrawMessage(this.spriteBatch, message, 50, Color.Blue);
-        }      
+        }
 
         /// <summary>
         /// Fonction dessinant l'écran du générique de fin de partie. Les chaînes du générique défilent
@@ -1712,6 +1711,9 @@ namespace Exercice_12_1
             }
         }
 
+        /// <summary>
+        /// Fonction qui verifie si le joueur a atteint une sortit            
+        /// </summary>
         private void GestionAtteintUneSortie()
         {
             // Vérifier si le joueur a atteint une sortie du monde.
@@ -1722,7 +1724,7 @@ namespace Exercice_12_1
                     this.MondeCourant = Mondes.MAP_1_2;
                     this.joueur.Position = new Vector2(300, 490);
 
-                    LoadMap12();
+                    this.LoadMap12();
                 }
                 else if (this.MondeCourant == Mondes.MAP_1_2)
                 {
@@ -1731,28 +1733,28 @@ namespace Exercice_12_1
                         this.MondeCourant = Mondes.MAP_1_1;
                         this.joueur.Position = new Vector2(300, 60);
 
-                        LoadMap11();
+                        this.LoadMap11();
                     }
                     else if (this.joueur.Position.Y < 60)
                     {
                         this.MondeCourant = Mondes.MAP_1_3;
                         this.joueur.Position = new Vector2(300, 490);
 
-                        LoadMap13();
+                        this.LoadMap13();
                     }
                     else if (this.joueur.Position.X > 510)
                     {
                         this.MondeCourant = Mondes.MAP_1_4;
                         this.joueur.Position = new Vector2(97, 300);
 
-                        LoadMap14();
+                        this.LoadMap14();
                     }
                     else if (this.joueur.Position.X < 85)
                     {
                         this.MondeCourant = Mondes.MAP_1_5;
                         this.joueur.Position = new Vector2(500, 285);
 
-                        LoadMap15();
+                        this.LoadMap15();
                     }
                 }
                 else if (this.MondeCourant == Mondes.MAP_1_3)
@@ -1760,14 +1762,14 @@ namespace Exercice_12_1
                     this.MondeCourant = Mondes.MAP_1_2;
                     this.joueur.Position = new Vector2(300, 80);
 
-                    LoadMap12();
+                    this.LoadMap12();
                 }
                 else if (this.MondeCourant == Mondes.MAP_1_4)
                 {
                     this.MondeCourant = Mondes.MAP_1_2;
                     this.joueur.Position = new Vector2(500, 280);
 
-                    LoadMap12();
+                    this.LoadMap12();
                 }
                 else if (this.MondeCourant == Mondes.MAP_1_5)
                 {
@@ -1775,7 +1777,7 @@ namespace Exercice_12_1
                     {
                         this.MondeCourant = Mondes.MAP_1_2;
                         this.joueur.Position = new Vector2(90, 290);
-                        LoadMap12();
+                        this.LoadMap12();
                     }
                     else if (this.joueur.Position.Y < 60)
                     {
@@ -1792,37 +1794,37 @@ namespace Exercice_12_1
         {
             foreach (Bloc bloc in this.listeBloc)
             {
-                listeBlocFini.Add(bloc);
+                this.listeBlocFini.Add(bloc);
             }
 
-            foreach (Bloc bloc in listeBlocFini)
+            foreach (Bloc bloc in this.listeBlocFini)
             {
                 this.listeBloc.Remove(bloc);
             }
 
             foreach (Projectile pj in this.listeProjectiles)
             {
-                listeProjectileFini.Add(pj);
+                this.listeProjectileFini.Add(pj);
             }
 
-            foreach (Projectile pj in listeProjectileFini)
+            foreach (Projectile pj in this.listeProjectileFini)
             {
                 this.listeProjectiles.Remove(pj);
             }
 
             foreach (Ennemi ogre in this.listeOgres)
             {
-                listeOgresFini.Add(ogre);
+                this.listeOgresFini.Add(ogre);
             }
 
-            foreach (Ennemi ogre in listeOgresFini)
+            foreach (Ennemi ogre in this.listeOgresFini)
             {
                 this.listeOgres.Remove(ogre);
             }
 
             foreach (Switch switch1 in this.listeSwitch)
             {
-                listeSwitchFini.Add(switch1);
+                this.listeSwitchFini.Add(switch1);
             }
 
             foreach (Switch switch1 in this.listeSwitchFini)
@@ -1852,28 +1854,28 @@ namespace Exercice_12_1
 
             foreach (Food food in this.listeFood)
             {
-                listeFoodFini.Add(food);
+                this.listeFoodFini.Add(food);
             }
 
             foreach (Food food in this.listeFoodFini)
             {
-                listeFood.Remove(food);
+                this.listeFood.Remove(food);
             }
 
             foreach (Clef clef in this.listeClef)
             {
-                listeClefFini.Add(clef);
+                this.listeClefFini.Add(clef);
             }
 
             foreach (Clef clef in this.listeClefFini)
             {
-                listeClef.Remove(clef);
+                this.listeClef.Remove(clef);
             }
 
-            if (boolClef == true)
+            if (this.boolClef == true)
             {
                 Clef clef1 = new Clef(600 - 16, 15);
-                listeClef.Add(clef1);
+                this.listeClef.Add(clef1);
             }
         }
 
@@ -1882,7 +1884,7 @@ namespace Exercice_12_1
         /// </summary>
         private void LoadMap11()
         {
-            ClearMap();
+            this.ClearMap();
 
             Bloc bloc0 = new Bloc(300, 133);
             bloc0.BoundsRect = new Rectangle(91, 91, 415, 415);
@@ -1893,9 +1895,6 @@ namespace Exercice_12_1
             OgreMouvement ogre = new OgreMouvement(new Vector2(300, 300));
             ogre.BoundsRect = new Rectangle(91, 91, 415, 415);
             this.listeOgres.Add(ogre);
-
-            //Porte porte0 = new Porte(300, 75, Porte.Directions.Nord);
-            //this.listePorte.Add(porte0);          
         }
 
         /// <summary>
@@ -1903,7 +1902,7 @@ namespace Exercice_12_1
         /// </summary>
         private void LoadMap12()
         {
-            ClearMap();
+            this.ClearMap();
 
             Bloc bloc0 = new Bloc(106, 340);
             bloc0.BoundsRect = new Rectangle(91, 91, 415, 415);
@@ -1948,7 +1947,7 @@ namespace Exercice_12_1
         /// </summary>
         private void LoadMap13()
         {
-            ClearMap();
+            this.ClearMap();
 
             Bloc bloc0 = new Bloc(404, 150);
             Bloc bloc1 = new Bloc(404, 175);
@@ -1976,14 +1975,14 @@ namespace Exercice_12_1
         /// </summary>
         private void LoadMap14()
         {
-            ClearMap();
+            this.ClearMap();
 
             Ogre ogre = new Ogre(new Vector2(300, 120));
             this.listeOgres.Add(ogre);
             Ogre ogre1 = new Ogre(new Vector2(300, 260));
             this.listeOgres.Add(ogre1);
 
-            if (boolClef == false)
+            if (this.boolClef == false)
             {
                 Clef clef = new Clef(474, 461);
                 this.listeClef.Add(clef);
@@ -1995,7 +1994,7 @@ namespace Exercice_12_1
         /// </summary>
         private void LoadMap15()
         {
-            ClearMap();
+            this.ClearMap();
 
             Ogre ogre = new Ogre(new Vector2(400, 120));
             this.listeOgres.Add(ogre);
@@ -2029,16 +2028,16 @@ namespace Exercice_12_1
         /// /// <param name="gameTime">Recoie la gameTime.</param>
         private void GestionSwtich(GameTime gameTime)
         {
-            foreach (Switch switch1 in listeSwitch)
+            foreach (Switch switch1 in this.listeSwitch)
             {
-                foreach (Bloc bloc in listeBloc)
+                foreach (Bloc bloc in this.listeBloc)
                 {
                     if (switch1.Boutton.Intersects(bloc.AireOccupe))
                     {
                         switch (switch1.Type)
                         {
                             case Switch.Types.Nord:
-                                foreach (Porte p in listePorte)
+                                foreach (Porte p in this.listePorte)
                                 {
                                     if (p.Direction == Porte.Directions.Nord)
                                     {
@@ -2048,7 +2047,7 @@ namespace Exercice_12_1
                                     return;
                                 }
 
-                                foreach (PorteHorizontale p in listePorteHorizontale)
+                                foreach (PorteHorizontale p in this.listePorteHorizontale)
                                 {
                                     if (p.Direction == PorteHorizontale.Directions.Nord)
                                     {
@@ -2060,7 +2059,7 @@ namespace Exercice_12_1
 
                                 break;
                             case Switch.Types.Est:
-                                foreach (Porte p in listePorte)
+                                foreach (Porte p in this.listePorte)
                                 {
                                     if (p.Direction == Porte.Directions.Est)
                                     {
@@ -2068,7 +2067,7 @@ namespace Exercice_12_1
                                     }
                                 }
 
-                                foreach (PorteHorizontale p in listePorteHorizontale)
+                                foreach (PorteHorizontale p in this.listePorteHorizontale)
                                 {
                                     if (p.Direction == PorteHorizontale.Directions.Est)
                                     {
@@ -2080,7 +2079,7 @@ namespace Exercice_12_1
 
                                 break;
                             case Switch.Types.Sud:
-                                foreach (Porte p in listePorte)
+                                foreach (Porte p in this.listePorte)
                                 {
                                     if (p.Direction == Porte.Directions.Sud)
                                     {
@@ -2090,7 +2089,7 @@ namespace Exercice_12_1
                                     return;
                                 }
 
-                                foreach (PorteHorizontale p in listePorteHorizontale)
+                                foreach (PorteHorizontale p in this.listePorteHorizontale)
                                 {
                                     if (p.Direction == PorteHorizontale.Directions.Sud)
                                     {
@@ -2102,7 +2101,7 @@ namespace Exercice_12_1
 
                                 break;
                             default:
-                                foreach (Porte p in listePorte)
+                                foreach (Porte p in this.listePorte)
                                 {
                                     if (p.Direction == Porte.Directions.Ouest)
                                     {
@@ -2112,7 +2111,7 @@ namespace Exercice_12_1
                                     return;
                                 }
 
-                                foreach (PorteHorizontale p in listePorteHorizontale)
+                                foreach (PorteHorizontale p in this.listePorteHorizontale)
                                 {
                                     if (p.Direction == PorteHorizontale.Directions.Ouest)
                                     {
@@ -2132,7 +2131,7 @@ namespace Exercice_12_1
                     switch (switch1.Type)
                     {
                         case Switch.Types.Nord:
-                            foreach (Porte p in listePorte)
+                            foreach (Porte p in this.listePorte)
                             {
                                 if (p.Direction == Porte.Directions.Nord)
                                 {
@@ -2140,7 +2139,7 @@ namespace Exercice_12_1
                                 }
                             }
 
-                            foreach (PorteHorizontale p in listePorteHorizontale)
+                            foreach (PorteHorizontale p in this.listePorteHorizontale)
                             {
                                 if (p.Direction == PorteHorizontale.Directions.Nord)
                                 {
@@ -2150,7 +2149,7 @@ namespace Exercice_12_1
 
                             break;
                         case Switch.Types.Est:
-                            foreach (Porte p in listePorte)
+                            foreach (Porte p in this.listePorte)
                             {
                                 if (p.Direction == Porte.Directions.Est)
                                 {
@@ -2158,7 +2157,7 @@ namespace Exercice_12_1
                                 }
                             }
 
-                            foreach (PorteHorizontale p in listePorteHorizontale)
+                            foreach (PorteHorizontale p in this.listePorteHorizontale)
                             {
                                 if (p.Direction == PorteHorizontale.Directions.Est)
                                 {
@@ -2168,7 +2167,7 @@ namespace Exercice_12_1
 
                             break;
                         case Switch.Types.Sud:
-                            foreach (Porte p in listePorte)
+                            foreach (Porte p in this.listePorte)
                             {
                                 if (p.Direction == Porte.Directions.Sud)
                                 {
@@ -2176,7 +2175,7 @@ namespace Exercice_12_1
                                 }
                             }
 
-                            foreach (PorteHorizontale p in listePorteHorizontale)
+                            foreach (PorteHorizontale p in this.listePorteHorizontale)
                             {
                                 if (p.Direction == PorteHorizontale.Directions.Sud)
                                 {
@@ -2186,7 +2185,7 @@ namespace Exercice_12_1
 
                             break;
                         default:
-                            foreach (Porte p in listePorte)
+                            foreach (Porte p in this.listePorte)
                             {
                                 if (p.Direction == Porte.Directions.Ouest)
                                 {
@@ -2194,7 +2193,7 @@ namespace Exercice_12_1
                                 }
                             }
 
-                            foreach (PorteHorizontale p in listePorteHorizontale)
+                            foreach (PorteHorizontale p in this.listePorteHorizontale)
                             {
                                 if (p.Direction == PorteHorizontale.Directions.Ouest)
                                 {
@@ -2210,7 +2209,7 @@ namespace Exercice_12_1
                     switch (switch1.Type)
                     {
                         case Switch.Types.Nord:
-                            foreach (Porte p in listePorte)
+                            foreach (Porte p in this.listePorte)
                             {
                                 if (p.Direction == Porte.Directions.Nord)
                                 {
@@ -2218,7 +2217,7 @@ namespace Exercice_12_1
                                 }
                             }
 
-                            foreach (PorteHorizontale p in listePorteHorizontale)
+                            foreach (PorteHorizontale p in this.listePorteHorizontale)
                             {
                                 if (p.Direction == PorteHorizontale.Directions.Nord)
                                 {
@@ -2228,7 +2227,7 @@ namespace Exercice_12_1
 
                             break;
                         case Switch.Types.Est:
-                            foreach (Porte p in listePorte)
+                            foreach (Porte p in this.listePorte)
                             {
                                 if (p.Direction == Porte.Directions.Est)
                                 {
@@ -2236,7 +2235,7 @@ namespace Exercice_12_1
                                 }
                             }
 
-                            foreach (PorteHorizontale p in listePorteHorizontale)
+                            foreach (PorteHorizontale p in this.listePorteHorizontale)
                             {
                                 if (p.Direction == PorteHorizontale.Directions.Est)
                                 {
@@ -2246,7 +2245,7 @@ namespace Exercice_12_1
 
                             break;
                         case Switch.Types.Sud:
-                            foreach (Porte p in listePorte)
+                            foreach (Porte p in this.listePorte)
                             {
                                 if (p.Direction == Porte.Directions.Sud)
                                 {
@@ -2254,7 +2253,7 @@ namespace Exercice_12_1
                                 }
                             }
 
-                            foreach (PorteHorizontale p in listePorteHorizontale)
+                            foreach (PorteHorizontale p in this.listePorteHorizontale)
                             {
                                 if (p.Direction == PorteHorizontale.Directions.Sud)
                                 {
@@ -2264,7 +2263,7 @@ namespace Exercice_12_1
 
                             break;
                         default:
-                            foreach (Porte p in listePorte)
+                            foreach (Porte p in this.listePorte)
                             {
                                 if (p.Direction == Porte.Directions.Ouest)
                                 {
@@ -2272,7 +2271,7 @@ namespace Exercice_12_1
                                 }
                             }
 
-                            foreach (PorteHorizontale p in listePorteHorizontale)
+                            foreach (PorteHorizontale p in this.listePorteHorizontale)
                             {
                                 if (p.Direction == PorteHorizontale.Directions.Ouest)
                                 {
@@ -2292,27 +2291,27 @@ namespace Exercice_12_1
         /// <param name="gameTime">Game time</param>
         private void GestionProjectile(GameTime gameTime)
         {
-            JoueurTirerProjectile();
+            this.JoueurTirerProjectile();
 
-            ProjectileReflection();
+            this.ProjectileReflection();
 
-            ProjectilleRebondissement();
+            this.ProjectilleRebondissement();
 
             foreach (Projectile pj in this.listeProjectiles)
             {
                 if (pj.VideDeProjectile <= 0)
                 {
-                    listeProjectileFini.Add(pj);
+                    this.listeProjectileFini.Add(pj);
                 }
 
-                foreach (Ennemi ogre in listeOgres)
+                foreach (Ennemi ogre in this.listeOgres)
                 {
                     if (pj.CollisionRapide(ogre) && pj.TypeProjectile == Projectile.TypesProjectiles.Joueur)
                     {
-                        //Créer un nouvel effet visuel pour l'explosion.
+                        // Créer un nouvel effet visuel pour l'explosion.
                         this.CreerExplosion(ogre, gameTime);
-                        listeProjectileFini.Add(pj);
-                        listeOgresFini.Add(ogre);
+                        this.listeProjectileFini.Add(pj);
+                        this.listeOgresFini.Add(ogre);
                     }
                 }
 
@@ -2326,8 +2325,8 @@ namespace Exercice_12_1
                             {
                                 // Créer un nouvel effet visuel pour l'explosion.
                                 this.CreerExplosion(pj, gameTime);
-                                listeProjectileFini.Add(pj);
-                                listeProjectileFini.Add(pj1);
+                                this.listeProjectileFini.Add(pj);
+                                this.listeProjectileFini.Add(pj1);
                             }
                         }
                     }
@@ -2339,12 +2338,12 @@ namespace Exercice_12_1
 
                     // Créer un nouvel effet visuel pour l'explosion.
                     this.CreerExplosion(pj, gameTime);
-                    listeProjectileFini.Add(pj);
+                    this.listeProjectileFini.Add(pj);
                 }
             }
 
             // Se débarasser des projectile ayant quitté l'écran.
-            foreach (Projectile pj in listeProjectileFini)
+            foreach (Projectile pj in this.listeProjectileFini)
             {
                 this.listeProjectiles.Remove(pj);
             }
@@ -2357,7 +2356,7 @@ namespace Exercice_12_1
         {
             if (ServiceHelper.Get<IInputService>().TirerNord(1))
             {
-                Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 0);
+                Projectile pj = new Projectile(new Vector2(this.joueur.Position.X, this.joueur.Position.Y), 0);
                 pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
 
                 if (ServiceHelper.Get<IInputService>().DeplacementDroite(0) > 0)
@@ -2373,7 +2372,7 @@ namespace Exercice_12_1
             }
             else if (ServiceHelper.Get<IInputService>().TirerEst(1))
             {
-                Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 2);
+                Projectile pj = new Projectile(new Vector2(this.joueur.Position.X, this.joueur.Position.Y), 2);
                 pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
 
                 if (ServiceHelper.Get<IInputService>().DeplacementAvant(0) > 0)
@@ -2389,7 +2388,7 @@ namespace Exercice_12_1
             }
             else if (ServiceHelper.Get<IInputService>().TirerSud(1))
             {
-                Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 4);
+                Projectile pj = new Projectile(new Vector2(this.joueur.Position.X, this.joueur.Position.Y), 4);
                 pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
 
                 if (ServiceHelper.Get<IInputService>().DeplacementDroite(0) > 0)
@@ -2405,7 +2404,7 @@ namespace Exercice_12_1
             }
             else if (ServiceHelper.Get<IInputService>().TirerOuest(1))
             {
-                Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 6);
+                Projectile pj = new Projectile(new Vector2(this.joueur.Position.X, this.joueur.Position.Y), 6);
                 pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
 
                 if (ServiceHelper.Get<IInputService>().DeplacementAvant(0) > 0)
@@ -2428,7 +2427,7 @@ namespace Exercice_12_1
         {
             foreach (Projectile pj in this.listeProjectiles)
             {
-                //La couleur "rouge" dans les images de collision, a finalement un tinte rouge de 237.
+                // La couleur "rouge" dans les images de collision, a finalement un tinte rouge de 237.
                 if (this.monde.CouleurDeCollision(pj.Position).R == 237)
                 {
                     if (pj.VitesseHorizontale < 0)
@@ -2459,7 +2458,7 @@ namespace Exercice_12_1
         /// </summary>
         private void GestionBloc()
         {
-            foreach (Bloc bloc in listeBloc)
+            foreach (Bloc bloc in this.listeBloc)
             {
                 if (this.joueur.CollisionBloc(bloc) && ServiceHelper.Get<IInputService>().Sauter(1) && bloc.BlockMouvement == true)
                 {
@@ -2480,7 +2479,7 @@ namespace Exercice_12_1
                         bloc.VitesseHorizontale = -0.1f;
                     }
 
-                    bruitageblock.Play();
+                    this.bruitageblock.Play();
 
                     bloc.BlockMouvement = false;
                 }
@@ -2492,9 +2491,9 @@ namespace Exercice_12_1
         /// </summary>
         private void ProjectilleRebondissement()
         {
-            foreach (Projectile pj in listeProjectiles)
+            foreach (Projectile pj in this.listeProjectiles)
             {
-                foreach (Bloc bloc in listeBloc)
+                foreach (Bloc bloc in this.listeBloc)
                 {
                     if (bloc.CollisionBloc(pj))
                     {
@@ -2534,12 +2533,12 @@ namespace Exercice_12_1
 
             foreach (VieDeJoueur vie in this.listeVideJoueur)
             {
-                listeVideJoueurFini.Add(vie);
+                this.listeVideJoueurFini.Add(vie);
             }
 
             foreach (VieDeJoueur vie in this.listeVideJoueurFini)
             {
-                listeVideJoueur.Remove(vie);
+                this.listeVideJoueur.Remove(vie);
             }
 
             for (; compteur > 0; compteur--)
@@ -2547,13 +2546,13 @@ namespace Exercice_12_1
                 if (compteur > 5 && compteur < 11)
                 {
                     VieDeJoueur vie = new VieDeJoueur(distance, 45);
-                    listeVideJoueur.Add(vie);
+                    this.listeVideJoueur.Add(vie);
                     distance += 30;
                 }
                 else if (compteur > 0)
                 {
                     VieDeJoueur vie = new VieDeJoueur(distance1, 15);
-                    listeVideJoueur.Add(vie);
+                    this.listeVideJoueur.Add(vie);
                     distance1 += 30;
                 }
             }

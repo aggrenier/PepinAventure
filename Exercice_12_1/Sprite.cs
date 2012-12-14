@@ -336,8 +336,7 @@ namespace IFM20884
             // Appliquer premièrement la détection par forme englobante
             float distance = (float)Math.Sqrt(Math.Pow(this.Position.X - cible.Position.X, 2f) + Math.Pow((this.Position.Y - cible.Position.Y), 2f));
             if (distance < (this.RayonDeCollision + cible.RayonDeCollision))
-            {
-                Console.WriteLine(cible.RayonDeCollision);
+            {               
                 return true;
             }
 

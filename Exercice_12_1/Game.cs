@@ -1131,7 +1131,7 @@ namespace Exercice_12_1
 
             foreach (Food food in this.listeFood)
             {
-                if(this.joueur.CollisionRapide(food))
+                if(this.joueur.Collision(food))
                 {
                     boolFood = false;
                     this.joueur.VieDeJoueur = 10;

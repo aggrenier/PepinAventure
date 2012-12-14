@@ -57,12 +57,7 @@ namespace Exercice_12_1
         /// Attribut statique (i.e. partagé par toutes les instances) constituant une 
         /// liste de palettes à exploiter selon la direction et l'état du joueur.
         /// </summary>
-        private static PaletteTuiles palettes;
-
-        /// <summary>
-        /// Boutton pour colision         
-        /// </summary>
-        private Rectangle boutton;
+        private static PaletteTuiles palettes;       
 
         /// <summary>
         /// Type de clef         
@@ -76,11 +71,7 @@ namespace Exercice_12_1
         /// <param name="y">Coordonnée initiale y (verticale) du sprite.</param>
         public Clef(int x, int y)
             : base(x, y)
-        {
-            this.boutton.X = (x - this.Width) / 4;
-            this.boutton.Y = (y - this.Height) / 4;
-            this.boutton.Width = this.Width / 2;
-            this.boutton.Height = this.Height / 2;
+        {            
         }       
 
         /// <summary>
@@ -119,15 +110,7 @@ namespace Exercice_12_1
             {
                 return new Vector2(this.Position.X, this.Position.Y);
             }
-        }
-
-        /// <summary>
-        /// Boutton pour colision         
-        /// </summary>
-        public Rectangle Boutton
-        {
-            get { return this.boutton; }
-        }
+        }        
 
         /// <summary>
         /// Type de clef         

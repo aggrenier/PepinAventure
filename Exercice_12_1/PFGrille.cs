@@ -421,6 +421,7 @@ namespace IFM20884
         /// <param name="row">Rangée de la matrice contenant le noeud d'intérêt.</param>
         /// <param name="col">Colonne de la matrice contenant le noeud d'intérêt.</param>
         /// <value>PFNoeud contenu dans l'élément (row,col) de la grille de noeuds.</value>
+        /// <returns>return la liste</returns>
         private PFNoeud this[int row, int col]
         {
             get { return this.grille[row, col]; }

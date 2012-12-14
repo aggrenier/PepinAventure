@@ -493,6 +493,39 @@ namespace Exercice_12_1
         }
 
         /// <summary>
+        /// Propriété activant et désactivant l'état de pause du jeu. Cette propriété doit être utilisée
+        /// pour mettre le jeu en pause (plutôt que EtatJeu) car elle stocke l'état précédent (i.e. avant 
+        /// la pause) du jeu afin de le restaurer lorsque la pause est terminée.
+        /// </summary>
+        /// <value>Le jeu est en pause ou pas.</value>
+        public bool GameOverState
+        {
+            get
+            {
+                return this.etatJeu == Etats.GameOver;
+            }
+
+            set
+            {
+                // S'assurer qu'il y a changement de statut de pause
+                if (value && this.EtatJeu != Etats.GameOver)
+                {
+                    // Stocker l'état courant du jeu avant d'activer la pause
+                    this.prevEtatJeu = this.EtatJeu;
+                    this.EtatJeu = Etats.GameOver;
+                }
+                else if (!value && this.EtatJeu == Etats.GameOver)
+                {
+                    // Restaurer l'état du jeu à ce qu'il était avant la pause
+                    this.EtatJeu = this.prevEtatJeu;
+                }
+
+                // Suspendre les effets sonores au besoin
+                this.SuspendreEffetsSonores(this.GameOverState);
+            }
+        }
+
+        /// <summary>
         /// Propriété (accesseur pour menuCourant) retournant ou changeant le menu affiché. Lorsque
         /// sa valeur est null, aucun menu n'est affiché.
         /// </summary>
@@ -718,7 +751,7 @@ namespace Exercice_12_1
             this.listeBloc = new List<Sprite>();
             this.listeBlocFini = new List<Sprite>();
 
-            this.listeOgres = new List<Ennemi>();                                                                                     /////////////////////////// OGRES
+            this.listeOgres = new List<Ennemi>();
             this.listeOgresFini = new List<Ennemi>();
 
             this.listeSwitch = new List<Sprite>();
@@ -942,8 +975,8 @@ namespace Exercice_12_1
 
             // Si le jeu est en cours de démarrage, passer à l'état de jouer.
             if (this.EtatJeu == Etats.GameOver)
-            {
-                // L'usager veut-il démarrer la partie? 
+            {  
+
                 if (ServiceHelper.Get<IInputService>().Sauter(1))
                 {
                     this.EtatJeu = Etats.Demarrer;
@@ -953,7 +986,7 @@ namespace Exercice_12_1
                     this.boolFood = false;
                     this.joueur.Clef = false;
                     this.ClearMap();
-                    this.LoadMap11();
+                    this.LoadMap11();                   
                 }
 
                 if (ServiceHelper.Get<IInputService>().Quitter(1))
@@ -1029,12 +1062,18 @@ namespace Exercice_12_1
                 this.bruitageFondActif.Volume = 0.1f;
             }
 
+            // Bruitage de fond.
+            if (this.bruitageFondActif.State == SoundState.Paused)
+            {
+                this.bruitageFondActif.Play();
+            }   
+
             // Mettre à jour le sprite du joueur puis centrer la camera sur celui-ci.
             this.joueur.Update(gameTime, this.graphics);
 
             if (this.joueur.VieDeJoueur == 0)
             {
-                this.EtatJeu = Etats.GameOver;
+                this.GameOverState = !this.GameOverState;
             }
 
             if (this.joueur.Etat == Personnage.Etats.Tombe && this.joueur.ContTombe > 60)

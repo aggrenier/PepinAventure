@@ -61,6 +61,9 @@ namespace Exercice_12_1
         /// </summary>
         private static SoundEffect bruitageFond;
 
+        /// <summary>
+        /// Effet sonore contenant le bruitage fin
+        /// </summary>
         private Boolean bruitageFinOn = false;
 
         /// <summary>
@@ -526,8 +529,10 @@ namespace Exercice_12_1
 
             foreach (Bloc bloc in listeBloc)
             {
-                if (bloc.AireOccupe.X == 300) // ça fait aucune sense.
-                     bloc.AireOccupe = new Rectangle(286, 119, 28, 28);
+                if (bloc.AireOccupe.X == 300)
+                {
+                    bloc.AireOccupe = new Rectangle(286, 119, 28, 28);
+                }
                 if (joueurRect.Intersects(bloc.AireOccupe))
                 {
                     return 1.0f;
@@ -537,19 +542,23 @@ namespace Exercice_12_1
             foreach (Porte porte in listePorte)
             {
                 if (!porte.Ouvert)
+                {
                     if (joueurRect.Intersects(porte.Barre))
                     {
                         return 1.0f;
                     }
+                }
             }
 
             foreach (PorteHorizontale porte in listePorteHorizontale)
             {
                 if (!porte.Ouvert)
+                {
                     if (joueurRect.Intersects(porte.Barre))
                     {
                         return 1.0f;
                     }
+                }
             }
 
 
@@ -598,8 +607,10 @@ namespace Exercice_12_1
                     dest.X -= Math.Sign(deltaX);    // reculer d'un pixel (validé à l'itération précédente)
                     break;
                 }
-                else if (this.CalculerResistanceAuMouvement(dest) == .9f)                             ///////////******
+                else if (this.CalculerResistanceAuMouvement(dest) == .9f)
+                {                            ///////////******
                     this.joueur.Etat = Personnage.Etats.Tombe;
+                }
             }
 
             // Maintenant considérer le déplacement vertical. Incrémenter la distance verticale
@@ -615,8 +626,10 @@ namespace Exercice_12_1
                     dest.Y -= Math.Sign(deltaY);    // reculer d'un pixel (validé à l'itération précédente)
                     break;
                 }
-                else if (this.CalculerResistanceAuMouvement(dest) == .9f)                             ///////////******
+                else if (this.CalculerResistanceAuMouvement(dest) == .9f)
+                {                       
                     this.joueur.Etat = Personnage.Etats.Tombe;
+                }
             }
 
             // Déterminer le déplacement maximal dans les deux directions
@@ -668,8 +681,10 @@ namespace Exercice_12_1
                     dest.Y -= Math.Sign(deltaY);    // reculer d'un pixel (validé à l'itération précédente)
                     break;
                 }
-                else if (this.CalculerResistanceAuMouvement(dest) == .9f)                             ///////////******
+                else if (this.CalculerResistanceAuMouvement(dest) == .9f)
+                {                             
                     this.joueur.Etat = Personnage.Etats.Tombe;
+                }
             }
 
             // Déterminer le déplacement maximal dans les deux directions
@@ -757,17 +772,17 @@ namespace Exercice_12_1
 
 
             // Charger les images de fonds du jeu pour les différents mondes.
-            Map_1_1.LoadContent(Content, this.graphics);
-            Map_1_2.LoadContent(Content, this.graphics);
-            Map_1_3.LoadContent(Content, this.graphics);
-            Map_1_4.LoadContent(Content, this.graphics);
-            Map_1_5.LoadContent(Content, this.graphics);
+            Exercice_12_1.Map_1_1.LoadContent(Content, this.graphics);
+            Exercice_12_1.Map_1_2.LoadContent(Content, this.graphics);
+            Exercice_12_1.Map_1_3.LoadContent(Content, this.graphics);
+            Exercice_12_1.Map_1_4.LoadContent(Content, this.graphics);
+            Exercice_12_1.Map_1_5.LoadContent(Content, this.graphics);
 
             // Configurer la caméra.
             //this.camera.MondeRect = new Rectangle(0, 0, this.monde.Largeur, this.monde.Hauteur);
 
             // Charger le sprite représentant le joueur.
-            Joueur.LoadContent(Content, this.graphics);
+            Exercice_12_1.Joueur.LoadContent(Content, this.graphics);
 
             // Créer et initialiser le sprite du joueur.
             this.joueur = new Joueur(1150, 300);
@@ -780,24 +795,24 @@ namespace Exercice_12_1
             // uniquement sur terre).
             // PFGrille grille = null;
 
-            Projectile.LoadContent(Content, this.graphics);
+            Exercice_12_1.Projectile.LoadContent(Content, this.graphics);
 
-            Bloc.LoadContent(Content, this.graphics);
+            Exercice_12_1.Bloc.LoadContent(Content, this.graphics);
 
-            Ogre.LoadContent(Content, this.graphics);
-            OgreMouvement.LoadContent(Content, this.graphics);
+            Exercice_12_1.Ogre.LoadContent(Content, this.graphics);
+            Exercice_12_1.OgreMouvement.LoadContent(Content, this.graphics);
 
-            Switch.LoadContent(Content, this.graphics);
+            Exercice_12_1.Switch.LoadContent(Content, this.graphics);
 
-            Porte.LoadContent(Content, this.graphics);
+            Exercice_12_1.Porte.LoadContent(Content, this.graphics);
 
-            PorteHorizontale.LoadContent(Content, this.graphics);
+            Exercice_12_1.PorteHorizontale.LoadContent(Content, this.graphics);
 
-            VieDeJoueur.LoadContent(Content, this.graphics);
+            Exercice_12_1.VieDeJoueur.LoadContent(Content, this.graphics);
 
-            Food.LoadContent(Content,this.graphics);
+            Exercice_12_1.Food.LoadContent(Content, this.graphics);
 
-            Clef.LoadContent(Content, this.graphics);
+            Exercice_12_1.Clef.LoadContent(Content, this.graphics);
 
             this.joueur.VieDeJoueur = 10;
 
@@ -974,9 +989,13 @@ namespace Exercice_12_1
                 }
                 // L'usager veut-il quitter immédiatement
                 if (ServiceHelper.Get<IInputService>().Quitter(0))
+                {
                     this.Exit();
+                }
+
                 // Modifier la position du générique de sorte qu'il monte lentement vers le haut
                 this.generiqueScrollPos--;
+
                 // Rien d'autre à faire alors on quitte la fonction
                 base.Update(gameTime);
                 return;
@@ -1484,7 +1503,9 @@ namespace Exercice_12_1
 
             // Afficher le sprite du joueur.
             if (this.joueur.Etat != Personnage.Etats.Tombe)
+            {
                 this.joueur.Draw(this.camera, this.spriteBatch);
+            }
             else
             {
                 // Afficher le joueur en etat de tombe
@@ -1787,6 +1808,7 @@ namespace Exercice_12_1
             porteEst.Direction = PorteHorizontale.Directions.Est;
             this.listePorteHorizontale.Add(porteEst);
         }
+
         /// <summary>
         /// Fonction qui load tout les elements de map 1-3           
         /// </summary>
@@ -1813,8 +1835,8 @@ namespace Exercice_12_1
                 Food food = new Food(475, 120);
                 this.listeFood.Add(food);
             }
-
         }
+
         /// <summary>
         /// Fonction qui load tout les elements de map 1-4           
         /// </summary>
@@ -1833,6 +1855,7 @@ namespace Exercice_12_1
                 this.listeClef.Add(clef);
             }
         }
+
         /// <summary>
         /// Fonction qui load tout les elements de map 1-5           
         /// </summary>
@@ -2132,6 +2155,7 @@ namespace Exercice_12_1
         /// <summary>
         /// Fonction qui fait la gestion des projectiles         
         /// </summary>
+        /// <param name="gameTime">Game time</param>
         private void GestionProjectile(GameTime gameTime)
         {
             if (ServiceHelper.Get<IInputService>().TirerNord(1))
@@ -2352,6 +2376,7 @@ namespace Exercice_12_1
                 }
             }
         }
+
         /// <summary>
         /// Routine d'affichage de message fourni, centré à l'écran par défaut.
         /// </summary>
@@ -2549,7 +2574,7 @@ namespace Exercice_12_1
         /// positionnées au centre de l'astéroïde, et les ajoute à sa liste de particules à
         /// gérer (attribut privListeParticulesExplosions).
         /// </summary>
-        /// <param name="asteriode">Astéroïde à faire exploser.</param>
+        /// <param name="sprite">Astéroïde à faire exploser.</param>
         /// <param name="gameTime">Lecture du temps de jeu écoulé.</param>
         private void CreerExplosion(Sprite sprite, GameTime gameTime)                                                                               ////// explosion
         {

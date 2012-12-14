@@ -62,14 +62,14 @@ namespace Exercice_12_1
         private static SoundEffect bruitageFond;
 
         /// <summary>
-        /// Effet sonore contenant le bruitage fin
-        /// </summary>
-        private Boolean bruitageFinOn = false;
-
-        /// <summary>
         /// Effet sonore contenant le bruitage de fin du jeu.
         /// </summary>
         private static SoundEffect bruitageFin;
+
+        /// <summary>
+        /// Effet sonore contenant le bruitage fin
+        /// </summary>
+        private Boolean bruitageFinOn = false;
 
         /// <summary>
         /// Liste de tous les menus du jeu (chargés dans LoadContent()).
@@ -227,9 +227,9 @@ namespace Exercice_12_1
         /// <summary>
         /// Sert 'a enlever les portes des maps suivants.
         /// </summary>
-        private List<Sprite> listeClefFini;     
+        private List<Sprite> listeClefFini;
 
-         /// <summary>
+        /// <summary>
         /// Sert 'a enlever les portes des maps suivants.
         /// </summary>
         private bool boolFood;
@@ -262,7 +262,7 @@ namespace Exercice_12_1
         /// <summary>
         /// Générateur de nombres aléatoires pour générer des astéroïdes.
         /// </summary>
-        private Random randomPJEnemi;       
+        private Random randomPJEnemi;
 
         /// <summary>
         /// Probabilité de générer un astéroïde par cycle de Update().
@@ -521,8 +521,7 @@ namespace Exercice_12_1
         /// <returns>Facteur de résistance entre 0.0f (aucune résistance) et 1.0f (résistance maximale).</returns>
         public float CalculerResistanceAuMouvement(Vector2 position)
         {
-            Rectangle joueurRect = new Rectangle((int)this.joueur.PositionPourCollisions.X,
-                                                 (int)this.joueur.PositionPourCollisions.Y,1,1);
+            Rectangle joueurRect = new Rectangle((int)this.joueur.PositionPourCollisions.X, (int)this.joueur.PositionPourCollisions.Y, 1, 1);
 
             foreach (Bloc bloc in listeBloc)
             {
@@ -624,7 +623,7 @@ namespace Exercice_12_1
                     break;
                 }
                 else if (this.CalculerResistanceAuMouvement(dest) == .9f)
-                {                       
+                {
                     this.joueur.Etat = Personnage.Etats.Tombe;
                 }
             }
@@ -677,7 +676,7 @@ namespace Exercice_12_1
                     break;
                 }
                 else if (this.CalculerResistanceAuMouvement(dest) == .9f)
-                {                             
+                {
                     this.joueur.Etat = Personnage.Etats.Tombe;
                 }
             }
@@ -741,7 +740,7 @@ namespace Exercice_12_1
             this.listeClef = new List<Sprite>();
             this.listeClefFini = new List<Sprite>();
             boolClef = false;
-        
+
             // Créer les attributs de gestion des explosions.
             this.randomExplosions = new Random();
 
@@ -780,7 +779,7 @@ namespace Exercice_12_1
             this.joueur.BoundsRect = new Rectangle(0, 0, 600, 600);
 
             // Imposer la palette de collisions au déplacement du joueur.
-            this.joueur.GetValiderDeplacement = this.ValiderDeplacement; 
+            this.joueur.GetValiderDeplacement = this.ValiderDeplacement;
 
             Exercice_12_1.Projectile.LoadContent(Content, this.graphics);
 
@@ -805,7 +804,7 @@ namespace Exercice_12_1
             this.joueur.VieDeJoueur = 10;
 
             this.joueur.Clef = false;
-            
+
             // Charger les textures associées aux effets visuels gérées par Game.
             this.explosionParticule = Content.Load<Texture2D>("Textures\\Effets\\explosion");
 
@@ -859,7 +858,7 @@ namespace Exercice_12_1
             // Charger les fonds d'écran d'accueil et de générique.
             this.ecranAccueil = Content.Load<Texture2D>("Textures\\SplashDebut");
             this.ecranGenerique = Content.Load<Texture2D>("Textures\\SplashFin");
-            this.ecranGameOver = Content.Load<Texture2D>("Textures\\SplashGameOver");            
+            this.ecranGameOver = Content.Load<Texture2D>("Textures\\SplashGameOver");
         }
 
         /// <summary>
@@ -1141,7 +1140,7 @@ namespace Exercice_12_1
 
             foreach (Food food in this.listeFood)
             {
-                if(this.joueur.Collision(food))
+                if (this.joueur.Collision(food))
                 {
                     boolFood = false;
                     this.joueur.VieDeJoueur = 10;
@@ -1156,7 +1155,7 @@ namespace Exercice_12_1
 
             foreach (Clef clef in this.listeClef)
             {
-                if(this.joueur.Collision(clef))
+                if (this.joueur.Collision(clef))
                 {
                     boolClef = true;
                     this.joueur.Clef = true;
@@ -1165,16 +1164,16 @@ namespace Exercice_12_1
                     Clef clef1 = new Clef(600 - 16, 15);
                     listeClef.Add(clef1);
                     break;
-                }              
+                }
             }
 
             foreach (Clef clef in this.listeClefFini)
             {
                 this.listeClef.Remove(clef);
             }
-            
+
             // Mettre à jour les particules d'explosion
-            this.UpdateParticulesExplosions(gameTime); 
+            this.UpdateParticulesExplosions(gameTime);
 
             foreach (Projectile pj in this.listeProjectiles)
             {
@@ -1192,77 +1191,9 @@ namespace Exercice_12_1
             foreach (Bloc bloc in this.listeBloc)
             {
                 listeBlocFini.Add(bloc);
-            }           
+            }
 
-            // Vérifier si le joueur a atteint une sortie du monde.
-            if (this.monde.AtteintUneSortie(this.joueur))
-            {
-                if (this.MondeCourant == Mondes.MAP_1_1)
-                {
-                    this.MondeCourant = Mondes.MAP_1_2;
-                    this.joueur.Position = new Vector2(300, 490);
-
-                    LoadMap12();
-                }
-                else if (this.MondeCourant == Mondes.MAP_1_2)
-                {
-                    if (this.joueur.Position.Y > 500)
-                    {
-                        this.MondeCourant = Mondes.MAP_1_1;
-                        this.joueur.Position = new Vector2(300, 60);
-
-                        LoadMap11();
-                    }
-                    else if (this.joueur.Position.Y < 60)
-                    {
-                        this.MondeCourant = Mondes.MAP_1_3;
-                        this.joueur.Position = this.monde.PositionInitiale;
-
-                        LoadMap13();
-                    }
-                    else if (this.joueur.Position.X > 510)
-                    {
-                        this.MondeCourant = Mondes.MAP_1_4;
-                        this.joueur.Position = new Vector2(97, 300);
-
-                        LoadMap14();
-                    }
-                    else if (this.joueur.Position.X < 85)
-                    {
-                        this.MondeCourant = Mondes.MAP_1_5;
-                        this.joueur.Position = new Vector2(500, 285);
-
-                        LoadMap15();
-                    }
-                }
-                else if (this.MondeCourant == Mondes.MAP_1_3)
-                {
-                    this.MondeCourant = Mondes.MAP_1_2;
-                    this.joueur.Position = new Vector2(300, 80);
-
-                    LoadMap12();
-                }
-                else if (this.MondeCourant == Mondes.MAP_1_4)
-                {
-                    this.MondeCourant = Mondes.MAP_1_2;
-                    this.joueur.Position = new Vector2(500, 280);
-
-                    LoadMap12();
-                }
-                else if (this.MondeCourant == Mondes.MAP_1_5)
-                {
-                    if (this.joueur.Position.X > 510)
-                    {
-                        this.MondeCourant = Mondes.MAP_1_2;
-                        this.joueur.Position = new Vector2(90, 290);
-                        LoadMap12();
-                    }
-                    else if (this.joueur.Position.Y < 60)
-                    {
-                        this.EtatJeu = Etats.Quitter;
-                    }
-                }
-            }         
+            GestionAtteintUneSortie();
 
             base.Update(gameTime);
         }
@@ -1289,7 +1220,7 @@ namespace Exercice_12_1
                 {
                     this.bruitageFondActif.Pause();
                 }
-            }            
+            }
             else
             {
                 // Bruitage de fond.
@@ -1372,7 +1303,7 @@ namespace Exercice_12_1
 
             // En phase de terminaison, alors afficher le générique 
             if (this.EtatJeu == Etats.Quitter)
-            {                
+            {
                 this.DrawGenerique(this.spriteBatch);
 
                 // Ignorer le reste de la fonction d'affichage 
@@ -1451,8 +1382,8 @@ namespace Exercice_12_1
                         null,                       // sourceRectangle
                         Color.Chartreuse,                // couleur
                         0,  // angle de rotation
-                        new Vector2(16, 16),   
-                        .4f + pj.VideDeProjectile % 1.001f,             // échelle d'affichage
+                        new Vector2(16, 16),
+                        .4f + (pj.VideDeProjectile % 1.001f),             // échelle d'affichage
                         SpriteEffects.None,         // effets
                         0.0f);                      // profondeur de couche (layer depth));
                 }
@@ -1464,7 +1395,7 @@ namespace Exercice_12_1
                         null,                       // sourceRectangle
                         Color.LightSalmon,                // couleur
                         0,                          // angle de rotation
-                        new Vector2(16, 16),  
+                        new Vector2(16, 16),
                         pj.VideDeProjectile % 1.1f,             // échelle d'affichage
                         SpriteEffects.None,         // effets
                         0.0f);                      // profondeur de couche (layer depth));
@@ -1525,7 +1456,7 @@ namespace Exercice_12_1
                 clef.Draw(this.spriteBatch);
             }
 
-            foreach(Food food in this.listeFood)
+            foreach (Food food in this.listeFood)
             {
                 food.Draw(this.spriteBatch);
             }
@@ -1538,7 +1469,7 @@ namespace Exercice_12_1
             this.spriteBatch.End();
 
             base.Draw(gameTime);
-        }
+        }       
 
         /// <summary>
         /// Routine d'affichage de message (centré à l'écran) correspondant à l'état courant du jeu.
@@ -1573,6 +1504,7 @@ namespace Exercice_12_1
                     this.graphics.GraphicsDevice.Viewport.Height / 2);
 
                 int decalageY = 50;
+
                 // Appliquer le décalage vertical par rapport au centre de l'écran.
                 centreEcran.Y += decalageY;
 
@@ -1607,6 +1539,156 @@ namespace Exercice_12_1
         }
 
         /// <summary>
+        /// Routine d'affichage de message fourni, centré à l'écran par défaut.
+        /// </summary>
+        /// <param name="spriteBatch">Tampon d'affichage.</param>
+        /// <param name="message">Message à afficher.</param>
+        /// <param name="decalageY">Décalage vertical (en pixels) par rapport au centre de l'écran.</param>
+        /// <param name="couleur">Couleur du texte.</param>
+        protected void DrawMessage(SpriteBatch spriteBatch, string message, int decalageY, Color couleur)
+        {
+            // Afficher le message s'il y a lieu.
+            if (message.Length > 0)
+            {
+                // L'origine du message sera positionnée au centre de l'écran.
+                Vector2 centreEcran = new Vector2(
+                    this.graphics.GraphicsDevice.Viewport.Width / 2,
+                    this.graphics.GraphicsDevice.Viewport.Height / 2);
+
+                // Appliquer le décalage vertical par rapport au centre de l'écran.
+                centreEcran.Y += decalageY;
+
+                // Splitter le message en fonction des \n dans celui-ci, afin de center chaque chaîne du message
+                // à l'écran.
+                string[] lignes = message.Split('\n');
+
+                // Afficher chaque chaîne du message indiciduellement, centrées l'une sous l'autre.
+                for (int idx = 0; idx < lignes.Length; idx++)
+                {
+                    // L'origine d'affichage de la chaîne est son point central.
+                    Vector2 centrePolice = this.policeMessages.MeasureString(lignes[idx]) / 2;
+
+                    // Afficher la chaîne centré à l'écran.
+                    spriteBatch.DrawString(
+                        this.policeMessages,        // police d'affichge
+                        lignes[idx],                // message à afficher
+                        centreEcran,                // position où afficher le message
+                        couleur,                    // couleur du texte
+                        0,                          // angle de rotation
+                        centrePolice,               // origine du texte (centrePolice positionné à centreEcran)
+                        1.0f,                       // échelle d'affichage
+                        SpriteEffects.None,         // effets
+                        1.0f);                      // profondeur de couche (layer depth)
+
+                    // Décaler afin que la chaîne soit positionnée sous la précédente.
+                    centreEcran.Y += centrePolice.Y * 2;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Fonction dessinant l'écran d'accueil. Un message est affiché sur la texture d'accueil
+        /// afin d'indiquer à l'usager quelle touche presser pour démarrer la partie.
+        /// </summary>
+        /// <param name="spriteBatch">Tampon d'affichage.</param>
+        protected void DrawEcranAccueil(SpriteBatch spriteBatch)
+        {
+            // Dessiner le fond d'écran.
+            spriteBatch.Draw(this.ecranAccueil, Vector2.Zero, Color.White);
+
+            // Afficher le message approprié selon le périphérique d'inputs.
+            string message = string.Empty;
+            if (ServiceHelper.Get<IInputService>().GetType() == typeof(ClavierService))
+            {
+                message = "Pressez Espace pour commencer...";
+            }
+            else if (ServiceHelper.Get<IInputService>().GetType() == typeof(ManetteService))
+            {
+                message = "Pressez A pour commencer...";
+            }
+            else
+            {
+                message = "ERREUR: aucune manette ou clavier!";
+            }
+
+            // Afficher le message 50 pixels plus bas que le centre de l'écran.
+            this.DrawMessage(this.spriteBatch, message, 50, Color.Blue);
+        }      
+
+        /// <summary>
+        /// Fonction dessinant l'écran du générique de fin de partie. Les chaînes du générique défilent
+        /// verticalement du bas de l'écran vers le haut, tel un générique de fin de film. Chaque chaîne
+        /// est centrée horizontalement à l'écran.
+        /// </summary>
+        /// <param name="spriteBatch">Tampon d'affichage.</param>
+        protected void DrawGenerique(SpriteBatch spriteBatch)
+        {
+            const int Espacement = 50;      // espace entre chaque groupe de lignes
+
+            // Dessiner le fond d'écran.
+            this.spriteBatch.Draw(this.ecranGenerique, Vector2.Zero, Color.White);
+
+            // Groupes de lignes constituant le générique. Chaque élément du tableau est un groupe
+            // de lignes inclu dans la même string mais séparées de \n.
+            string[] lignes = 
+            {
+                 "Matthieu Doell\nAlexandre Grenier",
+                 "Cours 20884 IFM\nPhysique du Jeu", 
+                 "Ce jeu enfreint plusieurs droits d'auteurs\nRedistribution interdite",
+                 "Copyright 2012\nPRODUCTIONS DOELL-GRENIER\nNintendo"
+            };
+
+            // Position verticale (en pixels) où est affichée le groupe de lignes courant dans la
+            // boucle suivante.
+            int row = this.generiqueScrollPos;
+
+            // Afficher chaque groupe de lignes du générique.
+            for (int idx = 0; idx < lignes.Length; idx++)
+            {
+                this.DrawMessage(this.spriteBatch, lignes[idx], row, Color.Pink);
+
+                // Mettre à jour la position de la prochaine ligne du générique.
+                row += (int)this.policeMessages.MeasureString(lignes[idx]).Y + Espacement;
+            }
+
+            // Si la dernière ligne du générique a disparue au haut de l'écran, on termine le
+            // programme.
+            if (row - Espacement < -(this.graphics.GraphicsDevice.Viewport.Height / 2))
+            {
+                this.DrawMessage(this.spriteBatch, "Merci", 290, Color.Pink);
+            }
+        }
+
+        /// <summary>
+        /// Fonction dessinant l'écran d'accueil. Un message est affiché sur la texture d'accueil
+        /// afin d'indiquer à l'usager quelle touche presser pour démarrer la partie.
+        /// </summary>
+        /// <param name="spriteBatch">Tampon d'affichage.</param>
+        protected void DrawEcranGameOver(SpriteBatch spriteBatch)
+        {
+            // Dessiner le fond d'écran.
+            spriteBatch.Draw(this.ecranGameOver, Vector2.Zero, Color.White);
+
+            // Afficher le message approprié selon le périphérique d'inputs.
+            string message = string.Empty;
+            if (ServiceHelper.Get<IInputService>().GetType() == typeof(ClavierService))
+            {
+                message = "Pressez Espace pour commencer...\nPressez ESC pour quitter";
+            }
+            else if (ServiceHelper.Get<IInputService>().GetType() == typeof(ManetteService))
+            {
+                message = "Pressez A pour commencer...\nPressez sur Start pour quitter";
+            }
+            else
+            {
+                message = "ERREUR: aucune manette ou clavier!";
+            }
+
+            // Afficher le message 50 pixels plus bas que le centre de l'écran.
+            this.DrawMessage(this.spriteBatch, message, 50, Color.White);
+        }
+
+        /// <summary>
         /// Fonction comparative pour trier des sprites en ordre croissant de position verticale dans le monde.
         /// Cette fonction est exploitée par Draw pour afficher les sprites de façon à ce que ceux plus bas
         /// dans le monde soient considérés comme "devant" ceux plus haut.
@@ -1630,6 +1712,79 @@ namespace Exercice_12_1
             }
         }
 
+        private void GestionAtteintUneSortie()
+        {
+            // Vérifier si le joueur a atteint une sortie du monde.
+            if (this.monde.AtteintUneSortie(this.joueur))
+            {
+                if (this.MondeCourant == Mondes.MAP_1_1)
+                {
+                    this.MondeCourant = Mondes.MAP_1_2;
+                    this.joueur.Position = new Vector2(300, 490);
+
+                    LoadMap12();
+                }
+                else if (this.MondeCourant == Mondes.MAP_1_2)
+                {
+                    if (this.joueur.Position.Y > 500)
+                    {
+                        this.MondeCourant = Mondes.MAP_1_1;
+                        this.joueur.Position = new Vector2(300, 60);
+
+                        LoadMap11();
+                    }
+                    else if (this.joueur.Position.Y < 60)
+                    {
+                        this.MondeCourant = Mondes.MAP_1_3;
+                        this.joueur.Position = new Vector2(300, 490);
+
+                        LoadMap13();
+                    }
+                    else if (this.joueur.Position.X > 510)
+                    {
+                        this.MondeCourant = Mondes.MAP_1_4;
+                        this.joueur.Position = new Vector2(97, 300);
+
+                        LoadMap14();
+                    }
+                    else if (this.joueur.Position.X < 85)
+                    {
+                        this.MondeCourant = Mondes.MAP_1_5;
+                        this.joueur.Position = new Vector2(500, 285);
+
+                        LoadMap15();
+                    }
+                }
+                else if (this.MondeCourant == Mondes.MAP_1_3)
+                {
+                    this.MondeCourant = Mondes.MAP_1_2;
+                    this.joueur.Position = new Vector2(300, 80);
+
+                    LoadMap12();
+                }
+                else if (this.MondeCourant == Mondes.MAP_1_4)
+                {
+                    this.MondeCourant = Mondes.MAP_1_2;
+                    this.joueur.Position = new Vector2(500, 280);
+
+                    LoadMap12();
+                }
+                else if (this.MondeCourant == Mondes.MAP_1_5)
+                {
+                    if (this.joueur.Position.X > 510)
+                    {
+                        this.MondeCourant = Mondes.MAP_1_2;
+                        this.joueur.Position = new Vector2(90, 290);
+                        LoadMap12();
+                    }
+                    else if (this.joueur.Position.Y < 60)
+                    {
+                        this.EtatJeu = Etats.Quitter;
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Fonction qui parcourt les listes et clear les item pour reinitialiser les cartes            
         /// </summary>
@@ -1649,7 +1804,7 @@ namespace Exercice_12_1
             {
                 listeProjectileFini.Add(pj);
             }
-            // Se débarasser des astéroïdes ayant quitté l'écran.
+
             foreach (Projectile pj in listeProjectileFini)
             {
                 this.listeProjectiles.Remove(pj);
@@ -1659,7 +1814,7 @@ namespace Exercice_12_1
             {
                 listeOgresFini.Add(ogre);
             }
-            // Se débarasser des astéroïdes ayant quitté l'écran.
+
             foreach (Ennemi ogre in listeOgresFini)
             {
                 this.listeOgres.Remove(ogre);
@@ -1694,10 +1849,12 @@ namespace Exercice_12_1
             {
                 this.listePorteHorizontale.Remove(porte);
             }
+
             foreach (Food food in this.listeFood)
             {
                 listeFoodFini.Add(food);
             }
+
             foreach (Food food in this.listeFoodFini)
             {
                 listeFood.Remove(food);
@@ -1707,6 +1864,7 @@ namespace Exercice_12_1
             {
                 listeClefFini.Add(clef);
             }
+
             foreach (Clef clef in this.listeClefFini)
             {
                 listeClef.Remove(clef);
@@ -1737,9 +1895,7 @@ namespace Exercice_12_1
             this.listeOgres.Add(ogre);
 
             //Porte porte0 = new Porte(300, 75, Porte.Directions.Nord);
-            //this.listePorte.Add(porte0);
-
-           
+            //this.listePorte.Add(porte0);          
         }
 
         /// <summary>
@@ -1751,7 +1907,7 @@ namespace Exercice_12_1
 
             Bloc bloc0 = new Bloc(106, 340);
             bloc0.BoundsRect = new Rectangle(91, 91, 415, 415);
-            
+
             Bloc bloc1 = new Bloc(133, 300);
             bloc1.BoundsRect = new Rectangle(91, 91, 415, 415);
 
@@ -1769,7 +1925,7 @@ namespace Exercice_12_1
 
             OgreMouvement ogre2 = new OgreMouvement(new Vector2(350, 350));
             this.listeOgres.Add(ogre2);
-            ogre2.BoundsRect = new Rectangle(300, 300, 193, 215);           
+            ogre2.BoundsRect = new Rectangle(300, 300, 193, 215);
 
             Switch switch1 = new Switch(133, 230);
             this.listeSwitch.Add(switch1);
@@ -1863,8 +2019,8 @@ namespace Exercice_12_1
             {
                 porteNord.Ouvert = true;
             }
-            this.listePorte.Add(porteNord);      
 
+            this.listePorte.Add(porteNord);
         }
 
         /// <summary>
@@ -2136,73 +2292,10 @@ namespace Exercice_12_1
         /// <param name="gameTime">Game time</param>
         private void GestionProjectile(GameTime gameTime)
         {
-            if (ServiceHelper.Get<IInputService>().TirerNord(1))
-            {
-                Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 0);
-                pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
-
-                if (ServiceHelper.Get<IInputService>().DeplacementDroite(0) > 0)
-                {
-                    pj.VitesseHorizontale += (this.joueur.VitesseHorizontal * 1.2f);
-                }
-                else if (ServiceHelper.Get<IInputService>().DeplacementGauche(0) > 0)
-                {
-                    pj.VitesseHorizontale -= (this.joueur.VitesseHorizontal * 1.2f);
-                }
-
-                this.listeProjectiles.Add(pj);
-            }
-            else if (ServiceHelper.Get<IInputService>().TirerEst(1))
-            {
-                Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 2);
-                pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
-
-                if (ServiceHelper.Get<IInputService>().DeplacementAvant(0) > 0)
-                {
-                    pj.VitesseVerticale -= (this.joueur.VitesseVerticale * 1.2f);
-                }
-                else if (ServiceHelper.Get<IInputService>().DeplacementArriere(0) > 0)
-                {
-                    pj.VitesseVerticale += (this.joueur.VitesseVerticale * 1.2f);
-                }
-
-                this.listeProjectiles.Add(pj);
-            }
-            else if (ServiceHelper.Get<IInputService>().TirerSud(1))
-            {
-                Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 4);
-                pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
-
-                if (ServiceHelper.Get<IInputService>().DeplacementDroite(0) > 0)
-                {
-                    pj.VitesseHorizontale += (this.joueur.VitesseHorizontal * 1.2f);
-                }
-                else if (ServiceHelper.Get<IInputService>().DeplacementGauche(0) > 0)
-                {
-                    pj.VitesseHorizontale -= (this.joueur.VitesseHorizontal * 1.2f);
-                }
-
-                this.listeProjectiles.Add(pj);
-            }
-
-            else if (ServiceHelper.Get<IInputService>().TirerOuest(1))
-            {
-                Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 6);
-                pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
-
-                if (ServiceHelper.Get<IInputService>().DeplacementAvant(0) > 0)
-                {
-                    pj.VitesseVerticale -= (this.joueur.VitesseVerticale * 1.2f);
-                }
-                else if (ServiceHelper.Get<IInputService>().DeplacementArriere(0) > 0)
-                {
-                    pj.VitesseVerticale += (this.joueur.VitesseVerticale * 1.2f);
-                }
-
-                this.listeProjectiles.Add(pj);
-            }
+            JoueurTirerProjectile();
 
             ProjectileReflection();
+
             ProjectilleRebondissement();
 
             foreach (Projectile pj in this.listeProjectiles)
@@ -2211,7 +2304,8 @@ namespace Exercice_12_1
                 {
                     listeProjectileFini.Add(pj);
                 }
-                foreach (Ennemi ogre in listeOgres)                                                       
+
+                foreach (Ennemi ogre in listeOgres)
                 {
                     if (pj.CollisionRapide(ogre) && pj.TypeProjectile == Projectile.TypesProjectiles.Joueur)
                     {
@@ -2221,6 +2315,7 @@ namespace Exercice_12_1
                         listeOgresFini.Add(ogre);
                     }
                 }
+
                 if (pj.TypeProjectile == Projectile.TypesProjectiles.Ennemi)
                 {
                     foreach (Projectile pj1 in this.listeProjectiles)
@@ -2233,23 +2328,96 @@ namespace Exercice_12_1
                                 this.CreerExplosion(pj, gameTime);
                                 listeProjectileFini.Add(pj);
                                 listeProjectileFini.Add(pj1);
-
                             }
                         }
                     }
                 }
+
                 if (pj.CollisionRapide(this.joueur) && pj.TypeProjectile == Projectile.TypesProjectiles.Ennemi)
                 {
                     this.joueur.VieDeJoueur--;
+
                     // Créer un nouvel effet visuel pour l'explosion.
                     this.CreerExplosion(pj, gameTime);
                     listeProjectileFini.Add(pj);
                 }
             }
+
             // Se débarasser des projectile ayant quitté l'écran.
             foreach (Projectile pj in listeProjectileFini)
             {
                 this.listeProjectiles.Remove(pj);
+            }
+        }
+
+        /// <summary>
+        /// Fonction qui fait tirer les projectiles         
+        /// </summary>
+        private void JoueurTirerProjectile()
+        {
+            if (ServiceHelper.Get<IInputService>().TirerNord(1))
+            {
+                Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 0);
+                pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
+
+                if (ServiceHelper.Get<IInputService>().DeplacementDroite(0) > 0)
+                {
+                    pj.VitesseHorizontale += this.joueur.VitesseHorizontal * 1.2f;
+                }
+                else if (ServiceHelper.Get<IInputService>().DeplacementGauche(0) > 0)
+                {
+                    pj.VitesseHorizontale -= this.joueur.VitesseHorizontal * 1.2f;
+                }
+
+                this.listeProjectiles.Add(pj);
+            }
+            else if (ServiceHelper.Get<IInputService>().TirerEst(1))
+            {
+                Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 2);
+                pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
+
+                if (ServiceHelper.Get<IInputService>().DeplacementAvant(0) > 0)
+                {
+                    pj.VitesseVerticale -= this.joueur.VitesseVerticale * 1.2f;
+                }
+                else if (ServiceHelper.Get<IInputService>().DeplacementArriere(0) > 0)
+                {
+                    pj.VitesseVerticale += this.joueur.VitesseVerticale * 1.2f;
+                }
+
+                this.listeProjectiles.Add(pj);
+            }
+            else if (ServiceHelper.Get<IInputService>().TirerSud(1))
+            {
+                Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 4);
+                pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
+
+                if (ServiceHelper.Get<IInputService>().DeplacementDroite(0) > 0)
+                {
+                    pj.VitesseHorizontale += this.joueur.VitesseHorizontal * 1.2f;
+                }
+                else if (ServiceHelper.Get<IInputService>().DeplacementGauche(0) > 0)
+                {
+                    pj.VitesseHorizontale -= this.joueur.VitesseHorizontal * 1.2f;
+                }
+
+                this.listeProjectiles.Add(pj);
+            }
+            else if (ServiceHelper.Get<IInputService>().TirerOuest(1))
+            {
+                Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 6);
+                pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
+
+                if (ServiceHelper.Get<IInputService>().DeplacementAvant(0) > 0)
+                {
+                    pj.VitesseVerticale -= this.joueur.VitesseVerticale * 1.2f;
+                }
+                else if (ServiceHelper.Get<IInputService>().DeplacementArriere(0) > 0)
+                {
+                    pj.VitesseVerticale += this.joueur.VitesseVerticale * 1.2f;
+                }
+
+                this.listeProjectiles.Add(pj);
             }
         }
 
@@ -2271,9 +2439,7 @@ namespace Exercice_12_1
                     {
                         pj.VitesseHorizontale = -1;
                     }
-
                 }
-
                 else if (this.monde.CouleurDeCollision(pj.Position) == Color.Black)
                 {
                     if (pj.VitesseVerticale < 0)
@@ -2284,7 +2450,6 @@ namespace Exercice_12_1
                     {
                         pj.VitesseVerticale = -1;
                     }
-                    
                 }
             }
         }
@@ -2319,7 +2484,7 @@ namespace Exercice_12_1
 
                     bloc.BlockMouvement = false;
                 }
-            }            
+            }
         }
 
         /// <summary>
@@ -2337,7 +2502,6 @@ namespace Exercice_12_1
                         {
                             pj.VitesseHorizontale = 1;
                         }
-
                         else if (pj.VitesseHorizontale > 0)
                         {
                             pj.VitesseHorizontale = -1;
@@ -2347,7 +2511,6 @@ namespace Exercice_12_1
                         {
                             pj.VitesseVerticale = 1;
                         }
-
                         else if (pj.VitesseVerticale > 0)
                         {
                             pj.VitesseVerticale = -1;
@@ -2358,162 +2521,12 @@ namespace Exercice_12_1
         }
 
         /// <summary>
-        /// Routine d'affichage de message fourni, centré à l'écran par défaut.
-        /// </summary>
-        /// <param name="spriteBatch">Tampon d'affichage.</param>
-        /// <param name="message">Message à afficher.</param>
-        /// <param name="decalageY">Décalage vertical (en pixels) par rapport au centre de l'écran.</param>
-        /// <param name="couleur">Couleur du texte.</param>
-        protected void DrawMessage(SpriteBatch spriteBatch, string message, int decalageY, Color couleur)
-        {
-            // Afficher le message s'il y a lieu.
-            if (message.Length > 0)
-            {
-                // L'origine du message sera positionnée au centre de l'écran.
-                Vector2 centreEcran = new Vector2(
-                    this.graphics.GraphicsDevice.Viewport.Width / 2,
-                    this.graphics.GraphicsDevice.Viewport.Height / 2);
-
-                // Appliquer le décalage vertical par rapport au centre de l'écran.
-                centreEcran.Y += decalageY;
-
-                // Splitter le message en fonction des \n dans celui-ci, afin de center chaque chaîne du message
-                // à l'écran.
-                string[] lignes = message.Split('\n');
-
-                // Afficher chaque chaîne du message indiciduellement, centrées l'une sous l'autre.
-                for (int idx = 0; idx < lignes.Length; idx++)
-                {
-                    // L'origine d'affichage de la chaîne est son point central.
-                    Vector2 centrePolice = this.policeMessages.MeasureString(lignes[idx]) / 2;
-
-                    // Afficher la chaîne centré à l'écran.
-                    spriteBatch.DrawString(
-                        this.policeMessages,        // police d'affichge
-                        lignes[idx],                // message à afficher
-                        centreEcran,                // position où afficher le message
-                        couleur,                    // couleur du texte
-                        0,                          // angle de rotation
-                        centrePolice,               // origine du texte (centrePolice positionné à centreEcran)
-                        1.0f,                       // échelle d'affichage
-                        SpriteEffects.None,         // effets
-                        1.0f);                      // profondeur de couche (layer depth)
-
-                    // Décaler afin que la chaîne soit positionnée sous la précédente.
-                    centreEcran.Y += centrePolice.Y * 2;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Fonction dessinant l'écran d'accueil. Un message est affiché sur la texture d'accueil
-        /// afin d'indiquer à l'usager quelle touche presser pour démarrer la partie.
-        /// </summary>
-        /// <param name="spriteBatch">Tampon d'affichage.</param>
-        protected void DrawEcranAccueil(SpriteBatch spriteBatch)
-        {
-            // Dessiner le fond d'écran.
-            spriteBatch.Draw(this.ecranAccueil, Vector2.Zero, Color.White);
-
-            // Afficher le message approprié selon le périphérique d'inputs.
-            string message = string.Empty;
-            if (ServiceHelper.Get<IInputService>().GetType() == typeof(ClavierService))
-            {
-                message = "Pressez Espace pour commencer...";
-            }
-            else if (ServiceHelper.Get<IInputService>().GetType() == typeof(ManetteService))
-            {
-                message = "Pressez A pour commencer...";
-            }
-            else
-            {
-                message = "ERREUR: aucune manette ou clavier!";
-            }
-
-            // Afficher le message 50 pixels plus bas que le centre de l'écran.
-            this.DrawMessage(this.spriteBatch, message, 50, Color.Blue);
-        }
-
-        /// <summary>
-        /// Fonction dessinant l'écran d'accueil. Un message est affiché sur la texture d'accueil
-        /// afin d'indiquer à l'usager quelle touche presser pour démarrer la partie.
-        /// </summary>
-        /// <param name="spriteBatch">Tampon d'affichage.</param>
-        protected void DrawEcranGameOver(SpriteBatch spriteBatch)
-        {
-            // Dessiner le fond d'écran.
-            spriteBatch.Draw(this.ecranGameOver, Vector2.Zero, Color.White);
-
-            // Afficher le message approprié selon le périphérique d'inputs.
-            string message = string.Empty;
-            if (ServiceHelper.Get<IInputService>().GetType() == typeof(ClavierService))
-            {
-                message = "Pressez Espace pour commencer...\nPressez ESC pour quitter";
-            }
-            else if (ServiceHelper.Get<IInputService>().GetType() == typeof(ManetteService))
-            {
-                message = "Pressez A pour commencer...\nPressez sur Start pour quitter";
-            }
-            else
-            {
-                message = "ERREUR: aucune manette ou clavier!";
-            }
-
-            // Afficher le message 50 pixels plus bas que le centre de l'écran.
-            this.DrawMessage(this.spriteBatch, message, 50, Color.White);
-        }
-
-        /// <summary>
-        /// Fonction dessinant l'écran du générique de fin de partie. Les chaînes du générique défilent
-        /// verticalement du bas de l'écran vers le haut, tel un générique de fin de film. Chaque chaîne
-        /// est centrée horizontalement à l'écran.
-        /// </summary>
-        /// <param name="spriteBatch">Tampon d'affichage.</param>
-        protected void DrawGenerique(SpriteBatch spriteBatch)
-        {
-            const int Espacement = 50;      // espace entre chaque groupe de lignes
-
-            // Dessiner le fond d'écran.
-            this.spriteBatch.Draw(this.ecranGenerique, Vector2.Zero, Color.White);
-
-            // Groupes de lignes constituant le générique. Chaque élément du tableau est un groupe
-            // de lignes inclu dans la même string mais séparées de \n.
-            string[] lignes = 
-            {
-                 "Matthieu Doell\nAlexandre Grenier",
-                 "Cours 20884 IFM\nPhysique du Jeu", 
-                 "Ce jeu enfreint plusieurs droits d'auteurs\nRedistribution interdite",
-                 "Copyright 2012\nPRODUCTIONS DOELL-GRENIER\nNintendo"
-            };
-
-            // Position verticale (en pixels) où est affichée le groupe de lignes courant dans la
-            // boucle suivante.
-            int row = this.generiqueScrollPos;
-
-            // Afficher chaque groupe de lignes du générique.
-            for (int idx = 0; idx < lignes.Length; idx++)
-            {
-                this.DrawMessage(this.spriteBatch, lignes[idx], row, Color.Pink);
-
-                // Mettre à jour la position de la prochaine ligne du générique.
-                row += (int)this.policeMessages.MeasureString(lignes[idx]).Y + Espacement;
-            }
-
-            // Si la dernière ligne du générique a disparue au haut de l'écran, on termine le
-            // programme.
-            if (row - Espacement < -(this.graphics.GraphicsDevice.Viewport.Height / 2))
-            {
-                this.DrawMessage(this.spriteBatch, "Merci", 290, Color.Pink);                
-            }
-        }
-
-        /// <summary>
         /// Fonction permettant de simuler une explosion de l'astéroïde donné. La fonction
         /// crée un ensemble de particules d'explosition (de 10 à 20 instances de ParticuleExplosion)
         /// positionnées au centre de l'astéroïde, et les ajoute à sa liste de particules à
         /// gérer (attribut privListeParticulesExplosions).
         /// </summary>        
-        public void UpdateVieDeJoueur()
+        private void UpdateVieDeJoueur()
         {
             int compteur = this.joueur.VieDeJoueur;
             int distance = 15;
@@ -2529,17 +2542,15 @@ namespace Exercice_12_1
                 listeVideJoueur.Remove(vie);
             }
 
-
             for (; compteur > 0; compteur--)
             {
-                
                 if (compteur > 5 && compteur < 11)
                 {
                     VieDeJoueur vie = new VieDeJoueur(distance, 45);
                     listeVideJoueur.Add(vie);
                     distance += 30;
                 }
-                else if( compteur > 0)
+                else if (compteur > 0)
                 {
                     VieDeJoueur vie = new VieDeJoueur(distance1, 15);
                     listeVideJoueur.Add(vie);

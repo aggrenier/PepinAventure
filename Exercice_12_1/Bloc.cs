@@ -151,15 +151,17 @@ namespace Exercice_12_1
         }
 
         /// <summary>
-        /// Vitesse de marche du joueur, avec valeur par défaut.
+        /// Accesseur retournant une rectangle réprésentant la surface couvert par le bloc.
         /// </summary>
         public Rectangle AireOccupe
         {
-            get {
-                return new Rectangle((int)this.Position.X - this.Width / 2,
-                                        (int)this.Position.Y - this.Height / 2, 
+            get 
+            {
+                return new Rectangle(
+                                        (int)this.Position.X - (this.Width / 2),
+                                        (int)this.Position.Y - (this.Height / 2), 
                                         this.Width, 
-                                        this.Height );
+                                        this.Height);
             }
         }
 

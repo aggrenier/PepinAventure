@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="JoueurSprite.cs" company="Marco Lavoie">
+// <copyright file="Clef.cs" company="Marco Lavoie">
 // Marco Lavoie, 2010. Tous droits réservés
 // 
 // L'utilisation de ce matériel pédagogique (présentations, code source 
@@ -59,12 +59,15 @@ namespace Exercice_12_1
         /// </summary>
         private static PaletteTuiles palettes;
 
+        /// <summary>
+        /// Boutton pour colision         
+        /// </summary>
         private Rectangle boutton;
 
-        public Rectangle Boutton
-        {
-            get { return this.boutton; }
-        }
+        /// <summary>
+        /// Type de clef         
+        /// </summary>
+        private Types type;       
 
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
@@ -74,19 +77,11 @@ namespace Exercice_12_1
         public Clef(int x, int y)
             : base(x, y)
         {
-            boutton.X = x - Width / 4;
-            boutton.Y = y - Height / 4;
-            boutton.Width = Width / 2;
-            boutton.Height = Height / 2;
-        }
-
-        private Types type;
-
-        public Types Type
-        {
-            get { return this.type; }
-            set { this.type = value; }
-        }
+            this.boutton.X = (x - this.Width) / 4;
+            this.boutton.Y = (y - this.Height) / 4;
+            this.boutton.Width = this.Width / 2;
+            this.boutton.Height = this.Height / 2;
+        }       
 
         /// <summary>
         /// Enumération des portes que la switch peuvent ouvrir.
@@ -112,17 +107,7 @@ namespace Exercice_12_1
             /// Ouvre le porte de l'ouest.
             /// </summary>
             Ouest
-        }
-
-        /// <summary>
-        /// Accesseur pour la palette.
-        /// </summary>
-        protected override PaletteTuiles Palette
-        {
-            // Les palettes sont stockées dans la liste en groupes d'état (i.e.
-            // 8 palettes de direction pour chaque état).
-            get { return palettes; }
-        }
+        }       
 
         /// <summary>
         /// Propriété (accesseur de lecture seulement) retournant la position des pattes du sprite.
@@ -134,6 +119,33 @@ namespace Exercice_12_1
             {
                 return new Vector2(this.Position.X, this.Position.Y);
             }
+        }
+
+        /// <summary>
+        /// Boutton pour colision         
+        /// </summary>
+        public Rectangle Boutton
+        {
+            get { return this.boutton; }
+        }
+
+        /// <summary>
+        /// Type de clef         
+        /// </summary>
+        public Types Type
+        {
+            get { return this.type; }
+            set { this.type = value; }
+        }
+
+        /// <summary>
+        /// Accesseur pour la palette.
+        /// </summary>
+        protected override PaletteTuiles Palette
+        {
+            // Les palettes sont stockées dans la liste en groupes d'état (i.e.
+            // 8 palettes de direction pour chaque état).
+            get { return palettes; }
         }
 
         /// <summary>

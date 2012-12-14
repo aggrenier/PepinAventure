@@ -126,7 +126,7 @@
     <Compile Include="IInputService.cs" />
     <Compile Include="ItemDeMenu.cs" />
     <Compile Include="Joueur.cs" />
-    <Compile Include="map_1_1.cs" />
+    <Compile Include="Map_1_1.cs" />
     <Compile Include="map_1_2.cs" />
     <Compile Include="map_1_3.cs" />
     <Compile Include="map_1_4.cs" />

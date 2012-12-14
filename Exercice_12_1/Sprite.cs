@@ -280,7 +280,7 @@ namespace IFM20884
         public virtual bool Collision(Sprite cible)
         {
             // Appliquer premièrement la détection par forme englobante
-            float distance = (float)Math.Sqrt(Math.Pow(this.Position.X - cible.Position.X, 2f) + Math.Pow((this.Position.Y - cible.Position.Y), 2f));
+            float distance = (float)Math.Sqrt(Math.Pow(this.Position.X - cible.Position.X, 2f) + Math.Pow(this.Position.Y - cible.Position.Y, 2f));
             if (distance > (this.RayonDeCollision + cible.RayonDeCollision))
             {
                 return false;
@@ -331,10 +331,15 @@ namespace IFM20884
             return false;
         }
 
+        /// <summary>
+        /// Fonctione de Collision Rapide, sans superposition de pixel       
+        /// </summary>
+        /// <param name="cible">Sprite à vérifier s'il y a collision avec this.</param>
+        /// <returns>Vrai si this est en collision avec cible.</returns>
         public virtual bool CollisionRapide(Sprite cible)
         {
             // Appliquer premièrement la détection par forme englobante
-            float distance = (float)Math.Sqrt(Math.Pow(this.Position.X - cible.Position.X, 2f) + Math.Pow((this.Position.Y - cible.Position.Y), 2f));
+            float distance = (float)Math.Sqrt(Math.Pow(this.Position.X - cible.Position.X, 2f) + Math.Pow(this.Position.Y - cible.Position.Y, 2f));
             if (distance < (this.RayonDeCollision + cible.RayonDeCollision))
             {               
                 return true;
@@ -343,14 +348,17 @@ namespace IFM20884
             return false;
         }
 
+        /// <summary>
+        /// Fonctione de Collision Rapide avec les blocs, sans superposition de pixel       
+        /// </summary>
+        /// <param name="cible">Sprite à vérifier s'il y a collision avec this.</param>
+        /// <returns>Vrai si this est en collision avec cible.</returns>
         public virtual bool CollisionBloc(Sprite cible)
-        {
-            // Appliquer premièrement la détection par forme englobante
-            //float distance = (float)Math.Sqrt(Math.Pow(this.Position.X - cible.Position.X, 2f) + Math.Pow((this.Position.Y - cible.Position.Y), 2f));
-
-            Rectangle rectSprite = new Rectangle((int)this.position.X-5, (int)this.position.Y-5,10,10);
-            Rectangle rectbloc = new Rectangle((int)cible.Position.X-14, (int)cible.Position.Y-14, 28, 28);             
-            if(rectSprite.Intersects( rectbloc))           
+        {            
+            Rectangle rectSprite = new Rectangle((int)this.position.X - 5, (int)this.position.Y - 5, 10, 10);
+            Rectangle rectbloc = new Rectangle((int)cible.Position.X - 14, (int)cible.Position.Y - 14, 28, 28);  
+           
+            if (rectSprite.Intersects(rectbloc))           
             {
                 Console.WriteLine(this.RayonDeCollision);
                 return true;

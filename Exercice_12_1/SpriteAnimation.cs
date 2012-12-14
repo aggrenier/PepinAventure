@@ -213,7 +213,7 @@ namespace IFM20884
             // Comme l'attribut _position contient la position centrée du sprite mais
             // que Draw() considère la position fournie comme celle de l'origine du
             // sprite, il faut décaler _position en conséquence avant d'invoquer Draw().
-            ForcerPosition(Position.X - (this.Width / 2), Position.Y - (this.Height / 2));
+            this.ForcerPosition(Position.X - (this.Width / 2), Position.Y - (this.Height / 2));
 
             // Créer destRect aux coordonnées du sprite dans le monde. À noter que
             // les dimensions de destRect sont constantes.
@@ -239,7 +239,7 @@ namespace IFM20884
             }
 
             // Remettre _position au centre du sprite.
-            ForcerPosition(Position.X + (this.Width / 2), Position.Y + (this.Height / 2));
+            this.ForcerPosition(Position.X + (this.Width / 2), Position.Y + (this.Height / 2));
         }
     }
 }

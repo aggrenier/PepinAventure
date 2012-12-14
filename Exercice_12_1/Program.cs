@@ -55,4 +55,3 @@ namespace Exercice_12_1
         }
     }
 }
-

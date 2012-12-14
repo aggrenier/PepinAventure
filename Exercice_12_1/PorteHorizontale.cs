@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="JoueurSprite.cs" company="Marco Lavoie">
+// <copyright file="PorteHorizontale.cs" company="Marco Lavoie">
 // Marco Lavoie, 2010. Tous droits réservés
 // 
 // L'utilisation de ce matériel pédagogique (présentations, code source 
@@ -47,7 +47,6 @@ namespace Exercice_12_1
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
 
-
     /// <summary>
     /// Classe implantant le sprite représentant le soldat contrôlé par le joueur. Ce sprite
     /// animé peut être stationnaire, marcher et courir dans huit directions.
@@ -70,41 +69,10 @@ namespace Exercice_12_1
         /// </summary>
         private static SoundEffect bruitFermer;
 
-        private bool ouvert = false;
-
-        public bool Ouvert
-        {
-            get { return this.ouvert; }
-            set { 
-                this.ouvert = value;
-                if (this.ouvert)
-                    IndexTuile = 0;
-                else
-                    IndexTuile = 2;
-            }
-        }
-
-        private Rectangle barre;
-
-        public Rectangle Barre
-        {
-            get { return this.barre; }
-            set { this.barre = value; }
-        }
-
         /// <summary>
-        /// Constructeur paramétré recevant la position du sprite.
+        /// Effet sonore contenant le bruitage du joueur en état de course.
         /// </summary>
-        /// <param name="x">Coordonnée initiale x (horizontale) du sprite.</param>
-        /// <param name="y">Coordonnée initiale y (verticale) du sprite.</param>
-        public PorteHorizontale(int x, int y, Directions direction)
-            : base(x, y)
-        {
-            barre.X = x - Width/2;
-            barre.Y = y - Height/2;
-            barre.Width = Width;
-            barre.Height = Height;
-        }
+        private bool ouvert = false;
 
         /// <summary>
         /// Attribut indiquant la direction de déplacement courante.
@@ -112,13 +80,24 @@ namespace Exercice_12_1
         private Directions direction;
 
         /// <summary>
-        /// Attribut indiquant la porte ouverte ou fermer.
+        /// Effet sonore contenant le bruitage du joueur en état de course.
         /// </summary>
-        public Directions Direction
+        private Rectangle barre;
+
+        /// <summary>
+        /// Constructeur paramétré recevant la position du sprite.
+        /// </summary>
+        /// <param name="x">Coordonnée initiale x (horizontale) du sprite.</param>
+        /// <param name="y">Coordonnée initiale y (verticale) du sprite.</param>
+        /// <param name="direction">Direction de la porte</param>
+        public PorteHorizontale(int x, int y, Directions direction)
+            : base(x, y)
         {
-            get { return this.direction; }
-            set { this.direction = value; }
-        }     
+            this.barre.X = x - (this.Width / 2);
+            this.barre.Y = y - (this.Height / 2);
+            this.barre.Width = this.Width;
+            this.barre.Height = this.Height;
+        }
 
         /// <summary>
         /// Enumération des directions potentielles de déplacement du personnage.
@@ -147,13 +126,45 @@ namespace Exercice_12_1
         }
 
         /// <summary>
-        /// Accesseur pour la palette.
+        /// Attribut indiquant la porte ouverte ou fermer.
         /// </summary>
-        protected override PaletteTuiles Palette
+        public Directions Direction
         {
-            // Les palettes sont stockées dans la liste en groupes d'état (i.e.
-            // 4 palettes de direction pour chaque état).
-            get { return palettes; }
+            get { return this.direction; }
+            set { this.direction = value; }
+        }
+
+        /// <summary>
+        /// Effet sonore contenant le bruitage du joueur en état de course.
+        /// </summary>
+        public Rectangle Barre
+        {
+            get { return this.barre; }
+            set { this.barre = value; }
+        }
+
+        /// <summary>
+        /// Effet sonore contenant le bruitage du joueur en état de course.
+        /// </summary>
+        public bool Ouvert
+        {
+            get
+            {
+                return this.ouvert;
+            }
+
+            set
+            {
+                this.ouvert = value;
+                if (this.ouvert)
+                {
+                    this.IndexTuile = 0;
+                }
+                else
+                {
+                    this.IndexTuile = 2;
+                }
+            }
         }
 
         /// <summary>
@@ -168,6 +179,15 @@ namespace Exercice_12_1
             }
         }
 
+        /// <summary>
+        /// Accesseur pour la palette.
+        /// </summary>
+        protected override PaletteTuiles Palette
+        {
+            // Les palettes sont stockées dans la liste en groupes d'état (i.e.
+            // 4 palettes de direction pour chaque état).
+            get { return palettes; }
+        }
 
         /// <summary>
         /// Charge les images associées au sprite du joueur.
@@ -176,13 +196,8 @@ namespace Exercice_12_1
         /// <param name="graphics">Gestionanire de périphérique d'affichage permettant d'extraire
         /// les caractéristiques de celui-ci (p.ex. l'écran).</param>
         public static void LoadContent(ContentManager content, GraphicsDeviceManager graphics)
-        {
-
-            //palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Nord"), 48, 36);
-            //palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Sud"), 48, 36);
+        {           
             palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Est"), 32, 48);
-            //palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Ouest"), 36, 28);
-
         }
 
         /// <summary>
@@ -192,8 +207,6 @@ namespace Exercice_12_1
         /// <param name="graphics">Gestionnaire de périphérique d'affichage.</param>
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics)
         {
-
-
             // La fonction de base s'occupe de l'animation.
             base.Update(gameTime, graphics);
         }

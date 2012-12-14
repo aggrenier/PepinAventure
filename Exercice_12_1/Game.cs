@@ -2143,11 +2143,11 @@ namespace Exercice_12_1
 
                 if (ServiceHelper.Get<IInputService>().DeplacementDroite(0) > 0)
                 {
-                    pj.vitesHorizontale += (this.joueur.VitesseHorizontal * 1.2f);
+                    pj.VitesseHorizontale += (this.joueur.VitesseHorizontal * 1.2f);
                 }
                 else if (ServiceHelper.Get<IInputService>().DeplacementGauche(0) > 0)
                 {
-                    pj.vitesHorizontale -= (this.joueur.VitesseHorizontal * 1.2f);
+                    pj.VitesseHorizontale -= (this.joueur.VitesseHorizontal * 1.2f);
                 }
 
 
@@ -2161,11 +2161,11 @@ namespace Exercice_12_1
 
                 if (ServiceHelper.Get<IInputService>().DeplacementAvant(0) > 0)
                 {
-                    pj.vitesseVerticale -= (this.joueur.VitesseVerticale * 1.2f);
+                    pj.VitesseVerticale -= (this.joueur.VitesseVerticale * 1.2f);
                 }
                 else if (ServiceHelper.Get<IInputService>().DeplacementArriere(0) > 0)
                 {
-                    pj.vitesseVerticale += (this.joueur.VitesseVerticale * 1.2f);
+                    pj.VitesseVerticale += (this.joueur.VitesseVerticale * 1.2f);
                 }
 
                 this.listeProjectiles.Add(pj);
@@ -2178,11 +2178,11 @@ namespace Exercice_12_1
 
                 if (ServiceHelper.Get<IInputService>().DeplacementDroite(0) > 0)
                 {
-                    pj.vitesHorizontale += (this.joueur.VitesseHorizontal * 1.2f);
+                    pj.VitesseHorizontale += (this.joueur.VitesseHorizontal * 1.2f);
                 }
                 else if (ServiceHelper.Get<IInputService>().DeplacementGauche(0) > 0)
                 {
-                    pj.vitesHorizontale -= (this.joueur.VitesseHorizontal * 1.2f);
+                    pj.VitesseHorizontale -= (this.joueur.VitesseHorizontal * 1.2f);
                 }
 
                 this.listeProjectiles.Add(pj);
@@ -2195,11 +2195,11 @@ namespace Exercice_12_1
 
                 if (ServiceHelper.Get<IInputService>().DeplacementAvant(0) > 0)
                 {
-                    pj.vitesseVerticale -= (this.joueur.VitesseVerticale * 1.2f);
+                    pj.VitesseVerticale -= (this.joueur.VitesseVerticale * 1.2f);
                 }
                 else if (ServiceHelper.Get<IInputService>().DeplacementArriere(0) > 0)
                 {
-                    pj.vitesseVerticale += (this.joueur.VitesseVerticale * 1.2f);
+                    pj.VitesseVerticale += (this.joueur.VitesseVerticale * 1.2f);
                 }
 
                 this.listeProjectiles.Add(pj);
@@ -2264,26 +2264,26 @@ namespace Exercice_12_1
                 //La couleur "rouge" dans les images de collision, a finalement un tinte rouge de 237.
                 if (this.monde.CouleurDeCollision(pj.Position).R == 237)
                 {
-                    if (pj.vitesHorizontale < 0)
+                    if (pj.VitesseHorizontale < 0)
                     {
-                        pj.vitesHorizontale = 1;
+                        pj.VitesseHorizontale = 1;
                     }
-                    else if (pj.vitesHorizontale > 0)
+                    else if (pj.VitesseHorizontale > 0)
                     {
-                        pj.vitesHorizontale = -1;
+                        pj.VitesseHorizontale = -1;
                     }
 
                 }
 
                 else if (this.monde.CouleurDeCollision(pj.Position) == Color.Black)
                 {
-                    if (pj.vitesseVerticale < 0)
+                    if (pj.VitesseVerticale < 0)
                     {
-                        pj.vitesseVerticale = 1;
+                        pj.VitesseVerticale = 1;
                     }
-                    else if (pj.vitesseVerticale > 0)
+                    else if (pj.VitesseVerticale > 0)
                     {
-                        pj.vitesseVerticale = -1;
+                        pj.VitesseVerticale = -1;
                     }
                     
                 }
@@ -2334,24 +2334,24 @@ namespace Exercice_12_1
                 {
                     if (bloc.CollisionBloc(pj))
                     {
-                        if (pj.vitesHorizontale < 0)
+                        if (pj.VitesseHorizontale < 0)
                         {
-                            pj.vitesHorizontale = 1;
+                            pj.VitesseHorizontale = 1;
                         }
 
-                        else if (pj.vitesHorizontale > 0)
+                        else if (pj.VitesseHorizontale > 0)
                         {
-                            pj.vitesHorizontale = -1;
+                            pj.VitesseHorizontale = -1;
                         }
 
-                        if (pj.vitesseVerticale < 0)
+                        if (pj.VitesseVerticale < 0)
                         {
-                            pj.vitesseVerticale = 1;
+                            pj.VitesseVerticale = 1;
                         }
 
-                        else if (pj.vitesseVerticale > 0)
+                        else if (pj.VitesseVerticale > 0)
                         {
-                            pj.vitesseVerticale = -1;
+                            pj.VitesseVerticale = -1;
                         }
                     }
                 }

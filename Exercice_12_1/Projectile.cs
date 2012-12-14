@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="JoueurSprite.cs" company="Marco Lavoie">
+// <copyright file="Projectile.cs" company="Marco Lavoie">
 // Marco Lavoie, 2010. Tous droits réservés
 // 
 // L'utilisation de ce matériel pédagogique (présentations, code source 
@@ -74,36 +74,6 @@ namespace Exercice_12_1
     public class Projectile : SpriteAnimation
     {
         /// <summary>
-        /// Fonction déléguée permettant d'obtenir la résistance aux déplacements du sprite
-        /// dans le monde de tuiles. Si aucune fonction déléguée n'est fournie, aucune
-        /// résistance n'est appliquée aux déplacements.
-        /// </summary>
-        private ResistanceAuMouvement getResistanceAuMouvement;
-
-        /// <summary>
-        /// Fonction déléguée permettant de valider les déplacements du sprite
-        /// dans le monde de tuiles. Si aucune fonction déléguée n'est fournie, aucune
-        /// résistance n'est appliquée aux déplacements.
-        /// </summary>
-        private ValiderDeplacement getValiderDeplacement;
-
-        private TypesProjectiles typeProjectile;
-
-        public enum TypesProjectiles
-        {
-
-            Joueur,
-
-            Ennemi
-        }
-
-        public TypesProjectiles TypeProjectile
-        {
-            get { return this.typeProjectile; }
-            set { this.typeProjectile = value; }
-        }
-
-        /// <summary>
         /// Attribut statique (i.e. partagé par toutes les instances) constituant une 
         /// liste de palettes à exploiter selon la direction et l'état du joueur.
         /// </summary>
@@ -117,51 +87,51 @@ namespace Exercice_12_1
         /// <summary>
         /// Effet sonore contenant le bruitage du joueur en état de course.
         /// </summary>
-        private static SoundEffect bruitFrapper;      
+        private static SoundEffect bruitFrapper;
+
+        /// <summary>
+        /// Fonction déléguée permettant d'obtenir la résistance aux déplacements du sprite
+        /// dans le monde de tuiles. Si aucune fonction déléguée n'est fournie, aucune
+        /// résistance n'est appliquée aux déplacements.
+        /// </summary>
+        private ResistanceAuMouvement getResistanceAuMouvement;
+
+        /// <summary>
+        /// Fonction déléguée permettant de valider les déplacements du sprite
+        /// dans le monde de tuiles. Si aucune fonction déléguée n'est fournie, aucune
+        /// résistance n'est appliquée aux déplacements.
+        /// </summary>
+        private ValiderDeplacement getValiderDeplacement;
+
+        /// <summary>
+        /// Pour le type de projectile, mechant ou pour joueur
+        /// </summary>
+        private TypesProjectiles typeProjectile;
 
         /// <summary>
         /// Vitesse de marche du joueur, avec valeur par défaut.
         /// </summary>
-        private float VitesseHorizontale = 0.0f;
+        private float vitesseHorizontale = 0.0f;
 
-        public float vitesHorizontale
-        {
-            get { return  this.VitesseHorizontale; }
-            set { this.VitesseHorizontale += value; }
-        }
-
-        private float VitesseVerticale = 0.0f;
         /// <summary>
-        /// Vitesse de marche du joueur, avec valeur par défaut.
+        /// Accesseur pour attribut vitesseMaximum.
         /// </summary>
-        public float vitesseVerticale
-        {
-            get { return this.VitesseVerticale; }
-            set { this.VitesseVerticale += value; }
-        }
+        private float vitesseVerticale = 0.0f;
 
         /// <summary>
         /// Attribut indiquant la direction de déplacement courante.
         /// </summary>
         private Direction direction;
 
-        // =======================================================================================================
+        /// <summary>
+        /// Accesseur pour attribut vitesseMaximum.
+        /// </summary>
         private float vieDeProjectile = 5f;
 
-        public float VideDeProjectile
-        {
-            get { return this.vieDeProjectile; }
-            set { this.vieDeProjectile = value; }
-        }
-
+        /// <summary>
+        /// Accesseur pour attribut vitesseMaximum.
+        /// </summary>
         private float animProjectile = 5f;
-
-        public float AnimProjectile
-        {
-            get { return this.animProjectile; }
-            set { this.animProjectile = value; }
-        }
-        
 
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
@@ -171,75 +141,90 @@ namespace Exercice_12_1
         public Projectile(float x, float y)
             : base(x, y)
         {
- 
         }
 
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite. On invoque l'autre constructeur.
         /// </summary>
         /// <param name="position">Coordonnées initiales horizontale et verticale du sprite.</param>
+        /// <param name="direction">Direction du projectile</param>
         public Projectile(Vector2 position, int direction)
             : this(position.X, position.Y)
         {
             switch (direction)
             {
-                case 0 :
+                case 0:
                     this.direction = Direction.Nord;
-                    VitesseHorizontale = 0.0f;
-                    vitesseVerticale = -0.5f;
+                    this.vitesseHorizontale = 0.0f;
+                    this.vitesseVerticale = -0.5f;
                     break;
 
                 case 1:
                     this.direction = Direction.NordEst;
-                    VitesseHorizontale = 0.5f;
-                    vitesseVerticale = -0.5f;
+                    this.vitesseHorizontale = 0.5f;
+                    this.vitesseVerticale = -0.5f;
                     break;
 
                 case 2:
                     this.direction = Direction.Est;
-                    VitesseHorizontale = +0.5f;
-                    vitesseVerticale = 0.0f;
+                    this.vitesseHorizontale = +0.5f;
+                    this.vitesseVerticale = 0.0f;
                     break;
 
                 case 3:
                     this.direction = Direction.SudEst;
-                    VitesseHorizontale = 0.5f;
-                    vitesseVerticale = 0.5f;
+                    this.vitesseHorizontale = 0.5f;
+                    this.vitesseVerticale = 0.5f;
                     break;
 
                 case 4:
                     this.direction = Direction.Sud;
-                    VitesseHorizontale = 0.0f;
-                    vitesseVerticale = 0.5f;
+                    this.vitesseHorizontale = 0.0f;
+                    this.vitesseVerticale = 0.5f;
                     break;
 
                 case 5:
                     this.direction = Direction.SudOuest;
-                    VitesseHorizontale = 0.5f;
-                    vitesseVerticale = -0.5f;
+                    this.vitesseHorizontale = 0.5f;
+                    this.vitesseVerticale = -0.5f;
                     break;
 
                 case 6:
                     this.direction = Direction.Ouest;
-                    VitesseHorizontale = -0.5f;
-                    vitesseVerticale = 0.0f;
+                    this.VitesseHorizontale = -0.5f;
+                    this.vitesseVerticale = 0.0f;
                     break;
 
                 case 7:
                     this.direction = Direction.NordOuest;
-                    VitesseHorizontale = -0.5f;
-                    vitesseVerticale = -0.5f;
+                    this.VitesseHorizontale = -0.5f;
+                    this.vitesseVerticale = -0.5f;
                     break;
 
                 default:
                     this.direction = Direction.Nord;
-                    VitesseHorizontale = 0.0f;
-                    vitesseVerticale = -0.5f;
+                    this.VitesseHorizontale = 0.0f;
+                    this.vitesseVerticale = -0.5f;
                     break;
             }
 
             bruitLaser.Play();
-            
+        }
+
+        /// <summary>
+        ///  Pour le type de projectile, mechant ou pour joueur
+        /// </summary>
+        public enum TypesProjectiles
+        {
+            /// <summary>
+            /// Joueur Projectile
+            /// </summary>
+            Joueur,
+
+            /// <summary>
+            /// Ennemi Projectile
+            /// </summary>
+            Ennemi
         }
 
         /// <summary>
@@ -291,17 +276,55 @@ namespace Exercice_12_1
         /// <summary>
         /// Accesseur pour attribut vitesseMaximum.
         /// </summary>
+        public float VitesseHorizontale
+        {
+            get { return this.vitesseHorizontale; }
+            set { this.vitesseHorizontale += value; }
+        }
+
+        /// <summary>
+        /// Vitesse de marche du joueur, avec valeur par défaut.
+        /// </summary>
+        public float VitesseVerticale
+        {
+            get { return this.vitesseVerticale; }
+            set { this.vitesseVerticale += value; }
+        }
+
+        /// <summary>
+        /// Accesseur pour attribut vitesseMaximum.
+        /// </summary>
+        public float VideDeProjectile
+        {
+            get { return this.vieDeProjectile; }
+            set { this.vieDeProjectile = value; }
+        }
+
+        /// <summary>
+        /// Accesseur pour attribut vitesseMaximum.
+        /// </summary>
+        public float AnimProjectile
+        {
+            get { return this.animProjectile; }
+            set { this.animProjectile = value; }
+        }
+
+        /// <summary>
+        /// Accesseur pour attribut vitesseMaximum.
+        /// </summary>
         public float VitesseMaximum
         {
             get { return this.VitesseMaximum; }
             set { this.VitesseMaximum = value; }
         }
 
-        protected override PaletteTuiles Palette
+        /// <summary>
+        ///  Pour le type de projectile, mechant ou pour joueur
+        /// </summary>
+        public TypesProjectiles TypeProjectile
         {
-            // Les palettes sont stockées dans la liste en groupes d'état (i.e.
-            // 8 palettes de direction pour chaque état).
-            get { return palettes; }
+            get { return this.typeProjectile; }
+            set { this.typeProjectile = value; }
         }
 
         /// <summary>
@@ -320,13 +343,13 @@ namespace Exercice_12_1
                     this.direction == Direction.NordEst ||
                     this.direction == Direction.SudEst)
                 {
-                    dx += (Width / 2) - 30;
+                    dx += (this.Width / 2) - 30;
                 }
                 else if (this.direction == Direction.Ouest ||
                     this.direction == Direction.NordOuest ||
                     this.direction == Direction.SudOuest)
                 {
-                    dx -= (Width / 2) - 30;
+                    dx -= (this.Width / 2) - 30;
                 }
 
                 return new Vector2(this.Position.X + dx, this.Position.Y + dy);
@@ -356,6 +379,16 @@ namespace Exercice_12_1
         }
 
         /// <summary>
+        /// Accesseur pour attribut Palette
+        /// </summary>
+        protected override PaletteTuiles Palette
+        {
+            // Les palettes sont stockées dans la liste en groupes d'état (i.e.
+            // 8 palettes de direction pour chaque état).
+            get { return palettes; }
+        }
+
+        /// <summary>
         /// Charge les images associées au sprite du joueur.
         /// </summary>
         /// <param name="content">Gestionnaire de contenu permettant de charger les images du vaisseau.</param>
@@ -367,8 +400,6 @@ namespace Exercice_12_1
 
             // Charger les bruitages de fond du joueur pour différents états
             bruitLaser = content.Load<SoundEffect>("Audio\\Effets\\Projectile\\Projectile");
-           
-            
             bruitFrapper = content.Load<SoundEffect>("Audio\\Effets\\Joueur\\Course");
         }
 
@@ -379,13 +410,9 @@ namespace Exercice_12_1
         /// <param name="graphics">Gestionnaire de périphérique d'affichage.</param>
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics)
         {
-            ForcerPosition(Position.X + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale),
-                Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.vitesseVerticale));
+            this.ForcerPosition(this.Position.X + (gameTime.ElapsedGameTime.Milliseconds * this.VitesseHorizontale), this.Position.Y + (gameTime.ElapsedGameTime.Milliseconds * this.vitesseVerticale));
 
             this.VideDeProjectile -= 0.1f;
-
-            //animProjectile -= .01f;
-            //animProjectile = (float)Math.Sin(this.animProjectile);
 
             // La fonction de base s'occupe de l'animation.
             base.Update(gameTime, graphics);
@@ -402,7 +429,7 @@ namespace Exercice_12_1
             // Comme l'attribut _position contient la position centrée du sprite mais
             // que Draw() considère la position fournie comme celle de l'origine du
             // sprite, il faut décaler _position en conséquence avant d'invoquer Draw().
-            ForcerPosition(Position.X - (this.Width / 2), Position.Y - (this.Height / 2));
+            this.ForcerPosition(Position.X - (this.Width / 2), Position.Y - (this.Height / 2));
 
             // Créer destRect aux coordonnées du sprite dans le monde. À noter que
             // les dimensions de destRect sont constantes.
@@ -428,7 +455,7 @@ namespace Exercice_12_1
             }
 
             // Remettre _position au centre du sprite.
-            ForcerPosition(Position.X + (this.Width / 2), Position.Y + (this.Height / 2));
+            this.ForcerPosition(this.Position.X + (this.Width / 2), this.Position.Y + (this.Height / 2));
         }
     }
 }

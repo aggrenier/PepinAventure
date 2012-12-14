@@ -256,9 +256,8 @@ namespace IFM20884
         public float AngleRotation
         {
             get { return this.angleRotation; }
-            set { this.angleRotation = value; }
+            set { angleRotation = value; }
         }
-
         /// <summary>
         /// Accesseur pour attribut vitesseMaximum.
         /// </summary>
@@ -283,7 +282,7 @@ namespace IFM20884
         public float Echelle
         {
             get { return this.echelle; }
-            set { this.echelle = value; }
+            set { echelle = value; }
         }
 
         /// <summary>
@@ -292,7 +291,7 @@ namespace IFM20884
         public int ContTombe
         {
             get { return this.contTombe; }
-            set { this.contTombe = value; }
+            set { contTombe = value; }
         }
 
         /// <summary>
@@ -301,7 +300,7 @@ namespace IFM20884
         public float VitesseVerticale
         {
             get { return 0.3f; }
-            set { this.vitesseVerticale = value; }
+            set { vitesseVerticale = value; }
         }
 
         /// <summary>
@@ -310,7 +309,7 @@ namespace IFM20884
         public float VitesseHorizontal
         {
             get { return 0.3f; }
-            set { this.vitesseHorizontal = value; }
+            set { vitesseHorizontal = value; }
         }
 
         /// <summary>
@@ -318,8 +317,8 @@ namespace IFM20884
         /// </summary>
         public bool Clef
         {
-            get { return this.clef; }
-            set { this.clef = value; }
+            get { return clef; }
+            set { clef = value; }
         }
 
         /// <summary>
@@ -388,20 +387,19 @@ namespace IFM20884
                     this.direction == Directions.NordEst ||
                     this.direction == Directions.SudEst)
                 {
-                    dx = +12;
+                    dx =  + 12;
                 }
                 else if (this.direction == Directions.Ouest ||
                     this.direction == Directions.NordOuest ||
                     this.direction == Directions.SudOuest)
                 {
-                    dx = -12;
+                    dx =  - 12;
                 }
-
                 if (this.direction == Directions.Nord ||
                     this.direction == Directions.NordEst ||
                     this.direction == Directions.NordOuest)
                 {
-                    dy = -12;
+                    dy -= 12;
                 }
 
                 return new Vector2(this.Position.X + dx, this.Position.Y + dy);
@@ -537,13 +535,14 @@ namespace IFM20884
         /// <param name="gameTime">Gestionnaire de temps de jeu.</param>
         /// <param name="graphics">Gestionnaire de périphérique d'affichage.</param>
         public override void Update(GameTime gameTime, GraphicsDeviceManager graphics)
-        {            
-            if (this.etat == Etats.Tombe)                                                      
+        {
+            // L'orsque le personnage est en train de tomber, il ne peut pas en sortir
+            if (this.etat == Etats.Tombe)                                                      ///////////******
             {
                 this.angleRotation += gameTime.ElapsedGameTime.Milliseconds * 0.004f;
                 this.angleRotation %= MathHelper.Pi * 2;
-                this.contTombe++;
-                this.echelle -= 0.015f;
+                contTombe++;
+                echelle -= 0.015f;
                 base.Update(gameTime, graphics);
                 return;
             }
@@ -714,9 +713,7 @@ namespace IFM20884
                 {
                     this.bruitActif.Play();
                     if (this.etat == Etats.Tombe)
-                    {
-                        this.bruitActif = null;
-                    }
+                        bruitActif = null;                                                             //*********
                 }
             }
 

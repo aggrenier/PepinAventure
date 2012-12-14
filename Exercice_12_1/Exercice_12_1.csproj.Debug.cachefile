@@ -162,4 +162,5 @@ Content\Objects\Heart.xnb
 Content\Objects\Food.xnb
 Content\Objects\Key.xnb
 Content\Textures\SplashGameOver.xnb
+Content\Audio\Musique\GameOver.xnb
 Content\Menus\QuitterMenu.xml

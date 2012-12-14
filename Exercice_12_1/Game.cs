@@ -119,6 +119,16 @@ namespace Exercice_12_1
         private SoundEffect bruitageblock;
 
         /// <summary>
+        /// Instance de bruitage de fond en cours de sonorisation durant le jeu.
+        /// </summary>
+        private SoundEffectInstance bruitageGameOverActif;
+
+        /// <summary>
+        /// Instance de bruitage des blocs.
+        /// </summary>
+        private SoundEffect bruitageGameOver;
+
+        /// <summary>
         /// Fond d'écran d'accueil.
         /// </summary>
         private Texture2D ecranAccueil;
@@ -526,6 +536,39 @@ namespace Exercice_12_1
         }
 
         /// <summary>
+        /// Propriété activant et désactivant l'état de pause du jeu. Cette propriété doit être utilisée
+        /// pour mettre le jeu en pause (plutôt que EtatJeu) car elle stocke l'état précédent (i.e. avant 
+        /// la pause) du jeu afin de le restaurer lorsque la pause est terminée.
+        /// </summary>
+        /// <value>Le jeu est en pause ou pas.</value>
+        public bool Quitter
+        {
+            get
+            {
+                return this.etatJeu == Etats.Quitter;
+            }
+
+            set
+            {
+                // S'assurer qu'il y a changement de statut de pause
+                if (value && this.EtatJeu != Etats.Quitter)
+                {
+                    // Stocker l'état courant du jeu avant d'activer la pause
+                    this.prevEtatJeu = this.EtatJeu;
+                    this.EtatJeu = Etats.Quitter;
+                }
+                else if (!value && this.EtatJeu == Etats.Quitter)
+                {
+                    // Restaurer l'état du jeu à ce qu'il était avant la pause
+                    this.EtatJeu = this.prevEtatJeu;
+                }
+
+                // Suspendre les effets sonores au besoin
+                this.SuspendreEffetsSonores(this.Quitter);
+            }
+        }
+
+        /// <summary>
         /// Propriété (accesseur pour menuCourant) retournant ou changeant le menu affiché. Lorsque
         /// sa valeur est null, aucun menu n'est affiché.
         /// </summary>
@@ -861,6 +904,13 @@ namespace Exercice_12_1
             this.bruitageFondActif.Volume = 0.80f;
             this.bruitageFondActif.IsLooped = true;
 
+            this.bruitageGameOver = Content.Load<SoundEffect>("Audio\\Musique\\GameOver");
+
+            // Sélectionner et paramétrer le bruitage de fond.
+            this.bruitageGameOverActif = this.bruitageGameOver.CreateInstance();
+            this.bruitageGameOverActif.Volume = 0.80f;
+            this.bruitageGameOverActif.IsLooped = false;
+
             // Charger les polices.
             this.policeMessages = Content.Load<SpriteFont>("Polices\\MessagesPolice");
             this.policeMenuTitre = Content.Load<SpriteFont>("Polices\\MenuTitresPolice");
@@ -976,9 +1026,14 @@ namespace Exercice_12_1
             // Si le jeu est en cours de démarrage, passer à l'état de jouer.
             if (this.EtatJeu == Etats.GameOver)
             {  
-
                 if (ServiceHelper.Get<IInputService>().Sauter(1))
                 {
+                    // Bruitage de fond.
+                    if (this.bruitageGameOverActif.State == SoundState.Playing)
+                    {
+                        this.bruitageGameOverActif.Stop();
+                    }   
+
                     this.EtatJeu = Etats.Demarrer;
                     this.joueur.VieDeJoueur = 10;
                     this.MondeCourant = Mondes.MAP_1_1;
@@ -991,7 +1046,13 @@ namespace Exercice_12_1
 
                 if (ServiceHelper.Get<IInputService>().Quitter(1))
                 {
-                    this.EtatJeu = Etats.Quitter;
+                    // Bruitage de fond.
+                    if (this.bruitageGameOverActif.State == SoundState.Playing)
+                    {
+                        this.bruitageGameOverActif.Stop();
+                    }
+
+                    this.Quitter = !this.Quitter;
                 }
 
                 // Rien d'autre à faire alors on quitte la fonction 
@@ -1011,7 +1072,7 @@ namespace Exercice_12_1
                 }
 
                 // L'usager veut-il quitter immédiatement
-                if (ServiceHelper.Get<IInputService>().Quitter(0))
+                if (ServiceHelper.Get<IInputService>().Sauter(0))
                 {
                     this.Exit();
                 }
@@ -1073,6 +1134,7 @@ namespace Exercice_12_1
 
             if (this.joueur.VieDeJoueur == 0)
             {
+                this.bruitageGameOverActif.Play();
                 this.GameOverState = !this.GameOverState;
             }
 
@@ -1820,7 +1882,7 @@ namespace Exercice_12_1
                     }
                     else if (this.joueur.Position.Y < 60)
                     {
-                        this.EtatJeu = Etats.Quitter;
+                        this.Quitter = !this.Quitter;
                     }
                 }
             }

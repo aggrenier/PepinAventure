@@ -125,10 +125,10 @@ namespace IFM20884
         /// <returns>Vrai si l'item de menu actif doit être sélectionné; faux sinon.</returns>
         bool MenuItemSelection(int device);
 
-        bool tirerNord(int device);
-        bool tirerEst(int device);
-        bool tirerSud(int device);
-        bool tirerOuest(int device);
+        bool TirerNord(int device);
+        bool TirerEst(int device);
+        bool TirerSud(int device);
+        bool TirerOuest(int device);
 
         bool BougerBloc(int device);
     }

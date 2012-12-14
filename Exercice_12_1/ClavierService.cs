@@ -177,43 +177,51 @@ namespace IFM20884
         }
 
         /// <summary>
-        /// Indique si le personnage doit sauter (si le bouton A de la manette est pressé). La         
+        /// Indique si le personnage doit tirer         
         /// </summary>
         /// <param name="device">Le périphérique à lire.</param>
         /// <returns>Vrai si la barre d'espacement est pressée.</returns>
-        public bool tirerNord(int device)
+        public bool TirerNord(int device)
         {
             // Imposer un délai de 0.2 seconde entre chaque saut.
             return this.DelaiDuplicationExpire(Keys.Up, 400);
         }
 
+        /// <summary>
+        /// Indique si le personnage doit tirer           
         /// </summary>
         /// <param name="device">Le périphérique à lire.</param>
         /// <returns>Vrai si la barre d'espacement est pressée.</returns>
-        public bool tirerEst(int device)
+        public bool TirerEst(int device)
         {
             // Imposer un délai de 0.2 seconde entre chaque saut.
             return this.DelaiDuplicationExpire(Keys.Right, 400);
         }
 
+        /// <summary>
+        /// Indique si le personnage doit tirer           
         /// </summary>
         /// <param name="device">Le périphérique à lire.</param>
         /// <returns>Vrai si la barre d'espacement est pressée.</returns>
-        public bool tirerSud(int device)
+        public bool TirerSud(int device)
         {
             // Imposer un délai de 0.2 seconde entre chaque saut.
             return this.DelaiDuplicationExpire(Keys.Down, 400);
         }
 
+        /// <summary>
+        /// Indique si le personnage doit tirer           
         /// </summary>
         /// <param name="device">Le périphérique à lire.</param>
         /// <returns>Vrai si la barre d'espacement est pressée.</returns>
-        public bool tirerOuest(int device)
+        public bool TirerOuest(int device)
         {
             // Imposer un délai de 0.2 seconde entre chaque saut.
             return this.DelaiDuplicationExpire(Keys.Left, 400);
         }
 
+        /// <summary>
+        /// Indique si le personnage doit sauter (si le bouton A de la manette est pressé). La         
         /// </summary>
         /// <param name="device">Le périphérique à lire.</param>
         /// <returns>Vrai si la barre d'espacement est pressée.</returns>

@@ -2136,7 +2136,7 @@ namespace Exercice_12_1
         /// </summary>
         private void GestionProjectile(GameTime gameTime)
         {
-            if (ServiceHelper.Get<IInputService>().tirerNord(1))
+            if (ServiceHelper.Get<IInputService>().TirerNord(1))
             {
                 Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 0);
                 pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
@@ -2154,7 +2154,7 @@ namespace Exercice_12_1
                 this.listeProjectiles.Add(pj);
             }
 
-            else if (ServiceHelper.Get<IInputService>().tirerEst(1))
+            else if (ServiceHelper.Get<IInputService>().TirerEst(1))
             {
                 Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 2);
                 pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
@@ -2171,7 +2171,7 @@ namespace Exercice_12_1
                 this.listeProjectiles.Add(pj);
             }
 
-            else if (ServiceHelper.Get<IInputService>().tirerSud(1))
+            else if (ServiceHelper.Get<IInputService>().TirerSud(1))
             {
                 Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 4);
                 pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
@@ -2188,7 +2188,7 @@ namespace Exercice_12_1
                 this.listeProjectiles.Add(pj);
             }
 
-            else if (ServiceHelper.Get<IInputService>().tirerOuest(1))
+            else if (ServiceHelper.Get<IInputService>().TirerOuest(1))
             {
                 Projectile pj = new Projectile(new Vector2(joueur.Position.X, this.joueur.Position.Y), 6);
                 pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;

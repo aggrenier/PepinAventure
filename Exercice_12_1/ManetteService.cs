@@ -404,7 +404,7 @@ namespace IFM20884
         /// </summary>
         /// <param name="device">Le périphérique à lire.</param>
         /// <returns>Vrai si la barre d'espacement est pressée.</returns>
-        public bool tirerNord(int device)
+        public bool TirerNord(int device)
         {
             // Ralentir les répétitions de pressions (400 millisecondes de délai)
             return this.DelaiDuplicationExpire(device, Buttons.RightThumbstickUp, 400);
@@ -413,7 +413,7 @@ namespace IFM20884
         /// </summary>
         /// <param name="device">Le périphérique à lire.</param>
         /// <returns>Vrai si la barre d'espacement est pressée.</returns>
-        public bool tirerEst(int device)
+        public bool TirerEst(int device)
         {
             // S'assurer que le numéro de manette fourni est valide.
             this.ValiderDevice(ref device);
@@ -430,7 +430,7 @@ namespace IFM20884
         /// </summary>
         /// <param name="device">Le périphérique à lire.</param>
         /// <returns>Vrai si la barre d'espacement est pressée.</returns>
-        public bool tirerSud(int device)
+        public bool TirerSud(int device)
         {
            // S'assurer que le numéro de manette fourni est valide.
             this.ValiderDevice(ref device);
@@ -449,7 +449,7 @@ namespace IFM20884
         /// </summary>
         /// <param name="device">Le périphérique à lire.</param>
         /// <returns>Vrai si la barre d'espacement est pressée.</returns>
-        public bool tirerOuest(int device)
+        public bool TirerOuest(int device)
         {
             // S'assurer que le numéro de manette fourni est valide.
             this.ValiderDevice(ref device);

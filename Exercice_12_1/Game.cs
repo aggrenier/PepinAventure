@@ -2200,6 +2200,7 @@ namespace Exercice_12_1
 
             Bloc bloc0 = new Bloc(404, 150);
             Bloc bloc1 = new Bloc(404, 175);
+            bloc0.BoundsRect = bloc1.BoundsRect = new Rectangle(362, 100, 84, 415);
 
             Ogre ogre = new Ogre(new Vector2(210, 144));
             this.listeOgres.Add(ogre);

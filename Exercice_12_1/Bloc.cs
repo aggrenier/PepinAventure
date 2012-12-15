@@ -113,12 +113,19 @@ namespace Exercice_12_1
         /// </summary>
         private bool blockMouvement = true;
 
+        /// <summary>
+        /// Son de tomber dans un troue.
+        /// </summary>
         private static SoundEffect bruitTombe;
 
-        private static SoundEffectInstance bruitTombeActif;
-
+        /// <summary>
+        /// L'échelle d'affichage du bloc. Utilisé pour tomber dans les trous.
+        /// </summary>
         private float blocEchelle = 1f;
 
+        /// <summary>
+        /// Accesseurs pour blocEchelle. Setter invoque la bruit de tombe lorsqu'il est 0.98f.
+        /// </summary>
         public float BlocEchelle
         {
             get { return this.blocEchelle; }

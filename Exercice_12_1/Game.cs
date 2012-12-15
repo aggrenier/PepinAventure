@@ -1045,7 +1045,10 @@ namespace Exercice_12_1
                 // L'usager veut-il démarrer la partie? 
                 if (ServiceHelper.Get<IInputService>().Sauter(1))
                 {
-                    this.EtatJeu = Etats.Jouer;
+                    this.EtatJeu = Etats.Jouer; 
+
+                    base.Update(gameTime);
+                    return;
                 }
 
                 // Rien d'autre à faire alors on quitte la fonction 
@@ -1062,9 +1065,14 @@ namespace Exercice_12_1
                     if (this.bruitageGameOverActif.State == SoundState.Playing)
                     {
                         this.bruitageGameOverActif.Stop();
-                    }   
+                    }
 
-                    this.EtatJeu = Etats.Demarrer;
+                    this.contMort = 0;
+                    this.GameOverState = false;
+                    this.EtatJeu = Etats.Demarrer;                    
+                    this.joueur = new Joueur(1150, 300);
+                    this.joueur.BoundsRect = new Rectangle(0, 0, 600, 600);                   
+                    this.joueur.GetValiderDeplacement = this.ValiderDeplacement;
                     this.joueur.VieDeJoueur = 10;
                     this.MondeCourant = Mondes.MAP_1_1;
                     this.boolClef = false;

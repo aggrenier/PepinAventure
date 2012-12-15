@@ -146,6 +146,11 @@ namespace IFM20884
         /// La vitesse vertical du personnage.
         /// </summary>
         private float vitesseVerticale;
+
+        /// <summary>
+        /// Compteur utiliser pour la couleur de collision
+        /// </summary>
+        private int couleurCollison = 100;
         
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
@@ -244,6 +249,15 @@ namespace IFM20884
             /// Le personnage mort. Seulement implémenté pour le joueur.
             /// </summary>
             Mort 
+        }
+
+        /// <summary>
+        /// Pour la couleur du joueur avec collision
+        /// </summary>
+        public int CouleurCollison
+        {
+            get { return this.couleurCollison; }
+            set { this.couleurCollison = value; }
         }
 
         /// <summary>

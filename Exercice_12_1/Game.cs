@@ -548,7 +548,7 @@ namespace Exercice_12_1
                     // Stocker l'état courant du jeu avant d'activer la pause
                     this.prevEtatJeu = this.EtatJeu;
                     this.EtatJeu = Etats.GameOver;
-                }              
+                }
 
                 // Suspendre les effets sonores au besoin
                 this.SuspendreEffetsSonores(this.GameOverState);
@@ -915,7 +915,7 @@ namespace Exercice_12_1
             this.LoadMap11();
 
             // Imposer la palette de collisions au déplacement du joueur.                       
-            this.joueur.GetResistanceAuMouvement = this.CalculerResistanceAuMouvement;          
+            this.joueur.GetResistanceAuMouvement = this.CalculerResistanceAuMouvement;
 
             // Charger le bruitage de fond du jeu.
             bruitageFond = Content.Load<SoundEffect>("Audio\\Musique\\zelda_3");
@@ -1045,7 +1045,7 @@ namespace Exercice_12_1
                 // L'usager veut-il démarrer la partie? 
                 if (ServiceHelper.Get<IInputService>().Sauter(1))
                 {
-                    this.EtatJeu = Etats.Jouer; 
+                    this.EtatJeu = Etats.Jouer;
 
                     base.Update(gameTime);
                     return;
@@ -1058,7 +1058,7 @@ namespace Exercice_12_1
 
             // Si le jeu est en cours de démarrage, passer à l'état de jouer.
             if (this.EtatJeu == Etats.GameOver)
-            {  
+            {
                 if (ServiceHelper.Get<IInputService>().Sauter(1))
                 {
                     // Bruitage de fond.
@@ -1069,9 +1069,9 @@ namespace Exercice_12_1
 
                     this.contMort = 0;
                     this.GameOverState = false;
-                    this.EtatJeu = Etats.Demarrer;                    
+                    this.EtatJeu = Etats.Demarrer;
                     this.joueur = new Joueur(1150, 300);
-                    this.joueur.BoundsRect = new Rectangle(0, 0, 600, 600);                   
+                    this.joueur.BoundsRect = new Rectangle(0, 0, 600, 600);
                     this.joueur.GetValiderDeplacement = this.ValiderDeplacement;
                     this.joueur.VieDeJoueur = 10;
                     this.MondeCourant = Mondes.MAP_1_1;
@@ -1079,7 +1079,7 @@ namespace Exercice_12_1
                     this.boolFood = false;
                     this.joueur.Clef = false;
                     this.ClearMap();
-                    this.LoadMap11();                   
+                    this.LoadMap11();
                 }
 
                 if (ServiceHelper.Get<IInputService>().Quitter(1))
@@ -1186,6 +1186,11 @@ namespace Exercice_12_1
             // Mettre à jour le sprite du joueur puis centrer la camera sur celui-ci.
             this.joueur.Update(gameTime, this.graphics);
 
+            if (this.joueur.CouleurCollison < 101)
+            {
+                this.joueur.CouleurCollison++;
+            }
+
             if (this.joueur.VieDeJoueur == 0)
             {
                 if (this.bruitageMortActif.State != SoundState.Playing && this.contMort == 0)
@@ -1216,12 +1221,12 @@ namespace Exercice_12_1
                 if (this.contMort++ > 110)
                 {
                     this.joueur.Etat = Personnage.Etats.Mort;
-                }               
+                }
 
-                this.bruitageFondActif.Pause();                
+                this.bruitageFondActif.Pause();
                 base.Update(gameTime);
                 return;
-            }    
+            }
 
             if (this.joueur.Etat == Personnage.Etats.Tombe && this.joueur.ContTombe > 60)
             {
@@ -1231,12 +1236,12 @@ namespace Exercice_12_1
                 this.joueur.Position = this.monde.PositionInitiale;
             }
 
-            this.camera.Centrer(this.joueur.Position);           
+            this.camera.Centrer(this.joueur.Position);
 
             // Mettre à jour les ogres.
             foreach (Ennemi ogre in this.listeOgres)
             {
-                ogre.SeTournerVers(this.joueur.Position);               
+                ogre.SeTournerVers(this.joueur.Position);
 
                 // Déterminer si on doit créer un nouvel astéroide.
                 if (this.randomPJEnemi.NextDouble() < this.probPJ)
@@ -1310,7 +1315,7 @@ namespace Exercice_12_1
                 {
                     this.joueur.VieDeJoueur--;
                     this.CreerExplosion(ogre, gameTime);
-                    this.listeOgresFini.Add(ogre);                    
+                    this.listeOgresFini.Add(ogre);
                 }
 
                 ogre.Update(gameTime, this.graphics);
@@ -1424,7 +1429,7 @@ namespace Exercice_12_1
         ///   2 - Éliminer les particules n'étant plus visibles.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected void UpdateParticulesExplosions(GameTime gameTime)                                                                                    
+        protected void UpdateParticulesExplosions(GameTime gameTime)
         {
             // Liste de particules à détruire
             List<ParticuleExplosion> particulesFinies = new List<ParticuleExplosion>();
@@ -1534,7 +1539,7 @@ namespace Exercice_12_1
                             0.75f,                      // échelle d'affichage
                             SpriteEffects.None,         // effets
                             0.0f);
-                }              
+                }
             }
 
             // Afficher les blocs.
@@ -1596,8 +1601,22 @@ namespace Exercice_12_1
                 sprite.Draw(this.camera, this.spriteBatch);
             }
 
-            // Afficher le sprite du joueur.
-            if (this.joueur.Etat != Personnage.Etats.Tombe)
+
+            if (this.joueur.CouleurCollison > 25 && this.joueur.CouleurCollison < 50 || this.joueur.CouleurCollison > 75 && this.joueur.CouleurCollison < 100 && this.joueur.Etat != Personnage.Etats.Tombe)
+            {
+                // Afficher le joueur en etat de tombe
+                this.spriteBatch.Draw(
+                    this.joueur.Texture,             // texture
+                    this.joueur.Position,            // position
+                    null,                       // sourceRectangle
+                    Color.Crimson,                // couleur
+                    0,  // angle de rotation
+                    new Vector2(16, 16),        // origine de rotation
+                    this.joueur.Echelle,             // échelle d'affichage
+                    SpriteEffects.None,         // effets
+                    0.0f);                      // profondeur de couche (layer depth)
+            }
+            else if (this.joueur.Etat != Personnage.Etats.Tombe)
             {
                 this.joueur.Draw(this.camera, this.spriteBatch);
             }
@@ -2522,9 +2541,10 @@ namespace Exercice_12_1
                 if (pj.CollisionRapide(this.joueur) && pj.TypeProjectile == Projectile.TypesProjectiles.Ennemi)
                 {
                     this.joueur.VieDeJoueur--;
+                    this.joueur.CouleurCollison = 0;
 
                     // Créer un nouvel effet visuel pour l'explosion.
-                    this.CreerExplosion(pj, gameTime);
+                    //this.CreerExplosion(pj, gameTime);
                     this.listeProjectileFini.Add(pj);
                 }
             }
@@ -2667,7 +2687,7 @@ namespace Exercice_12_1
                 this.bruitageblock.Play();
 
                 this.maBloc.BlockMouvement = false;
-            }          
+            }
         }
 
         /// <summary>

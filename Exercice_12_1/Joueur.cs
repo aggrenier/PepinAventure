@@ -73,7 +73,7 @@ namespace Exercice_12_1
         /// <summary>
         /// Utilisé pour pousser les blocs.
         /// </summary>
-        private int contPousseBloc = 0;     
+        private int contPousseBloc = 0;  
 
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
@@ -103,7 +103,7 @@ namespace Exercice_12_1
             get { return this.indexPeripherique; }
             set { this.indexPeripherique = Math.Min(Math.Max(value, 0), 4); }
         }
-
+      
         /// <summary>
         /// Compteur pour pousser les blocs
         /// </summary>

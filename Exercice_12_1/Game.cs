@@ -1167,10 +1167,14 @@ namespace Exercice_12_1
             // Mettre à jour les particules d'explosion
             this.UpdateParticulesExplosions(gameTime);
 
+            // Appelé pour arrêter le jeu aprés l'animation de mourir.
             if (this.joueur.Etat == Personnage.Etats.Mort && this.joueur.IndexTuile == 4)
             {
-                this.bruitageGameOverActif.Play();
-                this.GameOverState = !this.GameOverState;
+                if (contMort++ > 150)
+                {
+                    this.bruitageGameOverActif.Play();
+                    this.GameOverState = !this.GameOverState;
+                }
                 base.Update(gameTime);
                 return;
             }
@@ -1201,9 +1205,7 @@ namespace Exercice_12_1
                         break;
                 }
 
-                contMort++;
-
-                if (contMort > 110)
+                if (contMort++ > 110)
                 {
                     this.joueur.Etat = Personnage.Etats.Mort;
                 }

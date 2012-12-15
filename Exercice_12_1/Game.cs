@@ -548,12 +548,7 @@ namespace Exercice_12_1
                     // Stocker l'état courant du jeu avant d'activer la pause
                     this.prevEtatJeu = this.EtatJeu;
                     this.EtatJeu = Etats.GameOver;
-                }
-                else if (!value && this.EtatJeu == Etats.GameOver)
-                {
-                    // Restaurer l'état du jeu à ce qu'il était avant la pause
-                    this.EtatJeu = this.prevEtatJeu;
-                }
+                }              
 
                 // Suspendre les effets sonores au besoin
                 this.SuspendreEffetsSonores(this.GameOverState);
@@ -1209,7 +1204,7 @@ namespace Exercice_12_1
                 if (this.contMort++ > 110)
                 {
                     this.joueur.Etat = Personnage.Etats.Mort;
-                }                           
+                }               
 
                 this.bruitageFondActif.Pause();                
                 base.Update(gameTime);

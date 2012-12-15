@@ -748,7 +748,13 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Audio\Effets\Joueur\Frapper.wav">
+      <Name>Frapper</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Textures\OgreMouvement\Stationnaire\Est.png">
       <Name>Est</Name>

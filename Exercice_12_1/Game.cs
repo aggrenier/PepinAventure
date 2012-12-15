@@ -154,6 +154,11 @@ namespace Exercice_12_1
         private SoundEffect bruitageMort;
 
         /// <summary>
+        /// Instance de bruitage de mort du joueur.
+        /// </summary>
+        private SoundEffect bruitageFrapper;
+
+        /// <summary>
         /// Fond d'écran d'accueil.
         /// </summary>
         private Texture2D ecranAccueil;
@@ -933,6 +938,7 @@ namespace Exercice_12_1
 
             this.bruitageGameOver = Content.Load<SoundEffect>("Audio\\Musique\\GameOver");
             this.bruitageMort = Content.Load<SoundEffect>("Audio\\Effets\\Joueur\\Mort");
+            this.bruitageFrapper = Content.Load<SoundEffect>("Audio\\Effets\\Joueur\\Frapper");
 
             // Sélectionner et paramétrer le bruitage de fond.
             this.bruitageGameOverActif = this.bruitageGameOver.CreateInstance();
@@ -1316,7 +1322,8 @@ namespace Exercice_12_1
                 if (ogre.Collision(this.joueur) && this.joueur.CouleurCollison > 99)
                 {
                     this.joueur.VieDeJoueur--;
-                    this.joueur.CouleurCollison = 0;                   
+                    this.joueur.CouleurCollison = 0;
+                    this.bruitageFrapper.Play();
                 }
 
                 ogre.Update(gameTime, this.graphics);
@@ -1613,7 +1620,7 @@ namespace Exercice_12_1
                 // Afficher le joueur en etat de tombe
                 this.spriteBatch.Draw(
                     this.joueur.Texture,             // texture
-                    new Vector2(this.joueur.Position.X, this.joueur.Position.Y),
+                    new Vector2(this.joueur.Position.X-16, this.joueur.Position.Y-16),
                     null,                       // sourceRectangle
                     Color.Crimson,                // couleur
                     0,  // angle de rotation
@@ -2548,6 +2555,7 @@ namespace Exercice_12_1
                 {
                     this.joueur.VieDeJoueur--;
                     this.joueur.CouleurCollison = 0;
+                    bruitageFrapper.Play();
 
                     // Créer un nouvel effet visuel pour l'explosion.
                     this.CreerExplosion(pj, gameTime);

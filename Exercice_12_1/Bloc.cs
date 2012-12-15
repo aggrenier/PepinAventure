@@ -111,7 +111,15 @@ namespace Exercice_12_1
         /// <summary>
         /// Vitesse de marche du joueur, avec valeur par défaut.
         /// </summary>
-        private bool blockMouvement = true;      
+        private bool blockMouvement = true;
+
+        private float blocEchelle = 1f;
+
+        public float BlocEchelle
+        {
+            get { return this.blocEchelle; }
+            set { this.blocEchelle = value; }
+        }
 
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite.

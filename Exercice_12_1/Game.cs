@@ -1395,6 +1395,14 @@ namespace Exercice_12_1
                 this.listeBlocFini.Add(bloc);
             }
 
+            foreach (Bloc bloc in this.listeBlocFini)
+            {
+                if (bloc.BlocEchelle <= 0.05f)
+                {
+                    listeBloc.Remove(bloc);
+                }
+            }
+
             this.GestionAtteintUneSortie();
 
             base.Update(gameTime);
@@ -1555,7 +1563,27 @@ namespace Exercice_12_1
             // Afficher les blocs.
             foreach (Bloc bloc in this.listeBloc)
             {
-                listeDraw.Add(bloc);
+                // Extraire la couleur du pixel correspondant à la position donnée dans privTuilesCollisions.
+                Color pixColor = this.monde.CouleurDeCollision(bloc.Position);
+                if (pixColor == Color.Blue)
+                {
+                    this.spriteBatch.Draw(
+                    bloc.Texture,               // texture
+                    bloc.Position,              // position
+                    null,                       // sourceRectangle
+                    Color.White,                // couleur
+                    ((float)gameTime.TotalGameTime.TotalMilliseconds/360),  // angle de rotation
+                    new Vector2(16, 16),
+                    bloc.BlocEchelle,           // échelle d'affichage
+                    SpriteEffects.None,         // effets
+                    0.0f);
+
+                    bloc.BlocEchelle -= 0.02f;
+                }
+                else
+                {
+                    listeDraw.Add(bloc);
+                }
             }
 
             foreach (Switch switcht1 in this.listeSwitch)

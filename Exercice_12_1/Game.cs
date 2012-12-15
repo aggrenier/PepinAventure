@@ -1186,13 +1186,15 @@ namespace Exercice_12_1
             // Mettre à jour le sprite du joueur puis centrer la camera sur celui-ci.
             this.joueur.Update(gameTime, this.graphics);
 
-            if (this.joueur.CouleurCollison < 101)
+            if (this.joueur.CouleurCollison <= 99)
             {
                 this.joueur.CouleurCollison++;
             }
 
             if (this.joueur.VieDeJoueur == 0)
             {
+                this.joueur.CouleurCollison = 100;
+                
                 if (this.bruitageMortActif.State != SoundState.Playing && this.contMort == 0)
                 {
                     this.bruitageMort.Play();
@@ -1311,11 +1313,10 @@ namespace Exercice_12_1
                     }
                 }
 
-                if (ogre.Collision(this.joueur))
+                if (ogre.Collision(this.joueur) && this.joueur.CouleurCollison > 99)
                 {
                     this.joueur.VieDeJoueur--;
-                    this.CreerExplosion(ogre, gameTime);
-                    this.listeOgresFini.Add(ogre);
+                    this.joueur.CouleurCollison = 0;                   
                 }
 
                 ogre.Update(gameTime, this.graphics);
@@ -1602,12 +1603,17 @@ namespace Exercice_12_1
             }
 
 
-            if (this.joueur.CouleurCollison > 25 && this.joueur.CouleurCollison < 50 || this.joueur.CouleurCollison > 75 && this.joueur.CouleurCollison < 100 && this.joueur.Etat != Personnage.Etats.Tombe)
+            if ((this.joueur.CouleurCollison > 0 && this.joueur.CouleurCollison < 10
+                || this.joueur.CouleurCollison > 20 && this.joueur.CouleurCollison < 30
+                || this.joueur.CouleurCollison > 40 && this.joueur.CouleurCollison < 50
+                || this.joueur.CouleurCollison > 60 && this.joueur.CouleurCollison < 70
+                || this.joueur.CouleurCollison > 80 && this.joueur.CouleurCollison < 90)
+                 && (this.joueur.Etat != Personnage.Etats.Tombe))
             {
                 // Afficher le joueur en etat de tombe
                 this.spriteBatch.Draw(
                     this.joueur.Texture,             // texture
-                    this.joueur.Position,            // position
+                    new Vector2(this.joueur.Position.X, this.joueur.Position.Y),
                     null,                       // sourceRectangle
                     Color.Crimson,                // couleur
                     0,  // angle de rotation
@@ -2538,13 +2544,13 @@ namespace Exercice_12_1
                     }
                 }
 
-                if (pj.CollisionRapide(this.joueur) && pj.TypeProjectile == Projectile.TypesProjectiles.Ennemi)
+                if (pj.CollisionRapide(this.joueur) && pj.TypeProjectile == Projectile.TypesProjectiles.Ennemi && this.joueur.CouleurCollison > 99)
                 {
                     this.joueur.VieDeJoueur--;
                     this.joueur.CouleurCollison = 0;
 
                     // Créer un nouvel effet visuel pour l'explosion.
-                    //this.CreerExplosion(pj, gameTime);
+                    this.CreerExplosion(pj, gameTime);
                     this.listeProjectileFini.Add(pj);
                 }
             }

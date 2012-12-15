@@ -1193,6 +1193,10 @@ namespace Exercice_12_1
                     this.bruitageMort.Play();
                 }
 
+                this.bruitageFondActif.Stop();
+
+                this.joueur.SuspendreEffetsSonores(true);
+
                 switch ((gameTime.TotalGameTime.Milliseconds / 4) % 4)
                 {
                     case 0:

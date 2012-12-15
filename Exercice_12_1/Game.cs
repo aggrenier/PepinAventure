@@ -1240,8 +1240,10 @@ namespace Exercice_12_1
             {
                 this.joueur.AngleRotation = this.joueur.ContTombe = 0;
                 this.joueur.Etat = Personnage.Etats.Stationnaire;
+                this.joueur.Direction = Personnage.Directions.Nord;
                 this.joueur.Echelle = 1.0f;
                 this.joueur.Position = this.monde.PositionInitiale;
+                this.joueur.VieDeJoueur--;
             }
 
             this.camera.Centrer(this.joueur.Position);

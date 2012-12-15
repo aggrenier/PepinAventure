@@ -852,8 +852,8 @@ namespace IFM20884
                         repertoireEtat = "\\Tombe";
                         break;
                     case Etats.Mort:
-                    repertoireEtat = "\\Mort";
-                    break;
+                       repertoireEtat = "\\Mort";
+                        break;
                     default:
                         repertoireEtat = "\\Stationnaire";
                         break;

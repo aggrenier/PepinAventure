@@ -113,12 +113,22 @@ namespace Exercice_12_1
         /// </summary>
         private bool blockMouvement = true;
 
+        private static SoundEffect bruitTombe;
+
+        private static SoundEffectInstance bruitTombeActif;
+
         private float blocEchelle = 1f;
 
         public float BlocEchelle
         {
             get { return this.blocEchelle; }
-            set { this.blocEchelle = value; }
+            set { 
+                this.blocEchelle = value;
+                if (this.blocEchelle == 0.98f)
+                {
+                    bruitTombe.Play();
+                }
+            }
         }
 
         /// <summary>
@@ -232,6 +242,8 @@ namespace Exercice_12_1
         public static void LoadContent(ContentManager content, GraphicsDeviceManager graphics)
         {
             palettes = new PaletteTuiles(content.Load<Texture2D>("Objects\\Bloc"), 28, 28);
+
+            bruitTombe = content.Load<SoundEffect>("Audio\\Effets\\Joueur\\Tombe");
         }
 
         /// <summary>

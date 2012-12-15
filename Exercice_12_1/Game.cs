@@ -631,11 +631,11 @@ namespace Exercice_12_1
                     if (this.maBloc != bloc)
                     {
                         this.maBloc = bloc;
-                        contPousseBloc = 0;
+                        this.contPousseBloc = 0;
                     }
 
-                    contPousseBloc++;
-                    if (contPousseBloc > 20)
+                    this.contPousseBloc++;
+                    if (this.contPousseBloc > 20)
                     {
                         this.GestionBloc();
                     }
@@ -1170,11 +1170,12 @@ namespace Exercice_12_1
             // Appelé pour arrêter le jeu aprés l'animation de mourir.
             if (this.joueur.Etat == Personnage.Etats.Mort && this.joueur.IndexTuile == 4)
             {
-                if (contMort++ > 150)
+                if (this.contMort++ > 150)
                 {
                     this.bruitageGameOverActif.Play();
                     this.GameOverState = !this.GameOverState;
                 }
+
                 base.Update(gameTime);
                 return;
             }
@@ -1184,9 +1185,9 @@ namespace Exercice_12_1
 
             if (this.joueur.VieDeJoueur == 0)
             {
-                if (bruitageMortActif.State != SoundState.Playing && contMort == 0)
+                if (this.bruitageMortActif.State != SoundState.Playing && this.contMort == 0)
                 {
-                    bruitageMort.Play();
+                    this.bruitageMort.Play();
                 }
 
                 switch ((gameTime.TotalGameTime.Milliseconds / 4) % 4)
@@ -1205,12 +1206,12 @@ namespace Exercice_12_1
                         break;
                 }
 
-                if (contMort++ > 110)
+                if (this.contMort++ > 110)
                 {
                     this.joueur.Etat = Personnage.Etats.Mort;
-                }
+                }                           
 
-                this.bruitageFondActif.Pause();
+                this.bruitageFondActif.Pause();                
                 base.Update(gameTime);
                 return;
             }    
@@ -2637,28 +2638,28 @@ namespace Exercice_12_1
         /// </summary>
         private void GestionBloc()
         {
-            if (maBloc.BlockMouvement == true)
+            if (this.maBloc.BlockMouvement == true)
             {
                 if (this.joueur.Direction == Personnage.Directions.Nord)
                 {
-                    maBloc.VitesseVerticale = -0.1f;
+                    this.maBloc.VitesseVerticale = -0.1f;
                 }
                 else if (this.joueur.Direction == Personnage.Directions.Sud)
                 {
-                    maBloc.VitesseVerticale = 0.1f;
+                    this.maBloc.VitesseVerticale = 0.1f;
                 }
                 else if (this.joueur.Direction == Personnage.Directions.Est)
                 {
-                    maBloc.VitesseHorizontale = 0.1f;
+                    this.maBloc.VitesseHorizontale = 0.1f;
                 }
                 else if (this.joueur.Direction == Personnage.Directions.Ouest)
                 {
-                    maBloc.VitesseHorizontale = -0.1f;
+                    this.maBloc.VitesseHorizontale = -0.1f;
                 }
 
                 this.bruitageblock.Play();
 
-                maBloc.BlockMouvement = false;
+                this.maBloc.BlockMouvement = false;
             }          
         }
 

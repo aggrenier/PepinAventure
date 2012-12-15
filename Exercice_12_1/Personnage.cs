@@ -397,7 +397,6 @@ namespace IFM20884
                     {
                         dx = +12;
                     }
-
                     else if (this.direction == Directions.Ouest ||
                         this.direction == Directions.NordOuest ||
                         this.direction == Directions.SudOuest)
@@ -412,6 +411,7 @@ namespace IFM20884
                         dy -= 12;
                     }
                 }
+
                 return new Vector2(this.Position.X + dx, this.Position.Y + dy);
             }
         }

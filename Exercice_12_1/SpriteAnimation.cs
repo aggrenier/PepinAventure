@@ -155,15 +155,6 @@ namespace IFM20884
         }
 
         /// <summary>
-        /// Palette de textures permettant l'animation. Doit être surchargée dans les classes 
-        /// dérivées afin de manipuler une instance de PaletteTuiles.
-        /// </summary>
-        protected abstract PaletteTuiles Palette
-        {
-            get;
-        }
-
-        /// <summary>
         /// Accesseur de l'attribut indexTuile. On s'assure que la valeur de l'attribut est topujours
         /// valide selon la taille de la palette.
         /// </summary>
@@ -172,6 +163,15 @@ namespace IFM20884
             get { return (int)Math.Round(this.indexTuile); }
             set { this.indexTuile = (float)MathHelper.Clamp(value, 0, this.Palette.NombreDeTuiles - 1); }
         }
+
+        /// <summary>
+        /// Palette de textures permettant l'animation. Doit être surchargée dans les classes 
+        /// dérivées afin de manipuler une instance de PaletteTuiles.
+        /// </summary>
+        protected abstract PaletteTuiles Palette
+        {
+            get;
+        }        
 
         /// <summary>
         /// Animation du sprite: l'index de tuile à afficher est mis à jour en fonction du temps.

@@ -68,7 +68,12 @@ namespace Exercice_12_1
         /// Attribut indiquant l'index du périphérique contrôlant le sprite (voir
         /// dans Update (1 par défaut).
         /// </summary>
-        private int indexPeripherique = 1;        
+        private int indexPeripherique = 1;
+
+        /// <summary>
+        /// Utilisé pour pousser les blocs.
+        /// </summary>
+        private int contPousseBloc = 0;     
 
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
@@ -79,19 +84,8 @@ namespace Exercice_12_1
             : base(x, y) 
         {
             this.VieDeJoueur = 5;
-        }
-
-        /// <summary>
-        /// Utilisé pour pousser les blocs.
-        /// </summary>
-        private int contPousseBloc = 0;
-        
-        public int ContPousseBloc
-        {
-            get { return this.contPousseBloc; }
-            set { this.contPousseBloc = value; }
-        }
-
+        }        
+      
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite. On invoque l'autre constructeur.
         /// </summary>
@@ -110,20 +104,14 @@ namespace Exercice_12_1
             set { this.indexPeripherique = Math.Min(Math.Max(value, 0), 4); }
         }
 
-        //public override int IndexTuile
-        //{
-        //    get { return this.IndexTuile; }
-        //    //set {
-        //    //    if (!(this.Etat == Etats.Mort && this.IndexTuile == 4))
-        //    //    {
-        //    //        this.IndexTuile = value;
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        this.IndexTuile = 4;
-        //    //    }
-        //    //}
-        //}
+        /// <summary>
+        /// Compteur pour pousser les blocs
+        /// </summary>
+        public int ContPousseBloc
+        {
+            get { return this.contPousseBloc; }
+            set { this.contPousseBloc = value; }
+        }
 
         /// <summary>
         /// Propriété accesseur retournant la liste des palettes associées au personnage 

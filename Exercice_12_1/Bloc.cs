@@ -181,7 +181,7 @@ namespace Exercice_12_1
         {
             get { return this.blockMouvement; }
             set { this.blockMouvement = value; }
-        }        
+        }
 
         /// <summary>
         /// Propriété (accesseur pour getResistanceAuMouvement) retournant ou changeant la fonction déléguée 

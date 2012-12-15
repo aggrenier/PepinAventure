@@ -354,15 +354,15 @@ namespace IFM20884
         /// <param name="cible">Sprite à vérifier s'il y a collision avec this.</param>
         /// <returns>Vrai si this est en collision avec cible.</returns>
         public virtual bool CollisionBloc(Sprite cible)
-        {            
+        {
             Rectangle rectSprite = new Rectangle((int)this.position.X - 5, (int)this.position.Y - 5, 10, 10);
-            Rectangle rectbloc = new Rectangle((int)cible.Position.X - 14, (int)cible.Position.Y - 14, 28, 28);  
-           
-            if (rectSprite.Intersects(rectbloc))           
+            Rectangle rectbloc = new Rectangle((int)cible.Position.X - 14, (int)cible.Position.Y - 14, 28, 28);
+
+            if (rectSprite.Intersects(rectbloc))
             {
                 Console.WriteLine(this.RayonDeCollision);
                 return true;
-            }     
+            }
 
             return false;
         }

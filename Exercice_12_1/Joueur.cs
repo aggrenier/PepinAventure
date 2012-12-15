@@ -82,6 +82,17 @@ namespace Exercice_12_1
         }
 
         /// <summary>
+        /// Utilisé pour pousser les blocs.
+        /// </summary>
+        private int contPousseBloc = 0;
+        
+        public int ContPousseBloc
+        {
+            get { return this.contPousseBloc; }
+            set { this.contPousseBloc = value; }
+        }
+
+        /// <summary>
         /// Constructeur paramétré recevant la position du sprite. On invoque l'autre constructeur.
         /// </summary>
         /// <param name="position">Coordonnées initiales horizontale et verticale du sprite.</param>

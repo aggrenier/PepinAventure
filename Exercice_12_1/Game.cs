@@ -119,6 +119,16 @@ namespace Exercice_12_1
         private SoundEffect bruitageblock;
 
         /// <summary>
+        /// Réprésente la bloc en contact avec le joueur.
+        /// </summary>
+        private Bloc maBloc;
+
+        /// <summary>
+        /// Réprésente la durée que le joueur est en contact avec maBloc.
+        /// </summary>
+        private int contPousseBloc = 0;
+
+        /// <summary>
         /// Instance de bruitage de fond en cours de sonorisation durant le jeu.
         /// </summary>
         private SoundEffectInstance bruitageGameOverActif;
@@ -597,12 +607,22 @@ namespace Exercice_12_1
         /// <returns>Facteur de résistance entre 0.0f (aucune résistance) et 1.0f (résistance maximale).</returns>
         public float CalculerResistanceAuMouvement(Vector2 position)
         {
-            Rectangle joueurRect = new Rectangle((int)this.joueur.PositionPourCollisions.X-2, (int)this.joueur.PositionPourCollisions.Y-2, 5, 5);
+            Rectangle joueurRect = new Rectangle((int)this.joueur.PositionPourCollisions.X - 2, (int)this.joueur.PositionPourCollisions.Y - 2, 5, 5);
 
             foreach (Bloc bloc in this.listeBloc)
             {
                 if (joueurRect.Intersects(bloc.AireOccupe))
                 {
+                    if (maBloc != bloc)
+                    {
+                        maBloc = bloc;
+                        contPousseBloc = 0;
+                    }
+                    contPousseBloc++;
+                    if (contPousseBloc > 20)
+                    {
+                        this.GestionBloc();
+                    }
                     return 1.0f;
                 }
             }
@@ -1234,7 +1254,7 @@ namespace Exercice_12_1
 
             this.GestionProjectile(gameTime);
 
-            this.GestionBloc();
+            //this.GestionBloc();
 
             this.GestionSwtich(gameTime);
 
@@ -2560,32 +2580,29 @@ namespace Exercice_12_1
         /// </summary>
         private void GestionBloc()
         {
-            foreach (Bloc bloc in this.listeBloc)
+            if (maBloc.BlockMouvement == true)
             {
-                if (this.joueur.CollisionBloc(bloc) && ServiceHelper.Get<IInputService>().Sauter(1) && bloc.BlockMouvement == true)
+                if (this.joueur.Direction == Personnage.Directions.Nord)
                 {
-                    if (this.joueur.Direction == Personnage.Directions.Nord)
-                    {
-                        bloc.VitesseVerticale = -0.1f;
-                    }
-                    else if (this.joueur.Direction == Personnage.Directions.Sud)
-                    {
-                        bloc.VitesseVerticale = 0.1f;
-                    }
-                    else if (this.joueur.Direction == Personnage.Directions.Est)
-                    {
-                        bloc.VitesseHorizontale = 0.1f;
-                    }
-                    else if (this.joueur.Direction == Personnage.Directions.Ouest)
-                    {
-                        bloc.VitesseHorizontale = -0.1f;
-                    }
-
-                    this.bruitageblock.Play();
-
-                    bloc.BlockMouvement = false;
+                    maBloc.VitesseVerticale = -0.1f;
                 }
-            }
+                else if (this.joueur.Direction == Personnage.Directions.Sud)
+                {
+                    maBloc.VitesseVerticale = 0.1f;
+                }
+                else if (this.joueur.Direction == Personnage.Directions.Est)
+                {
+                    maBloc.VitesseHorizontale = 0.1f;
+                }
+                else if (this.joueur.Direction == Personnage.Directions.Ouest)
+                {
+                    maBloc.VitesseHorizontale = -0.1f;
+                }
+
+                this.bruitageblock.Play();
+
+                maBloc.BlockMouvement = false;
+            }          
         }
 
         /// <summary>

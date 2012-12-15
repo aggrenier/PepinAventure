@@ -87,7 +87,7 @@ namespace Exercice_12_1
         /// </summary>
         public override Vector2 PositionInitiale
         {
-            get { return new Vector2(300, 300); }
+            get { return new Vector2(300, 490); }
         }
 
         /// <summary>

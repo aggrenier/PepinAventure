@@ -108,7 +108,22 @@ namespace Exercice_12_1
         {
             get { return this.indexPeripherique; }
             set { this.indexPeripherique = Math.Min(Math.Max(value, 0), 4); }
-        }       
+        }
+
+        //public override int IndexTuile
+        //{
+        //    get { return this.IndexTuile; }
+        //    //set {
+        //    //    if (!(this.Etat == Etats.Mort && this.IndexTuile == 4))
+        //    //    {
+        //    //        this.IndexTuile = value;
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        this.IndexTuile = 4;
+        //    //    }
+        //    //}
+        //}
 
         /// <summary>
         /// Propriété accesseur retournant la liste des palettes associées au personnage 
@@ -183,7 +198,7 @@ namespace Exercice_12_1
         {
             // Premièrement s'assurer qu'un service de lecture de périphérique d'inputs est
             // disponible
-            if (ServiceHelper.Disponible<IInputService>())
+            if (ServiceHelper.Disponible<IInputService>() && this.VieDeJoueur != 0)
             {
                 // Obtenir les vitesses de déplacements (toutes entre 0.0 et 1.0) de l'input
                 vitesseNord = ServiceHelper.Get<IInputService>().DeplacementAvant(this.indexPeripherique);

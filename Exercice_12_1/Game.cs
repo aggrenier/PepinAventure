@@ -129,6 +129,11 @@ namespace Exercice_12_1
         private int contPousseBloc = 0;
 
         /// <summary>
+        /// Conteur pour l'animation de mourir.
+        /// </summary>
+        private int contMort = 0;
+
+        /// <summary>
         /// Instance de bruitage de fond en cours de sonorisation durant le jeu.
         /// </summary>
         private SoundEffectInstance bruitageGameOverActif;
@@ -137,6 +142,16 @@ namespace Exercice_12_1
         /// Instance de bruitage des blocs.
         /// </summary>
         private SoundEffect bruitageGameOver;
+
+        /// <summary>
+        /// Instance de bruitage de mort du joueur.
+        /// </summary>
+        private SoundEffectInstance bruitageMortActif;
+
+        /// <summary>
+        /// Instance de bruitage de mort du joueur.
+        /// </summary>
+        private SoundEffect bruitageMort;
 
         /// <summary>
         /// Fond d'écran d'accueil.
@@ -613,16 +628,18 @@ namespace Exercice_12_1
             {
                 if (joueurRect.Intersects(bloc.AireOccupe))
                 {
-                    if (maBloc != bloc)
+                    if (this.maBloc != bloc)
                     {
-                        maBloc = bloc;
+                        this.maBloc = bloc;
                         contPousseBloc = 0;
                     }
+
                     contPousseBloc++;
                     if (contPousseBloc > 20)
                     {
                         this.GestionBloc();
                     }
+
                     return 1.0f;
                 }
             }
@@ -920,11 +937,14 @@ namespace Exercice_12_1
             this.bruitageFondActif.IsLooped = true;
 
             this.bruitageGameOver = Content.Load<SoundEffect>("Audio\\Musique\\GameOver");
+            this.bruitageMort = Content.Load<SoundEffect>("Audio\\Effets\\Joueur\\Mort");
 
             // Sélectionner et paramétrer le bruitage de fond.
             this.bruitageGameOverActif = this.bruitageGameOver.CreateInstance();
             this.bruitageGameOverActif.Volume = 0.80f;
             this.bruitageGameOverActif.IsLooped = false;
+            this.bruitageMortActif = this.bruitageMort.CreateInstance();
+            this.bruitageMortActif.IsLooped = false;
 
             // Charger les polices.
             this.policeMessages = Content.Load<SpriteFont>("Polices\\MessagesPolice");
@@ -1142,16 +1162,56 @@ namespace Exercice_12_1
             if (this.bruitageFondActif.State == SoundState.Paused)
             {
                 this.bruitageFondActif.Play();
-            }   
+            }
+
+            // Mettre à jour les particules d'explosion
+            this.UpdateParticulesExplosions(gameTime);
+
+            if (this.joueur.Etat == Personnage.Etats.Mort && this.joueur.IndexTuile == 4)
+            {
+                this.bruitageGameOverActif.Play();
+                this.GameOverState = !this.GameOverState;
+                base.Update(gameTime);
+                return;
+            }
 
             // Mettre à jour le sprite du joueur puis centrer la camera sur celui-ci.
             this.joueur.Update(gameTime, this.graphics);
 
             if (this.joueur.VieDeJoueur == 0)
             {
-                this.bruitageGameOverActif.Play();
-                this.GameOverState = !this.GameOverState;
-            }
+                if (bruitageMortActif.State != SoundState.Playing && contMort == 0)
+                {
+                    bruitageMort.Play();
+                }
+
+                switch ((gameTime.TotalGameTime.Milliseconds / 4) % 4)
+                {
+                    case 0:
+                        this.joueur.Direction = Personnage.Directions.Nord;
+                        break;
+                    case 1:
+                        this.joueur.Direction = Personnage.Directions.Est;
+                        break;
+                    case 2:
+                        this.joueur.Direction = Personnage.Directions.Sud;
+                        break;
+                    default:
+                        this.joueur.Direction = Personnage.Directions.Ouest;
+                        break;
+                }
+
+                contMort++;
+
+                if (contMort > 110)
+                {
+                    this.joueur.Etat = Personnage.Etats.Mort;
+                }
+
+                this.bruitageFondActif.Pause();
+                base.Update(gameTime);
+                return;
+            }    
 
             if (this.joueur.Etat == Personnage.Etats.Tombe && this.joueur.ContTombe > 60)
             {
@@ -1254,8 +1314,6 @@ namespace Exercice_12_1
 
             this.GestionProjectile(gameTime);
 
-            //this.GestionBloc();
-
             this.GestionSwtich(gameTime);
 
             this.UpdateVieDeJoueur();
@@ -1293,9 +1351,6 @@ namespace Exercice_12_1
             {
                 this.listeClef.Remove(clef);
             }
-
-            // Mettre à jour les particules d'explosion
-            this.UpdateParticulesExplosions(gameTime);
 
             foreach (Projectile pj in this.listeProjectiles)
             {
@@ -1447,26 +1502,26 @@ namespace Exercice_12_1
                 if (ogre is OgreMouvement)
                 {
                     this.spriteBatch.Draw(
-                            ogre.Texture,                 // texture
-                            ogre.Position,                // position
-                            null,                         // sourceRectangle
-                            Color.White,                 // couleur
+                            ogre.Texture,               // texture
+                            ogre.Position,              // position
+                            null,                       // sourceRectangle
+                            Color.White,                // couleur
                             0,  // angle de rotation
                             new Vector2(16, 16),
-                            2f,                       // échelle d'affichage
+                            2f,                         // échelle d'affichage
                             SpriteEffects.None,         // effets
                             0.0f);
                 }
                 else
                 {
                     this.spriteBatch.Draw(
-                            ogre.Texture,                 // texture
-                            ogre.Position,                // position
-                            null,                         // sourceRectangle
+                            ogre.Texture,               // texture
+                            ogre.Position,              // position
+                            null,                       // sourceRectangle
                             Color.White,                // couleur
-                            0,  // angle de rotation
+                            0,                          // angle de rotation
                             new Vector2(16, 16),
-                            0.75f,             // échelle d'affichage
+                            0.75f,                      // échelle d'affichage
                             SpriteEffects.None,         // effets
                             0.0f);
                 }              
@@ -1502,8 +1557,8 @@ namespace Exercice_12_1
                         pj.Texture,                 // texture
                         pj.Position,                // position
                         null,                       // sourceRectangle
-                        Color.Chartreuse,                // couleur
-                        0,  // angle de rotation
+                        Color.Chartreuse,           // couleur
+                        0,                          // angle de rotation
                         new Vector2(16, 16),
                         .4f + (pj.VideDeProjectile % 1.001f),             // échelle d'affichage
                         SpriteEffects.None,         // effets

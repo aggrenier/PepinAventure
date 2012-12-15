@@ -167,7 +167,7 @@ namespace IFM20884
         /// Accesseur de l'attribut indexTuile. On s'assure que la valeur de l'attribut est topujours
         /// valide selon la taille de la palette.
         /// </summary>
-        protected int IndexTuile               // accesseur pour _indexTuile, moulé en entier
+        public virtual int IndexTuile               // accesseur pour _indexTuile, moulé en entier
         {
             get { return (int)Math.Round(this.indexTuile); }
             set { this.indexTuile = (float)MathHelper.Clamp(value, 0, this.Palette.NombreDeTuiles - 1); }

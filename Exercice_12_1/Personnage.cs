@@ -238,7 +238,12 @@ namespace IFM20884
             /// <summary>
             /// Le personnage tombe dans un trou.
             /// </summary>
-            Tombe 
+            Tombe,
+
+            /// <summary>
+            /// Le personnage mort. Seulement implémenté pour le joueur.
+            /// </summary>
+            Mort 
         }
 
         /// <summary>
@@ -832,6 +837,9 @@ namespace IFM20884
                     case Etats.Tombe:
                         repertoireEtat = "\\Tombe";
                         break;
+                    case Etats.Mort:
+                    repertoireEtat = "\\Mort";
+                    break;
                     default:
                         repertoireEtat = "\\Stationnaire";
                         break;

@@ -166,6 +166,7 @@ namespace Exercice_12_1
                         bruitOuvrir.Play();
                     }
                 }
+
                 this.ouvert = value;
                 if (this.ouvert)
                 {

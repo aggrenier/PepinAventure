@@ -1399,7 +1399,7 @@ namespace Exercice_12_1
             {
                 if (bloc.BlocEchelle <= 0.05f)
                 {
-                    listeBloc.Remove(bloc);
+                    this.listeBloc.Remove(bloc);
                 }
             }
 
@@ -1572,7 +1572,7 @@ namespace Exercice_12_1
                     bloc.Position,              // position
                     null,                       // sourceRectangle
                     Color.White,                // couleur
-                    ((float)gameTime.TotalGameTime.TotalMilliseconds/360),  // angle de rotation
+                    (float)gameTime.TotalGameTime.TotalMilliseconds / 360,  // angle de rotation
                     new Vector2(16, 16),
                     bloc.BlocEchelle,           // échelle d'affichage
                     SpriteEffects.None,         // effets
@@ -1639,18 +1639,17 @@ namespace Exercice_12_1
                 sprite.Draw(this.camera, this.spriteBatch);
             }
 
-
-            if ((this.joueur.CouleurCollison > 0 && this.joueur.CouleurCollison < 10
-                || this.joueur.CouleurCollison > 20 && this.joueur.CouleurCollison < 30
-                || this.joueur.CouleurCollison > 40 && this.joueur.CouleurCollison < 50
-                || this.joueur.CouleurCollison > 60 && this.joueur.CouleurCollison < 70
-                || this.joueur.CouleurCollison > 80 && this.joueur.CouleurCollison < 90)
+            if (((this.joueur.CouleurCollison > 0 && this.joueur.CouleurCollison < 10)
+                || (this.joueur.CouleurCollison > 20 && this.joueur.CouleurCollison < 30)
+                || (this.joueur.CouleurCollison > 40 && this.joueur.CouleurCollison < 50)
+                || (this.joueur.CouleurCollison > 60 && this.joueur.CouleurCollison < 70)
+                || (this.joueur.CouleurCollison > 80 && this.joueur.CouleurCollison < 90))
                  && (this.joueur.Etat != Personnage.Etats.Tombe))
             {
                 // Afficher le joueur en etat de tombe
                 this.spriteBatch.Draw(
                     this.joueur.Texture,             // texture
-                    new Vector2(this.joueur.Position.X-16, this.joueur.Position.Y-16),
+                    new Vector2(this.joueur.Position.X - 16, this.joueur.Position.Y - 16),
                     null,                       // sourceRectangle
                     Color.Crimson,                // couleur
                     0,  // angle de rotation
@@ -1744,6 +1743,7 @@ namespace Exercice_12_1
                         {
                             output = "ERREUR: aucune manette ou clavier!";
                         }
+
                     break;
 
                 default:
@@ -2546,37 +2546,38 @@ namespace Exercice_12_1
         /// Verifie que la position finale du bloc est valide. (Il ne rentre pas dans une mûr, porte, ou autre bloc.)
         /// </summary>
         /// <param name="bloc">Le bloc à tester.</param>
+        /// <returns>Return false pour valider le deplacement du joueur</returns>
         private bool ValiderDeplacementBloc(Bloc bloc)
         {
-            if (joueur.Direction == Personnage.Directions.NordEst ||
-                joueur.Direction == Personnage.Directions.NordOuest ||
-                joueur.Direction == Personnage.Directions.SudEst ||
-                joueur.Direction == Personnage.Directions.SudOuest)
+            if (this.joueur.Direction == Personnage.Directions.NordEst ||
+                this.joueur.Direction == Personnage.Directions.NordOuest ||
+                this.joueur.Direction == Personnage.Directions.SudEst ||
+                this.joueur.Direction == Personnage.Directions.SudOuest)
             {
                 return false;
             }
 
             Vector2 destV = bloc.Position;
-            switch (joueur.Direction)
+            switch (this.joueur.Direction)
             {
-                case (Personnage.Directions.Nord):
+                case Personnage.Directions.Nord:
                     destV.Y -= 28;
                     break;
-                case (Personnage.Directions.Est):
+                case Personnage.Directions.Est:
                     destV.X += 28;
                     break;
-                case (Personnage.Directions.Sud):
+                case Personnage.Directions.Sud:
                     destV.Y += 28;
                     break;
-                case (Personnage.Directions.Ouest):
+                case Personnage.Directions.Ouest:
                     destV.X -= 28;
                     break;
                 default: // Si le joueur se déplace sur un angle, il ne peut pas déplacer le bloc.
                     return false;
             }
             
-            if (this.monde.CouleurDeCollision(destV) != Color.White && 
-                this.monde.CouleurDeCollision(destV) != Color.Blue ||
+            if ((this.monde.CouleurDeCollision(destV) != Color.White && 
+                this.monde.CouleurDeCollision(destV) != Color.Blue) ||
                 destV.Y < 95 ||
                 destV.Y > 505 ||
                 destV.X < 95 ||
@@ -2587,7 +2588,7 @@ namespace Exercice_12_1
 
             Rectangle destBloc = new Rectangle((int)destV.X - 14, (int)destV.Y - 14, 28, 28);
 
-            foreach (Bloc bloc1 in listeBloc)
+            foreach (Bloc bloc1 in this.listeBloc)
             {
                 if (destBloc.Intersects(bloc1.AireOccupe))
                 {
@@ -2649,7 +2650,7 @@ namespace Exercice_12_1
                 {
                     this.joueur.VieDeJoueur--;
                     this.joueur.CouleurCollison = 0;
-                    bruitageFrapper.Play();
+                    this.bruitageFrapper.Play();
 
                     // Créer un nouvel effet visuel pour l'explosion.
                     this.CreerExplosion(pj, gameTime);

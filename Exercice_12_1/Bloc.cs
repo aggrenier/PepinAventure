@@ -80,6 +80,11 @@ namespace Exercice_12_1
         private static PaletteTuiles palettes;
 
         /// <summary>
+        /// Son de tomber dans un troue.
+        /// </summary>
+        private static SoundEffect bruitTombe;
+
+        /// <summary>
         /// Fonction déléguée permettant d'obtenir la résistance aux déplacements du sprite
         /// dans le monde de tuiles. Si aucune fonction déléguée n'est fournie, aucune
         /// résistance n'est appliquée aux déplacements.
@@ -111,32 +116,12 @@ namespace Exercice_12_1
         /// <summary>
         /// Vitesse de marche du joueur, avec valeur par défaut.
         /// </summary>
-        private bool blockMouvement = true;
-
-        /// <summary>
-        /// Son de tomber dans un troue.
-        /// </summary>
-        private static SoundEffect bruitTombe;
+        private bool blockMouvement = true;        
 
         /// <summary>
         /// L'échelle d'affichage du bloc. Utilisé pour tomber dans les trous.
         /// </summary>
-        private float blocEchelle = 1f;
-
-        /// <summary>
-        /// Accesseurs pour blocEchelle. Setter invoque la bruit de tombe lorsqu'il est 0.98f.
-        /// </summary>
-        public float BlocEchelle
-        {
-            get { return this.blocEchelle; }
-            set { 
-                this.blocEchelle = value;
-                if (this.blocEchelle == 0.98f)
-                {
-                    bruitTombe.Play();
-                }
-            }
-        }
+        private float blocEchelle = 1f;       
 
         /// <summary>
         /// Constructeur paramétré recevant la position du sprite.
@@ -146,6 +131,26 @@ namespace Exercice_12_1
         public Bloc(int x, int y)
             : base(x, y)
         {
+        }
+
+        /// <summary>
+        /// Accesseurs pour blocEchelle. Setter invoque la bruit de tombe lorsqu'il est 0.98f.
+        /// </summary>
+        public float BlocEchelle
+        {
+            get 
+            { 
+                return this.blocEchelle; 
+            }
+
+            set
+            {
+                this.blocEchelle = value;
+                if (this.blocEchelle == 0.98f)
+                {
+                    bruitTombe.Play();
+                }
+            }
         }
 
         /// <summary>

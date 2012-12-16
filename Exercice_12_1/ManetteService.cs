@@ -304,7 +304,6 @@ namespace IFM20884
             // S'assurer que le numéro de manette fourni est valide.
             this.ValiderDevice(ref device);
 
-
             // Ralentir les répétitions de pressions (400 millisecondes de délai)
             // Premièrement vérifier le thumbstick gauche
             if (this.etatManette[device - 1].IsButtonDown(Buttons.RightThumbstickUp))
@@ -472,7 +471,7 @@ namespace IFM20884
                 return false;
             }
 
-            Console.WriteLine("" + device + ", " + (int)bouton + ", " + bouton.ToString());
+            Console.WriteLine(device + ", " + (int)bouton + ", " + bouton.ToString());
 
             // Vérifier si le délai minimum entre deux pression du bouton est expiré
             DateTime now = DateTime.Now;        // heure courante

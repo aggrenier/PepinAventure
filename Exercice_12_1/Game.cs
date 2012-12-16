@@ -1613,7 +1613,7 @@ namespace Exercice_12_1
                         Color.Chartreuse,           // couleur
                         0,                          // angle de rotation
                         new Vector2(16, 16),
-                        .7f + ((gameTime.TotalGameTime.Milliseconds / 60) % 3)/3f,             // échelle d'affichage
+                        .7f + (((gameTime.TotalGameTime.Milliseconds / 60) % 3) / 3f),             // échelle d'affichage
                         SpriteEffects.None,         // effets
                         0.0f);                      // profondeur de couche (layer depth));
                 }
@@ -1626,7 +1626,7 @@ namespace Exercice_12_1
                         Color.LightSalmon,                // couleur
                         0,                          // angle de rotation
                         new Vector2(16, 16),
-                        .7f + ((gameTime.TotalGameTime.Milliseconds / 60) % 3) / 3f,             // échelle d'affichage
+                        .7f + (((gameTime.TotalGameTime.Milliseconds / 60) % 3) / 3f),             // échelle d'affichage
                         SpriteEffects.None,         // effets
                         0.0f);                      // profondeur de couche (layer depth));
                 }

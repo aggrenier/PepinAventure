@@ -466,9 +466,16 @@ namespace IFM20884
         private bool DelaiDuplicationExpire(int device, Buttons bouton, int delai)
         {
             // Premièrement s'assurer que le bouton est pressé
-            if (!this.etatManette[device - 1].IsButtonDown(bouton))
+            try
             {
-                return false;
+                if (!this.etatManette[device - 1].IsButtonDown(bouton))
+                {
+                    return false;
+                }
+            }
+            catch (System.IndexOutOfRangeException) 
+            {
+                Console.Error.WriteLine("Problème de manette. Semble que ManetteService.etatManette[] est détruit.");
             }
 
             Console.WriteLine(device + ", " + (int)bouton + ", " + bouton.ToString());

@@ -155,6 +155,17 @@ namespace Exercice_12_1
 
             set
             {
+                if (this.ouvert != value)
+                {
+                    if (!value)
+                    {
+                        bruitFermer.Play();
+                    }
+                    else
+                    {
+                        bruitOuvrir.Play();
+                    }
+                }
                 this.ouvert = value;
                 if (this.ouvert)
                 {
@@ -198,6 +209,9 @@ namespace Exercice_12_1
         public static void LoadContent(ContentManager content, GraphicsDeviceManager graphics)
         {
             palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Nord"), 48, 36);
+
+            bruitOuvrir = content.Load<SoundEffect>("Audio\\Effets\\Porte\\Ouvre");
+            bruitFermer = content.Load<SoundEffect>("Audio\\Effets\\Porte\\Ferme");
         }
 
         /// <summary>

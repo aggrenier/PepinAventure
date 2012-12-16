@@ -189,4 +189,6 @@ Content\Textures\OgreMouvement\Mort\SudOuest.xnb
 Content\Textures\Joueur\Mort\NordOuest.xnb
 Content\Audio\Effets\Joueur\mort.xnb
 Content\Audio\Effets\Joueur\Frapper.xnb
+Content\Audio\Effets\Porte\Ferme.xnb
+Content\Audio\Effets\Porte\Ouvre.xnb
 Content\Menus\QuitterMenu.xml

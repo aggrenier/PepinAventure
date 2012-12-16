@@ -2191,9 +2191,11 @@ namespace Exercice_12_1
             switch2.Type = Switch.Types.Est;
 
             Porte porteNord = new Porte(300, 75, Porte.Directions.Nord);
+            porteNord.Ouvert = true;
             this.listePorte.Add(porteNord);
 
             PorteHorizontale porteEst = new PorteHorizontale(525, 300, PorteHorizontale.Directions.Est);
+            porteEst.Ouvert = true;
             porteEst.Direction = PorteHorizontale.Directions.Est;
             this.listePorteHorizontale.Add(porteEst);
         }

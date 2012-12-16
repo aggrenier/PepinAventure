@@ -152,12 +152,5 @@ namespace IFM20884
         /// <param name="device">Le périphérique à lire.</param>
         /// <returns>Vrai si le joueur tire; faux sinon.</returns>
         bool TirerOuest(int device);
-
-        /// <summary>
-        /// Indique si le Joueur bouge un bloc
-        /// </summary>
-        /// <param name="device">Le périphérique à lire.</param>
-        /// <returns>Vrai si le joueur bougeun bloc; faux sinon.</returns>
-        bool BougerBloc(int device);
     }
 }

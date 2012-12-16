@@ -2536,6 +2536,15 @@ namespace Exercice_12_1
         }
 
         /// <summary>
+        /// Verifie que la position finale du bloc est valide.
+        /// </summary>
+        /// <param name="bloc">Le bloc à tester.</param>
+        private bool ValiderDeplacementBloc(Bloc bloc)
+        {
+            return true;
+        }
+
+        /// <summary>
         /// Fonction qui fait la gestion des projectiles         
         /// </summary>
         /// <param name="gameTime">Game time</param>

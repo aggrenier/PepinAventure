@@ -301,8 +301,24 @@ namespace IFM20884
         /// <returns>Vrai si la barre d'espacement est pressée.</returns>
         public bool TirerNord(int device)
         {
+            // S'assurer que le numéro de manette fourni est valide.
+            this.ValiderDevice(ref device);
+
+
             // Ralentir les répétitions de pressions (400 millisecondes de délai)
-            return this.DelaiDuplicationExpire(device, Buttons.RightThumbstickUp, 400);
+            // Premièrement vérifier le thumbstick gauche
+            if (this.etatManette[device - 1].IsButtonDown(Buttons.RightThumbstickUp))
+            {
+                return this.DelaiDuplicationExpire(device, Buttons.RightThumbstickUp, 400);
+            }
+
+            // Maintenant le bouton Y
+            if (this.etatManette[device - 1].IsButtonDown(Buttons.Y))
+            {
+                return this.DelaiDuplicationExpire(device, Buttons.Y, 400);
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -318,7 +334,13 @@ namespace IFM20884
             // Premièrement vérifier le thumbstick gauche
             if (this.etatManette[device - 1].IsButtonDown(Buttons.RightThumbstickRight))
             {
-                return true;
+                return this.DelaiDuplicationExpire(device, Buttons.RightThumbstickRight, 400);
+            }
+
+            // Maintenant le bouton B
+            if (this.etatManette[device - 1].IsButtonDown(Buttons.B))
+            {
+                return this.DelaiDuplicationExpire(device, Buttons.B, 400);
             }
 
             return false;                                                                       
@@ -337,12 +359,16 @@ namespace IFM20884
             // Premièrement vérifier le thumbstick gauche
             if (this.etatManette[device - 1].IsButtonDown(Buttons.RightThumbstickDown))
             {
-                return true;
+                return this.DelaiDuplicationExpire(device, Buttons.RightThumbstickDown, 400);
+            }
+
+            // Maintenant le bouton A
+            if (this.etatManette[device - 1].IsButtonDown(Buttons.A))
+            {
+                return this.DelaiDuplicationExpire(device, Buttons.A, 400);
             }
 
             return false;
-
-            // lil' problem
         }
 
         /// <summary>
@@ -358,21 +384,16 @@ namespace IFM20884
             // Premièrement vérifier le thumbstick gauche
             if (this.etatManette[device - 1].IsButtonDown(Buttons.RightThumbstickLeft))
             {
-                return true;
+                return this.DelaiDuplicationExpire(device, Buttons.RightThumbstickLeft, 400);
+            }
+
+            // Maintenant le bouton X
+            if (this.etatManette[device - 1].IsButtonDown(Buttons.X))
+            {
+                return this.DelaiDuplicationExpire(device, Buttons.X, 400);
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Retourne si le joueur bouge un bloc
-        /// </summary>        
-        /// <param name="device">Le périphérique à lire.</param>
-        /// <returns>Vrai si la barre d'espacement est pressée.</returns>
-        public bool BougerBloc(int device)
-        {
-            // Imposer un délai de 0.2 seconde entre chaque saut.
-            return true;                                                                    
         }
 
         /// <summary>
@@ -385,7 +406,7 @@ namespace IFM20884
             for (int device = 1; device <= this.NombreMaxManettes; device++)
             {
                 this.etatManette[device - 1] = GamePad.GetState(this.GetPlayerIndex(device));
-
+                
                 // Initialiser les tableaux d'état des boutons.
                 for (int bouton = 0; bouton < this.NombreMaxBoutons; bouton++)
                 {
@@ -450,6 +471,8 @@ namespace IFM20884
             {
                 return false;
             }
+
+            Console.WriteLine("" + device + ", " + (int)bouton + ", " + bouton.ToString());
 
             // Vérifier si le délai minimum entre deux pression du bouton est expiré
             DateTime now = DateTime.Now;        // heure courante

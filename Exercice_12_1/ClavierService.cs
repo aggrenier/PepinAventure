@@ -218,18 +218,7 @@ namespace IFM20884
         {
             // Imposer un délai de 0.2 seconde entre chaque saut.
             return this.DelaiDuplicationExpire(Keys.Left, 400);
-        }
-
-        /// <summary>
-        /// Indique si le personnage doit sauter (si le bouton A de la manette est pressé). La         
-        /// </summary>
-        /// <param name="device">Le périphérique à lire.</param>
-        /// <returns>Vrai si la barre d'espacement est pressée.</returns>
-        public bool BougerBloc(int device)
-        {
-            // Imposer un délai de 0.2 seconde entre chaque saut.
-            return this.DelaiDuplicationExpire(Keys.E, 200);
-        }        
+        }   
 
         /// <summary>
         /// Indique si le personnage doit sauter (si le bouton A de la manette est pressé). La

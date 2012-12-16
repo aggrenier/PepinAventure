@@ -2144,7 +2144,7 @@ namespace Exercice_12_1
             this.ClearMap();
 
             Bloc bloc0 = new Bloc(300, 105);
-            bloc0.BoundsRect = new Rectangle(91, 91, 415, 415);
+            bloc0.BoundsRect = new Rectangle(258, 63, 84, 84);
 
             this.listeBloc.Add(bloc0);
 
@@ -2543,7 +2543,7 @@ namespace Exercice_12_1
         }
 
         /// <summary>
-        /// Verifie que la position finale du bloc est valide.
+        /// Verifie que la position finale du bloc est valide. (Il ne rentre pas dans une mûr, porte, ou autre bloc.)
         /// </summary>
         /// <param name="bloc">Le bloc à tester.</param>
         private bool ValiderDeplacementBloc(Bloc bloc)
@@ -2575,7 +2575,12 @@ namespace Exercice_12_1
                     return false;
             }
             
-            if (this.monde.CouleurDeCollision(destV) != Color.White && this.monde.CouleurDeCollision(destV) != Color.Blue) 
+            if (this.monde.CouleurDeCollision(destV) != Color.White && 
+                this.monde.CouleurDeCollision(destV) != Color.Blue ||
+                destV.Y < 95 ||
+                destV.Y > 505 ||
+                destV.X < 95 ||
+                destV.X > 505) 
             { 
                 return false; 
             }

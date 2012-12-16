@@ -635,7 +635,7 @@ namespace Exercice_12_1
                     }
 
                     this.contPousseBloc++;
-                    if (this.contPousseBloc > 20)
+                    if (this.contPousseBloc > 20 && this.ValiderDeplacementBloc(bloc))
                     {
                         this.GestionBloc();
                     }
@@ -1732,11 +1732,18 @@ namespace Exercice_12_1
             switch (this.EtatJeu)
             {
                 case Etats.Pause:
-                    if (this.MenuCourant == null)
-                    {
-                        output = "Pause (pressez P pour continuer...)";
-                    }
-
+                        if (ServiceHelper.Get<IInputService>().GetType() == typeof(ClavierService))
+                        {
+                            output = "Pressez « P » pour continuer";
+                        }
+                        else if (ServiceHelper.Get<IInputService>().GetType() == typeof(ManetteService))
+                        {
+                            output = "Pressez « Start » pour continuer";
+                        }
+                        else
+                        {
+                            output = "ERREUR: aucune manette ou clavier!";
+                        }
                     break;
 
                 default:
@@ -2136,7 +2143,7 @@ namespace Exercice_12_1
         {
             this.ClearMap();
 
-            Bloc bloc0 = new Bloc(300, 133);
+            Bloc bloc0 = new Bloc(300, 105);
             bloc0.BoundsRect = new Rectangle(91, 91, 415, 415);
 
             this.listeBloc.Add(bloc0);
@@ -2541,6 +2548,48 @@ namespace Exercice_12_1
         /// <param name="bloc">Le bloc à tester.</param>
         private bool ValiderDeplacementBloc(Bloc bloc)
         {
+            if (joueur.Direction == Personnage.Directions.NordEst ||
+                joueur.Direction == Personnage.Directions.NordOuest ||
+                joueur.Direction == Personnage.Directions.SudEst ||
+                joueur.Direction == Personnage.Directions.SudOuest)
+            {
+                return false;
+            }
+
+            Vector2 destV = bloc.Position;
+            switch (joueur.Direction)
+            {
+                case (Personnage.Directions.Nord):
+                    destV.Y -= 28;
+                    break;
+                case (Personnage.Directions.Est):
+                    destV.X += 28;
+                    break;
+                case (Personnage.Directions.Sud):
+                    destV.Y += 28;
+                    break;
+                case (Personnage.Directions.Ouest):
+                    destV.X -= 28;
+                    break;
+                default: // Si le joueur se déplace sur un angle, il ne peut pas déplacer le bloc.
+                    return false;
+            }
+            
+            if (this.monde.CouleurDeCollision(destV) != Color.White && this.monde.CouleurDeCollision(destV) != Color.Blue) 
+            { 
+                return false; 
+            }
+
+            Rectangle destBloc = new Rectangle((int)destV.X - 14, (int)destV.Y - 14, 28, 28);
+
+            foreach (Bloc bloc1 in listeBloc)
+            {
+                if (destBloc.Intersects(bloc1.AireOccupe))
+                {
+                    return false;
+                }
+            }
+
             return true;
         }
 

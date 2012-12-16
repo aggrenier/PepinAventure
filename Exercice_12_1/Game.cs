@@ -2160,14 +2160,14 @@ namespace Exercice_12_1
         {
             this.ClearMap();
 
-            Bloc bloc0 = new Bloc(106, 340);
-            bloc0.BoundsRect = new Rectangle(91, 91, 415, 415);
+            Bloc bloc0 = new Bloc(106, 272);
+            bloc0.BoundsRect = new Rectangle(64, 230, 84, 84);
 
-            Bloc bloc1 = new Bloc(133, 300);
-            bloc1.BoundsRect = new Rectangle(91, 91, 415, 415);
+            Bloc bloc1 = new Bloc(134, 300);
+            bloc1.BoundsRect = new Rectangle(92, 258, 84, 84);
 
-            Bloc bloc2 = new Bloc(106, 255);
-            bloc2.BoundsRect = new Rectangle(91, 91, 415, 415);
+            Bloc bloc2 = new Bloc(106, 328);
+            bloc2.BoundsRect = new Rectangle(64, 286, 84, 84);
 
             this.listeBloc.Add(bloc0);
             this.listeBloc.Add(bloc1);
@@ -2182,11 +2182,11 @@ namespace Exercice_12_1
             this.listeOgres.Add(ogre2);
             ogre2.BoundsRect = new Rectangle(300, 300, 193, 215);
 
-            Switch switch1 = new Switch(133, 230);
+            Switch switch1 = new Switch(134, 272);
             this.listeSwitch.Add(switch1);
             switch1.Type = Switch.Types.Nord;
 
-            Switch switch2 = new Switch(203, 300);
+            Switch switch2 = new Switch(162, 300);
             this.listeSwitch.Add(switch2);
             switch2.Type = Switch.Types.Est;
 
@@ -2383,7 +2383,7 @@ namespace Exercice_12_1
                     }
                 }
 
-                if (switch1.Boutton.Intersects(new Rectangle((int)this.joueur.PositionPourCollisions.X, (int)this.joueur.PositionPourCollisions.Y, 10, 10)))
+                if (switch1.Boutton.Intersects(new Rectangle((int)this.joueur.Position.X - 5, (int)this.joueur.Position.Y + 10, 10, 10)))
                 {
                     switch (switch1.Type)
                     {

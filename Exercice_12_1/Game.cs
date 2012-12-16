@@ -1613,7 +1613,7 @@ namespace Exercice_12_1
                         Color.Chartreuse,           // couleur
                         0,                          // angle de rotation
                         new Vector2(16, 16),
-                        .4f + (pj.VideDeProjectile % 1.001f),             // échelle d'affichage
+                        .7f + ((gameTime.TotalGameTime.Milliseconds / 60) % 3)/3f,             // échelle d'affichage
                         SpriteEffects.None,         // effets
                         0.0f);                      // profondeur de couche (layer depth));
                 }
@@ -1626,7 +1626,7 @@ namespace Exercice_12_1
                         Color.LightSalmon,                // couleur
                         0,                          // angle de rotation
                         new Vector2(16, 16),
-                        pj.VideDeProjectile % 1.1f,             // échelle d'affichage
+                        .7f + ((gameTime.TotalGameTime.Milliseconds / 60) % 3) / 3f,             // échelle d'affichage
                         SpriteEffects.None,         // effets
                         0.0f);                      // profondeur de couche (layer depth));
                 }
@@ -2191,11 +2191,11 @@ namespace Exercice_12_1
             switch2.Type = Switch.Types.Est;
 
             Porte porteNord = new Porte(300, 75, Porte.Directions.Nord);
-            porteNord.Ouvert = true;
+            porteNord.Ouvert = true; // fermé au prochaine Update, invoque le son de fermeture
             this.listePorte.Add(porteNord);
 
             PorteHorizontale porteEst = new PorteHorizontale(525, 300, PorteHorizontale.Directions.Est);
-            porteEst.Ouvert = true;
+            porteEst.Ouvert = true; // fermé au prochaine Update, invoque le son de fermeture
             porteEst.Direction = PorteHorizontale.Directions.Est;
             this.listePorteHorizontale.Add(porteEst);
         }

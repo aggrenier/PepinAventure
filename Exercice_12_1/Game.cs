@@ -2148,7 +2148,7 @@ namespace Exercice_12_1
 
             this.listeBloc.Add(bloc0);
 
-            OgreMouvement ogre = new OgreMouvement(new Vector2(300, 300));
+            OgreMouvement ogre = new OgreMouvement(new Vector2(400, 300));
             ogre.BoundsRect = new Rectangle(91, 91, 415, 415);
             this.listeOgres.Add(ogre);
         }

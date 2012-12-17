@@ -1422,13 +1422,16 @@ namespace Exercice_12_1
 
             foreach (Bloc bloc in this.listeBlocFini)
             {
-                //if (bloc.BlocEchelle <= 0.05f)
+                // if (bloc.BlocEchelle <= 0.05f)
                 {
                     this.listeBloc.Remove(bloc);
                 }
             }
 
-            this.GestionAtteintUneSortie();            
+            this.GestionAtteintUneSortie();
+
+            this.listeProjectileFini.Clear();
+            this.listeVideJoueurFini.Clear();
 
             base.Update(gameTime);
         }

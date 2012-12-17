@@ -1079,6 +1079,14 @@ namespace Exercice_12_1
                     base.Update(gameTime);
                     return;
                 }
+                else if (ServiceHelper.Get<IInputService>().Pause(1))
+                {
+                    this.EtatJeu = Etats.Jouer;
+                    this.joueur.VieDeJoueur = 99;
+
+                    base.Update(gameTime);
+                    return;
+                }
 
                 // Rien d'autre à faire alors on quitte la fonction 
                 base.Update(gameTime);
@@ -2968,7 +2976,7 @@ namespace Exercice_12_1
                     this.listeVideJoueur.Add(vie);
                     distance += 30;
                 }
-                else if (compteur > 0)
+                else if (compteur > 0 && compteur <= 5)
                 {
                     VieDeJoueur vie = new VieDeJoueur(distance1, 15);
                     this.listeVideJoueur.Add(vie);

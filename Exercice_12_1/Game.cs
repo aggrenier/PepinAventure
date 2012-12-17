@@ -1701,10 +1701,7 @@ namespace Exercice_12_1
                     this.joueur.Echelle,             // échelle d'affichage
                     SpriteEffects.None,         // effets
                     0.0f);                      // profondeur de couche (layer depth)
-            }
-
-            // Afficher les messages selon l'état du jeu.
-            this.DrawMessages(this.spriteBatch);
+            }          
 
             // Afficher le menu courant s'il y en a un sélectionné.
             if (this.MenuCourant != null)
@@ -1740,84 +1737,18 @@ namespace Exercice_12_1
                 vie.Draw(this.spriteBatch);
             }
 
+            // Si le jeu est en état de démarrage, afficher l'écran d'accueil 
+            if (this.EtatJeu == Etats.Pause)
+            {
+                this.DrawEcranPause(this.spriteBatch);
+                this.spriteBatch.End();
+                base.Draw(gameTime);
+                return;
+            }          
+
             this.spriteBatch.End();
 
             base.Draw(gameTime);
-        }
-
-        /// <summary>
-        /// Routine d'affichage de message (centré à l'écran) correspondant à l'état courant du jeu.
-        /// </summary>
-        /// <param name="spriteBatch">Tampon d'affichage.</param>
-        protected void DrawMessages(SpriteBatch spriteBatch)
-        {
-            string output = string.Empty;      // Message à afficher
-
-            // Déterminer le message à afficher selon l'état du jeu.
-            switch (this.EtatJeu)
-            {
-                case Etats.Pause:
-                        if (ServiceHelper.Get<IInputService>().GetType() == typeof(ClavierService))
-                        {
-                            output = "Pressez « P » pour continuer";
-                        }
-                        else if (ServiceHelper.Get<IInputService>().GetType() == typeof(ManetteService))
-                        {
-                            output = "Pressez « Start » pour continuer";
-                        }
-                        else
-                        {
-                            output = "ERREUR: aucune manette ou clavier!";
-                        }
-
-                    break;
-
-                default:
-                    output = string.Empty;
-                    break;
-            }
-
-            // Afficher le message s'il y a lieu.
-            if (output.Length > 0)
-            {
-                // L'origine du message sera positionnée au centre de l'écran.
-                Vector2 centreEcran = new Vector2(
-                    this.graphics.GraphicsDevice.Viewport.Width / 2,
-                    this.graphics.GraphicsDevice.Viewport.Height / 2);
-
-                int decalageY = 50;
-
-                // Appliquer le décalage vertical par rapport au centre de l'écran.
-                centreEcran.Y += decalageY;
-
-                // Splitter le message en fonction des \n dans celui-ci, afin de center chaque chaîne du message
-                // à l'écran.
-                string[] lignes = output.Split('\n');
-
-                Color couleur = Color.White;
-
-                // Afficher chaque chaîne du message indiciduellement, centrées l'une sous l'autre.
-                for (int idx = 0; idx < lignes.Length; idx++)
-                {
-                    // L'origine d'affichage de la chaîne est son point central.
-                    Vector2 centrePolice = this.policeMessages.MeasureString(lignes[idx]) / 2;
-
-                    // Afficher la chaîne centré à l'écran.
-                    spriteBatch.DrawString(
-                        this.policeMessages,        // police d'affichge
-                        lignes[idx],                // message à afficher
-                        centreEcran,                // position où afficher le message
-                        couleur,                    // couleur du texte
-                        0,                          // angle de rotation
-                        centrePolice,               // origine du texte (centrePolice positionné à centreEcran)
-                        1.0f,                       // échelle d'affichage
-                        SpriteEffects.None,         // effets
-                        1.0f);                      // profondeur de couche (layer depth)
-
-                    // Décaler afin que la chaîne soit positionnée sous la précédente.
-                    centreEcran.Y += centrePolice.Y * 2;
-                }
-            }
         }
 
         /// <summary>
@@ -1960,6 +1891,35 @@ namespace Exercice_12_1
             else if (ServiceHelper.Get<IInputService>().GetType() == typeof(ManetteService))
             {
                 message = "Pressez A pour commencer...\nPressez sur Start pour quitter";
+            }
+            else
+            {
+                message = "ERREUR: aucune manette ou clavier!";
+            }
+
+            // Afficher le message 50 pixels plus bas que le centre de l'écran.
+            this.DrawMessage(this.spriteBatch, message, 50, Color.White);
+        }
+
+        /// <summary>
+        /// Fonction dessinant l'écran d'accueil. Un message est affiché sur la texture d'accueil
+        /// afin d'indiquer à l'usager quelle touche presser pour démarrer la partie.
+        /// </summary>
+        /// <param name="spriteBatch">Tampon d'affichage.</param>
+        protected void DrawEcranPause(SpriteBatch spriteBatch)
+        {
+            // Dessiner le fond d'écran.
+            //spriteBatch.Draw(this.ecranGameOver, Vector2.Zero, Color.White);
+
+            // Afficher le message approprié selon le périphérique d'inputs.
+            string message = string.Empty;
+            if (ServiceHelper.Get<IInputService>().GetType() == typeof(ClavierService))
+            {
+                message = "Pressez Z pour continuer";
+            }
+            else if (ServiceHelper.Get<IInputService>().GetType() == typeof(ManetteService))
+            {
+                message = "Pressez Start pour continuer";
             }
             else
             {

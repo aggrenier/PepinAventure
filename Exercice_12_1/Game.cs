@@ -2168,7 +2168,7 @@ namespace Exercice_12_1
         /// </summary>
         private void FinDePartie()
         {
-            this.boolFood = false;
+            this.boolFood = true;
             this.boolClef = false;
             for (int i = 0; i < portesClefOuvert.Length; i++)
             {

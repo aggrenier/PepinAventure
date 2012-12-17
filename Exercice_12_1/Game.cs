@@ -280,9 +280,14 @@ namespace Exercice_12_1
         private bool boolFood;
 
         /// <summary>
-        /// Sert 'a enlever les portes des maps suivants.
+        /// Sert à ouvrir les portesClef des maps suivants.
         /// </summary>
         private bool boolClef;
+
+        /// <summary>
+        /// Tableau de porteClef ouvert. Cela réside dans Game à cause qu'il faut être sauvegarder en tout temps.
+        /// </summary>
+        private bool[] portesClefOuvert = new bool[1];
 
         /// <summary>
         /// Attribut représentant le monde de tuiles à afficherdurant le jeu.
@@ -655,7 +660,15 @@ namespace Exercice_12_1
                 {
                     if (joueurRect.Intersects(porte.Barre))
                     {
-                        return 1.0f;
+                        if (porte.PorteClef && this.joueur.Clef)
+                        {
+                            porte.Ouvert = true;
+                            portesClefOuvert[0] = true;
+                        }
+                        else
+                        {
+                            return 1.0f;
+                        }
                     }
                 }
             }
@@ -853,6 +866,7 @@ namespace Exercice_12_1
             this.listeClef = new List<Sprite>();
             this.listeClefFini = new List<Sprite>();
             this.boolClef = false;
+            this.portesClefOuvert[0] = false;
 
             // Créer les attributs de gestion des explosions.
             this.randomExplosions = new Random();
@@ -2279,7 +2293,7 @@ namespace Exercice_12_1
 
             Porte porteNord = new Porte(115, 75, Porte.Directions.Nord);
             porteNord.PorteClef = true;
-            if (this.joueur.Clef == false)
+            if (this.portesClefOuvert[0] == false)
             {
                 porteNord.Ouvert = false;
             }

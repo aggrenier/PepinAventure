@@ -1428,7 +1428,7 @@ namespace Exercice_12_1
                 }
             }
 
-            this.GestionAtteintUneSortie();
+            this.GestionAtteintUneSortie();            
 
             base.Update(gameTime);
         }
@@ -2077,7 +2077,7 @@ namespace Exercice_12_1
         /// </summary>
         private void ClearMap()
         {
-            //clear les bloc sur la map
+            // clear les bloc sur la map
             foreach (Bloc bloc in this.listeBloc)
             {
                 this.listeBlocFini.Add(bloc);
@@ -2090,7 +2090,7 @@ namespace Exercice_12_1
 
             this.listeBlocFini.Clear();
 
-            //clear les projectiles sur la map
+            // clear les projectiles sur la map
             foreach (Projectile pj in this.listeProjectiles)
             {
                 this.listeProjectileFini.Add(pj);
@@ -2101,9 +2101,10 @@ namespace Exercice_12_1
                 this.listeProjectiles.Remove(pj);
             }
 
+            this.listeBlocFini.Clear();
             this.listeProjectileFini.Clear();
 
-            //clear les ogres sur la map
+            // clear les ogres sur la map
             foreach (Ennemi ogre in this.listeOgres)
             {
                 this.listeOgresFini.Add(ogre);
@@ -2116,7 +2117,7 @@ namespace Exercice_12_1
 
             this.listeOgresFini.Clear();
 
-            //clear les swicht
+            // clear les swicht
             foreach (Switch switch1 in this.listeSwitch)
             {
                 this.listeSwitchFini.Add(switch1);
@@ -2129,7 +2130,7 @@ namespace Exercice_12_1
 
             this.listeSwitchFini.Clear();
 
-            //clear les ports
+            // clear les ports
             foreach (Porte porte in this.listePorte)
             {
                 this.listePorteFini.Add(porte);
@@ -2142,7 +2143,7 @@ namespace Exercice_12_1
 
             this.listePorteFini.Clear();
 
-            //clear les portes horizontale
+            // clear les portes horizontale
             foreach (PorteHorizontale porte in this.listePorteHorizontale)
             {
                 this.listePorteHorizontaleFini.Add(porte);
@@ -2155,7 +2156,7 @@ namespace Exercice_12_1
 
             this.listePorteHorizontaleFini.Clear();
 
-            //clear les power-ups
+            // clear les power-ups
             foreach (Food food in this.listeFood)
             {
                 this.listeFoodFini.Add(food);
@@ -2168,7 +2169,7 @@ namespace Exercice_12_1
 
             this.listeFoodFini.Clear();
 
-            //clear les clefs
+            // clear les clefs
             foreach (Clef clef in this.listeClef)
             {
                 this.listeClefFini.Add(clef);
@@ -2186,6 +2187,8 @@ namespace Exercice_12_1
             }
 
             this.listeClefFini.Clear();
+
+            this.listeVideJoueurFini.Clear();
         }
 
         /// <summary>

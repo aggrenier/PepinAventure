@@ -114,6 +114,19 @@ namespace Exercice_12_1
         }
 
         /// <summary>
+        /// Accesseur pour attribut contrôlant le rayon appliquée au sprite pour la détection 
+        /// approximative de collisions.
+        /// </summary>
+        public override float RayonDeCollision
+        {
+            // Calcule une rayon plus petite pour le joueur. ( / 4f à place de 2f).
+            get
+            {
+                return (float)Math.Sqrt((this.Width * this.Width) + (this.Height * this.Height)) / 4.0f;
+            }
+        }
+
+        /// <summary>
         /// Propriété accesseur retournant la liste des palettes associées au personnage 
         /// selon son état et sa direction. Ces palettes sont stockées dans l'attribut 
         /// static palettes.
@@ -131,20 +144,7 @@ namespace Exercice_12_1
         protected override List<SoundEffect> EffetsSonores
         {
             get { return Joueur.effetsSonores; }
-        }
-
-        /// <summary>
-        /// Accesseur pour attribut contrôlant le rayon appliquée au sprite pour la détection 
-        /// approximative de collisions.
-        /// </summary>
-        public override float RayonDeCollision
-        {
-            // Calcule une rayon plus petite pour le joueur. ( / 4f à place de 2f).
-            get
-            {
-                return (float)Math.Sqrt((this.Width * this.Width) + (this.Height * this.Height)) / 4.0f;
-            }
-        }
+        }        
 
         /// <summary>
         /// Surchargé afin de retourner la palette correspondant à la direction de 

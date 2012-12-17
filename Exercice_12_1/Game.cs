@@ -535,6 +535,11 @@ namespace Exercice_12_1
                 {
                     // Restaurer l'état du jeu à ce qu'il était avant la pause
                     this.EtatJeu = this.prevEtatJeu;
+                    if (this.MondeCourant == Mondes.MAP_1_1 && this.joueur.Position.Y > 510)
+                    {
+                        this.joueur.Position = new Vector2(300,500);
+                        this.joueur.Direction = Personnage.Directions.Nord;
+                    }
                 }
 
                 // Suspendre les effets sonores au besoin
@@ -1770,13 +1775,17 @@ namespace Exercice_12_1
             switch (this.EtatJeu)
             {
                 case Etats.Pause:
+                    if (this.MondeCourant == Mondes.MAP_1_1 && joueur.Position.Y > 510)
+                    {
+                        output += "L'aventure est dans l'autre direction\n\n";
+                    }
                         if (ServiceHelper.Get<IInputService>().GetType() == typeof(ClavierService))
                         {
-                            output = "Pressez « P » pour continuer";
+                            output += "Pressez « P » pour continuer";
                         }
                         else if (ServiceHelper.Get<IInputService>().GetType() == typeof(ManetteService))
                         {
-                            output = "Pressez « Start » pour continuer";
+                            output += "Pressez « Start » pour continuer";
                         }
                         else
                         {
@@ -2017,10 +2026,17 @@ namespace Exercice_12_1
             {
                 if (this.MondeCourant == Mondes.MAP_1_1)
                 {
-                    this.MondeCourant = Mondes.MAP_1_2;
-                    this.joueur.Position = new Vector2(300, 490);
+                    if (joueur.Position.Y < 60)
+                    {
+                        this.MondeCourant = Mondes.MAP_1_2;
+                        this.joueur.Position = new Vector2(300, 490);
 
-                    this.LoadMap12();
+                        this.LoadMap12();
+                    }
+                    else
+                    {
+                       this.Pause = true;
+                    }
                 }
                 else if (this.MondeCourant == Mondes.MAP_1_2)
                 {
@@ -2990,7 +3006,7 @@ namespace Exercice_12_1
         /// </summary>
         /// <param name="sprite">Astéroïde à faire exploser.</param>
         /// <param name="gameTime">Lecture du temps de jeu écoulé.</param>
-        private void CreerExplosion(Sprite sprite, GameTime gameTime)                                                                               ////// explosion
+        private void CreerExplosion(Sprite sprite, GameTime gameTime)                                                                            
         {
             // Déterminer au hasard le nombre de particules pour représenter l'explosion
             int nombreDeParticules = 10 + this.randomExplosions.Next(11);   // entre 10 et 20 particules

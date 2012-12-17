@@ -90,7 +90,7 @@ namespace IFM20884
         /// <returns>Nombre maximum de boutons sur une manette.</returns>
         private int NombreMaxBoutons
         {
-            get { return (int)Buttons.Y + 1; }
+            get { return (int)Buttons.Y + 1; } // Il existe une problème avec cette logique. ( != Keys.Zoom )
         }
 
         /// <summary>
@@ -308,11 +308,11 @@ namespace IFM20884
             {
                 return false;
             }
-            else if ( this.etatManette[device - 1].IsButtonDown(Buttons.Y) && this.etatManette[device - 1].IsButtonDown(Buttons.B))
+            else if (this.etatManette[device - 1].IsButtonDown(Buttons.Y) && this.etatManette[device - 1].IsButtonDown(Buttons.B))
             {
                  return false;
             }
-             else if ( this.etatManette[device - 1].IsButtonDown(Buttons.Y) && this.etatManette[device - 1].IsButtonDown(Buttons.X))
+             else if (this.etatManette[device - 1].IsButtonDown(Buttons.Y) && this.etatManette[device - 1].IsButtonDown(Buttons.X))
             {
                  return false;
             }           

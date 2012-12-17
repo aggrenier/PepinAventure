@@ -169,7 +169,7 @@ namespace IFM20884
                 }
                 else
                 {
-                    return (float)Math.Sqrt((this.Width * this.Width) + (this.Height * this.Height)) / 4.0f;
+                    return (float)Math.Sqrt((this.Width * this.Width) + (this.Height * this.Height)) / 2.0f;
                 }
             }
 

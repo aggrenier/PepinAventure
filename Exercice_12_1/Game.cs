@@ -663,7 +663,7 @@ namespace Exercice_12_1
                         if (porte.PorteClef && this.joueur.Clef)
                         {
                             porte.Ouvert = true;
-                            portesClefOuvert[0] = true;
+                            this.portesClefOuvert[0] = true;
                             this.boolClef = false;
                             this.joueur.Clef = false;
                         }
@@ -1521,7 +1521,7 @@ namespace Exercice_12_1
             // Si le jeu est en état de démarrage, afficher l'écran d'accueil 
             if (this.EtatJeu == Etats.GameOver)
             {
-                FinDePartie();
+                this.FinDePartie();
                 this.DrawEcranGameOver(this.spriteBatch);
                 this.spriteBatch.End();
                 base.Draw(gameTime);
@@ -1565,7 +1565,7 @@ namespace Exercice_12_1
                             ogre.Position,              // position
                             null,                       // sourceRectangle
                             Color.White,                // couleur
-                            0,  // angle de rotation
+                            0,                          // angle de rotation
                             new Vector2(16, 16),
                             2f,                         // échelle d'affichage
                             SpriteEffects.None,         // effets
@@ -2162,7 +2162,6 @@ namespace Exercice_12_1
             }
         }
 
-
         /// <summary>
         /// Remet les valeurs au conditions initiales pour la nouvelle partie.
         /// </summary>
@@ -2170,7 +2169,7 @@ namespace Exercice_12_1
         {
             this.boolFood = true;
             this.boolClef = false;
-            for (int i = 0; i < portesClefOuvert.Length; i++)
+            for (int i = 0; i < this.portesClefOuvert.Length; i++)
             {
                 this.portesClefOuvert[i] = false;
             }
@@ -2281,7 +2280,7 @@ namespace Exercice_12_1
             Ogre ogre1 = new Ogre(new Vector2(300, 260));
             this.listeOgres.Add(ogre1);
 
-            if (this.boolClef == false && portesClefOuvert[0] == false)
+            if (this.boolClef == false && this.portesClefOuvert[0] == false)
             {
                 Clef clef = new Clef(474, 461);
                 this.listeClef.Add(clef);

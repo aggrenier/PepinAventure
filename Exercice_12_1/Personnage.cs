@@ -265,11 +265,15 @@ namespace IFM20884
         /// </summary>
         public int VieDeJoueur
         {
-            get { return this.vieDeJoueur; }
+            get 
+            { 
+                return this.vieDeJoueur; 
+            }
+
             set 
             { 
                 this.vieDeJoueur = value;
-                //this.vieDeJoueur = 10;                //  *** Décommenter cette ligne pour être invicible. ***
+                ////this.vieDeJoueur = 10;                //  *** Décommenter cette ligne pour être invicible. ***
             }
         }
 

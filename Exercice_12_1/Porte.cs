@@ -197,7 +197,9 @@ namespace Exercice_12_1
             }
         }
 
-
+        /// <summary>
+        /// Accesseur pour Porte.porteClef
+        /// </summary>
         public bool PorteClef
         {
             get { return this.porteClef; }

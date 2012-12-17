@@ -302,17 +302,21 @@ namespace IFM20884
         public bool TirerNord(int device)
         {
             // S'assurer que le numéro de manette fourni est valide.
-            this.ValiderDevice(ref device);
-
-            // Ralentir les répétitions de pressions (400 millisecondes de délai)
-            // Premièrement vérifier le thumbstick gauche
-            if (this.etatManette[device - 1].IsButtonDown(Buttons.RightThumbstickUp))
+            this.ValiderDevice(ref device); 
+        
+            if (this.etatManette[device - 1].IsButtonDown(Buttons.Y) && this.etatManette[device - 1].IsButtonDown(Buttons.A))
             {
-                return this.DelaiDuplicationExpire(device, Buttons.RightThumbstickUp, 400);
+                return false;
             }
-
-            // Maintenant le bouton Y
-            if (this.etatManette[device - 1].IsButtonDown(Buttons.Y))
+            else if ( this.etatManette[device - 1].IsButtonDown(Buttons.Y) && this.etatManette[device - 1].IsButtonDown(Buttons.B))
+            {
+                 return false;
+            }
+             else if ( this.etatManette[device - 1].IsButtonDown(Buttons.Y) && this.etatManette[device - 1].IsButtonDown(Buttons.X))
+            {
+                 return false;
+            }           
+            else if (this.etatManette[device - 1].IsButtonDown(Buttons.Y))
             {
                 return this.DelaiDuplicationExpire(device, Buttons.Y, 400);
             }
@@ -330,14 +334,19 @@ namespace IFM20884
             // S'assurer que le numéro de manette fourni est valide.
             this.ValiderDevice(ref device);
 
-            // Premièrement vérifier le thumbstick gauche
-            if (this.etatManette[device - 1].IsButtonDown(Buttons.RightThumbstickRight))
+            if (this.etatManette[device - 1].IsButtonDown(Buttons.B) && this.etatManette[device - 1].IsButtonDown(Buttons.A))
             {
-                return this.DelaiDuplicationExpire(device, Buttons.RightThumbstickRight, 400);
+                return false;
             }
-
-            // Maintenant le bouton B
-            if (this.etatManette[device - 1].IsButtonDown(Buttons.B))
+            else if (this.etatManette[device - 1].IsButtonDown(Buttons.B) && this.etatManette[device - 1].IsButtonDown(Buttons.Y))
+            {
+                return false;
+            }
+            else if (this.etatManette[device - 1].IsButtonDown(Buttons.B) && this.etatManette[device - 1].IsButtonDown(Buttons.X))
+            {
+                return false;
+            }
+            else if (this.etatManette[device - 1].IsButtonDown(Buttons.B))
             {
                 return this.DelaiDuplicationExpire(device, Buttons.B, 400);
             }
@@ -355,14 +364,19 @@ namespace IFM20884
             // S'assurer que le numéro de manette fourni est valide.
             this.ValiderDevice(ref device);
 
-            // Premièrement vérifier le thumbstick gauche
-            if (this.etatManette[device - 1].IsButtonDown(Buttons.RightThumbstickDown))
+            if (this.etatManette[device - 1].IsButtonDown(Buttons.A) && this.etatManette[device - 1].IsButtonDown(Buttons.Y))
             {
-                return this.DelaiDuplicationExpire(device, Buttons.RightThumbstickDown, 400);
+                return false;
             }
-
-            // Maintenant le bouton A
-            if (this.etatManette[device - 1].IsButtonDown(Buttons.A))
+            else if (this.etatManette[device - 1].IsButtonDown(Buttons.A) && this.etatManette[device - 1].IsButtonDown(Buttons.B))
+            {
+                return false;
+            }
+            else if (this.etatManette[device - 1].IsButtonDown(Buttons.A) && this.etatManette[device - 1].IsButtonDown(Buttons.X))
+            {
+                return false;
+            }
+            else if (this.etatManette[device - 1].IsButtonDown(Buttons.A))
             {
                 return this.DelaiDuplicationExpire(device, Buttons.A, 400);
             }
@@ -380,14 +394,19 @@ namespace IFM20884
             // S'assurer que le numéro de manette fourni est valide.
             this.ValiderDevice(ref device);
 
-            // Premièrement vérifier le thumbstick gauche
-            if (this.etatManette[device - 1].IsButtonDown(Buttons.RightThumbstickLeft))
+            if (this.etatManette[device - 1].IsButtonDown(Buttons.X) && this.etatManette[device - 1].IsButtonDown(Buttons.A))
             {
-                return this.DelaiDuplicationExpire(device, Buttons.RightThumbstickLeft, 400);
+                return false;
             }
-
-            // Maintenant le bouton X
-            if (this.etatManette[device - 1].IsButtonDown(Buttons.X))
+            else if (this.etatManette[device - 1].IsButtonDown(Buttons.X) && this.etatManette[device - 1].IsButtonDown(Buttons.B))
+            {
+                return false;
+            }
+            else if (this.etatManette[device - 1].IsButtonDown(Buttons.X) && this.etatManette[device - 1].IsButtonDown(Buttons.Y))
+            {
+                return false;
+            }
+            else if (this.etatManette[device - 1].IsButtonDown(Buttons.X))
             {
                 return this.DelaiDuplicationExpire(device, Buttons.X, 400);
             }

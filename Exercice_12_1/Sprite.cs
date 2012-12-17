@@ -360,7 +360,6 @@ namespace IFM20884
 
             if (rectSprite.Intersects(rectbloc))
             {
-                Console.WriteLine(this.RayonDeCollision);
                 return true;
             }
 

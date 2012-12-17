@@ -497,8 +497,6 @@ namespace IFM20884
                 Console.Error.WriteLine("Problème de manette. Semble que ManetteService.etatManette[] est détruit.");
             }
 
-            Console.WriteLine(device + ", " + (int)bouton + ", " + bouton.ToString());
-
             // Vérifier si le délai minimum entre deux pression du bouton est expiré
             DateTime now = DateTime.Now;        // heure courante
             if ((now - this.heureDernierePression[device - 1, (int)bouton]).TotalMilliseconds < delai)

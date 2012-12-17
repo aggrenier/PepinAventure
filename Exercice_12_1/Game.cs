@@ -2086,7 +2086,7 @@ namespace Exercice_12_1
                     }
                     else
                     {
-                        this.Pause = true;
+                        this.PauseP = true;
                     }
                 }
                 else if (this.MondeCourant == Mondes.MAP_1_2)

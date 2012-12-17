@@ -1139,7 +1139,7 @@ namespace Exercice_12_1
                 }
 
                 // L'usager veut-il quitter immédiatement
-                if (ServiceHelper.Get<IInputService>().Sauter(0))
+                if (ServiceHelper.Get<IInputService>().Quitter(1))
                 {
                     this.Exit();
                 }
@@ -2718,11 +2718,11 @@ namespace Exercice_12_1
                 Projectile pj = new Projectile(new Vector2(this.joueur.Position.X, this.joueur.Position.Y), 0);
                 pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
 
-                if (ServiceHelper.Get<IInputService>().DeplacementDroite(0) > 0)
+                if (ServiceHelper.Get<IInputService>().DeplacementDroite(1) > 0)
                 {
                     pj.VitesseHorizontale += this.joueur.VitesseHorizontal * 1.2f;
                 }
-                else if (ServiceHelper.Get<IInputService>().DeplacementGauche(0) > 0)
+                else if (ServiceHelper.Get<IInputService>().DeplacementGauche(1) > 0)
                 {
                     pj.VitesseHorizontale -= this.joueur.VitesseHorizontal * 1.2f;
                 }
@@ -2734,11 +2734,11 @@ namespace Exercice_12_1
                 Projectile pj = new Projectile(new Vector2(this.joueur.Position.X, this.joueur.Position.Y), 2);
                 pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
 
-                if (ServiceHelper.Get<IInputService>().DeplacementAvant(0) > 0)
+                if (ServiceHelper.Get<IInputService>().DeplacementAvant(1) > 0)
                 {
                     pj.VitesseVerticale -= this.joueur.VitesseVerticale * 1.2f;
                 }
-                else if (ServiceHelper.Get<IInputService>().DeplacementArriere(0) > 0)
+                else if (ServiceHelper.Get<IInputService>().DeplacementArriere(1) > 0)
                 {
                     pj.VitesseVerticale += this.joueur.VitesseVerticale * 1.2f;
                 }
@@ -2750,11 +2750,11 @@ namespace Exercice_12_1
                 Projectile pj = new Projectile(new Vector2(this.joueur.Position.X, this.joueur.Position.Y), 4);
                 pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
 
-                if (ServiceHelper.Get<IInputService>().DeplacementDroite(0) > 0)
+                if (ServiceHelper.Get<IInputService>().DeplacementDroite(1) > 0)
                 {
                     pj.VitesseHorizontale += this.joueur.VitesseHorizontal * 1.2f;
                 }
-                else if (ServiceHelper.Get<IInputService>().DeplacementGauche(0) > 0)
+                else if (ServiceHelper.Get<IInputService>().DeplacementGauche(1) > 0)
                 {
                     pj.VitesseHorizontale -= this.joueur.VitesseHorizontal * 1.2f;
                 }
@@ -2766,11 +2766,11 @@ namespace Exercice_12_1
                 Projectile pj = new Projectile(new Vector2(this.joueur.Position.X, this.joueur.Position.Y), 6);
                 pj.TypeProjectile = Projectile.TypesProjectiles.Joueur;
 
-                if (ServiceHelper.Get<IInputService>().DeplacementAvant(0) > 0)
+                if (ServiceHelper.Get<IInputService>().DeplacementAvant(1) > 0)
                 {
                     pj.VitesseVerticale -= this.joueur.VitesseVerticale * 1.2f;
                 }
-                else if (ServiceHelper.Get<IInputService>().DeplacementArriere(0) > 0)
+                else if (ServiceHelper.Get<IInputService>().DeplacementArriere(1) > 0)
                 {
                     pj.VitesseVerticale += this.joueur.VitesseVerticale * 1.2f;
                 }

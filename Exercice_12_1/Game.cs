@@ -1183,7 +1183,7 @@ namespace Exercice_12_1
                 return;
             }
 
-            // S'assurer que le bruitage de fond est en lecture.
+            // S'assurer que le bruitage de fond est en lecture.migh
             if (this.bruitageFondActif.State == SoundState.Stopped)
             {
                 this.bruitageFondActif.Play();

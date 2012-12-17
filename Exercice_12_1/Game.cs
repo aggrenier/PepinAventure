@@ -2075,6 +2075,7 @@ namespace Exercice_12_1
         /// </summary>
         private void ClearMap()
         {
+            //clear les bloc sur la map
             foreach (Bloc bloc in this.listeBloc)
             {
                 this.listeBlocFini.Add(bloc);
@@ -2085,6 +2086,9 @@ namespace Exercice_12_1
                 this.listeBloc.Remove(bloc);
             }
 
+            this.listeBlocFini.Clear();
+
+            //clear les projectiles sur la map
             foreach (Projectile pj in this.listeProjectiles)
             {
                 this.listeProjectileFini.Add(pj);
@@ -2095,6 +2099,9 @@ namespace Exercice_12_1
                 this.listeProjectiles.Remove(pj);
             }
 
+            this.listeProjectileFini.Clear();
+
+            //clear les ogres sur la map
             foreach (Ennemi ogre in this.listeOgres)
             {
                 this.listeOgresFini.Add(ogre);
@@ -2105,6 +2112,9 @@ namespace Exercice_12_1
                 this.listeOgres.Remove(ogre);
             }
 
+            this.listeOgresFini.Clear();
+
+            //clear les swicht
             foreach (Switch switch1 in this.listeSwitch)
             {
                 this.listeSwitchFini.Add(switch1);
@@ -2115,6 +2125,9 @@ namespace Exercice_12_1
                 this.listeSwitch.Remove(switch1);
             }
 
+            this.listeSwitchFini.Clear();
+
+            //clear les ports
             foreach (Porte porte in this.listePorte)
             {
                 this.listePorteFini.Add(porte);
@@ -2125,6 +2138,9 @@ namespace Exercice_12_1
                 this.listePorte.Remove(porte);
             }
 
+            this.listePorteFini.Clear();
+
+            //clear les portes horizontale
             foreach (PorteHorizontale porte in this.listePorteHorizontale)
             {
                 this.listePorteHorizontaleFini.Add(porte);
@@ -2135,6 +2151,9 @@ namespace Exercice_12_1
                 this.listePorteHorizontale.Remove(porte);
             }
 
+            this.listePorteHorizontaleFini.Clear();
+
+            //clear les power-ups
             foreach (Food food in this.listeFood)
             {
                 this.listeFoodFini.Add(food);
@@ -2145,6 +2164,9 @@ namespace Exercice_12_1
                 this.listeFood.Remove(food);
             }
 
+            this.listeFoodFini.Clear();
+
+            //clear les clefs
             foreach (Clef clef in this.listeClef)
             {
                 this.listeClefFini.Add(clef);
@@ -2160,6 +2182,8 @@ namespace Exercice_12_1
                 Clef clef1 = new Clef(600 - 16, 15);
                 this.listeClef.Add(clef1);
             }
+
+            this.listeClefFini.Clear();
         }
 
         /// <summary>
@@ -2807,7 +2831,7 @@ namespace Exercice_12_1
                     {
                         pj.VitesseVerticale = -1;
                     }
-                }
+                }               
             }
         }
 
@@ -2868,6 +2892,36 @@ namespace Exercice_12_1
                         else if (pj.VitesseVerticale > 0)
                         {
                             pj.VitesseVerticale = -1;
+                        }
+                    }
+                }
+
+                foreach (Porte porte in this.listePorte)
+                {
+                    if (pj.Collision(porte))
+                    {
+                        if (pj.VitesseVerticale < 0)
+                        {
+                            pj.VitesseVerticale = 1;
+                        }
+                        else if (pj.VitesseVerticale > 0)
+                        {
+                            pj.VitesseVerticale = -1;
+                        }
+                    }
+                }
+
+                foreach (PorteHorizontale porte in this.listePorteHorizontale)
+                {
+                    if (pj.Collision(porte))
+                    {
+                        if (pj.VitesseHorizontale < 0)
+                        {
+                            pj.VitesseHorizontale = 1;
+                        }
+                        else if (pj.VitesseHorizontale > 0)
+                        {
+                            pj.VitesseHorizontale = -1;
                         }
                     }
                 }

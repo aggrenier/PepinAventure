@@ -279,6 +279,8 @@ namespace Exercice_12_1
         /// </summary>
         private bool boolClef;
 
+        ///
+
         /// <summary>
         /// Attribut représentant le monde de tuiles à afficherdurant le jeu.
         /// </summary>
@@ -2269,6 +2271,7 @@ namespace Exercice_12_1
             this.listeOgres.Add(ogre3);
 
             Porte porteNord = new Porte(115, 75, Porte.Directions.Nord);
+            porteNord.PorteClef = true;
             if (this.joueur.Clef == false)
             {
                 porteNord.Ouvert = false;

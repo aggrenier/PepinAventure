@@ -75,6 +75,11 @@ namespace Exercice_12_1
         private bool ouvert = false;
 
         /// <summary>
+        /// Indique si cette porte est ouvert avec une clef.
+        /// </summary>
+        private bool porteClef = false;
+
+        /// <summary>
         /// Attribut indiquant la direction de déplacement courante.
         /// </summary>
         private Directions direction;
@@ -144,7 +149,7 @@ namespace Exercice_12_1
         }
 
         /// <summary>
-        /// Effet sonore contenant le bruitage du joueur en état de course.
+        /// Accesseurs pour Porte.ouvert
         /// </summary>
         public bool Ouvert
         {
@@ -172,11 +177,22 @@ namespace Exercice_12_1
                 {
                     this.IndexTuile = 0;
                 }
+                else if (this.porteClef && !this.ouvert)
+                {
+                    this.IndexTuile = 3;
+                }
                 else
                 {
                     this.IndexTuile = 2;
                 }
             }
+        }
+
+
+        public bool PorteClef
+        {
+            get { return this.porteClef; }
+            set { this.porteClef = value; }
         }
 
         /// <summary>
@@ -209,7 +225,7 @@ namespace Exercice_12_1
         /// les caractéristiques de celui-ci (p.ex. l'écran).</param>
         public static void LoadContent(ContentManager content, GraphicsDeviceManager graphics)
         {
-            palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Nord"), 48, 36);
+            palettes = new PaletteTuiles(content.Load<Texture2D>("Textures\\Porte\\Nord"), 48, 32);
 
             bruitOuvrir = content.Load<SoundEffect>("Audio\\Effets\\Porte\\Ouvre");
             bruitFermer = content.Load<SoundEffect>("Audio\\Effets\\Porte\\Ferme");

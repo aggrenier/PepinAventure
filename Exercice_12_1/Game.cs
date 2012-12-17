@@ -425,7 +425,12 @@ namespace Exercice_12_1
             /// <summary>
             /// En suspension temporaire.
             /// </summary>
-            Pause
+            Pause,
+
+            /// <summary>
+            /// En suspension temporaire.
+            /// </summary>
+            PauseP
         }
 
         /// <summary>
@@ -544,6 +549,44 @@ namespace Exercice_12_1
 
                 // Suspendre les effets sonores au besoin
                 this.SuspendreEffetsSonores(this.Pause);
+            }
+        }
+
+        /// <summary>
+        /// Propriété activant et désactivant l'état de pause du jeu. Cette propriété doit être utilisée
+        /// pour mettre le jeu en pause (plutôt que EtatJeu) car elle stocke l'état précédent (i.e. avant 
+        /// la pause) du jeu afin de le restaurer lorsque la pause est terminée.
+        /// </summary>
+        /// <value>Le jeu est en pause ou pas.</value>
+        public bool PauseP
+        {
+            get
+            {
+                return this.etatJeu == Etats.PauseP;
+            }
+
+            set
+            {
+                // S'assurer qu'il y a changement de statut de pause
+                if (value && this.EtatJeu != Etats.PauseP)
+                {
+                    // Stocker l'état courant du jeu avant d'activer la pause
+                    this.prevEtatJeu = this.EtatJeu;
+                    this.EtatJeu = Etats.PauseP;
+                }
+                else if (!value && this.EtatJeu == Etats.PauseP)
+                {
+                    // Restaurer l'état du jeu à ce qu'il était avant la pause
+                    this.EtatJeu = this.prevEtatJeu;
+                    if (this.MondeCourant == Mondes.MAP_1_1 && this.joueur.Position.Y > 510)
+                    {
+                        this.joueur.Position = new Vector2(300, 500);
+                        this.joueur.Direction = Personnage.Directions.Nord;
+                    }
+                }
+
+                // Suspendre les effets sonores au besoin
+                this.SuspendreEffetsSonores(this.PauseP);
             }
         }
 
@@ -1186,7 +1229,14 @@ namespace Exercice_12_1
             // Est-ce que le bouton de pause a été pressé?
             if (ServiceHelper.Get<IInputService>().Pause(1))
             {
-                this.Pause = !this.Pause;
+                this.PauseP = !this.PauseP;
+            }
+
+            // Si le jeu est en pause, interrompre la mise à jour.
+            if (this.EtatJeu == Etats.PauseP)
+            {
+                base.Update(gameTime);
+                return;
             }
 
             // Si le jeu est en pause, interrompre la mise à jour.
@@ -1774,7 +1824,7 @@ namespace Exercice_12_1
             // Déterminer le message à afficher selon l'état du jeu.
             switch (this.EtatJeu)
             {
-                case Etats.Pause:
+                case Etats.PauseP:
                     if (this.MondeCourant == Mondes.MAP_1_1 && joueur.Position.Y > 510)
                     {
                         output += "L'aventure est dans l'autre direction\n\n";

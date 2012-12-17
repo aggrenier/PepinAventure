@@ -189,8 +189,8 @@ Content\Audio\Effets\Joueur\mort.xnb
 Content\Audio\Effets\Porte\Ferme.xnb
 Content\Audio\Effets\Porte\Ouvre.xnb
 Content\Audio\Effets\Item\Item.xnb
+Content\Audio\Effets\Porte\PorteClef.xnb
 Content\Polices\MenuItemsPolice.xnb
 Content\Polices\MenuTitresPolice.xnb
 Content\Polices\MessagesPolice.xnb
-Content\Audio\Effets\Porte\PorteClef.xnb
 Content\Menus\QuitterMenu.xml

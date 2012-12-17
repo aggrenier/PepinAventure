@@ -2947,10 +2947,7 @@ namespace Exercice_12_1
         }
 
         /// <summary>
-        /// Fonction permettant de simuler une explosion de l'astéroïde donné. La fonction
-        /// crée un ensemble de particules d'explosition (de 10 à 20 instances de ParticuleExplosion)
-        /// positionnées au centre de l'astéroïde, et les ajoute à sa liste de particules à
-        /// gérer (attribut privListeParticulesExplosions).
+        /// Fonction qui gere les coeurs du joueur
         /// </summary>        
         private void UpdateVieDeJoueur()
         {

@@ -67,33 +67,7 @@ namespace Exercice_12_1
         public VieDeJoueur(int x, int y)
             : base(x, y)
         {           
-        }       
-
-        /// <summary>
-        /// Enumération des portes que la switch peuvent ouvrir.
-        /// </summary>
-        public enum Types
-        {
-            /// <summary>
-            /// Ouvre le porte du nord.
-            /// </summary>
-            Nord,
-
-            /// <summary>
-            /// Ouvre le porte de l'est.
-            /// </summary>
-            Est,
-
-            /// <summary>
-            /// Ouvre le porte du sud.
-            /// </summary>
-            Sud,
-
-            /// <summary>
-            /// Ouvre le porte de l'ouest.
-            /// </summary>
-            Ouest
-        }
+        }             
 
         /// <summary>
         /// Propriété (accesseur de lecture seulement) retournant la position des pattes du sprite.

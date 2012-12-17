@@ -159,6 +159,11 @@ namespace Exercice_12_1
         private SoundEffect bruitageFrapper;
 
         /// <summary>
+        /// Instance de bruitage quand le joueur prends des items.
+        /// </summary>
+        private SoundEffect bruitageItem;
+
+        /// <summary>
         /// Fond d'écran d'accueil.
         /// </summary>
         private Texture2D ecranAccueil;
@@ -278,8 +283,6 @@ namespace Exercice_12_1
         /// Sert 'a enlever les portes des maps suivants.
         /// </summary>
         private bool boolClef;
-
-        ///
 
         /// <summary>
         /// Attribut représentant le monde de tuiles à afficherdurant le jeu.
@@ -942,6 +945,8 @@ namespace Exercice_12_1
             this.bruitageMort = Content.Load<SoundEffect>("Audio\\Effets\\Joueur\\Mort");
             this.bruitageFrapper = Content.Load<SoundEffect>("Audio\\Effets\\Joueur\\Frapper");
 
+            this.bruitageItem = Content.Load<SoundEffect>("Audio\\Effets\\Item\\Item");
+
             // Sélectionner et paramétrer le bruitage de fond.
             this.bruitageGameOverActif = this.bruitageGameOver.CreateInstance();
             this.bruitageGameOverActif.Volume = 0.80f;
@@ -1352,6 +1357,7 @@ namespace Exercice_12_1
                     this.boolFood = false;
                     this.joueur.VieDeJoueur = 10;
                     this.listeFoodFini.Add(food);
+                    this.bruitageItem.Play();
                 }
             }
 
@@ -1367,6 +1373,7 @@ namespace Exercice_12_1
                     this.boolClef = true;
                     this.joueur.Clef = true;
                     this.listeClefFini.Add(clef);
+                    this.bruitageItem.Play();
 
                     Clef clef1 = new Clef(600 - 16, 15);
                     this.listeClef.Add(clef1);

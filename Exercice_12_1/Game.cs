@@ -2876,20 +2876,20 @@ namespace Exercice_12_1
                 {
                     if (bloc.CollisionBloc(pj))
                     {
-                        if (pj.VitesseHorizontale < 0)
+                        if (pj.VitesseHorizontale < 0 && pj.Position.X > bloc.Position.X + 12)
                         {
                             pj.VitesseHorizontale = 1;
                         }
-                        else if (pj.VitesseHorizontale > 0)
+                        else if (pj.VitesseHorizontale > 0 && pj.Position.X < bloc.Position.X - 12)
                         {
                             pj.VitesseHorizontale = -1;
                         }
 
-                        if (pj.VitesseVerticale < 0)
+                        if (pj.VitesseVerticale < 0 && pj.Position.Y > bloc.Position.Y + 12)
                         {
                             pj.VitesseVerticale = 1;
                         }
-                        else if (pj.VitesseVerticale > 0)
+                        else if (pj.VitesseVerticale > 0 && pj.Position.Y < bloc.Position.Y - 12)
                         {
                             pj.VitesseVerticale = -1;
                         }

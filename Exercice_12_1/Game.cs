@@ -732,7 +732,7 @@ namespace Exercice_12_1
                     break;
                 }
                 else if (this.CalculerResistanceAuMouvement(dest) == .9f)
-                {                            ///////////******
+                {                            
                     this.joueur.Etat = Personnage.Etats.Tombe;
                 }
             }
@@ -1413,16 +1413,16 @@ namespace Exercice_12_1
                 {
                     bloc.Update(gameTime, this.graphics);
                 }
-            }
 
-            foreach (Bloc bloc in this.listeBloc)
-            {
-                this.listeBlocFini.Add(bloc);
+                if (bloc.BlocEchelle <= 0.05f)
+                {
+                    this.listeBlocFini.Add(bloc);
+                }
             }
 
             foreach (Bloc bloc in this.listeBlocFini)
             {
-                if (bloc.BlocEchelle <= 0.05f)
+                //if (bloc.BlocEchelle <= 0.05f)
                 {
                     this.listeBloc.Remove(bloc);
                 }
@@ -1589,8 +1589,10 @@ namespace Exercice_12_1
             // Afficher les blocs.
             foreach (Bloc bloc in this.listeBloc)
             {
-                // Extraire la couleur du pixel correspondant à la position donnée dans privTuilesCollisions.
+                // Extraire la couleur du pixel au position du bloc.
                 Color pixColor = this.monde.CouleurDeCollision(bloc.Position);
+
+                // Si la couleur est bleu, il tombe, sinon, il affiche normalement.
                 if (pixColor == Color.Blue)
                 {
                     this.spriteBatch.Draw(
@@ -2876,6 +2878,7 @@ namespace Exercice_12_1
                 {
                     if (bloc.CollisionBloc(pj))
                     {
+                        // Si le projectile approche le côté horizontale du bloc il rebond à l'horizontale.
                         if (pj.VitesseHorizontale < 0 && pj.Position.X > bloc.Position.X + 12)
                         {
                             pj.VitesseHorizontale = 1;
@@ -2885,6 +2888,7 @@ namespace Exercice_12_1
                             pj.VitesseHorizontale = -1;
                         }
 
+                        // Si le projectile approche le côté verticale du bloc il rebond au verticale.
                         if (pj.VitesseVerticale < 0 && pj.Position.Y > bloc.Position.Y + 12)
                         {
                             pj.VitesseVerticale = 1;

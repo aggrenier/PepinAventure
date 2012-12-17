@@ -124,8 +124,8 @@ namespace Exercice_12_1
         /// <returns>Returns true si le joueur a atteint une sortie</returns>
         public override bool AtteintUneSortie(Sprite sprite)
         {
-            return (sprite.Position.Y < 60
-                || sprite.Position.Y > 510);
+            return sprite.Position.Y < 60
+                || sprite.Position.Y > 510;
         }     
     }
 }

@@ -542,7 +542,7 @@ namespace Exercice_12_1
                     this.EtatJeu = this.prevEtatJeu;
                     if (this.MondeCourant == Mondes.MAP_1_1 && this.joueur.Position.Y > 510)
                     {
-                        this.joueur.Position = new Vector2(300,500);
+                        this.joueur.Position = new Vector2(300, 500);
                         this.joueur.Direction = Personnage.Directions.Nord;
                     }
                 }
@@ -780,7 +780,7 @@ namespace Exercice_12_1
                     break;
                 }
                 else if (this.CalculerResistanceAuMouvement(dest) == .9f)
-                {                            
+                {
                     this.joueur.Etat = Personnage.Etats.Tombe;
                 }
             }
@@ -1286,7 +1286,7 @@ namespace Exercice_12_1
             if (this.joueur.VieDeJoueur == 0)
             {
                 this.joueur.CouleurCollison = 100;
-                
+
                 if (this.bruitageMortActif.State != SoundState.Playing && this.contMort == 0)
                 {
                     this.bruitageMort.Play();
@@ -1825,22 +1825,23 @@ namespace Exercice_12_1
             switch (this.EtatJeu)
             {
                 case Etats.PauseP:
-                    if (this.MondeCourant == Mondes.MAP_1_1 && joueur.Position.Y > 510)
+                    if (this.MondeCourant == Mondes.MAP_1_1 && this.joueur.Position.Y > 510)
                     {
                         output += "L'aventure est dans l'autre direction\n\n";
                     }
-                        if (ServiceHelper.Get<IInputService>().GetType() == typeof(ClavierService))
-                        {
-                            output += "Pressez « P » pour continuer";
-                        }
-                        else if (ServiceHelper.Get<IInputService>().GetType() == typeof(ManetteService))
-                        {
-                            output += "Pressez « Start » pour continuer";
-                        }
-                        else
-                        {
-                            output = "ERREUR: aucune manette ou clavier!";
-                        }
+
+                    if (ServiceHelper.Get<IInputService>().GetType() == typeof(ClavierService))
+                    {
+                        output += "Pressez « P » pour continuer";
+                    }
+                    else if (ServiceHelper.Get<IInputService>().GetType() == typeof(ManetteService))
+                    {
+                        output += "Pressez « Start » pour continuer";
+                    }
+                    else
+                    {
+                        output = "ERREUR: aucune manette ou clavier!";
+                    }
 
                     break;
 
@@ -2076,7 +2077,7 @@ namespace Exercice_12_1
             {
                 if (this.MondeCourant == Mondes.MAP_1_1)
                 {
-                    if (joueur.Position.Y < 60)
+                    if (this.joueur.Position.Y < 60)
                     {
                         this.MondeCourant = Mondes.MAP_1_2;
                         this.joueur.Position = new Vector2(300, 490);
@@ -2085,7 +2086,7 @@ namespace Exercice_12_1
                     }
                     else
                     {
-                       this.Pause = true;
+                        this.Pause = true;
                     }
                 }
                 else if (this.MondeCourant == Mondes.MAP_1_2)
@@ -2723,15 +2724,15 @@ namespace Exercice_12_1
                 default: // Si le joueur se déplace sur un angle, il ne peut pas déplacer le bloc.
                     return false;
             }
-            
-            if ((this.monde.CouleurDeCollision(destV) != Color.White && 
+
+            if ((this.monde.CouleurDeCollision(destV) != Color.White &&
                 this.monde.CouleurDeCollision(destV) != Color.Blue) ||
                 destV.Y < 95 ||
                 destV.Y > 505 ||
                 destV.X < 95 ||
-                destV.X > 505) 
-            { 
-                return false; 
+                destV.X > 505)
+            {
+                return false;
             }
 
             Rectangle destBloc = new Rectangle((int)destV.X - 14, (int)destV.Y - 14, 28, 28);
@@ -2913,7 +2914,7 @@ namespace Exercice_12_1
                     {
                         pj.VitesseVerticale = -1;
                     }
-                }               
+                }
             }
         }
 
@@ -3056,7 +3057,7 @@ namespace Exercice_12_1
         /// </summary>
         /// <param name="sprite">Astéroïde à faire exploser.</param>
         /// <param name="gameTime">Lecture du temps de jeu écoulé.</param>
-        private void CreerExplosion(Sprite sprite, GameTime gameTime)                                                                            
+        private void CreerExplosion(Sprite sprite, GameTime gameTime)
         {
             // Déterminer au hasard le nombre de particules pour représenter l'explosion
             int nombreDeParticules = 10 + this.randomExplosions.Next(11);   // entre 10 et 20 particules

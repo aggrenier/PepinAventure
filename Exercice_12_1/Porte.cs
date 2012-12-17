@@ -70,6 +70,11 @@ namespace Exercice_12_1
         private static SoundEffect bruitFermer;
 
         /// <summary>
+        /// Effet sonore pour le porte clef.
+        /// </summary>
+        private static SoundEffect bruitPorteClef;
+
+        /// <summary>
         /// Effet sonore contenant le bruitage du joueur en état de course.
         /// </summary>
         private bool ouvert = false;
@@ -166,9 +171,13 @@ namespace Exercice_12_1
                     {
                         bruitFermer.Play();
                     }
-                    else
+                    else if (!this.porteClef)
                     {
                         bruitOuvrir.Play();
+                    }
+                    else
+                    {
+                        bruitPorteClef.Play();
                     }
                 }
 
@@ -229,6 +238,7 @@ namespace Exercice_12_1
 
             bruitOuvrir = content.Load<SoundEffect>("Audio\\Effets\\Porte\\Ouvre");
             bruitFermer = content.Load<SoundEffect>("Audio\\Effets\\Porte\\Ferme");
+            bruitPorteClef = content.Load<SoundEffect>("Audio\\Effets\\Porte\\PorteClef");
         }
 
         /// <summary>

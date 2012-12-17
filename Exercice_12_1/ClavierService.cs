@@ -184,7 +184,7 @@ namespace IFM20884
         public bool TirerNord(int device)
         {
             // Imposer un délai de 0.2 seconde entre chaque saut.
-            return this.DelaiDuplicationExpire(Keys.Up, 400);
+            return (this.DelaiDuplicationExpire(Keys.Up, 400));
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace IFM20884
         public bool TirerEst(int device)
         {
             // Imposer un délai de 0.2 seconde entre chaque saut.
-            return this.DelaiDuplicationExpire(Keys.Right, 400);
+            return (this.DelaiDuplicationExpire(Keys.Right, 400));
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace IFM20884
         public bool TirerSud(int device)
         {
             // Imposer un délai de 0.2 seconde entre chaque saut.
-            return this.DelaiDuplicationExpire(Keys.Down, 400);
+            return (this.DelaiDuplicationExpire(Keys.Down, 400));
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace IFM20884
         public bool TirerOuest(int device)
         {
             // Imposer un délai de 0.2 seconde entre chaque saut.
-            return this.DelaiDuplicationExpire(Keys.Left, 400);
+            return (this.DelaiDuplicationExpire(Keys.Left, 400));
         }   
 
         /// <summary>
